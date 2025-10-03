@@ -8,34 +8,40 @@
     <style>
         :root {
             --primary: #2997ff;
+            --primary-light: #5ab1ff;
             --secondary: #888;
-            --background: #1d1d1f;
-            --card-bg: #2a2a2e;
-            --text: #f5f5f7;
-            --text-secondary: #a1a1a6;
-            --success: #34c759;
-            --warning: #ffcc00;
-            --danger: #ff3b30;
+            --background: #0d1117;
+            --card-bg: #161b22;
+            --text: #f0f6fc;
+            --text-secondary: #8b949e;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
             --border-radius: 12px;
             --transition: all 0.3s ease;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --header-bg: rgba(0, 0, 0, 0.8);
-            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(13, 17, 23, 0.95);
+            --border-color: rgba(240, 246, 252, 0.1);
+            --gradient-primary: linear-gradient(135deg, #2997ff 0%, #5ab1ff 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #ffa62e 100%);
         }
 
-        [data-the极光呆呆脑me="light"] {
-            --primary: #0071e3;
-            --secondary: #86868b;
-            --background: #f5f5f7;
-            --card-bg: #ffffff;
-            --text: #1d1d1f;
-            --text-secondary: #86868b;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
+        [data-theme="light"] {
+            --primary: #0969da;
+            --primary-light: #218bff;
+            --secondary: #656d76;
+            --background: #ffffff;
+            --card-bg: #f6f8fa;
+            --text: #24292f;
+            --text-secondary: #656d76;
+            --success: #1a7f37;
+            --warning: #9a6700;
+            --danger: #cf222e;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --header-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(0, 极光呆呆脑0, 0, 0.1);
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(36, 41, 47, 0.1);
+            --gradient-primary: linear-gradient(135deg, #0969da 0%, #218bff 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #ffa62e 100%);
         }
         
         * {
@@ -54,9 +60,8 @@
             transition: var(--transition);
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 20%);
-            background-attachment: fixed;
+                radial-gradient(circle at 85% 30%, rgba(255, 107, 107, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 166, 46, 0.05) 0%, transparent 20%);
         }
         
         .container {
@@ -97,7 +102,7 @@
         .logo h1 {
             font-size: 22px;
             font-weight: 600;
-            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -114,13 +119,30 @@
             font-size: 16px;
             font-weight: 500;
             transition: var(--transition);
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 8px;
+            position: relative;
         }
         
-        .nav-links a:hover, .nav极光呆呆脑-links a.active {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
             background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 80%;
         }
         
         .theme-toggle, .lang-toggle {
@@ -188,25 +210,1169 @@
             cursor: pointer;
         }
         
-        /* 页面标题样式 */
-        .page-header {
+        /* 英雄区域样式 */
+        .hero {
             text-align: center;
-            padding: 80px 0 40px;
+            padding: 100px 0 80px;
             position: relative;
             overflow: hidden;
         }
         
-        .page-header::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 极光呆呆脑0;
-            background: radial-gradient(circle at top right, rgba(41, 151, 255, 0.1), transparent 50%);
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(41, 151, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
             z-index: -1;
         }
         
-        .page-header h1 {
-            font-size: 3.2rem;
-            margin
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .badge {
+            background: rgba(41, 151, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(41, 151, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(41, 151, 255, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(41, 151, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(41, 151, 255, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(41, 151, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(41, 151, 255, 0.2);
+        }
+        
+        /* 内容卡片样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* FAQ样式 */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .faq-item {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(41, 151, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-secondary);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+        }
+        
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .faq-arrow {
+            transition: var(--transition);
+        }
+        
+        /* 分类标签 */
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .category-tab:hover:not(.active) {
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        /* 搜索框 */
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border-radius: 30px;
+            border: none;
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+        }
+        
+        /* 帮助卡片样式 */
+        .help-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .help-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .help-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--success), var(--warning));
+        }
+        
+        .help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .help-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .help-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .help-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .help-card .btn {
+            margin-top: auto;
+            width: fit-content;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--card-bg);
+            padding: 60px 0 30px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+            
+            .help-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .badges {
+                gap: 10px;
+            }
+            
+            .badge {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .lang-menu {
+                right: -50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        
+        /* 页面内容容器 */
+        .page-content {
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fab fa-apple"></i>
+                <h1 data-lang-key="site_title">ASUS FL8700JP 黑苹果</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html" class="active"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
+                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+                
+                <div class="lang-container" style="position: relative;">
+                    <button class="lang-toggle" id="langToggle">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <div class="lang-option active" data-lang="zh-CN">
+                            <i class="fas fa-check"></i>
+                            <span>简体中文</span>
+                        </div>
+                        <div class="lang-option" data-lang="zh-TW">
+                            <i class="fas fa-check"></i>
+                            <span>繁體中文</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <i class="fas fa-check"></i>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="fade-in-up" data-lang-key="hero_title">常见问题解答</h1>
+                <p class="fade-in-up delay-1" data-lang-key="hero_subtitle">找到关于ASUS FL8700JP黑苹果项目的常见问题及解决方案</p>
+                <div class="badges fade-in-up delay-1">
+                    <div class="badge"><i class="fas fa-check-circle"></i> <span data-lang-key="badge_comprehensive">全面解答</span></div>
+                    <div class="badge"><i class="fas fa-search"></i> <span data-lang-key="badge_searchable">可搜索分类</span></div>
+                    <div class="badge"><i class="fas fa-lightbulb"></i> <span data-lang-key="badge_helpful">实用帮助</span></div>
+                </div>
+                <div class="fade-in-up delay-2">
+                    <a href="installation.html" class="btn" data-lang-key="btn_installation">查看安装指南</a>
+                    <a href="hardware.html" class="btn btn-outline" data-lang-key="btn_hardware">硬件支持</a>
+                </div>
+            </div>
+        </section>
+
+        <main class="container">
+            <!-- 搜索和分类 -->
+            <section class="section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索问题..." id="faqSearch" data-lang-key="search_placeholder">
+                </div>
+                
+                <div class="category-tabs">
+                    <div class="category-tab active" data-category="all" data-lang-key="category_all">全部问题</div>
+                    <div class="category-tab" data-category="installation" data-lang-key="category_installation">安装问题</div>
+                    <div class="category-tab" data-category="hardware" data-lang-key="category_hardware">硬件相关</div>
+                    <div class="category-tab" data-category="performance" data-lang-key="category_performance">性能优化</div>
+                    <div class="category-tab" data-category="troubleshooting" data-lang-key="category_troubleshooting">故障排除</div>
+                </div>
+            </section>
+
+            <!-- FAQ列表 -->
+            <section class="section">
+                <h2 class="section-title" data-lang-key="faq_title">常见问题</h2>
+                <div class="faq-container">
+                    <!-- 安装问题 -->
+                    <div class="faq-item" data-category="installation">
+                        <div class="faq-question">
+                            <span data-lang-key="faq1_question">安装过程中出现"禁止符号"怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq1_answer_intro">这是常见的安装问题，通常是由于引导配置不正确或硬件不兼容导致的。解决方法：</p>
+                            <ol>
+                                <li data-lang-key="faq1_answer_step1">检查BIOS设置，确保已禁用Secure Boot和Fast Boot</li>
+                                <li data-lang-key="faq1_answer_step2">确认DVMT预分配已设置为64M或更高</li>
+                                <li data-lang-key="faq1_answer_step3">更新OpenCore引导程序到最新版本</li>
+                                <li data-lang-key="faq1_answer_step4">检查config.plist中是否正确设置了所有必要的ACPI补丁和Kexts</li>
+                                <li data-lang-key="faq1_answer_step5">尝试使用不同的SMBIOS机型标识符</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="installation">
+                        <div class="faq-question">
+                            <span data-lang-key="faq2_question">如何创建macOS安装U盘？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq2_answer_intro">创建安装U盘的步骤：</p>
+                            <ol>
+                                <li data-lang-key="faq2_answer_step1">从黑果小兵的部落阁或其他可靠来源下载macOS镜像</li>
+                                <li data-lang-key="faq2_answer_step2">准备一个至少16GB的U盘</li>
+                                <li data-lang-key="faq2_answer_step3">使用BalenaEtcher或终端命令将镜像写入U盘</li>
+                                <li data-lang-key="faq2_answer_step4">将EFI文件夹复制到U盘的EFI分区</li>
+                                <li data-lang-key="faq2_answer_step5">确保config.plist已针对您的硬件进行正确配置</li>
+                            </ol>
+                            <p data-lang-key="faq2_answer_note">注意：在Windows系统下制作安装盘时，需要使用特定的工具如TransMac。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 硬件相关 -->
+                    <div class="faq-item" data-category="hardware">
+                        <div class="faq-question">
+                            <span data-lang-key="faq3_question">如何关闭开机时的"咚"声？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq3_answer_intro">要关闭开机时的提示音：</p>
+                            <ol>
+                                <li data-lang-key="faq3_answer_step1">进入macOS系统后，打开"系统偏好设置"</li>
+                                <li data-lang-key="faq3_answer_step2">选择"声音"选项</li>
+                                <li data-lang-key="faq3_answer_step3">切换到"声音效果"标签页</li>
+                                <li data-lang-key="faq3_answer_step4">取消勾选"在启动时播放声音"选项</li>
+                            </ol>
+                            <p data-lang-key="faq3_answer_note">此外，您还可以在OpenCore的config.plist中通过添加AudioDxe驱动并设置相关参数来完全禁用启动音。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="hardware">
+                        <div class="faq-question">
+                            <span data-lang-key="faq4_question">触控板偶尔无响应怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq4_answer_intro">这是ELAN1200触控板驱动的已知问题，可以尝试以下解决方法：</p>
+                            <ul>
+                                <li data-lang-key="faq4_answer_step1">重启系统 - 这能解决大多数临时性问题</li>
+                                <li data-lang-key="faq4_answer_step2">进入睡眠模式后唤醒 - 有时能重新初始化触控板驱动</li>
+                                <li data-lang-key="faq4_answer_step3">更新VoodooI2C和相关驱动到最新版本</li>
+                                <li data-lang-key="faq4_answer_step4">检查EFI/OC/Kexts中是否正确安装了所有必要的触控板驱动</li>
+                                <li data-lang-key="faq4_answer_step5">在启动参数中添加<code>-v</code>查看详细日志，排查驱动加载问题</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 性能优化 -->
+                    <div class="faq-item" data-category="performance">
+                        <div class="faq-question">
+                            <span data-lang-key="faq5_question">如何优化电池续航时间？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq5_answer_intro">优化电池续航的方法：</p>
+                            <ol>
+                                <li data-lang-key="faq5_answer_step1">确保CPU电源管理正常工作，使用CPUFriend或类似工具优化性能配置</li>
+                                <li data-lang-key="faq5_answer_step2">在"系统偏好设置" -> "节能"中调整相关设置</li>
+                                <li data-lang-key="faq5_answer_step3">使用亮度调节快捷键降低屏幕亮度</li>
+                                <li data-lang-key="faq5_answer_step4">关闭不必要的后台应用程序和服务</li>
+                                <li data-lang-key="faq5_answer_step5">确保GPU节能功能正常工作，避免独显在不需要时耗电</li>
+                                <li data-lang-key="faq5_answer_step6">使用适当的SMBIOS机型标识符，确保所有节能功能正常工作</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- 故障排除 -->
+                    <div class="faq-item" data-category="troubleshooting">
+                        <div class="faq-question">
+                            <span data-lang-key="faq6_question">蓝牙设备无法连接怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq6_answer_intro">蓝牙连接问题的解决方法：</p>
+                            <ol>
+                                <li data-lang-key="faq6_answer_step1">确认IntelBluetoothFirmware和IntelBluetoothInjector驱动已正确安装</li>
+                                <li data-lang-key="faq6_answer_step2">检查USB映射是否正确，蓝牙通常通过内部USB连接</li>
+                                <li data-lang-key="faq6_answer_step3">尝试重置蓝牙模块：关闭蓝牙等待10秒后重新开启</li>
+                                <li data-lang-key="faq6_answer_step4">删除<code>/Library/Preferences/com.apple.Bluetooth.plist</code>文件后重启</li>
+                                <li data-lang-key="faq6_answer_step5">更新到最新版本的蓝牙驱动</li>
+                                <li data-lang-key="faq6_answer_step6">如果问题依旧，尝试使用USB外接蓝牙适配器</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="troubleshooting">
+                        <div class="faq-question">
+                            <span data-lang-key="faq7_question">WiFi连接不稳定或速度慢怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-lang-key="faq7_answer_intro">WiFi连接问题的解决方法：</p>
+                            <ol>
+                                <li data-lang-key="faq7_answer_step1">更新IntelWiFi驱动到最新版本</li>
+                                <li data-lang-key="faq7_answer_step2">尝试不同的网络位置（如2.4GHz和5GHz频段）</li>
+                                <li data-lang-key="faq7_answer_step3">重置网络设置：删除<code>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</code>后重启</li>
+                                <li data-lang-key="faq7_answer_step4">使用WiFi诊断工具检查信号强度</li>
+                                <li data-lang-key="faq7_answer_step5">考虑更换兼容的无线网卡（如BCM94360系列）以获得更好的兼容性</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 需要更多帮助 -->
+            <section class="section">
+                <h2 class="section-title" data-lang-key="more_help_title">需要更多帮助？</h2>
+                <p class="text-center" data-lang-key="more_help_intro" style="margin-bottom: 30px; color: var(--text-secondary);">如果以上解答没有解决您的问题，可以通过以下方式获取帮助</p>
+                
+                <div class="help-cards">
+                    <div class="help-card fade-in-up">
+                        <div class="help-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3 data-lang-key="help_github_title">GitHub 项目</h3>
+                        <p data-lang-key="help_github_desc">访问我们的GitHub仓库，查看详细文档、更新日志和提交问题。</p>
+                        <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh" class="btn btn-outline" data-lang-key="btn_visit_github">访问 GitHub</a>
+                    </div>
+                    
+                    <div class="help-card fade-in-up delay-1">
+                        <div class="help-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 data-lang-key="help_docs_title">详细文档</h3>
+                        <p data-lang-key="help_docs_desc">查阅完整的安装指南、硬件兼容性列表和故障排除手册。</p>
+                        <a href="installation.html" class="btn btn-outline" data-lang-key="btn_view_docs">查看文档</a>
+                    </div>
+                    
+                    <div class="help-card fade-in-up delay-2">
+                        <div class="help-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 data-lang-key="help_contact_title">联系我们</h3>
+                        <p data-lang-key="help_contact_desc">发送邮件至我们的支持团队，获取个性化的帮助和支持。</p>
+                        <a href="mailto:1551656605@qq.com" class="btn btn-outline" data-lang-key="btn_send_email">发送邮件</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
+                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <p class="copyright" data-lang-key="license">📜📜 <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+            <p><small data-lang-key="footer_note">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // 多语言支持
+        const translations = {
+            'zh-CN': {
+                'site_title': 'ASUS FL8700JP 黑苹果',
+                'nav_home': '主页',
+                'nav_hardware': '硬件支持',
+                'nav_installation': '安装指南',
+                'nav_faq': '常见问题',
+                'nav_compatibility': '系统兼容',
+                'hero_title': '常见问题解答',
+                'hero_subtitle': '找到关于ASUS FL8700JP黑苹果项目的常见问题及解决方案',
+                'badge_comprehensive': '全面解答',
+                'badge_searchable': '可搜索分类',
+                'badge_helpful': '实用帮助',
+                'btn_installation': '查看安装指南',
+                'btn_hardware': '硬件支持',
+                'search_placeholder': '搜索问题...',
+                'category_all': '全部问题',
+                'category_installation': '安装问题',
+                'category_hardware': '硬件相关',
+                'category_performance': '性能优化',
+                'category_troubleshooting': '故障排除',
+                'faq_title': '常见问题',
+                'faq1_question': '安装过程中出现"禁止符号"怎么办？',
+                'faq1_answer_intro': '这是常见的安装问题，通常是由于引导配置不正确或硬件不兼容导致的。解决方法：',
+                'faq1_answer_step1': '检查BIOS设置，确保已禁用Secure Boot和Fast Boot',
+                'faq1_answer_step2': '确认DVMT预分配已设置为64M或更高',
+                'faq1_answer_step3': '更新OpenCore引导程序到最新版本',
+                'faq1_answer_step4': '检查config.plist中是否正确设置了所有必要的ACPI补丁和Kexts',
+                'faq1_answer_step5': '尝试使用不同的SMBIOS机型标识符',
+                'faq2_question': '如何创建macOS安装U盘？',
+                'faq2_answer_intro': '创建安装U盘的步骤：',
+                'faq2_answer_step1': '从黑果小兵的部落阁或其他可靠来源下载macOS镜像',
+                'faq2_answer_step2': '准备一个至少16GB的U盘',
+                'faq2_answer_step3': '使用BalenaEtcher或终端命令将镜像写入U盘',
+                'faq2_answer_step4': '将EFI文件夹复制到U盘的EFI分区',
+                'faq2_answer_step5': '确保config.plist已针对您的硬件进行正确配置',
+                'faq2_answer_note': '注意：在Windows系统下制作安装盘时，需要使用特定的工具如TransMac。',
+                'faq3_question': '如何关闭开机时的"咚"声？',
+                'faq3_answer_intro': '要关闭开机时的提示音：',
+                'faq3_answer_step1': '进入macOS系统后，打开"系统偏好设置"',
+                'faq3_answer_step2': '选择"声音"选项',
+                'faq3_answer_step3': '切换到"声音效果"标签页',
+                'faq3_answer_step4': '取消勾选"在启动时播放声音"选项',
+                'faq3_answer_note': '此外，您还可以在OpenCore的config.plist中通过添加AudioDxe驱动并设置相关参数来完全禁用启动音。',
+                'faq4_question': '触控板偶尔无响应怎么办？',
+                'faq4_answer_intro': '这是ELAN1200触控板驱动的已知问题，可以尝试以下解决方法：',
+                'faq4_answer_step1': '重启系统 - 这能解决大多数临时性问题',
+                'faq4_answer_step2': '进入睡眠模式后唤醒 - 有时能重新初始化触控板驱动',
+                'faq4_answer_step3': '更新VoodooI2C和相关驱动到最新版本',
+                'faq4_answer_step4': '检查EFI/OC/Kexts中是否正确安装了所有必要的触控板驱动',
+                'faq4_answer_step5': '在启动参数中添加<code>-v</code>查看详细日志，排查驱动加载问题',
+                'faq5_question': '如何优化电池续航时间？',
+                'faq5_answer_intro': '优化电池续航的方法：',
+                'faq5_answer_step1': '确保CPU电源管理正常工作，使用CPUFriend或类似工具优化性能配置',
+                'faq5_answer_step2': '在"系统偏好设置" -> "节能"中调整相关设置',
+                'faq5_answer_step3': '使用亮度调节快捷键降低屏幕亮度',
+                'faq5_answer_step4': '关闭不必要的后台应用程序和服务',
+                'faq5_answer_step5': '确保GPU节能功能正常工作，避免独显在不需要时耗电',
+                'faq5_answer_step6': '使用适当的SMBIOS机型标识符，确保所有节能功能正常工作',
+                'faq6_question': '蓝牙设备无法连接怎么办？',
+                'faq6_answer_intro': '蓝牙连接问题的解决方法：',
+                'faq6_answer_step1': '确认IntelBluetoothFirmware和IntelBluetoothInjector驱动已正确安装',
+                'faq6_answer_step2': '检查USB映射是否正确，蓝牙通常通过内部USB连接',
+                'faq6_answer_step3': '尝试重置蓝牙模块：关闭蓝牙等待10秒后重新开启',
+                'faq6_answer_step4': '删除<code>/Library/Preferences/com.apple.Bluetooth.plist</code>文件后重启',
+                'faq6_answer_step5': '更新到最新版本的蓝牙驱动',
+                'faq6_answer_step6': '如果问题依旧，尝试使用USB外接蓝牙适配器',
+                'faq7_question': 'WiFi连接不稳定或速度慢怎么办？',
+                'faq7_answer_intro': 'WiFi连接问题的解决方法：',
+                'faq7_answer_step1': '更新IntelWiFi驱动到最新版本',
+                'faq7_answer_step2': '尝试不同的网络位置（如2.4GHz和5GHz频段）',
+                'faq7_answer_step3': '重置网络设置：删除<code>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</code>后重启',
+                'faq7_answer_step4': '使用WiFi诊断工具检查信号强度',
+                'faq7_answer_step5': '考虑更换兼容的无线网卡（如BCM94360系列）以获得更好的兼容性',
+                'more_help_title': '需要更多帮助？',
+                'more_help_intro': '如果以上解答没有解决您的问题，可以通过以下方式获取帮助',
+                'help_github_title': 'GitHub 项目',
+                'help_github_desc': '访问我们的GitHub仓库，查看详细文档、更新日志和提交问题。',
+                'btn_visit_github': '访问 GitHub',
+                'help_docs_title': '详细文档',
+                'help_docs_desc': '查阅完整的安装指南、硬件兼容性列表和故障排除手册。',
+                'btn_view_docs': '查看文档',
+                'help_contact_title': '联系我们',
+                'help_contact_desc': '发送邮件至我们的支持团队，获取个性化的帮助和支持。',
+                'btn_send_email': '发送邮件',
+                'license': 'MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
+                'footer_note': '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
+            },
+            'zh-TW': {
+                'site_title': 'ASUS FL8700JP 黑蘋果',
+                'nav_home': '主頁',
+                'nav_hardware': '硬體支援',
+                'nav_installation': '安裝指南',
+                'nav_faq': '常見問題',
+                'nav_compatibility': '系統相容',
+                'hero_title': '常見問題解答',
+                'hero_subtitle': '找到關於ASUS FL8700JP黑蘋果項目的常見問題及解決方案',
+                'badge_comprehensive': '全面解答',
+                'badge_searchable': '可搜索分類',
+                'badge_helpful': '實用幫助',
+                'btn_installation': '查看安裝指南',
+                'btn_hardware': '硬體支援',
+                'search_placeholder': '搜索問題...',
+                'category_all': '全部問題',
+                'category_installation': '安裝問題',
+                'category_hardware': '硬體相關',
+                'category_performance': '性能優化',
+                'category_troubleshooting': '故障排除',
+                'faq_title': '常見問題',
+                'faq1_question': '安裝過程中出現"禁止符號"怎麼辦？',
+                'faq1_answer_intro': '這是常見的安裝問題，通常是由於引導配置不正確或硬體不相容導致的。解決方法：',
+                'faq1_answer_step1': '檢查BIOS設定，確保已禁用Secure Boot和Fast Boot',
+                'faq1_answer_step2': '確認DVMT預分配已設定為64M或更高',
+                'faq1_answer_step3': '更新OpenCore引導程序到最新版本',
+                'faq1_answer_step4': '檢查config.plist中是否正確設定了所有必要的ACPI補丁和Kexts',
+                'faq1_answer_step5': '嘗試使用不同的SMBIOS機型識別碼',
+                'faq2_question': '如何創建macOS安裝U盤？',
+                'faq2_answer_intro': '創建安裝U盤的步驟：',
+                'faq2_answer_step1': '從黑果小兵的部落閣或其他可靠來源下載macOS鏡像',
+                'faq2_answer_step2': '準備一個至少16GB的U盤',
+                'faq2_answer_step3': '使用BalenaEtcher或終端命令將鏡像寫入U盤',
+                'faq2_answer_step4': '將EFI資料夾複製到U盤的EFI分區',
+                'faq2_answer_step5': '確保config.plist已針對您的硬體進行正確配置',
+                'faq2_answer_note': '注意：在Windows系統下製作安裝盤時，需要使用特定的工具如TransMac。',
+                'faq3_question': '如何關閉開機時的"咚"聲？',
+                'faq3_answer_intro': '要關閉開機時的提示音：',
+                'faq3_answer_step1': '進入macOS系統後，打開"系統偏好設定"',
+                'faq3_answer_step2': '選擇"聲音"選項',
+                'faq3_answer_step3': '切換到"聲音效果"標籤頁',
+                'faq3_answer_step4': '取消勾選"在啟動時播放聲音"選項',
+                'faq3_answer_note': '此外，您還可以在OpenCore的config.plist中通過添加AudioDxe驅動並設定相關參數來完全禁用啟動音。',
+                'faq4_question': '觸控板偶爾無響應怎麼辦？',
+                'faq4_answer_intro': '這是ELAN1200觸控板驅動的已知問題，可以嘗試以下解決方法：',
+                'faq4_answer_step1': '重啟系統 - 這能解決大多數臨時性問題',
+                'faq4_answer_step2': '進入睡眠模式後喚醒 - 有時能重新初始化觸控板驅動',
+                'faq4_answer_step3': '更新VoodooI2C和相關驅動到最新版本',
+                'faq4_answer_step4': '檢查EFI/OC/Kexts中是否正確安裝了所有必要的觸控板驅動',
+                'faq4_answer_step5': '在啟動參數中添加<code>-v</code>查看詳細日誌，排查驅動加載問題',
+                'faq5_question': '如何優化電池續航時間？',
+                'faq5_answer_intro': '優化電池續航的方法：',
+                'faq5_answer_step1': '確保CPU電源管理正常工作，使用CPUFriend或類似工具優化性能配置',
+                'faq5_answer_step2': '在"系統偏好設定" -> "節能"中調整相關設定',
+                'faq5_answer_step3': '使用亮度調節快捷鍵降低螢幕亮度',
+                'faq5_answer_step4': '關閉不必要的後台應用程式和服務',
+                'faq5_answer_step5': '確保GPU節能功能正常工作，避免獨顯在不需要時耗電',
+                'faq5_answer_step6': '使用適當的SMBIOS機型識別碼，確保所有節能功能正常工作',
+                'faq6_question': '藍牙設備無法連接怎麼辦？',
+                'faq6_answer_intro': '藍牙連接問題的解決方法：',
+                'faq6_answer_step1': '確認IntelBluetoothFirmware和IntelBluetoothInjector驅動已正確安裝',
+                'faq6_answer_step2': '檢查USB映射是否正確，藍牙通常通過內部USB連接',
+                'faq6_answer_step3': '嘗試重置藍牙模組：關閉藍牙等待10秒後重新開啟',
+                'faq6_answer_step4': '刪除<code>/Library/Preferences/com.apple.Bluetooth.plist</code>檔案後重啟',
+                'faq6_answer_step5': '更新到最新版本的藍牙驅動',
+                'faq6_answer_step6': '如果問題依舊，嘗試使用USB外接藍牙適配器',
+                'faq7_question': 'WiFi連接不穩定或速度慢怎麼辦？',
+                'faq7_answer_intro': 'WiFi連接問題的解決方法：',
+                'faq7_answer_step1': '更新IntelWiFi驅動到最新版本',
+                'faq7_answer_step2': '嘗試不同的網路位置（如2.4GHz和5GHz頻段）',
+                'faq7_answer_step3': '重置網路設定：刪除<code>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</code>後重啟',
+                'faq7_answer_step4': '使用WiFi診斷工具檢查信號強度',
+                'faq7_answer_step5': '考慮更換相容的無線網卡（如BCM94360系列）以獲得更好的相容性',
+                'more_help_title': '需要更多幫助？',
+                'more_help_intro': '如果以上解答沒有解決您的問題，可以通過以下方式獲取幫助',
+                'help_github_title': 'GitHub 項目',
+                'help_github_desc': '訪問我們的GitHub倉庫，查看詳細文檔、更新日誌和提交問題。',
+                'btn_visit_github': '訪問 GitHub',
+                'help_docs_title': '詳細文檔',
+                'help_docs_desc': '查閱完整的安裝指南、硬體相容性列表和故障排除手冊。',
+                'btn_view_docs': '查看文檔',
+                'help_contact_title': '聯繫我們',
+                'help_contact_desc': '發送郵件至我們的支援團隊，獲取個性化的幫助和支援。',
+                'btn_send_email': '發送郵件',
+                'license': 'MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
+                'footer_note': '溫馨提示：本項目僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+            },
+            'en': {
+                'site_title': 'ASUS FL8700JP Hackintosh',
+                'nav_home': 'Home',
+                'nav_hardware': 'Hardware Support',
+                'nav_installation': 'Installation Guide',
+                'nav_faq': 'FAQ',
+                'nav_compatibility': 'System Compatibility',
+                'hero_title': 'Frequently Asked Questions',
+                'hero_subtitle': 'Find common questions and solutions about the ASUS FL8700JP Hackintosh project',
+                'badge_comprehensive': 'Comprehensive Answers',
+                'badge_searchable': 'Searchable Categories',
+                'badge_helpful': 'Practical Help',
+                'btn_installation': 'View Installation Guide',
+                'btn_hardware': 'Hardware Support',
+                'search_placeholder': 'Search questions...',
+                'category_all': 'All Questions',
+                'category_installation': 'Installation Issues',
+                'category_hardware': 'Hardware Related',
+                'category_performance': 'Performance Optimization',
+                'category_troubleshooting': 'Troubleshooting',
+                'faq_title': 'Frequently Asked Questions',
+                'faq1_question': 'What to do when "prohibited symbol" appears during installation?',
+                'faq1_answer_intro': 'This is a common installation issue, usually caused by incorrect boot configuration or hardware incompatibility. Solutions:',
+                'faq1_answer_step1': 'Check BIOS settings, ensure Secure Boot and Fast Boot are disabled',
+                'faq1_answer_step2': 'Confirm DVMT pre-allocation is set to 64M or higher',
+                'faq1_answer_step3': 'Update OpenCore bootloader to the latest version',
+                'faq1_answer_step4': 'Check if all necessary ACPI patches and Kexts are correctly set in config.plist',
+                'faq1_answer_step5': 'Try using different SMBIOS model identifiers',
+                'faq2_question': 'How to create a macOS installation USB drive?',
+                'faq2_answer_intro': 'Steps to create installation USB drive:',
+                'faq2_answer_step1': 'Download macOS image from reliable sources like HeiGuo XiaoBing',
+                'faq2_answer_step2': 'Prepare a USB drive with at least 16GB capacity',
+                'faq2_answer_step3': 'Use BalenaEtcher or terminal commands to write the image to the USB drive',
+                'faq2_answer_step4': 'Copy the EFI folder to the EFI partition of the USB drive',
+                'faq2_answer_step5': 'Ensure config.plist is properly configured for your hardware',
+                'faq2_answer_note': 'Note: When creating installation media on Windows, specific tools like TransMac are required.',
+                'faq3_question': 'How to disable the startup "dong" sound?',
+                'faq3_answer_intro': 'To disable the startup sound:',
+                'faq3_answer_step1': 'After entering macOS, open "System Preferences"',
+                'faq3_answer_step2': 'Select "Sound" option',
+                'faq3_answer_step3': 'Switch to "Sound Effects" tab',
+                'faq3_answer_step4': 'Uncheck "Play sound on startup" option',
+                'faq3_answer_note': 'Additionally, you can completely disable the startup sound by adding AudioDxe driver and setting relevant parameters in OpenCore config.plist.',
+                'faq4_question': 'What to do when trackpad occasionally becomes unresponsive?',
+                'faq4_answer_intro': 'This is a known issue with ELAN1200 trackpad driver. Try the following solutions:',
+                'faq4_answer_step1': 'Restart system - this solves most temporary issues',
+                'faq4_answer_step2': 'Wake from sleep mode - sometimes reinitializes the trackpad driver',
+                'faq4_answer_step3': 'Update VoodooI2C and related drivers to the latest version',
+                'faq4_answer_step4': 'Check if all necessary trackpad drivers are correctly installed in EFI/OC/Kexts',
+                'faq4_answer_step5': 'Add <code>-v</code> to boot arguments to view detailed logs and troubleshoot driver loading issues',
+                'faq5_question': 'How to optimize battery life?',
+                'faq5_answer_intro': 'Methods to optimize battery life:',
+                'faq5_answer_step1': 'Ensure CPU power management works properly, use CPUFriend or similar tools to optimize performance configuration',
+                'faq5_answer_step2': 'Adjust relevant settings in "System Preferences" -> "Energy Saver"',
+                'faq5_answer_step3': 'Use brightness adjustment shortcuts to reduce screen brightness',
+                'faq5_answer_step4': 'Close unnecessary background applications and services',
+                'faq5_answer_step5': 'Ensure GPU power saving functions work properly to avoid dedicated graphics consuming power when not needed',
+                'faq5_answer_step6': 'Use appropriate SMBIOS model identifiers to ensure all power saving functions work properly',
+                'faq6_question': 'What to do when Bluetooth devices cannot connect?',
+                'faq6_answer_intro': 'Solutions for Bluetooth connection issues:',
+                'faq6_answer_step1': 'Confirm IntelBluetoothFirmware and IntelBluetoothInjector drivers are correctly installed',
+                'faq6_answer_step2': 'Check if USB mapping is correct, Bluetooth usually connects through internal USB',
+                'faq6_answer_step3': 'Try resetting Bluetooth module: turn off Bluetooth, wait 10 seconds, then turn it back on',
+                'faq6_answer_step4': 'Delete <code>/Library/Preferences/com.apple.Bluetooth.plist</code> file and restart',
+                'faq6_answer_step5': 'Update to the latest version of Bluetooth drivers',
+                'faq6_answer_step6': 'If the problem persists, try using an external USB Bluetooth adapter',
+                'faq7_question': 'What to do when WiFi connection is unstable or slow?',
+                'faq7_answer_intro': 'Solutions for WiFi connection issues:',
+                'faq7_answer_step1': 'Update IntelWiFi driver to the latest version',
+                'faq7_answer_step2': 'Try different network locations (such as 2.4GHz and 5GHz bands)',
+                'faq7_answer_step3': 'Reset network settings: delete <code>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</code> and restart',
+                'faq7_answer_step4': 'Use WiFi diagnostic tools to check signal strength',
+                'faq7_answer_step5': 'Consider replacing with a compatible wireless card (like BCM94360 series) for better compatibility',
+                'more_help_title': 'Need More Help?',
+                'more_help_intro': 'If the above answers didn\'t solve your problem, you can get help through the following ways',
+                'help_github_title': 'GitHub Project',
+                'help_github_desc': 'Visit our GitHub repository to view detailed documentation, changelogs and submit issues.',
+                'btn_visit_github': 'Visit GitHub',
+                'help_docs_title': 'Detailed Documentation',
+                'help_docs_desc': 'Consult the complete installation guide, hardware compatibility list and troubleshooting manual.',
+                'btn_view_docs': 'View Documentation',
+                'help_contact_title': 'Contact Us',
+                'help_contact_desc': 'Send an email to our support team for personalized help and support.',
+                'btn_send_email': 'Send Email',
+                'license': 'MIT License | © 2021-2025 Aurora Daidai Brain - All Rights Reserved',
+                'footer_note': 'Friendly reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const langMenu = document.getElementById('langMenu');
+        const langOptions = document.querySelectorAll('.lang-option');
+        
+        // 检查本地存储或浏览器语言
+        const savedLang = localStorage.getItem('language') || navigator.language;
+        let currentLang = savedLang.startsWith('zh') ? (savedLang.includes('TW') || savedLang.includes('HK') ? 'zh-TW' : 'zh-CN') : 'en';
+        
+        // 应用语言
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // 更新语言选项激活状态
+            langOptions.forEach(option => {
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 保存语言选择
+            localStorage.setItem('language', lang);
+            currentLang = lang;
+        }
+        
+        // 初始化语言
+        applyLanguage(currentLang);
+        
+        // 语言切换菜单
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('active');
+        });
+        
+        // 选择语言
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                applyLanguage(lang);
+                langMenu.classList.remove('active');
+            });
+        });
+        
+        // 点击其他地方关闭语言菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-container')) {
+                langMenu.classList.remove('active');
+            }
+        });
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查本地存储或系统偏好
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // FAQ展开功能
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // 分类筛选功能
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.getAttribute('data-category');
+                
+                // 更新激活状态
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // 筛选FAQ项目
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // 搜索功能
+        const searchInput = document.getElementById('faqSearch');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // 设置当前页面激活状态
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('active');
+            }
+        });
+        
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.help-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
