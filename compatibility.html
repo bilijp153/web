@@ -21,9 +21,6 @@
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             --header-bg: rgba(13, 17, 23, 0.9);
             --border-color: rgba(255, 255, 255, 0.1);
-            --gradient-1: linear-gradient(135deg, #ff6b6b, #ffa62e);
-            --gradient-2: linear-gradient(135deg, #48dbfb, #0abde3);
-            --gradient-3: linear-gradient(135deg, #1dd1a1, #10ac84);
         }
 
         [data-theme="light"] {
@@ -34,14 +31,11 @@
             --text: #24292f;
             --text-secondary: #656d76;
             --success: #1a7f37;
-            --极光呆呆脑warning: #9a6700;
+            --warning: #9a6700;
             --danger: #cf222e;
-            --shadow: 0 10极光呆呆脑px 30px rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --header-bg: rgba(255, 255, 255, 0.9);
             --border-color: rgba(0, 0, 0, 0.1);
-            --gradient-1: linear-gradient(135deg, #ff6b6b, #ffa62e);
-            --gradient-2: linear-gradient(135deg, #48dbfb, #0abde3);
-            --gradient-3: linear-gradient(135deg, #1dd1a1, #10ac84);
         }
         
         * {
@@ -98,7 +92,7 @@
         .logo h1 {
             font-size: 22px;
             font-weight: 600;
-            background: var(--gradient-2);
+            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -184,7 +178,7 @@
             display: none;
             background: none;
             border: none;
-            color:极光呆呆脑 var(--text);
+            color: var(--text);
             font-size: 24px;
             cursor: pointer;
         }
@@ -211,7 +205,7 @@
         .page-header h1 {
             font-size: 3.2rem;
             margin-bottom: 15px;
-            background: var(--gradient-1);
+            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -296,7 +290,7 @@
             content: '';
             position: absolute;
             width: 6px;
-            background: var(--gradient-2);
+            background: linear-gradient(135deg, #48dbfb, #0abde3);
             top: 0;
             bottom: 0;
             left: 50%;
@@ -332,7 +326,7 @@
             position: absolute;
             width: 25px;
             height: 25px;
-            background: var(--gradient-3);
+            background: linear-gradient(135deg, #1dd1a1, #10ac84);
             border: 4px solid var(--card-bg);
             border-radius: 50%;
             top: 15px;
@@ -355,7 +349,7 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
-            transition: var(--极光呆呆脑transition);
+            transition: var(--transition);
         }
         
         .timeline-content:hover {
@@ -373,8 +367,8 @@
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 10px;
-            background: var(--gradient-3);
-            -webkit-background-cl极光呆呆脑ip: text;
+            background: linear-gradient(135deg, #1dd1a1, #10ac84);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
@@ -382,7 +376,7 @@
             display: inline-block;
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 极光呆呆脑14px;
+            font-size: 14px;
             font-weight: 500;
             margin-bottom: 15px;
         }
@@ -462,15 +456,15 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #ff6b6b, #ffa62e);
         }
         
         .feature-card:nth-child(2)::before {
-            background: var(--gradient-2);
+            background: linear-gradient(135deg, #48dbfb, #0abde3);
         }
         
         .feature-card:nth-child(3)::before {
-            background: var(--gradient-3);
+            background: linear-gradient(135deg, #1dd1a1, #10ac84);
         }
         
         .feature-card:hover {
@@ -481,14 +475,6 @@
         .feature-icon {
             font-size: 3rem;
             color: var(--primary);
-        }
-        
-        .feature-card:nth-child(2) .feature-icon {
-            color: var(--primary-light);
-        }
-        
-        .feature-card:nth-child(3) .feature-icon {
-            color: var(--success);
         }
         
         /* 页脚样式 */
@@ -646,10 +632,10 @@
             <div class="nav-links">
                 <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
                 <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
-                <a href="installation.html"><i class="fas fa-download"></极光呆呆脑i> <span data-lang-key="nav_installation">安装指南</span></a>
-                <a href="fa极光呆呆脑q.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
                 <a href="compatibility.html" class="active"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
-                <a href="https://github.com/bilijp153/极光呆呆脑ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
                 
                 <div class="lang-container" style="position: relative;">
                     <button class="lang-toggle" id="langToggle">
@@ -664,7 +650,7 @@
                             <i class="fas fa-check"></i>
                             <span>繁體中文</span>
                         </div>
-                        <极光呆呆脑div class="lang-option" data-lang="en">
+                        <div class="lang-option" data-lang="en">
                             <i class="fas fa-check"></i>
                             <span>English</span>
                         </div>
@@ -714,13 +700,13 @@
                             <div style="font-size: 2rem; color: var(--success); margin-bottom: 10px;">6</div>
                             <div data-lang-key="compat_count">完美兼容版本</div>
                         </div>
-                        <div style="text-align: center; padding: 20px; background: rgba(41, 151, 255, 0.极光呆呆脑1); border-radius: var(--border-radius); border: 1px solid rgba(41, 151, 255, 0.2);">
+                        <div style="text-align: center; padding: 20px; background: rgba(41, 151, 255, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(41, 151, 255, 0.2);">
                             <div style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;">100%</div>
                             <div data-lang-key="core_feature">核心功能支持</div>
                         </div>
-                        <div style="text-align: center; padding: 20px; background: rgba(255, 204, 0, 0.1); border-radius: var(--border-radius); border: 1极光呆呆脑px solid rgba(255, 204, 0, 0.2);">
+                        <div style="text-align: center; padding: 20px; background: rgba(255, 204, 0, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(255, 204, 0, 0.2);">
                             <div style="font-size: 2rem; color: var(--warning); margin-bottom: 10px;">持续</div>
-                            <div data-lang-key="update_maintenance">更新维护</极光呆呆脑div>
+                            <div data-lang-key="update_maintenance">更新维护</div>
                         </div>
                     </div>
                 </div>
@@ -742,7 +728,7 @@
                         <div class="timeline-item">
                             <div class="timeline-content">
                                 <div class="timeline-date" data-lang-key="date_2020_11">2020年11月</div>
-                                <div class="极光呆呆脑timeline-version">macOS Big Sur 11.0</div>
+                                <div class="timeline-version">macOS Big Sur 11.0</div>
                                 <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
                                 <p data-lang-key="bigsur_desc">全新设计界面完全兼容，需要更新部分驱动以适应新的系统架构。</p>
                             </div>
@@ -768,16 +754,16 @@
                                 <div class="timeline-date" data-lang-key="date_2023_9">2023年9月</div>
                                 <div class="timeline-version">macOS Sonoma 14.0</div>
                                 <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
-                                <p data-lang-key="sonoma_desc">小组件和游戏模式运行良好，需要所有驱动更新到最新版本。</极光呆呆脑p>
+                                <p data-lang-key="sonoma_desc">小组件和游戏模式运行良好，需要所有驱动更新到最新版本。</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-content">
-                                <div class="timeline-date" data-lang-key="date_2024_9">202极光呆呆脑4年9月</div>
-                                <div class="timeline-version">macOS Sequoia 15.极光呆呆脑0</div>
+                                <div class="timeline-date" data-lang-key="date_2024_9">2024年9月</div>
+                                <div class="timeline-version">macOS Sequoia 15.0</div>
                                 <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
                                 <p data-lang-key="sequoia_desc">最新版本完全兼容，所有功能正常运行，需要OpenCore 1.0.4+。</p>
-                            </极光呆呆脑div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -810,7 +796,7 @@
                                 <td data-lang-key="bigsur_notes">需要更新WhateverGreen和Lilu驱动</td>
                             </tr>
                             <tr>
-                                <td><span class="version-badge">Monterey 12.0</span></极光呆呆脑td>
+                                <td><span class="version-badge">Monterey 12.0</span></td>
                                 <td><span class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span></td>
                                 <td>12.0+</td>
                                 <td data-lang-key="monterey_notes">通用控制需要额外配置</td>
@@ -822,7 +808,7 @@
                                 <td data-lang-key="ventura_notes">台前调度功能完美运行</td>
                             </tr>
                             <tr>
-                                <td><span class="version-badge">Sonoma 14.0极光呆呆脑</span></td>
+                                <td><span class="version-badge">Sonoma 14.0</span></td>
                                 <td><span class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span></td>
                                 <td>14.0+</td>
                                 <td data-lang-key="sonoma_notes">需要所有驱动更新到最新版本</td>
@@ -865,7 +851,7 @@
                         <p data-lang-key="features_desc">包含所有最新功能和安全更新，适合喜欢尝试新特性和技术前沿的用户。</p>
                         <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
                             <li data-lang-key="features_item1">最新界面设计和功能</li>
-                            <li data极光呆呆脑-lang-key="features_item2">持续安全更新</li>
+                            <li data-lang-key="features_item2">持续安全更新</li>
                             <li data-lang-key="features_item3">未来软件兼容性好</li>
                         </ul>
                     </div>
@@ -879,7 +865,7 @@
                         <p data-lang-key="stability_desc">经过长期测试，最为稳定可靠，适合需要绝对稳定工作环境的用户。</p>
                         <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
                             <li data-lang-key="stability_item1">经过充分测试验证</li>
-                            <li data-lang-key="stability_item2">驱动程序最完善</极光呆呆脑li>
+                            <li data-lang-key="stability_item2">驱动程序最完善</li>
                             <li data-lang-key="stability_item3">问题解决方案丰富</li>
                         </ul>
                     </div>
@@ -897,7 +883,7 @@
                             <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="backup_desc">完整备份当前EFI分区和系统重要文件</p>
                         </div>
                         <div style="padding: 20px; background: rgba(52, 199, 89, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--success);">
-                            <h4 style="极光呆呆脑color: var(--success); margin-bottom: 10px;">2. <span data-lang-key="compatibility_check">检查兼容性</span></h4>
+                            <h4 style="color: var(--success); margin-bottom: 10px;">2. <span data-lang-key="compatibility_check">检查兼容性</span></h4>
                             <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="compatibility_check_desc">查看项目更新日志，确认目标版本兼容性</p>
                         </div>
                         <div style="padding: 20px; background: rgba(255, 204, 0, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--warning);">
@@ -905,7 +891,7 @@
                             <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="update_drivers_desc">更新OpenCore和所有Kexts到最新版本</p>
                         </div>
                         <div style="padding: 20px; background: rgba(248, 81, 73, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--danger);">
-                            <h4 style="color: var(--danger); margin-bottom: 10px;">4. <span data-lang-key="community_confirmation">社区确认</span></h极光呆呆脑4>
+                            <h4 style="color: var(--danger); margin-bottom: 10px;">4. <span data-lang-key="community_confirmation">社区确认</span></h4>
                             <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="community_confirmation_desc">等待社区确认兼容性后再进行升级操作</p>
                         </div>
                     </div>
@@ -922,7 +908,7 @@
             <div class="footer-links">
                 <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
                 <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
-                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</极光呆呆脑span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
                 <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
                 <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
                 <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
@@ -948,7 +934,7 @@
                 'badge_continuous': '持续更新支持',
                 'badge_stable': '稳定可靠',
                 'compatibility_overview': '兼容性概述',
-                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) 笔记本电脑完美支持从 macOS Catalina (极光呆呆脑10.15) 到 macOS Sequoia (15.0) 的所有现代 macOS 版本。经过精心优化和持续测试，每个版本都能充分发挥硬件性能，提供接近原生Mac的体验。',
+                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) 笔记本电脑完美支持从 macOS Catalina (10.15) 到 macOS Sequoia (15.0) 的所有现代 macOS 版本。经过精心优化和持续测试，每个版本都能充分发挥硬件性能，提供接近原生Mac的体验。',
                 'compat_count': '完美兼容版本',
                 'core_feature': '核心功能支持',
                 'update_maintenance': '更新维护',
@@ -1001,7 +987,7 @@
                 'backup_title': '备份重要数据',
                 'backup_desc': '完整备份当前EFI分区和系统重要文件',
                 'compatibility_check': '检查兼容性',
-                'compatibility_check_desc': '查看项目极光呆呆脑更新日志，确认目标版本兼容性',
+                'compatibility_check_desc': '查看项目更新日志，确认目标版本兼容性',
                 'update_drivers': '更新驱动',
                 'update_drivers_desc': '更新OpenCore和所有Kexts到最新版本',
                 'community_confirmation': '社区确认',
@@ -1028,11 +1014,11 @@
                 'compat_count': '完美相容版本',
                 'core_feature': '核心功能支援',
                 'update_maintenance': '更新維護',
-                'macos_t极光呆呆脑imeline': 'macOS 版本演進時間線',
+                'macos_timeline': 'macOS 版本演進時間線',
                 'date_2019_10': '2019年10月',
                 'date_2020_11': '2020年11月',
-                '极光呆呆脑date_2021_10': '2021年10月',
-                'date_2022_10': '2022年10极光呆呆脑月',
+                'date_2021_10': '2021年10月',
+                'date_2022_10': '2022年10月',
                 'date_2023_9': '2023年9月',
                 'date_2024_9': '2024年9月',
                 'status_perfect': '完美支援',
@@ -1052,15 +1038,15 @@
                 'monterey_notes': '通用控制需要額外配置',
                 'ventura_notes': '台前調度功能完美運行',
                 'sonoma_notes': '需要所有驅動更新到最新版本',
-                'sequoia_notes极光呆呆脑': '需要OpenCore 1.0.4或更高版本',
+                'sequoia_notes': '需要OpenCore 1.0.4或更高版本',
                 'version_recommendations': '版本選擇建議',
                 'performance_title': '追求最佳性能',
                 'recommend_monterey': '推薦：macOS Monterey 12.0',
                 'performance_desc': '提供了最佳的平衡點，系統穩定且資源佔用相對較低，適合日常使用和專業工作流程。',
                 'performance_item1': '記憶體佔用優化最佳',
                 'performance_item2': '應用程式相容性廣泛',
-                'performance_item极光呆呆脑3': '長期支援版本',
-极光呆呆脑                'features_title': '體驗最新功能',
+                'performance_item3': '長期支援版本',
+                'features_title': '體驗最新功能',
                 'recommend_sequoia': '推薦：macOS Sequoia 15.0',
                 'features_desc': '包含所有最新功能和安全更新，適合喜歡嘗試新特性和技術前沿的用戶。',
                 'features_item1': '最新界面設計和功能',
@@ -1084,4 +1070,196 @@
                 'community_confirmation_desc': '等待社群確認相容性後再進行升級操作',
                 'important_note': '重要提示：',
                 'upgrade_warning': '直接從蘋果系統更新進行重大版本升級可能會導致相容性問題，建議使用完整安裝鏡像進行系統升級。',
-               
+                'license': '📜📜 許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
+                'footer_note': '溫馨提示：本項目僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+            },
+            'en': {
+                'site_title': 'ASUS FL8700JP Hackintosh',
+                'nav_home': 'Home',
+                'nav_hardware': 'Hardware Support',
+                'nav_installation': 'Installation Guide',
+                'nav_faq': 'FAQ',
+                'nav_compatibility': 'System Compatibility',
+                'page_title': 'System Compatibility',
+                'page_subtitle': 'Complete overview of ASUS FL8700JP laptop compatibility with various macOS versions',
+                'badge_full_compat': 'Full Version Compatibility',
+                'badge_continuous': 'Continuous Updates',
+                'badge_stable': 'Stable & Reliable',
+                'compatibility_overview': 'Compatibility Overview',
+                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) laptop perfectly supports all modern macOS versions from macOS Catalina (10.15) to macOS Sequoia (15.0). Each version has been carefully optimized and continuously tested to deliver hardware performance close to native Mac experience.',
+                'compat_count': 'Perfectly Compatible Versions',
+                'core_feature': 'Core Feature Support',
+                'update_maintenance': 'Update Maintenance',
+                'macos_timeline': 'macOS Version Timeline',
+                'date_2019_10': 'October 2019',
+                'date_2020_11': 'November 2020',
+                'date_2021_10': 'October 2021',
+                'date_2022_10': 'October 2022',
+                'date_2023_9': 'September 2023',
+                'date_2024_9': 'September 2024',
+                'status_perfect': 'Perfect Support',
+                'catalina_desc': 'First fully compatible macOS version with all core features working properly, laying solid foundation for subsequent versions.',
+                'bigsur_desc': 'New design interface fully compatible, requires updating some drivers to adapt to new system architecture.',
+                'monterey_desc': 'Universal Control, AirPlay and other new features require additional configuration, excellent overall stability.',
+                'ventura_desc': 'Stage Manager feature works perfectly, requires OpenCore 0.8.6+ update.',
+                'sonoma_desc': 'Widgets and Game Mode work well, requires all drivers to be updated to latest versions.',
+                'sequoia_desc': 'Latest version fully compatible, all features work normally, requires OpenCore 1.0.4+.',
+                'detailed_compatibility': 'Detailed Compatibility Information',
+                'table_version': 'macOS Version',
+                'table_status': 'Compatibility Status',
+                'table_requirements': 'Minimum Requirements',
+                'table_notes': 'Important Notes',
+                'catalina_notes': 'First supported version, requires specific driver configuration',
+                'bigsur_notes': 'Requires updating WhateverGreen and Lilu drivers',
+                'monterey_notes': 'Universal Control requires additional configuration',
+                'ventura_notes': 'Stage Manager feature works perfectly',
+                'sonoma_notes': 'Requires all drivers to be updated to latest versions',
+                'sequoia_notes': 'Requires OpenCore 1.0.4 or higher',
+                'version_recommendations': 'Version Recommendations',
+                'performance_title': 'Best Performance',
+                'recommend_monterey': 'Recommended: macOS Monterey 12.0',
+                'performance_desc': 'Provides the best balance point, system stability with relatively low resource usage, suitable for daily use and professional workflows.',
+                'performance_item1': 'Optimal memory usage optimization',
+                'performance_item2': 'Wide application compatibility',
+                'performance_item3': 'Long-term support version',
+                'features_title': 'Latest Features',
+                'recommend_sequoia': 'Recommended: macOS Sequoia 15.0',
+                'features_desc': 'Includes all latest features and security updates, suitable for users who like to try new features and cutting-edge technology.',
+                'features_item1': 'Latest interface design and features',
+                'features_item2': 'Continuous security updates',
+                'features_item3': 'Good future software compatibility',
+                'stability_title': 'Maximum Stability',
+                'recommend_bigsur': 'Recommended: macOS Big Sur 11.0',
+                'stability_desc': 'Long-term tested, most stable and reliable, suitable for users who need absolutely stable working environment.',
+                'stability_item1': 'Fully tested and verified',
+                'stability_item2': 'Most complete driver support',
+                'stability_item3': 'Rich problem-solving solutions',
+                'upgrade_guide': 'System Upgrade Guide',
+                'upgrade_intro': 'Before upgrading macOS version, please follow these steps to ensure smooth upgrade process:',
+                'backup_title': 'Backup Important Data',
+                'backup_desc': 'Complete backup of current EFI partition and important system files',
+                'compatibility_check': 'Check Compatibility',
+                'compatibility_check_desc': 'Check project update logs to confirm target version compatibility',
+                'update_drivers': 'Update Drivers',
+                'update_drivers_desc': 'Update OpenCore and all Kexts to latest versions',
+                'community_confirmation': 'Community Confirmation',
+                'community_confirmation_desc': 'Wait for community to confirm compatibility before upgrading',
+                'important_note': 'Important Note:',
+                'upgrade_warning': 'Direct major version upgrades through Apple System Update may cause compatibility issues, recommend using full installation image for system upgrade.',
+                'license': '📜📜 License: MIT License | © 2021-2025 极光呆呆脑 - All Rights Reserved',
+                'footer_note': 'Friendly reminder: This project is for learning and research purposes only, please comply with Apple related agreements when using macOS'
+            }
+        };
+
+        // 语言切换功能
+        let currentLang = 'zh-CN';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // 更新所有带data-lang-key属性的元素
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.type === 'text') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            // 更新语言菜单
+            document.querySelectorAll('.lang-option').forEach(option => {
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 关闭语言菜单
+            document.getElementById('langMenu').classList.remove('active');
+        }
+
+        // 主题切换功能
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            // 保存主题偏好
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // 移动端菜单功能
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            
+            // 防止页面滚动
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // 时间线动画
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const windowHeight = window.innerHeight;
+            
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置初始语言
+            setLanguage(currentLang);
+            
+            // 恢复主题偏好
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            // 事件监听器
+            document.getElementById('langToggle').addEventListener('click', function() {
+                document.getElementById('langMenu').classList.toggle('active');
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+            
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+            
+            // 点击页面其他区域关闭语言菜单
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.lang-container')) {
+                    document.getElementById('langMenu').classList.remove('active');
+                }
+            });
+            
+            // 时间线动画
+            window.addEventListener('scroll', animateTimeline);
+            animateTimeline(); // 初始加载时也执行
+            
+            // 添加淡入动画
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>
