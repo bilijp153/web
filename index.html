@@ -203,4 +203,289 @@
             align-items: center;
             padding: 1rem;
             background: var(--code-bg);
-            border-ra
+            border-radius: 8px;
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 0 0 8px 8px;
+            margin-top: 2px;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .contributors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contributor {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contributor img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span>🍎 黑苹果星球</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">项目介绍</a></li>
+                    <li><a href="#hardware">硬件支持</a></li>
+                    <li><a href="#install">安装指南</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#contributors">贡献者</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>让 Windows 笔记本完美运行 macOS</h1>
+            <p>为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="intro" class="card">
+            <h2>📖 项目介绍</h2>
+            <p>本项目提供了为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案，支持从 macOS Catalina 到 Sequoia 的所有版本。</p>
+            
+            <h3>项目结构</h3>
+            <div class="code-block">
+                EFI/
+                ├── BOOT/
+                │   └── BOOTx64.efi              # 引导文件
+                └── OC/
+                    ├── ACPI/                    # 系统补丁与修复
+                    │   ├── SSDT-AWAC.aml        # 时钟控制器修复
+                    │   ├── SSDT-EC-USBX.aml     # 嵌入式控制器
+                    │   └── SSDT-PLUG.aml        # CPU电源管理
+                    ├── Kexts/                   # 核心硬件驱动
+                    │   ├── Lilu.kext            # 核心插件
+                    │   ├── VirtualSMC.kext      # 系统管理控制器
+                    │   ├── WhateverGreen.kext   # 显卡修复
+                    │   └── AppleALC.kext        # 声卡驱动
+                    ├── Drivers/                 # OpenCore 引导驱动
+                    │   ├── OpenRuntime.efi      # 运行时服务
+                    │   └── HfsPlus.efi          # HFS+文件系统支持
+                    ├── config.plist             # 主配置文件
+                    └── Tools/                   # 实用工具集合
+            </div>
+            
+            <h3>效果展示</h3>
+            <div class="gallery">
+                
+                
+            </div>
+        </section>
+
+        <section id="hardware" class="card">
+            <h2>💻 硬件支持</h2>
+            <table class="hardware-table">
+                <thead>
+                    <tr>
+                        <th>组件</th>
+                        <th>型号</th>
+                        <th>状态</th>
+                        <th>详细说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>处理器</strong></td>
+                        <td>Intel i7-1065G7</td>
+                        <td class="status-supported">✅ 完美支持</td>
+                        <td>Ice Lake 架构优化</td>
+                    </tr>
+                    <tr>
+                        <td><strong>核显</strong></td>
+                        <td>Intel Iris Plus G7</td>
+                        <td class="status-partial">⚠️ 基本支持</td>
+                        <td>不支持 HDMI 输出</td>
+                    </tr>
+                    <tr>
+                        <td><strong>独立显卡</strong></td>
+                        <td>NVIDIA MX330</td>
+                        <td class="status-unsupported">❌ 不支持</td>
+                        <td>已在配置中屏蔽</td>
+                    </tr>
+                    <tr>
+                        <td><strong>音频</strong></td>
+                        <td>Realtek ALC256</td>
+                        <td class="status-supported">✅ 完美支持</td>
+                        <td>自动切换输入/输出设备</td>
+                    </tr>
+                    <tr>
+                        <td><strong>无线网络</strong></td>
+                        <td>Intel Wireless-AC 9461</td>
+                        <td class="status-partial">⚠️ 部分支持</td>
+                        <td>不支持隔空投送</td>
+                    </tr>
+                    <tr>
+                        <td><strong>触控板</strong></td>
+                        <td>ELAN1200</td>
+                        <td class="status-partial">⚠️ 基本支持</td>
+                        <td>偶发无响应</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="install" class="card">
+            <h2>⚙️ 安装指南</h2>
+            <h3>准备工作</h3>
+            <p>1. <strong>BIOS 设置</strong>：禁用 Secure Boot，关闭 Fast Boot，设置 DVMT 预分配为 64M</p>
+            <p>2. <strong>安装介质</strong>：下载 macOS 镜像，使用 BalenaEtcher 创建安装U盘</p>
+            
+            <h3>安装流程</h3>
+            <div class="code-block">
+                1. 下载项目文件
+                2. 提取本机 ACPI 表
+                3. 替换配置文件
+                4. 启动安装
+                5. 迁移 EFI
+                6. SMBIOS 配置
+            </div>
+            
+            <h3>详细步骤</h3>
+            <p>访问 <a href="#">发布页面</a> 下载最新EFI，使用 SSDTTime 提取必要文件，然后将生成的SSDT文件放入指定目录。</p>
+        </section>
+
+        <section id="faq" class="card">
+            <h2>❓ 常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>如何关闭开机时的"咚"声？</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>前往"系统设置" → "声音" → 取消勾选"启动时播放声音"</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>触控板偶尔无响应怎么办？</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>这是 ELAN1200 驱动的已知问题，暂时可通过以下方法解决：重启系统或进入睡眠模式后唤醒</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>如何更改默认启动系统？</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>两种方法：在 OpenCore 启动界面按 <code>Ctrl+Enter</code> 设置默认启动项，或进入 macOS 后通过"系统设置" → "启动磁盘"设置</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contributors" class="card">
+            <h2>🤝 参与贡献</h2>
+            <div class="contributors">
+                <div class="contributor">
+                    <h3>极光呆呆脑</h3>
+                    <p>项目维护</p>
+                    <p>1551656605@qq.com</p>
+                </div>
+                <div class="contributor">
+                    <h3>若涵</h3>
+                    <p>测试验证</p>
+                </div>
+            </div>
+            
+            <h3>反馈渠道</h3>
+            <p>提交 Issue 或发送邮件至: 1551656605@qq.com</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>📜 许可证: MIT © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+            <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.setAttribute('data-theme', 
+                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            themeToggle.textContent = document.body.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        });
+
+        // FAQ 折叠功能
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+                
+                answer.style.display = isOpen ? 'none' : 'block';
+                question.querySelector('span:last-child').textContent = isOpen ? '+' : '-';
+            });
+        });
+
+        // 默认关闭所有 FAQ
+        document.querySelectorAll('.faq-answer').forEach(answer => {
+            answer.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
