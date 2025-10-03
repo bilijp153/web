@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASUS FL8700JP 黑苹果项目 | 常见问题</title>
+    <title>常见问题 | ASUS FL8700JP 黑苹果项目</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* 深色主题变量 */
             --primary: #2997ff;
             --secondary: #888;
             --background: #1d1d1f;
@@ -25,7 +24,6 @@
         }
 
         [data-theme="light"] {
-            /* 浅色主题变量 */
             --primary: #0071e3;
             --secondary: #86868b;
             --background: #f5f5f7;
@@ -145,55 +143,35 @@
             cursor: pointer;
         }
         
-        /* 英雄区域样式 */
-        .hero {
+        /* 页面标题样式 */
+        .page-header {
             text-align: center;
-            padding: 60px 0 40px;
-            background: radial-gradient(circle at top right, var(--card-bg), var(--background));
-            border-bottom: 1px solid var(--border-color);
+            padding: 60px 0 30px;
         }
         
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
+        .page-header h1 {
+            font-size: 2.8rem;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
+            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .hero p {
-            font-size: 1.1rem;
+        .page-header p {
+            font-size: 1.2rem;
             color: var(--secondary);
-            margin-bottom: 20px;
-        }
-        
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* 内容卡片样式 */
         .section {
-            padding: 50px 0;
+            padding: 40px 0;
         }
         
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -209,44 +187,40 @@
         }
         
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--primary);
         }
         
         /* FAQ样式 */
         .faq-container {
-            margin: 20px 0;
-        }
-        
-        .faq-category {
-            margin-bottom: 40px;
-        }
-        
-        .faq-category h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .faq-item {
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .faq-question {
-            font-size: 1.1rem;
+            padding: 20px;
+            font-size: 1.2rem;
             font-weight: 600;
-            padding: 15px 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -259,84 +233,76 @@
             background: rgba(41, 151, 255, 0.1);
         }
         
-        .faq-question.active {
-            background: rgba(41, 151, 255, 0.15);
-        }
-        
         .faq-answer {
             padding: 0 20px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-secondary);
         }
         
-        .faq-answer.active {
+        .faq-item.active .faq-answer {
+            max-height: 500px;
             padding: 20px;
-            max-height: 1000px;
         }
         
-        .faq-answer p {
-            margin-bottom: 15px;
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
         }
         
-        .faq-answer ul, .faq-answer ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .faq-answer li {
-            margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-        }
-        
-        .solution-tag {
-            display: inline-block;
-            padding: 5px 10px;
-            background: var(--success);
-            color: white;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-        
-        .warning-tag {
-            display: inline-block;
-            padding: 5px 10px;
-            background: var(--warning);
-            color: black;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-        
-        /* 搜索框样式 */
-        .search-container {
-            margin: 20px 0;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 12px 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 30px;
-            background: var(--card-bg);
-            color: var(--text);
-            font-size: 1rem;
+        .faq-arrow {
             transition: var(--transition);
         }
         
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(41, 151, 255, 0.2);
+        /* 分类标签 */
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .category-tab:hover:not(.active) {
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        /* 搜索框 */
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border-radius: 30px;
+            border: none;
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
         }
         
         /* 页脚样式 */
@@ -400,26 +366,27 @@
                 display: block;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .category-tabs {
+                overflow-x: auto;
+                padding-bottom: 10px;
             }
         }
         
         @media (max-width: 480px) {
-            .hero h1 {
+            .page-header h1 {
                 font-size: 1.8rem;
             }
             
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             .faq-question {
-                font-size: 1rem;
-                padding: 12px 15px;
-            }
-            
-            .faq-answer.active {
+                font-size: 1.1rem;
                 padding: 15px;
             }
         }
@@ -457,23 +424,269 @@
 
     <!-- 页面内容 -->
     <div class="page-content">
-        <!-- 英雄区域 -->
-        <section class="hero">
-            <div class="container hero-content">
-                <h1><i class="fas fa-question-circle"></i> 常见问题</h1>
-                <p>ASUS FL8700JP 黑苹果使用过程中遇到的常见问题及解决方案</p>
-                <div class="breadcrumb">
-                    <a href="index.html">首页</a> > <span>常见问题</span>
-                </div>
+        <!-- 页面标题 -->
+        <section class="page-header">
+            <div class="container">
+                <h1>常见问题解答</h1>
+                <p>在这里您可以找到关于ASUS FL8700JP黑苹果项目的常见问题及解决方案</p>
             </div>
         </section>
 
         <main class="container">
             <!-- 搜索框 -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索问题..." id="faqSearch">
+            </div>
+
+            <!-- 分类标签 -->
+            <div class="category-tabs">
+                <div class="category-tab active" data-category="all">全部问题</div>
+                <div class="category-tab" data-category="installation">安装问题</div>
+                <div class="category-tab" data-category="hardware">硬件相关</div>
+                <div class="category-tab" data-category="performance">性能优化</div>
+                <div class="category-tab" data-category="troubleshooting">故障排除</div>
+            </div>
+
+            <!-- FAQ列表 -->
             <section class="section">
-                <div class="search-container">
-                    <input type="text" class="search-box" placeholder="搜索问题..." id="faqSearch">
+                <div class="faq-container">
+                    <!-- 安装问题 -->
+                    <div class="faq-item" data-category="installation">
+                        <div class="faq-question">
+                            <span>安装过程中出现"禁止符号"怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>这是常见的安装问题，通常是由于引导配置不正确或硬件不兼容导致的。解决方法：</p>
+                            <ol>
+                                <li>检查BIOS设置，确保已禁用Secure Boot和Fast Boot</li>
+                                <li>确认DVMT预分配已设置为64M或更高</li>
+                                <li>更新OpenCore引导程序到最新版本</li>
+                                <li>检查config.plist中是否正确设置了所有必要的ACPI补丁和Kexts</li>
+                                <li>尝试使用不同的SMBIOS机型标识符</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="installation">
+                        <div class="faq-question">
+                            <span>如何创建macOS安装U盘？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>创建安装U盘的步骤：</p>
+                            <ol>
+                                <li>从黑果小兵的部落阁或其他可靠来源下载macOS镜像</li>
+                                <li>准备一个至少16GB的U盘</li>
+                                <li>使用BalenaEtcher或终端命令将镜像写入U盘</li>
+                                <li>将EFI文件夹复制到U盘的EFI分区</li>
+                                <li>确保config.plist已针对您的硬件进行正确配置</li>
+                            </ol>
+                            <p>注意：在Windows系统下制作安装盘时，需要使用特定的工具如TransMac。</p>
+                        </div>
+                    </div>
+
+                    <!-- 硬件相关 -->
+                    <div class="faq-item" data-category="hardware">
+                        <div class="faq-question">
+                            <span>如何关闭开机时的"咚"声？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>要关闭开机时的提示音：</p>
+                            <ol>
+                                <li>进入macOS系统后，打开"系统偏好设置"</li>
+                                <li>选择"声音"选项</li>
+                                <li>切换到"声音效果"标签页</li>
+                                <li>取消勾选"在启动时播放声音"选项</li>
+                            </ol>
+                            <p>此外，您还可以在OpenCore的config.plist中通过添加AudioDxe驱动并设置相关参数来完全禁用启动音。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="hardware">
+                        <div class="faq-question">
+                            <span>触控板偶尔无响应怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>这是ELAN1200触控板驱动的已知问题，可以尝试以下解决方法：</p>
+                            <ul>
+                                <li>重启系统 - 这能解决大多数临时性问题</li>
+                                <li>进入睡眠模式后唤醒 - 有时能重新初始化触控板驱动</li>
+                                <li>更新VoodooI2C和相关驱动到最新版本</li>
+                                <li>检查EFI/OC/Kexts中是否正确安装了所有必要的触控板驱动</li>
+                                <li>在启动参数中添加<code>-v</code>查看详细日志，排查驱动加载问题</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 性能优化 -->
+                    <div class="faq-item" data-category="performance">
+                        <div class="faq-question">
+                            <span>如何优化电池续航时间？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>优化电池续航的方法：</p>
+                            <ol>
+                                <li>确保CPU电源管理正常工作，使用CPUFriend或类似工具优化性能配置</li>
+                                <li>在"系统偏好设置" -> "节能"中调整相关设置</li>
+                                <li>使用亮度调节快捷键降低屏幕亮度</li>
+                                <li>关闭不必要的后台应用程序和服务</li>
+                                <li>确保GPU节能功能正常工作，避免独显在不需要时耗电</li>
+                                <li>使用适当的SMBIOS机型标识符，确保所有节能功能正常工作</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="performance">
+                        <div class="faq-question">
+                            <span>如何提升图形性能？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>提升图形性能的建议：</p>
+                            <ul>
+                                <li>确保WhateverGreen驱动正确加载并配置</li>
+                                <li>在DeviceProperties中正确设置显存大小</li>
+                                <li>使用适当的缓冲帧补丁（framebuffer patches）</li>
+                                <li>在BIOS中分配足够的DVMT预分配内存（建议64M或更高）</li>
+                                <li>避免使用过于老旧的macOS版本，新版系统通常有更好的GPU驱动支持</li>
+                                <li>关闭不必要的视觉效果，如透明度和动画效果</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 故障排除 -->
+                    <div class="faq-item" data-category="troubleshooting">
+                        <div class="faq-question">
+                            <span>蓝牙设备无法连接怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>蓝牙连接问题的解决方法：</p>
+                            <ol>
+                                <li>确认IntelBluetoothFirmware和IntelBluetoothInjector驱动已正确安装</li>
+                                <li>检查USB映射是否正确，蓝牙通常通过内部USB连接</li>
+                                <li>尝试重置蓝牙模块：关闭蓝牙等待10秒后重新开启</li>
+                                <li>删除<code>/Library/Preferences/com.apple.Bluetooth.plist</code>文件后重启</li>
+                                <li>更新到最新版本的蓝牙驱动</li>
+                                <li>如果问题依旧，尝试使用USB外接蓝牙适配器</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="troubleshooting">
+                        <div class="faq-question">
+                            <span>如何更改默认启动系统？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>有两种方法可以更改默认启动系统：</p>
+                            <ol>
+                                <li><strong>在OpenCore引导界面设置</strong>：启动时进入OpenCore选择界面，选择想要默认启动的系统，然后按<code>Ctrl+Enter</code>设置默认启动项。</li>
+                                <li><strong>在macOS系统中设置</strong>：进入macOS后，打开"系统偏好设置" -> "启动磁盘"，选择想要默认启动的系统盘。</li>
+                            </ol>
+                            <p>注意：如果使用双系统，建议在OpenCore中设置默认启动项，这样可以确保引导过程更加稳定。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="troubleshooting">
+                        <div class="faq-question">
+                            <span>开机时卡在[EB|#LOG:EXITBS:START]错误怎么办？</span>
+                            <i class="fas fa-chevron-down faq-arrow"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>这个错误通常与引导相关配置有关，解决方法：</p>
+                            <ul>
+                                <li>确保使用最新版本的OpenCore引导程序</li>
+                                <li>检查config.plist中Booter -> Quirks设置，尝试启用或禁用AvoidRuntimeDefrag</li>
+                                <li>确认MmioWhitelist设置正确，包含所有必要的内存映射IO地址</li>
+                                <li>尝试在NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82中添加boot-args参数<code>-v</code>来查看详细错误信息</li>
+                                <li>确保所有ACPI文件（SSDTs）正确且适用于您的硬件</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- 
+            <!-- 更多帮助 -->
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-life-ring"></i> 需要更多帮助？</h2>
+                <div class="card">
+                    <p>如果以上解答没有解决您的问题，您可以通过以下方式获取帮助：</p>
+                    <ol>
+                        <li>查看项目的<a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh" style="color: var(--primary);">GitHub页面</a>，阅读详细文档和更新日志</li>
+                        <li>在GitHub Issues中搜索类似问题或提交新问题</li>
+                        <li>发送邮件至：1551656605@qq.com</li>
+                        <li>参考<a href="https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html" style="color: var(--primary);">OpenCore故障排除指南</a></li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="index.html"><i class="fas fa-home"></i> 主页</a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> 硬件支持</a>
+                <a href="installation.html"><i class="fas fa-download"></i> 安装指南</a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> 常见问题</a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> 系统兼容</a>
+                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <p class="copyright">📜 <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+            <p><small>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查本地存储或系统偏好
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // FAQ展开/收起功能
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // 分类筛选功能
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 更新激活状态
+                categoryTabs.forEach(t => t
