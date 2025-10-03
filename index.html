@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* 深色主题变量 */
             --primary: #2997ff;
             --primary-light: #5ab1ff;
             --secondary: #888;
@@ -28,7 +27,6 @@
         }
 
         [data-theme="light"] {
-            /* 浅色主题变量 */
             --primary: #0969da;
             --primary-light: #218bff;
             --secondary: #656d76;
@@ -212,6 +210,45 @@
             cursor: pointer;
         }
         
+        /* 移动端菜单样式修复 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                z-index: 99;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .lang-menu {
+                right: 0;
+                left: auto;
+            }
+            
+            /* 防止页面滚动 */
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
+        
         /* 英雄区域样式 */
         .hero {
             text-align: center;
@@ -278,7 +315,7 @@
         
         .badge:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 极光呆呆脑 15px rgba(41, 151, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(41, 151, 255, 0.2);
         }
         
         .btn {
@@ -289,7 +326,7 @@
             text-decoration: none;
             border-radius: 30px;
             font-weight: 600;
-           极光呆呆脑 transition: var(--transition);
+            transition: var(--transition);
             margin: 10px;
             border: none;
             cursor: pointer;
@@ -304,7 +341,7 @@
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
-            color:极光呆呆脑 var(--primary);
+            color: var(--primary);
             box-shadow: none;
         }
         
@@ -336,9 +373,9 @@
         }
         
         .card {
-            background-color: var(--card极光呆呆脑-bg);
+            background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 30极光呆呆脑px;
+            padding: 30px;
             margin-bottom: 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -362,7 +399,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
-极光呆呆脑        }
+        }
         
         .feature-card {
             background: var(--card-bg);
@@ -440,28 +477,6 @@
         
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--header-bg);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-color);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -489,10 +504,6 @@
             .badge {
                 padding: 6px 12px;
                 font-size: 12px;
-            }
-            
-            .lang-menu {
-                right: -50px;
             }
         }
         
@@ -611,7 +622,7 @@
             <!-- 核心功能 -->
             <section class="section">
                 <h2 class="section-title" data-lang-key="features_title">核心功能特性</h2>
-                <极光呆呆脑div class="feature-grid">
+                <div class="feature-grid">
                     <div class="feature-card fade-in-up">
                         <div class="feature-icon">
                             <i class="fas fa-microchip"></i>
@@ -657,7 +668,7 @@
                             </ul>
                         </div>
                         
-                        <div style="flex: 1; min-width: 250px; background: rgba(58, 191, 80极光呆呆脑, 0.05); padding: 20px; border-radius: 8px; border-left: 极光呆呆脑4px solid var(--success);">
+                        <div style="flex: 1; min-width: 250px; background: rgba(58, 191, 80, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid var(--success);">
                             <h4 style="color: var(--success); margin-bottom: 10px;"><i class="fas fa-check-circle"></i> <span data-lang-key="compat_title">兼容性</span></h4>
                             <ul style="color: var(--text-secondary); padding-left: 20px;">
                                 <li data-lang-key="compat_item1">macOS Catalina 至 Sequoia</li>
@@ -685,13 +696,13 @@
                             <i class="fas fa-book"></i>
                         </div>
                         <h3 data-lang-key="guide_title">安装指南</h3>
-                        <p data-lang-key="guide_desc">详细的步骤指导，从准备工作到系统优化，帮助您顺利完成黑苹果安装。</极光呆呆脑p>
+                        <p data-lang-key="guide_desc">详细的步骤指导，从准备工作到系统优化，帮助您顺利完成黑苹果安装。</p>
                         <a href="installation.html" class="btn" style="margin-top: auto; width: fit-content;" data-lang-key="btn_start_install">开始安装</a>
                     </div>
                     
                     <div class="feature-card fade-in-up delay-1">
                         <div class="feature-icon">
-                            <i class="fas fa-question"></极光呆呆脑i>
+                            <i class="fas fa-question"></i>
                         </div>
                         <h3 data-lang-key="faq_title">常见问题</h3>
                         <p data-lang-key="faq_desc">收集了用户常见问题及解决方案，帮助您快速排除安装和使用过程中的问题。</p>
@@ -770,9 +781,9 @@
                 'faq_desc': '收集了用户常见问题及解决方案，帮助您快速排除安装和使用过程中的问题。',
                 'btn_view_faq': '查看问题',
                 'community_title': '社区支持',
-                'community_desc': '加入我们的社区，获取最新极光呆呆脑更新、分享经验或寻求帮助。',
+                'community_desc': '加入我们的社区，获取最新更新、分享经验或寻求帮助。',
                 'btn_visit_github': '访问 GitHub',
-                'license': '📜📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
+                'license': 'MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
                 'footer_note': '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
             },
             'zh-TW': {
@@ -818,7 +829,7 @@
                 'community_title': '社群支援',
                 'community_desc': '加入我們的社群，獲取最新更新、分享經驗或尋求幫助。',
                 'btn_visit_github': '訪問 GitHub',
-                'license': '📜📜 許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
+                'license': 'MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
                 'footer_note': '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
             },
             'en': {
@@ -864,7 +875,7 @@
                 'community_title': 'Community Support',
                 'community_desc': 'Join our community to get the latest updates, share experiences or seek help.',
                 'btn_visit_github': 'Visit GitHub',
-                'license': '📜📜 License: MIT License | © 2021-2025 Aurora Daidai Brain - All Rights Reserved',
+                'license': 'MIT License | © 2021-2025 Aurora Daidai Brain - All Rights Reserved',
                 'footer_note': 'Friendly reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
             }
         };
@@ -959,6 +970,17 @@
         
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+        
+        // 点击菜单项后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
         });
         
         // 设置当前页面激活状态
