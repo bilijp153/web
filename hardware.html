@@ -110,7 +110,7 @@
         
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 15px;
             align-items: center;
         }
         
@@ -129,7 +129,7 @@
             background: rgba(41, 151, 255, 0.1);
         }
         
-        .theme-toggle {
+        .theme-toggle, .lang-toggle {
             background: none;
             border: none;
             color: var(--text);
@@ -138,10 +138,50 @@
             padding: 8px;
             border-radius: 50%;
             transition: var(--transition);
+            position: relative;
         }
         
-        .theme-toggle:hover {
+        .theme-toggle:hover, .lang-toggle:hover {
             background: rgba(41, 151, 255, 0.1);
+            color: var(--primary);
+        }
+        
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 120px;
+            z-index: 101;
+            border: 1px solid var(--border-color);
+        }
+        
+        .lang-menu.active {
+            display: flex;
+        }
+        
+        .lang-option {
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-option:hover {
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .lang-option.active {
+            background: rgba(41, 151, 255, 0.2);
             color: var(--primary);
         }
         
@@ -458,19 +498,24 @@
             animation: fadeInUp 0.6s ease-out;
         }
         
-        /* 响应式设计 */
+        /* 响应式设计 - 修复移动端菜单问题 */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 70px;
+                top: 100%;
                 left: 0;
                 right: 0;
                 background: var(--header-bg);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
                 padding: 20px;
                 gap: 15px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                z-index: 1000;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
             }
             
             .nav-links.active {
@@ -497,6 +542,10 @@
             .feature-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .lang-menu {
+                right: -50px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -506,6 +555,15 @@
             
             .section-title {
                 font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                padding: 15px;
+            }
+            
+            .nav-links a {
+                padding: 10px;
+                font-size: 16px;
             }
         }
         
@@ -521,15 +579,36 @@
         <div class="container nav-container">
             <div class="logo">
                 <i class="fab fa-apple"></i>
-                <h1>ASUS FL8700JP 黑苹果</h1>
+                <h1 data-lang-key="site_title">ASUS FL8700JP 黑苹果</h1>
             </div>
             <div class="nav-links">
-                <a href="index.html"><i class="fas fa-home"></i> 主页</a>
-                <a href="hardware.html" class="active"><i class="fas fa-microchip"></i> 硬件支持</a>
-                <a href="installation.html"><i class="fas fa-download"></i> 安装指南</a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> 常见问题</a>
-                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> 系统兼容</a>
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html" class="active"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
                 <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+                
+                <div class="lang-container" style="position: relative;">
+                    <button class="lang-toggle" id="langToggle">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <div class="lang-option active" data-lang="zh-CN">
+                            <i class="fas fa-check"></i>
+                            <span>简体中文</span>
+                        </div>
+                        <div class="lang-option" data-lang="zh-TW">
+                            <i class="fas fa-check"></i>
+                            <span>繁體中文</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <i class="fas fa-check"></i>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -545,22 +624,22 @@
         <!-- 页面标题 -->
         <section class="page-header">
             <div class="container">
-                <h1>硬件支持</h1>
-                <p>详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况</p>
+                <h1 data-lang-key="page_title">硬件支持</h1>
+                <p data-lang-key="page_subtitle">详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况</p>
             </div>
         </section>
 
         <main class="container">
             <!-- 兼容性摘要 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-chart-pie"></i> 兼容性概览</h2>
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> <span data-lang-key="compatibility_overview">兼容性概览</span></h2>
                 <div class="compatibility-summary">
                     <div class="summary-card supported">
                         <div class="summary-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="summary-count">8</div>
-                        <div>完美支持的组件</div>
+                        <div data-lang-key="summary_supported">完美支持的组件</div>
                     </div>
                     
                     <div class="summary-card partial">
@@ -568,7 +647,7 @@
                             <i class="fas fa-exclamation-circle"></i>
                         </div>
                         <div class="summary-count">3</div>
-                        <div>部分支持的组件</div>
+                        <div data-lang-key="summary_partial">部分支持的组件</div>
                     </div>
                     
                     <div class="summary-card unsupported">
@@ -576,96 +655,96 @@
                             <i class="fas fa-times-circle"></i>
                         </div>
                         <div class="summary-count">1</div>
-                        <div>不支持的组件</div>
+                        <div data-lang-key="summary_unsupported">不支持的组件</div>
                     </div>
                 </div>
             </section>
 
             <!-- 硬件支持表格 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-list-alt"></i> 详细硬件支持</h2>
+                <h2 class="section-title"><i class="fas fa-list-alt"></i> <span data-lang-key="hardware_details">详细硬件支持</span></h2>
                 <div class="card fade-in">
                     <table class="hardware-table">
                         <thead>
                             <tr>
-                                <th>组件</th>
-                                <th>型号</th>
-                                <th>状态</th>
-                                <th>详细说明</th>
+                                <th data-lang-key="table_component">组件</th>
+                                <th data-lang-key="table_model">型号</th>
+                                <th data-lang-key="table_status">状态</th>
+                                <th data-lang-key="table_description">详细说明</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>处理器</strong></td>
+                                <td><strong data-lang-key="component_cpu">处理器</strong></td>
                                 <td>Intel i7-1065G7</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>Ice Lake 架构优化，电源管理正常</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="cpu_desc">Ice Lake 架构优化，电源管理正常</td>
                             </tr>
                             <tr>
-                                <td><strong>核显</strong></td>
+                                <td><strong data-lang-key="component_igpu">核显</strong></td>
                                 <td>Intel Iris Plus G7</td>
-                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 基本支持</td>
-                                <td>不支持 HDMI 输出，内屏显示正常</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></td>
+                                <td data-lang-key="igpu_desc">不支持 HDMI 输出，内屏显示正常</td>
                             </tr>
                             <tr>
-                                <td><strong>独立显卡</strong></td>
+                                <td><strong data-lang-key="component_dgpu">独立显卡</strong></td>
                                 <td>NVIDIA MX330</td>
-                                <td class="status-unsupported"><i class="fas fa-times"></i> 不支持</td>
-                                <td>已在配置中屏蔽，无法驱动</td>
+                                <td class="status-unsupported"><i class="fas fa-times"></i> <span data-lang-key="status_unsupported">不支持</span></td>
+                                <td data-lang-key="dgpu_desc">已在配置中屏蔽，无法驱动</td>
                             </tr>
                             <tr>
-                                <td><strong>音频</strong></td>
+                                <td><strong data-lang-key="component_audio">音频</strong></td>
                                 <td>Realtek ALC256</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>自动切换输入/输出设备，音质良好</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="audio_desc">自动切换输入/输出设备，音质良好</td>
                             </tr>
                             <tr>
-                                <td><strong>无线网络</strong></td>
+                                <td><strong data-lang-key="component_wifi">无线网络</strong></td>
                                 <td>Intel Wireless-AC 9461</td>
-                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 部分支持</td>
-                                <td>WiFi正常，不支持隔空投送和接力</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">部分支持</span></td>
+                                <td data-lang-key="wifi_desc">WiFi正常，不支持隔空投送和接力</td>
                             </tr>
                             <tr>
-                                <td><strong>触控板</strong></td>
+                                <td><strong data-lang-key="component_trackpad">触控板</strong></td>
                                 <td>ELAN1200</td>
-                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 基本支持</td>
-                                <td>多指手势正常，偶发无响应</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></td>
+                                <td data-lang-key="trackpad_desc">多指手势正常，偶发无响应</td>
                             </tr>
                             <tr>
-                                <td><strong>Type-C</strong></td>
+                                <td><strong data-lang-key="component_typec">Type-C</strong></td>
                                 <td>-</td>
-                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 部分支持</td>
-                                <td>数据传输正常，不支持视频输出</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">部分支持</span></td>
+                                <td data-lang-key="typec_desc">数据传输正常，不支持视频输出</td>
                             </tr>
                             <tr>
-                                <td><strong>蓝牙</strong></td>
+                                <td><strong data-lang-key="component_bluetooth">蓝牙</strong></td>
                                 <td>Intel Bluetooth</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>连接稳定，支持多种蓝牙设备</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="bluetooth_desc">连接稳定，支持多种蓝牙设备</td>
                             </tr>
                             <tr>
-                                <td><strong>USB端口</strong></td>
+                                <td><strong data-lang-key="component_usb">USB端口</strong></td>
                                 <td>USB 3.0/2.0</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>所有USB端口正常工作</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="usb_desc">所有USB端口正常工作</td>
                             </tr>
                             <tr>
-                                <td><strong>摄像头</strong></td>
+                                <td><strong data-lang-key="component_camera">摄像头</strong></td>
                                 <td>集成摄像头</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>FaceTime、Photo Booth等应用正常</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="camera_desc">FaceTime、Photo Booth等应用正常</td>
                             </tr>
                             <tr>
-                                <td><strong>读卡器</strong></td>
+                                <td><strong data-lang-key="component_cardreader">读卡器</strong></td>
                                 <td>Realtek RTS522A</td>
-                                <td class="status-unsupported"><i class="fas fa-times"></i> 不支持</td>
-                                <td>暂无可用驱动</td>
+                                <td class="status-unsupported"><i class="fas fa-times"></i> <span data-lang-key="status_unsupported">不支持</span></td>
+                                <td data-lang-key="cardreader_desc">暂无可用驱动</td>
                             </tr>
                             <tr>
-                                <td><strong>电源管理</strong></td>
+                                <td><strong data-lang-key="component_power">电源管理</strong></td>
                                 <td>ACPI</td>
-                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
-                                <td>睡眠、唤醒、电池状态显示正常</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_supported">完美支持</span></td>
+                                <td data-lang-key="power_desc">睡眠、唤醒、电池状态显示正常</td>
                             </tr>
                         </tbody>
                     </table>
@@ -674,48 +753,48 @@
 
             <!-- 关键功能 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-cogs"></i> 关键功能状态</h2>
+                <h2 class="section-title"><i class="fas fa-cogs"></i> <span data-lang-key="key_features">关键功能状态</span></h2>
                 <div class="feature-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-battery-full"></i>
                         </div>
-                        <h3>电源管理</h3>
-                        <p>完整的电源管理支持，包括睡眠、唤醒和电池状态监控，确保笔记本电脑的移动使用体验。</p>
+                        <h3 data-lang-key="feature_power_title">电源管理</h3>
+                        <p data-lang-key="feature_power_desc">完整的电源管理支持，包括睡眠、唤醒和电池状态监控，确保笔记本电脑的移动使用体验。</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-wifi"></i>
                         </div>
-                        <h3>无线连接</h3>
-                        <p>WiFi和蓝牙功能正常工作，但部分苹果生态功能如隔空投送和接力不可用。</p>
+                        <h3 data-lang-key="feature_wireless_title">无线连接</h3>
+                        <p data-lang-key="feature_wireless_desc">WiFi和蓝牙功能正常工作，但部分苹果生态功能如隔空投送和接力不可用。</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-volume-up"></i>
                         </div>
-                        <h3>音频系统</h3>
-                        <p>内置扬声器、耳机插孔和麦克风全部正常工作，支持自动设备切换。</p>
+                        <h3 data-lang-key="feature_audio_title">音频系统</h3>
+                        <p data-lang-key="feature_audio_desc">内置扬声器、耳机插孔和麦克风全部正常工作，支持自动设备切换。</p>
                     </div>
                 </div>
             </section>
 
             <!-- 使用建议 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-lightbulb"></i> 使用建议</h2>
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> <span data-lang-key="usage_tips">使用建议</span></h2>
                 <div class="card fade-in">
-                    <h3><i class="fas fa-tips"></i> 优化体验建议</h3>
+                    <h3><i class="fas fa-tips"></i> <span data-lang-key="optimization_tips">优化体验建议</span></h3>
                     <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>考虑更换兼容的无线网卡以获得完整的苹果生态体验</li>
-                        <li>使用USB-C转HDMI适配器解决视频输出限制</li>
-                        <li>定期检查项目更新，获取最新的驱动和优化</li>
-                        <li>备份重要数据，特别是在进行系统更新前</li>
+                        <li data-lang-key="tip1">考虑更换兼容的无线网卡以获得完整的苹果生态体验</li>
+                        <li data-lang-key="tip2">使用USB-C转HDMI适配器解决视频输出限制</li>
+                        <li data-lang-key="tip3">定期检查项目更新，获取最新的驱动和优化</li>
+                        <li data-lang-key="tip4">备份重要数据，特别是在进行系统更新前</li>
                     </ul>
                     
-                    <h3 style="margin-top: 25px;"><i class="fas fa-sync-alt"></i> 更新提示</h3>
-                    <p>硬件兼容性可能会随着macOS版本更新而变化，建议在升级系统前查看项目的最新兼容性信息。</p>
+                    <h3 style="margin-top: 25px;"><i class="fas fa-sync-alt"></i> <span data-lang-key="update_notice">更新提示</span></h3>
+                    <p data-lang-key="update_desc">硬件兼容性可能会随着macOS版本更新而变化，建议在升级系统前查看项目的最新兼容性信息。</p>
                 </div>
             </section>
         </main>
@@ -724,19 +803,274 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-links">
-                <a href="index.html"><i class="fas fa-home"></i> 主页</a>
-                <a href="hardware.html"><i class="fas fa-microchip"></i> 硬件支持</a>
-                <a href="installation.html"><i class="fas fa-download"></i> 安装指南</a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> 常见问题</a>
-                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> 系统兼容</a>
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
                 <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
             </div>
-            <p class="copyright">📜 <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-            <p><small>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
+            <p class="copyright" data-lang-key="license"> <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+            <p><small data-lang-key="footer_note">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
         </div>
     </footer>
 
     <script>
+        // 多语言支持
+        const translations = {
+            'zh-CN': {
+                'site_title': 'ASUS FL8700JP 黑苹果',
+                'nav_home': '主页',
+                'nav_hardware': '硬件支持',
+                'nav_installation': '安装指南',
+                'nav_faq': '常见问题',
+                'nav_compatibility': '系统兼容',
+                'page_title': '硬件支持',
+                'page_subtitle': '详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况',
+                'compatibility_overview': '兼容性概览',
+                'summary_supported': '完美支持的组件',
+                'summary_partial': '部分支持的组件',
+                'summary_unsupported': '不支持的组件',
+                'hardware_details': '详细硬件支持',
+                'table_component': '组件',
+                'table_model': '型号',
+                'table_status': '状态',
+                'table_description': '详细说明',
+                'component_cpu': '处理器',
+                'component_igpu': '核显',
+                'component_dgpu': '独立显卡',
+                'component_audio': '音频',
+                'component_wifi': '无线网络',
+                'component_trackpad': '触控板',
+                'component_typec': 'Type-C',
+                'component_bluetooth': '蓝牙',
+                'component_usb': 'USB端口',
+                'component_camera': '摄像头',
+                'component_cardreader': '读卡器',
+                'component_power': '电源管理',
+                'status_supported': '完美支持',
+                'status_partial': '基本支持',
+                'status_unsupported': '不支持',
+                'cpu_desc': 'Ice Lake 架构优化，电源管理正常',
+                'igpu_desc': '不支持 HDMI 输出，内屏显示正常',
+                'dgpu_desc': '已在配置中屏蔽，无法驱动',
+                'audio_desc': '自动切换输入/输出设备，音质良好',
+                'wifi_desc': 'WiFi正常，不支持隔空投送和接力',
+                'trackpad_desc': '多指手势正常，偶发无响应',
+                'typec_desc': '数据传输正常，不支持视频输出',
+                'bluetooth_desc': '连接稳定，支持多种蓝牙设备',
+                'usb_desc': '所有USB端口正常工作',
+                'camera_desc': 'FaceTime、Photo Booth等应用正常',
+                'cardreader_desc': '暂无可用驱动',
+                'power_desc': '睡眠、唤醒、电池状态显示正常',
+                'key_features': '关键功能状态',
+                'feature_power_title': '电源管理',
+                'feature_power_desc': '完整的电源管理支持，包括睡眠、唤醒和电池状态监控，确保笔记本电脑的移动使用体验。',
+                'feature_wireless_title': '无线连接',
+                'feature_wireless_desc': 'WiFi和蓝牙功能正常工作，但部分苹果生态功能如隔空投送和接力不可用。',
+                'feature_audio_title': '音频系统',
+                'feature_audio_desc': '内置扬声器、耳机插孔和麦克风全部正常工作，支持自动设备切换。',
+                'usage_tips': '使用建议',
+                'optimization_tips': '优化体验建议',
+                'tip1': '考虑更换兼容的无线网卡以获得完整的苹果生态体验',
+                'tip2': '使用USB-C转HDMI适配器解决视频输出限制',
+                'tip3': '定期检查项目更新，获取最新的驱动和优化',
+                'tip4': '备份重要数据，特别是在进行系统更新前',
+                'update_notice': '更新提示',
+                'update_desc': '硬件兼容性可能会随着macOS版本更新而变化，建议在升级系统前查看项目的最新兼容性信息。',
+                'license': ' 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
+                'footer_note': '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
+            },
+            'zh-TW': {
+                'site_title': 'ASUS FL8700JP 黑蘋果',
+                'nav_home': '主頁',
+                'nav_hardware': '硬體支援',
+                'nav_installation': '安裝指南',
+                'nav_faq': '常見問題',
+                'nav_compatibility': '系統相容',
+                'page_title': '硬體支援',
+                'page_subtitle': '詳細了解您的ASUS FL8700JP筆記型電腦與macOS的硬體相容性情況',
+                'compatibility_overview': '相容性概覽',
+                'summary_supported': '完美支援的組件',
+                'summary_partial': '部分支援的組件',
+                'summary_unsupported': '不支援的組件',
+                'hardware_details': '詳細硬體支援',
+                'table_component': '組件',
+                'table_model': '型號',
+                'table_status': '狀態',
+                'table_description': '詳細說明',
+                'component_cpu': '處理器',
+                'component_igpu': '核顯',
+                'component_dgpu': '獨立顯卡',
+                'component_audio': '音訊',
+                'component_wifi': '無線網路',
+                'component_trackpad': '觸控板',
+                'component_typec': 'Type-C',
+                'component_bluetooth': '藍牙',
+                'component_usb': 'USB端口',
+                'component_camera': '攝像頭',
+                'component_cardreader': '讀卡器',
+                'component_power': '電源管理',
+                'status_supported': '完美支援',
+                'status_partial': '基本支援',
+                'status_unsupported': '不支援',
+                'cpu_desc': 'Ice Lake 架構優化，電源管理正常',
+                'igpu_desc': '不支援 HDMI 輸出，內螢幕顯示正常',
+                'dgpu_desc': '已在配置中屏蔽，無法驅動',
+                'audio_desc': '自動切換輸入/輸出設備，音質良好',
+                'wifi_desc': 'WiFi正常，不支援隔空投放和接力',
+                'trackpad_desc': '多指手勢正常，偶發無響應',
+                'typec_desc': '資料傳輸正常，不支援視訊輸出',
+                'bluetooth_desc': '連接穩定，支援多種藍牙設備',
+                'usb_desc': '所有USB端口正常工作',
+                'camera_desc': 'FaceTime、Photo Booth等應用正常',
+                'cardreader_desc': '暫無可用驅動',
+                'power_desc': '睡眠、喚醒、電池狀態顯示正常',
+                'key_features': '關鍵功能狀態',
+                'feature_power_title': '電源管理',
+                'feature_power_desc': '完整的電源管理支援，包括睡眠、喚醒和電池狀態監控，確保筆記型電腦的行動使用體驗。',
+                'feature_wireless_title': '無線連接',
+                'feature_wireless_desc': 'WiFi和藍牙功能正常工作，但部分蘋果生態功能如隔空投放和接力不可用。',
+                'feature_audio_title': '音訊系統',
+                'feature_audio_desc': '內建揚聲器、耳機插孔和麥克風全部正常工作，支援自動設備切換。',
+                'usage_tips': '使用建議',
+                'optimization_tips': '優化體驗建議',
+                'tip1': '考慮更換相容的無線網卡以獲得完整的蘋果生態體驗',
+                'tip2': '使用USB-C轉HDMI轉接器解決視訊輸出限制',
+                'tip3': '定期檢查專案更新，獲取最新的驅動和優化',
+                'tip4': '備份重要資料，特別是在進行系統更新前',
+                'update_notice': '更新提示',
+                'update_desc': '硬體相容性可能會隨著macOS版本更新而變化，建議在升級系統前查看專案的最新相容性資訊。',
+                'license': ' 許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
+                'footer_note': '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+            },
+            'en': {
+                'site_title': 'ASUS FL8700JP Hackintosh',
+                'nav_home': 'Home',
+                'nav_hardware': 'Hardware Support',
+                'nav_installation': 'Installation Guide',
+                'nav_faq': 'FAQ',
+                'nav_compatibility': 'System Compatibility',
+                'page_title': 'Hardware Support',
+                'page_subtitle': 'Detailed information about the hardware compatibility of your ASUS FL8700JP laptop with macOS',
+                'compatibility_overview': 'Compatibility Overview',
+                'summary_supported': 'Fully Supported Components',
+                'summary_partial': 'Partially Supported Components',
+                'summary_unsupported': 'Unsupported Components',
+                'hardware_details': 'Detailed Hardware Support',
+                'table_component': 'Component',
+                'table_model': 'Model',
+                'table_status': 'Status',
+                'table_description': 'Detailed Description',
+                'component_cpu': 'Processor',
+                'component_igpu': 'Integrated GPU',
+                'component_dgpu': 'Dedicated GPU',
+                'component_audio': 'Audio',
+                'component_wifi': 'Wireless Network',
+                'component_trackpad': 'Trackpad',
+                'component_typec': 'Type-C',
+                'component_bluetooth': 'Bluetooth',
+                'component_usb': 'USB Ports',
+                'component_camera': 'Camera',
+                'component_cardreader': 'Card Reader',
+                'component_power': 'Power Management',
+                'status_supported': 'Fully Supported',
+                'status_partial': 'Partially Supported',
+                'status_unsupported': 'Unsupported',
+                'cpu_desc': 'Ice Lake architecture optimized, power management working properly',
+                'igpu_desc': 'HDMI output not supported, internal display works fine',
+                'dgpu_desc': 'Disabled in configuration, cannot be driven',
+                'audio_desc': 'Automatic input/output device switching, good sound quality',
+                'wifi_desc': 'WiFi works normally, AirDrop and Continuity not supported',
+                'trackpad_desc': 'Multi-touch gestures work, occasional unresponsiveness',
+                'typec_desc': 'Data transfer works, video output not supported',
+                'bluetooth_desc': 'Stable connection, supports various Bluetooth devices',
+                'usb_desc': 'All USB ports work properly',
+                'camera_desc': 'FaceTime, Photo Booth and other applications work normally',
+                'cardreader_desc': 'No available driver',
+                'power_desc': 'Sleep, wake, battery status display all work properly',
+                'key_features': 'Key Feature Status',
+                'feature_power_title': 'Power Management',
+                'feature_power_desc': 'Complete power management support including sleep, wake and battery status monitoring, ensuring a good mobile experience for the laptop.',
+                'feature_wireless_title': 'Wireless Connectivity',
+                'feature_wireless_desc': 'WiFi and Bluetooth function properly, but some Apple ecosystem features like AirDrop and Continuity are not available.',
+                'feature_audio_title': 'Audio System',
+                'feature_audio_desc': 'Built-in speakers, headphone jack and microphone all work properly with automatic device switching support.',
+                'usage_tips': 'Usage Suggestions',
+                'optimization_tips': 'Optimization Tips',
+                'tip1': 'Consider replacing with a compatible wireless card for full Apple ecosystem experience',
+                'tip2': 'Use USB-C to HDMI adapter to solve video output limitations',
+                'tip3': 'Regularly check project updates for the latest drivers and optimizations',
+                'tip4': 'Back up important data, especially before system updates',
+                'update_notice': 'Update Notice',
+                'update_desc': 'Hardware compatibility may change with macOS version updates. It is recommended to check the latest compatibility information of the project before upgrading the system.',
+                'license': 'License: MIT License | © 2021-2025 Aurora Daidai Brain - All Rights Reserved',
+                'footer_note': 'Friendly reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const langMenu = document.getElementById('langMenu');
+        const langOptions = document.querySelectorAll('.lang-option');
+        
+        // 检查本地存储或浏览器语言
+        const savedLang = localStorage.getItem('language') || navigator.language;
+        let currentLang = savedLang.startsWith('zh') ? (savedLang.includes('TW') || savedLang.includes('HK') ? 'zh-TW' : 'zh-CN') : 'en';
+        
+        // 应用语言
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // 更新语言选项激活状态
+            langOptions.forEach(option => {
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 保存语言选择
+            localStorage.setItem('language', lang);
+            currentLang = lang;
+        }
+        
+        // 初始化语言
+        applyLanguage(currentLang);
+        
+        // 语言切换菜单
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('active');
+        });
+        
+        // 选择语言
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                applyLanguage(lang);
+                langMenu.classList.remove('active');
+            });
+        });
+        
+        // 点击其他地方关闭语言菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-container')) {
+                langMenu.classList.remove('active');
+            }
+        });
+        
         // 主题切换功能
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
@@ -759,12 +1093,28 @@
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
         
-        // 移动端菜单切换
+        // 移动端菜单切换 - 修复后的代码
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.querySelector('.nav-links');
         
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            // 防止点击菜单时页面滚动
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // 点击菜单项后关闭菜单（移动端）
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
         });
         
         // 设置当前页面激活状态
