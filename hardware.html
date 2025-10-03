@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASUS FL8700JP 黑苹果项目 | 硬件支持</title>
+    <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* 深色主题变量 */
             --primary: #2997ff;
+            --primary-light: #5aafff;
+            --primary-dark: #0066cc;
             --secondary: #888;
             --background: #1d1d1f;
+            --background-light: #2a2a2e;
             --card-bg: #2a2a2e;
             --text: #f5f5f7;
             --text-secondary: #a1a1a6;
@@ -25,10 +27,12 @@
         }
 
         [data-theme="light"] {
-            /* 浅色主题变量 */
             --primary: #0071e3;
+            --primary-light: #4a9eff;
+            --primary-dark: #0056b3;
             --secondary: #86868b;
             --background: #f5f5f7;
+            --background-light: #ffffff;
             --card-bg: #ffffff;
             --text: #1d1d1f;
             --text-secondary: #86868b;
@@ -54,6 +58,11 @@
             padding: 0;
             margin: 0;
             transition: var(--transition);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
         }
         
         .container {
@@ -145,78 +154,102 @@
             cursor: pointer;
         }
         
-        /* 英雄区域样式 */
-        .hero {
+        /* 页面标题样式 */
+        .page-header {
             text-align: center;
-            padding: 60px 0 40px;
-            background: radial-gradient(circle at top right, var(--card-bg), var(--background));
-            border-bottom: 1px solid var(--border-color);
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(41, 151, 255, 0.1), transparent 50%);
+            z-index: -1;
         }
         
-        .hero h1 {
-            font-size: 2.5rem;
+        .page-header h1 {
+            font-size: 3.2rem;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
+            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out;
         }
         
-        .hero p {
-            font-size: 1.1rem;
+        .page-header p {
+            font-size: 1.2rem;
             color: var(--secondary);
-            margin-bottom: 20px;
-        }
-        
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         /* 内容卡片样式 */
         .section {
-            padding: 50px 0;
+            padding: 40px 0;
         }
         
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 10px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 3px;
         }
         
         .card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--success), var(--warning));
         }
         
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         /* 硬件支持表格样式 */
@@ -224,65 +257,150 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .hardware-table th, .hardware-table td {
-            padding: 12px 15px;
+            padding: 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
         
         .hardware-table th {
-            background-color: rgba(41, 151, 255, 0.05);
+            background-color: rgba(41, 151, 255, 0.1);
             font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .hardware-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .hardware-table tr:hover {
+            background-color: rgba(41, 151, 255, 0.05);
         }
         
         .status-supported {
             color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .status-partial {
             color: var(--warning);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .status-unsupported {
             color: var(--danger);
-        }
-        
-        .status-icon {
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        
-        /* 兼容性标签样式 */
-        .compatibility-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .compatibility-tag {
-            background: rgba(41, 151, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
         
-        /* 硬件详情样式 */
-        .hardware-detail {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(41, 151, 255, 0.05);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
+        /* 兼容性摘要样式 */
+        .compatibility-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
         
-        .hardware-detail h4 {
-            margin-bottom: 10px;
+        .summary-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .summary-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .supported .summary-icon {
+            color: var(--success);
+        }
+        
+        .partial .summary-icon {
+            color: var(--warning);
+        }
+        
+        .unsupported .summary-icon {
+            color: var(--danger);
+        }
+        
+        .summary-count {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .supported .summary-count {
+            color: var(--success);
+        }
+        
+        .partial .summary-count {
+            color: var(--warning);
+        }
+        
+        .unsupported .summary-count {
+            color: var(--danger);
+        }
+        
+        /* 功能卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
             color: var(--primary);
         }
         
@@ -324,6 +442,22 @@
             margin-top: 20px;
         }
         
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .nav-links {
@@ -347,23 +481,31 @@
                 display: block;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .page-header h1 {
+                font-size: 2.5rem;
             }
             
             .hardware-table {
                 display: block;
                 overflow-x: auto;
             }
+            
+            .compatibility-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
+            .page-header h1 {
+                font-size: 2rem;
             }
             
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
         }
         
@@ -400,24 +542,49 @@
 
     <!-- 页面内容 -->
     <div class="page-content">
-        <!-- 英雄区域 -->
-        <section class="hero">
-            <div class="container hero-content">
-                <h1><i class="fas fa-microchip"></i> 硬件支持</h1>
-                <p>ASUS VivoBook FL8700JP 各硬件组件在黑苹果系统中的兼容性状态</p>
-                <div class="breadcrumb">
-                    <a href="index.html">首页</a> > <span>硬件支持</span>
-                </div>
+        <!-- 页面标题 -->
+        <section class="page-header">
+            <div class="container">
+                <h1>硬件支持</h1>
+                <p>详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况</p>
             </div>
         </section>
 
         <main class="container">
-            <!-- 硬件兼容性表格 -->
+            <!-- 兼容性摘要 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-table"></i> 硬件兼容性总览</h2>
-                <div class="card">
-                    <p>下表详细列出了 ASUS VivoBook FL8700JP 各硬件组件在 macOS 系统中的兼容性状态。✅ 表示完美支持，⚠️ 表示基本支持但有小问题，❌ 表示不支持。</p>
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> 兼容性概览</h2>
+                <div class="compatibility-summary">
+                    <div class="summary-card supported">
+                        <div class="summary-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="summary-count">8</div>
+                        <div>完美支持的组件</div>
+                    </div>
                     
+                    <div class="summary-card partial">
+                        <div class="summary-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="summary-count">3</div>
+                        <div>部分支持的组件</div>
+                    </div>
+                    
+                    <div class="summary-card unsupported">
+                        <div class="summary-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="summary-count">1</div>
+                        <div>不支持的组件</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 硬件支持表格 -->
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-list-alt"></i> 详细硬件支持</h2>
+                <div class="card fade-in">
                     <table class="hardware-table">
                         <thead>
                             <tr>
@@ -431,158 +598,124 @@
                             <tr>
                                 <td><strong>处理器</strong></td>
                                 <td>Intel i7-1065G7</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
                                 <td>Ice Lake 架构优化，电源管理正常</td>
                             </tr>
                             <tr>
                                 <td><strong>核显</strong></td>
                                 <td>Intel Iris Plus G7</td>
-                                <td class="status-partial"><span class="status-icon">⚠️</span> 基本支持</td>
-                                <td>驱动正常，但不支持 HDMI 输出</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 基本支持</td>
+                                <td>不支持 HDMI 输出，内屏显示正常</td>
                             </tr>
                             <tr>
                                 <td><strong>独立显卡</strong></td>
                                 <td>NVIDIA MX330</td>
-                                <td class="status-unsupported"><span class="status-icon">❌</span> 不支持</td>
-                                <td>macOS 无驱动，已在配置中屏蔽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>内存</strong></td>
-                                <td>DDR4 8GB/16GB</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>识别正确，无兼容性问题</td>
+                                <td class="status-unsupported"><i class="fas fa-times"></i> 不支持</td>
+                                <td>已在配置中屏蔽，无法驱动</td>
                             </tr>
                             <tr>
                                 <td><strong>音频</strong></td>
                                 <td>Realtek ALC256</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>自动切换输入/输出设备，内置麦克风正常</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
+                                <td>自动切换输入/输出设备，音质良好</td>
                             </tr>
                             <tr>
                                 <td><strong>无线网络</strong></td>
                                 <td>Intel Wireless-AC 9461</td>
-                                <td class="status-partial"><span class="status-icon">⚠️</span> 部分支持</td>
-                                <td>Wi-Fi 正常，但不支持隔空投送和接力</td>
-                            </tr>
-                            <tr>
-                                <td><strong>蓝牙</strong></td>
-                                <td>Intel Bluetooth</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>连接稳定，文件传输正常</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 部分支持</td>
+                                <td>WiFi正常，不支持隔空投送和接力</td>
                             </tr>
                             <tr>
                                 <td><strong>触控板</strong></td>
                                 <td>ELAN1200</td>
-                                <td class="status-partial"><span class="status-icon">⚠️</span> 基本支持</td>
-                                <td>手势支持，但偶发无响应</td>
-                            </tr>
-                            <tr>
-                                <td><strong>键盘</strong></td>
-                                <td>内置键盘</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>所有按键功能正常，包括功能键</td>
-                            </tr>
-                            <tr>
-                                <td><strong>USB 端口</strong></td>
-                                <td>USB 3.0/2.0</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>所有 USB 端口识别正常</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 基本支持</td>
+                                <td>多指手势正常，偶发无响应</td>
                             </tr>
                             <tr>
                                 <td><strong>Type-C</strong></td>
-                                <td>USB 3.1 Gen1</td>
-                                <td class="status-partial"><span class="status-icon">⚠️</span> 部分支持</td>
-                                <td>数据传输正常，但不支持视频输出</td>
+                                <td>-</td>
+                                <td class="status-partial"><i class="fas fa-exclamation-triangle"></i> 部分支持</td>
+                                <td>数据传输正常，不支持视频输出</td>
                             </tr>
                             <tr>
-                                <td><strong>HDMI</strong></td>
-                                <td>HDMI 1.4</td>
-                                <td class="status-unsupported"><span class="status-icon">❌</span> 不支持</td>
-                                <td>Ice Lake 核显限制，无法输出视频</td>
+                                <td><strong>蓝牙</strong></td>
+                                <td>Intel Bluetooth</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
+                                <td>连接稳定，支持多种蓝牙设备</td>
                             </tr>
                             <tr>
-                                <td><strong>读卡器</strong></td>
-                                <td>Realtek RTS5129</td>
-                                <td class="status-unsupported"><span class="status-icon">❌</span> 不支持</td>
-                                <td>无可用驱动</td>
+                                <td><strong>USB端口</strong></td>
+                                <td>USB 3.0/2.0</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
+                                <td>所有USB端口正常工作</td>
                             </tr>
                             <tr>
                                 <td><strong>摄像头</strong></td>
-                                <td>USB 2.0 HD UVC WebCam</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>即插即用，无需额外驱动</td>
+                                <td>集成摄像头</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
+                                <td>FaceTime、Photo Booth等应用正常</td>
                             </tr>
                             <tr>
-                                <td><strong>电池状态</strong></td>
-                                <td>内置锂电池</td>
-                                <td class="status-supported"><span class="status-icon">✅</span> 完美支持</td>
-                                <td>电量显示准确，电源管理正常</td>
+                                <td><strong>读卡器</strong></td>
+                                <td>Realtek RTS522A</td>
+                                <td class="status-unsupported"><i class="fas fa-times"></i> 不支持</td>
+                                <td>暂无可用驱动</td>
+                            </tr>
+                            <tr>
+                                <td><strong>电源管理</strong></td>
+                                <td>ACPI</td>
+                                <td class="status-supported"><i class="fas fa-check"></i> 完美支持</td>
+                                <td>睡眠、唤醒、电池状态显示正常</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- 关键硬件详情 -->
+            <!-- 关键功能 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-info-circle"></i> 关键硬件详情</h2>
-                
-                <div class="card">
-                    <h3><i class="fas fa-microchip"></i> 处理器 (Intel i7-1065G7)</h3>
-                    <div class="hardware-detail">
-                        <h4>支持状态：完美</h4>
-                        <p>Ice Lake 架构的 10nm 处理器，4核8线程，基础频率 1.3GHz，最大睿频 3.9GHz。在黑苹果系统中：</p>
-                        <ul>
-                            <li>CPU 电源管理完全正常，支持各种节能状态</li>
-                            <li>睿频功能工作正常，性能发挥充分</li>
-                            <li>温度监控准确，风扇控制正常</li>
-                        </ul>
+                <h2 class="section-title"><i class="fas fa-cogs"></i> 关键功能状态</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <h3>电源管理</h3>
+                        <p>完整的电源管理支持，包括睡眠、唤醒和电池状态监控，确保笔记本电脑的移动使用体验。</p>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <h3><i class="fas fa-desktop"></i> 核显 (Intel Iris Plus G7)</h3>
-                    <div class="hardware-detail">
-                        <h4>支持状态：基本支持</h4>
-                        <p>集成在 Ice Lake 处理器中的 Gen11 核显，性能较前代有显著提升。目前状态：</p>
-                        <ul>
-                            <li>驱动正常，支持硬件加速和 Metal API</li>
-                            <li>显示输出正常，支持 HiDPI 分辨率</li>
-                            <li><strong>限制</strong>：由于平台限制，HDMI 输出无法工作</li>
-                            <li><strong>解决方案</strong>：可通过 USB-C 转 HDMI 适配器实现外接显示</li>
-                        </ul>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3>无线连接</h3>
+                        <p>WiFi和蓝牙功能正常工作，但部分苹果生态功能如隔空投送和接力不可用。</p>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <h3><i class="fas fa-wifi"></i> 无线网络 (Intel Wireless-AC 9461)</h3>
-                    <div class="hardware-detail">
-                        <h4>支持状态：部分支持</h4>
-                        <p>Intel 无线网卡，支持 802.11ac 标准。通过 itlwm 驱动实现基本功能：</p>
-                        <ul>
-                            <li>Wi-Fi 连接稳定，支持 2.4GHz 和 5GHz 频段</li>
-                            <li>支持 WPA/WPA2 加密</li>
-                            <li><strong>限制</strong>：不支持苹果的 Continuity 功能（隔空投送、接力等）</li>
-                            <li><strong>替代方案</strong>：可更换为博通网卡以获得完整功能</li>
-                        </ul>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <h3>音频系统</h3>
+                        <p>内置扬声器、耳机插孔和麦克风全部正常工作，支持自动设备切换。</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 驱动信息 -->
+            <!-- 使用建议 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-cogs"></i> 驱动信息</h2>
-                <div class="card">
-                    <p>本项目使用以下驱动确保硬件兼容性：</p>
-                    <ul>
-                        <li><strong>Lilu</strong> - 核心插件加载器</li>
-                        <li><strong>WhateverGreen</strong> - 显卡驱动修复</li>
-                        <li><strong>AppleALC</strong> - 声卡驱动</li>
-                        <li><strong>VirtualSMC</strong> - 模拟 SMC 芯片</li>
-                        <li><strong>itlwm</strong> - Intel 无线网卡驱动</li>
-                        <li><strong>VoodooI2C</strong> - 触控板驱动</li>
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> 使用建议</h2>
+                <div class="card fade-in">
+                    <h3><i class="fas fa-tips"></i> 优化体验建议</h3>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li>考虑更换兼容的无线网卡以获得完整的苹果生态体验</li>
+                        <li>使用USB-C转HDMI适配器解决视频输出限制</li>
+                        <li>定期检查项目更新，获取最新的驱动和优化</li>
+                        <li>备份重要数据，特别是在进行系统更新前</li>
                     </ul>
-                    <p>所有驱动均已针对 FL8700JP 硬件进行优化配置，确保最佳兼容性。</p>
+                    
+                    <h3 style="margin-top: 25px;"><i class="fas fa-sync-alt"></i> 更新提示</h3>
+                    <p>硬件兼容性可能会随着macOS版本更新而变化，建议在升级系统前查看项目的最新兼容性信息。</p>
                 </div>
             </section>
         </main>
@@ -639,6 +772,25 @@
             if (link.href === window.location.href) {
                 link.classList.add('active');
             }
+        });
+        
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有卡片元素
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
