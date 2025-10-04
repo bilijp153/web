@@ -8,11 +8,8 @@
     <style>
         :root {
             --primary: #2997ff;
-            --primary-light: #5aafff;
-            --primary-dark: #0066cc;
             --secondary: #888;
             --background: #1d1d1f;
-            --background-light: #2a2a2e;
             --card-bg: #2a2a2e;
             --text: #f5f5f7;
             --text-secondary: #a1a1a6;
@@ -28,11 +25,8 @@
 
         [data-theme="light"] {
             --primary: #0071e3;
-            --primary-light: #4a9eff;
-            --primary-dark: #0056b3;
             --secondary: #86868b;
             --background: #f5f5f7;
-            --background-light: #ffffff;
             --card-bg: #ffffff;
             --text: #1d1d1f;
             --text-secondary: #86868b;
@@ -59,9 +53,9 @@
             margin: 0;
             transition: var(--transition);
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 20%);
             background-attachment: fixed;
         }
         
@@ -95,11 +89,6 @@
             gap: 15px;
         }
         
-        .logo img {
-            width: 40px;
-            height: 40px;
-        }
-        
         .logo h1 {
             font-size: 22px;
             font-weight: 600;
@@ -110,7 +99,7 @@
         
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 15px;
             align-items: center;
         }
         
@@ -129,7 +118,7 @@
             background: rgba(41, 151, 255, 0.1);
         }
         
-        .theme-toggle {
+        .theme-toggle, .lang-toggle {
             background: none;
             border: none;
             color: var(--text);
@@ -140,9 +129,45 @@
             transition: var(--transition);
         }
         
-        .theme-toggle:hover {
+        .theme-toggle:hover, .lang-toggle:hover {
             background: rgba(41, 151, 255, 0.1);
             color: var(--primary);
+        }
+        
+        .lang-menu {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: var(--card-bg);
+            min-width: 120px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid var(--border-color);
+        }
+        
+        .lang-dropdown a {
+            color: var(--text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        
+        .lang-dropdown a:hover {
+            background-color: rgba(41, 151, 255, 0.1);
+            color: var(--primary);
+        }
+        
+        .lang-menu:hover .lang-dropdown {
+            display: block;
         }
         
         .mobile-menu-btn {
@@ -162,24 +187,12 @@
             overflow: hidden;
         }
         
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at top right, rgba(41, 151, 255, 0.1), transparent 50%);
-            z-index: -1;
-        }
-        
         .page-header h1 {
             font-size: 3.2rem;
             margin-bottom: 15px;
             background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
         }
         
         .page-header p {
@@ -187,7 +200,6 @@
             color: var(--secondary);
             max-width: 800px;
             margin: 0 auto;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         /* 内容卡片样式 */
@@ -224,18 +236,6 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--success), var(--warning));
         }
         
         .card:hover {
@@ -247,9 +247,6 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         /* 安装步骤样式 */
@@ -258,14 +255,12 @@
             flex-direction: column;
             gap: 25px;
             margin: 20px 0;
-            counter-reset: step-counter;
         }
         
         .step {
             display: flex;
             gap: 20px;
             align-items: flex-start;
-            position: relative;
         }
         
         .step-number {
@@ -280,8 +275,6 @@
             flex-shrink: 0;
             font-weight: bold;
             font-size: 1.2rem;
-            position: relative;
-            z-index: 2;
         }
         
         .step-content {
@@ -305,10 +298,6 @@
             border-left: 2px solid var(--border-color);
         }
         
-        .step-details li {
-            margin-bottom: 8px;
-        }
-        
         .warning-box {
             background: rgba(255, 204, 0, 0.1);
             border-left: 4px solid var(--warning);
@@ -320,6 +309,14 @@
         .info-box {
             background: rgba(41, 151, 255, 0.1);
             border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 15px 0;
+        }
+        
+        .success-box {
+            background: rgba(52, 199, 89, 0.1);
+            border-left: 4px solid var(--success);
             padding: 15px;
             border-radius: 0 var(--border-radius) var(--border-radius) 0;
             margin: 15px 0;
@@ -363,8 +360,6 @@
             font-weight: 500;
             transition: var(--transition);
             margin: 10px 0;
-            border: none;
-            cursor: pointer;
         }
         
         .btn:hover {
@@ -487,6 +482,23 @@
         .page-content {
             min-height: calc(100vh - 200px);
         }
+        
+        /* 代码块样式 */
+        code {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            display: block;
+            padding: 15px;
+            overflow-x: auto;
+            line-height: 1.5;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -495,15 +507,27 @@
         <div class="container nav-container">
             <div class="logo">
                 <i class="fab fa-apple"></i>
-                <h1>ASUS FL8700JP 黑苹果</h1>
+                <h1 data-lang-key="site_title">ASUS FL8700JP 黑苹果</h1>
             </div>
-            <div class="nav-links">
-                <a href="index.html"><i class="fas fa-home"></i> 主页</a>
-                <a href="hardware.html"><i class="fas fa-microchip"></i> 硬件支持</a>
-                <a href="installation.html" class="active"><i class="fas fa-download"></i> 安装指南</a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> 常见问题</a>
-                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> 系统兼容</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html" class="active"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
                 <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
+                
+                <div class="lang-menu">
+                    <button class="lang-toggle" id="langToggle">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <a href="#" data-lang="zh-CN">简体中文</a>
+                        <a href="#" data-lang="zh-TW">繁體中文</a>
+                        <a href="#" data-lang="en">English</a>
+                    </div>
+                </div>
+                
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -519,241 +543,205 @@
         <!-- 页面标题 -->
         <section class="page-header">
             <div class="container">
-                <h1>安装指南</h1>
-                <p>按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑</p>
+                <h1 data-lang-key="page_title">安装指南</h1>
+                <p data-lang-key="page_subtitle">按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑</p>
             </div>
         </section>
 
         <main class="container">
             <!-- 准备工作 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-tools"></i> 准备工作</h2>
+                <h2 class="section-title"><i class="fas fa-tools"></i> <span data-lang-key="preparation">准备工作</span></h2>
                 <div class="card fade-in">
-                    <p>在开始安装之前，请确保您已准备好以下物品和条件：</p>
+                    <p data-lang-key="preparation_desc">在开始安装之前，请确保您已准备好以下物品和条件：</p>
                     
                     <div class="info-box">
-                        <strong>所需物品：</strong>
+                        <strong data-lang-key="required_items">所需物品：</strong>
                         <ul>
-                            <li>16GB或更大容量的U盘</li>
-                            <li>可正常运行的Windows或macOS系统</li>
-                            <li>稳定的网络连接</li>
-                            <li>至少50GB的可用磁盘空间</li>
+                            <li data-lang-key="item1">16GB或更大容量的U盘</li>
+                            <li data-lang-key="item2">可正常运行的Windows或macOS系统</li>
+                            <li data-lang-key="item3">稳定的网络连接</li>
+                            <li data-lang-key="item4">至少50GB的可用磁盘空间</li>
+                            <li data-lang-key="item5">ASUS FL8700JP笔记本电脑 (X509JP)</li>
                         </ul>
                     </div>
                     
                     <div class="warning-box">
-                        <strong>重要提示：</strong> 安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。
+                        <strong data-lang-key="important_note">重要提示：</strong> <span data-lang-key="important_desc">安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。</span>
+                    </div>
+                    
+                    <div class="success-box">
+                        <strong data-lang-key="supported_versions">支持版本：</strong>
+                        <span data-lang-key="supported_desc">macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x)</span>
                     </div>
                 </div>
             </section>
 
             <!-- BIOS设置 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-cog"></i> BIOS设置</h2>
+                <h2 class="section-title"><i class="fas fa-cog"></i> <span data-lang-key="bios_settings">BIOS设置</span></h2>
                 <div class="card fade-in">
+                    <p data-lang-key="bios_desc">在开始安装之前，请确保您的BIOS已更新到最新版本，并按照以下步骤进行设置：</p>
+                    
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <div class="step-title">进入BIOS设置</div>
-                                <p>开机时反复按F2键进入BIOS设置界面。</p>
+                                <div class="step-title" data-lang-key="bios_step1_title">进入BIOS设置</div>
+                                <p data-lang-key="bios_step1_desc">开机时反复按F2键进入BIOS设置界面。</p>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="step-title">安全启动设置</div>
-                                <p>在Security选项卡中，将Secure Boot设置为Disabled。</p>
+                                <div class="step-title" data-lang-key="bios_step2_title">安全启动设置</div>
+                                <p data-lang-key="bios_step2_desc">在Security选项卡中，将Secure Boot设置为Disabled。</p>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="step-title">启动选项</div>
-                                <p>在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。</p>
+                                <div class="step-title" data-lang-key="bios_step3_title">启动选项</div>
+                                <p data-lang-key="bios_step3_desc">在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。</p>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <div class="step-title">DVMT预分配</div>
-                                <p>在Advanced选项中，将DVMT Pre-Allocated设置为64M。</p>
+                                <div class="step-title" data-lang-key="bios_step4_title">DVMT预分配</div>
+                                <p data-lang-key="bios_step4_desc">在Advanced选项中，将DVMT Pre-Allocated设置为64M。</p>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">5</div>
                             <div class="step-content">
-                                <div class="step-title">保存设置</div>
-                                <p>按F10保存设置并退出BIOS。</p>
+                                <div class="step-title" data-lang-key="bios_step5_title">其他设置</div>
+                                <p data-lang-key="bios_step5_desc">禁用CFG Lock、VT-d和 Thunderbolt安全选项（如果存在）。</p>
                             </div>
                         </div>
+                        
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <div class="step-title" data-lang-key="bios_step6_title">保存设置</div>
+                                <p data-lang-key="bios_step6_desc">按F10保存设置并退出BIOS。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <strong data-lang-key="bios_warning_title">注意：</strong> 
+                        <span data-lang-key="bios_warning_desc">不同版本的BIOS界面可能略有不同，但关键设置选项名称基本相同。如果找不到某个选项，请查阅您的BIOS手册或更新BIOS版本。</span>
                     </div>
                 </div>
             </section>
 
             <!-- 创建安装介质 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-usb"></i> 创建安装介质</h2>
+                <h2 class="section-title"><i class="fas fa-usb"></i> <span data-lang-key="create_installer">创建安装介质</span></h2>
                 <div class="card fade-in">
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <div class="step-title">下载macOS镜像</div>
-                                <p>从苹果官网或可信来源下载macOS安装镜像。</p>
+                                <div class="step-title" data-lang-key="media_step1_title">下载macOS镜像</div>
+                                <p data-lang-key="media_step1_desc">从苹果官网或可信来源下载macOS安装镜像。推荐使用gibMacOS工具下载。</p>
+                                <div class="step-details">
+                                    <p data-lang-key="media_step1_detail">在Windows上，可以使用gibMacOS工具：</p>
+                                    <pre><code># 下载gibMacOS
+git clone https://github.com/corpnewt/gibMacOS
+cd gibMacOS
+python gibMacOS.command</code></pre>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="step-title">准备U盘</div>
-                                <p>使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式。</p>
+                                <div class="step-title" data-lang-key="media_step2_title">准备U盘</div>
+                                <p data-lang-key="media_step2_desc">使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式，GUID分区图。</p>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="step-title">创建安装盘</div>
-                                <p>使用终端命令或BalenaEtcher将镜像写入U盘。</p>
+                                <div class="step-title" data-lang-key="media_step3_title">创建安装盘</div>
+                                <p data-lang-key="media_step3_desc">使用终端命令或BalenaEtcher将镜像写入U盘。</p>
                                 <div class="step-details">
-                                    <code>sudo /Applications/Install\ macOS\ [版本名称].app/Contents/Resources/createinstallmedia --volume /Volumes/[U盘名称]</code>
+                                    <p data-lang-key="media_step3_terminal">在macOS终端中使用以下命令：</p>
+                                    <pre><code>sudo /Applications/Install\ macOS\ [版本名称].app/Contents/Resources/createinstallmedia --volume /Volumes/[U盘名称] --nointeraction</code></pre>
+                                    <p data-lang-key="media_step3_windows">在Windows上，可以使用BalenaEtcher或TransMac工具。</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- EFI配置 -->
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-file-code"></i> EFI配置</h2>
-                <div class="card fade-in">
-                    <div class="download-section">
-                        <div class="download-card">
-                            <div class="download-icon">
-                                <i class="fas fa-download"></i>
-                            </div>
-                            <h3>下载EFI文件</h3>
-                            <p>从项目发布页面下载最新版本的EFI文件</p>
-                            <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh/releases" class="btn" target="_blank">下载EFI</a>
-                        </div>
-                        
-                        <div class="download-card">
-                            <div class="download-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <h3>提取ACPI表</h3>
-                            <p>使用SSDTTime工具提取您设备的ACPI表</p>
-                            <a href="https://github.com/corpnewt/SSDTTime" class="btn btn-outline" target="_blank">获取工具</a>
-                        </div>
-                    </div>
                     
-                    <div class="steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <div class="step-title">配置EFI分区</div>
-                                <p>将下载的EFI文件夹复制到U盘的EFI分区中。</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <div class="step-title">生成SSDT文件</div>
-                                <p>使用SSDTTime在Windows下提取本机ACPI表，生成必要的SSDT文件。</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <div class="step-title">替换配置文件</div>
-                                <p>将生成的SSDT文件放入EFI/OC/ACPI目录，替换原有文件。</p>
-                            </div>
-                        </div>
+                    <div class="info-box">
+                        <strong data-lang-key="media_note_title">提示：</strong> 
+                        <span data-lang-key="media_note_desc">创建安装介质的过程可能需要30分钟或更长时间，请确保电源稳定且不要中断过程。</span>
                     </div>
                 </div>
             </section>
 
             <!-- 安装过程 -->
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-play-circle"></i> 安装过程</h2>
+                <h2 class="section-title"><i class="fas fa-play-circle"></i> <span data-lang-key="installation_process">安装过程</span></h2>
                 <div class="card fade-in">
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <div class="step-title">启动安装</div>
-                                <p>从U盘启动，进入OpenCore引导界面，选择安装macOS。</p>
+                                <div class="step-title" data-lang-key="install_step1_title">启动安装</div>
+                                <p data-lang-key="install_step1_desc">从U盘启动，进入OpenCore引导界面，选择安装macOS。</p>
+                                <div class="step-details">
+                                    <p data-lang-key="install_step1_detail">在启动时按ESC键选择启动设备，选择UEFI:您的U盘名称。</p>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="step-title">磁盘工具</div>
-                                <p>进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。</p>
+                                <div class="step-title" data-lang-key="install_step2_title">磁盘工具</div>
+                                <p data-lang-key="install_step2_desc">进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。</p>
+                                <div class="step-details">
+                                    <p data-lang-key="install_step2_detail">选择"显示所有设备"，选择主硬盘，点击"抹掉"，格式选择APFS，方案选择GUID分区图。</p>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="step-title">开始安装</div>
-                                <p>选择刚格式化的磁盘作为安装目标，开始安装过程。</p>
+                                <div class="step-title" data-lang-key="install_step3_title">开始安装</div>
+                                <p data-lang-key="install_step3_desc">选择刚格式化的磁盘作为安装目标，开始安装过程。</p>
+                                <div class="step-details">
+                                    <p data-lang-key="install_step3_detail">安装过程会重启数次，每次重启后请继续选择从U盘启动，然后选择macOS安装器继续安装。</p>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <div class="step-title">完成安装</div>
-                                <p>系统会自动重启数次，最终进入macOS设置向导。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 后期配置 -->
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-sliders-h"></i> 后期配置</h2>
-                <div class="card fade-in">
-                    <div class="steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <div class="step-title">迁移EFI</div>
-                                <p>使用MountEFI或类似工具将U盘中的EFI文件夹复制到系统盘的EFI分区。</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <div class="step-title">SMBIOS配置</div>
-                                <p>使用ProperTree编辑config.plist，设置机型为MacBookPro16,2，并生成三码。</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <div class="step-title">驱动更新</div>
-                                <p>安装完成后，检查并更新所有必要的Kexts驱动到最新版本。</p>
+                                <div class="step-title" data-lang-key="install_step4_title">完成安装</div>
+                                <p data-lang-key="install_step4_desc">系统会自动重启数次，最终进入macOS设置向导。</p>
+                                <div class="step-details">
+                                    <p data-lang-key="install_step4_detail">按照向导完成macOS初始设置，创建用户账户等。</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="info-box">
-                        <strong>安装完成：</strong> 恭喜！您现在应该已经成功在ASUS FL8700JP上运行macOS。如果遇到任何问题，请查看常见问题页面或访问项目GitHub页面寻求帮助。
+                    <div class="warning-box">
+                        <strong data-lang-key="install_warning_title">常见问题：</strong> 
+                        <span data-lang-key="install_warning_desc">如果安装过程中出现卡住、重启或错误，请尝试使用不同的引导参数，如"-v"调试模式、"agdpmod=pikera"解决显卡问题等。</span>
                     </div>
                 </div>
             </section>
@@ -763,73 +751,362 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-links">
-                <a href="index.html"><i class="fas fa-home"></i> 主页</a>
-                <a href="hardware.html"><i class="fas fa-microchip"></i> 硬件支持</a>
-                <a href="installation.html"><i class="fas fa-download"></i> 安装指南</a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> 常见问题</a>
-                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> 系统兼容</a>
+                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
+                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
+                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
+                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
+                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
                 <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
             </div>
-            <p class="copyright">📜 <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-            <p><small>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
+            <p class="copyright">📜📜 <strong data-lang-key="license">许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - <span data-lang-key="rights_reserved">保留所有权利</span></p>
+            <p><small data-lang-key="footer_note">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
         </div>
     </footer>
 
     <script>
-        // 主题切换功能
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // 检查本地存储或系统偏好
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-        
-        function updateThemeIcon(theme) {
-            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-        
-        // 移动端菜单切换
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // 设置当前页面激活状态
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add('active');
+        // 多语言支持
+        const translations = {
+            'zh-CN': {
+                'site_title': 'ASUS FL8700JP 黑苹果',
+                'nav_home': '主页',
+                'nav_hardware': '硬件支持',
+                'nav_installation': '安装指南',
+                'nav_faq': '常见问题',
+                'nav_compatibility': '系统兼容',
+                'page_title': '安装指南',
+                'page_subtitle': '按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑',
+                'preparation': '准备工作',
+                'preparation_desc': '在开始安装之前，请确保您已准备好以下物品和条件：',
+                'required_items': '所需物品：',
+                'item1': '16GB或更大容量的U盘',
+                'item2': '可正常运行的Windows或macOS系统',
+                'item3': '稳定的网络连接',
+                'item4': '至少50GB的可用磁盘空间',
+                'item5': 'ASUS FL8700JP笔记本电脑 (X509JP)',
+                'important_note': '重要提示：',
+                'important_desc': '安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。',
+                'supported_versions': '支持版本：',
+                'supported_desc': 'macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x)',
+                'bios_settings': 'BIOS设置',
+                'bios_desc': '在开始安装之前，请确保您的BIOS已更新到最新版本，并按照以下步骤进行设置：',
+                'bios_step1_title': '进入BIOS设置',
+                'bios_step1_desc': '开机时反复按F2键进入BIOS设置界面。',
+                'bios_step2_title': '安全启动设置',
+                'bios_step2_desc': '在Security选项卡中，将Secure Boot设置为Disabled。',
+                'bios_step3_title': '启动选项',
+                'bios_step3_desc': '在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。',
+                'bios_step4_title': 'DVMT预分配',
+                'bios_step4_desc': '在Advanced选项中，将DVMT Pre-Allocated设置为64M。',
+                'bios_step5_title': '其他设置',
+                'bios_step5_desc': '禁用CFG Lock、VT-d和 Thunderbolt安全选项（如果存在）。',
+                'bios_step6_title': '保存设置',
+                'bios_step6_desc': '按F10保存设置并退出BIOS。',
+                'bios_warning_title': '注意：',
+                'bios_warning_desc': '不同版本的BIOS界面可能略有不同，但关键设置选项名称基本相同。如果找不到某个选项，请查阅您的BIOS手册或更新BIOS版本。',
+                'create_installer': '创建安装介质',
+                'media_step1_title': '下载macOS镜像',
+                'media_step1_desc': '从苹果官网或可信来源下载macOS安装镜像。推荐使用gibMacOS工具下载。',
+                'media_step1_detail': '在Windows上，可以使用gibMacOS工具：',
+                'media_step2_title': '准备U盘',
+                'media_step2_desc': '使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式，GUID分区图。',
+                'media_step3_title': '创建安装盘',
+                'media_step3_desc': '使用终端命令或BalenaEtcher将镜像写入U盘。',
+                'media_step3_terminal': '在macOS终端中使用以下命令：',
+                'media_step3_windows': '在Windows上，可以使用BalenaEtcher或TransMac工具。',
+                'media_note_title': '提示：',
+                'media_note_desc': '创建安装介质的过程可能需要30分钟或更长时间，请确保电源稳定且不要中断过程。',
+                'installation_process': '安装过程',
+                'install_step1_title': '启动安装',
+                'install_step1_desc': '从U盘启动，进入OpenCore引导界面，选择安装macOS。',
+                'install_step1_detail': '在启动时按ESC键选择启动设备，选择UEFI:您的U盘名称。',
+                'install_step2_title': '磁盘工具',
+                'install_step2_desc': '进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。',
+                'install_step2_detail': '选择"显示所有设备"，选择主硬盘，点击"抹掉"，格式选择APFS，方案选择GUID分区图。',
+                'install_step3_title': '开始安装',
+                'install_step3_desc': '选择刚格式化的磁盘作为安装目标，开始安装过程。',
+                'install_step3_detail': '安装过程会重启数次，每次重启后请继续选择从U盘启动，然后选择macOS安装器继续安装。',
+                'install_step4_title': '完成安装',
+                'install_step4_desc': '系统会自动重启数次，最终进入macOS设置向导。',
+                'install_step4_detail': '按照向导完成macOS初始设置，创建用户账户等。',
+                'install_warning_title': '常见问题：',
+                'install_warning_desc': '如果安装过程中出现卡住、重启或错误，请尝试使用不同的引导参数，如"-v"调试模式、"agdpmod=pikera"解决显卡问题等。',
+                'license': '许可证',
+                'rights_reserved': '保留所有权利',
+                'footer_note': '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
+            },
+            'zh-TW': {
+                'site_title': 'ASUS FL8700JP 黑蘋果',
+                'nav_home': '主頁',
+                'nav_hardware': '硬體支援',
+                'nav_installation': '安裝指南',
+                'nav_faq': '常見問題',
+                'nav_compatibility': '系統相容',
+                'page_title': '安裝指南',
+                'page_subtitle': '按照步驟操作，將macOS完美安裝到您的ASUS FL8700JP筆記型電腦',
+                'preparation': '準備工作',
+                'preparation_desc': '在開始安裝之前，請確保您已準備好以下物品和條件：',
+                'required_items': '所需物品：',
+                'item1': '16GB或更大容量的U盤',
+                'item2': '可正常運行的Windows或macOS系統',
+                'item3': '穩定的網路連接',
+                'item4': '至少50GB的可用磁碟空間',
+                'item5': 'ASUS FL8700JP筆記型電腦 (X509JP)',
+                'important_note': '重要提示：',
+                'important_desc': '安裝過程中會格式化硬碟，請務必備份所有重要資料。本指南僅適用於ASUS FL8700JP (X509JP)特定機型。',
+                'supported_versions': '支援版本：',
+                'supported_desc': 'macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x)',
+                'bios_settings': 'BIOS設定',
+                'bios_desc': '在開始安裝之前，請確保您的BIOS已更新到最新版本，並按照以下步驟進行設定：',
+                'bios_step1_title': '進入BIOS設定',
+                'bios_step1_desc': '開機時反覆按F2鍵進入BIOS設定介面。',
+                'bios_step2_title': '安全啟動設定',
+                'bios_step2_desc': '在Security選項卡中，將Secure Boot設定為Disabled。',
+                'bios_step3_title': '啟動選項',
+                'bios_step3_desc': '在Boot選項卡中，將Fast Boot設定為Disabled，將CSM設定為Enabled。',
+                'bios_step4_title': 'DVMT預分配',
+                'bios_step4_desc': '在Advanced選項中，將DVMT Pre-Allocated設定為64M。',
+                'bios_step5_title': '其他設定',
+                'bios_step5_desc': '禁用CFG Lock、VT-d和 Thunderbolt安全選項（如果存在）。',
+                'bios_step6_title': '儲存設定',
+                'bios_step6_desc': '按F10儲存設定並退出BIOS。',
+                'bios_warning_title': '注意：',
+                'bios_warning_desc': '不同版本的BIOS介面可能略有不同，但關鍵設定選項名稱基本相同。如果找不到某個選項，請查閱您的BIOS手冊或更新BIOS版本。',
+                'create_installer': '建立安裝媒體',
+                'media_step1_title': '下載macOS鏡像',
+                'media_step1_desc': '從蘋果官網或可信來源下載macOS安裝鏡像。推薦使用gibMacOS工具下載。',
+                'media_step1_detail': '在Windows上，可以使用gibMacOS工具：',
+                'media_step2_title': '準備U盤',
+                'media_step2_desc': '使用磁碟工具將U盤格式化為Mac OS擴充（日誌式）格式，GUID分割區圖。',
+                'media_step3_title': '建立安裝盤',
+                'media_step3_desc': '使用終端命令或BalenaEtcher將鏡像寫入U盤。',
+                'media_step3_terminal': '在macOS終端中使用以下命令：',
+                'media_step3_windows': '在Windows上，可以使用BalenaEtcher或TransMac工具。',
+                'media_note_title': '提示：',
+                'media_note_desc': '建立安裝媒體的過程可能需要30分鐘或更長時間，請確保電源穩定且不要中斷過程。',
+                'installation_process': '安裝過程',
+                'install_step1_title': '啟動安裝',
+                'install_step1_desc': '從U盤啟動，進入OpenCore引導介面，選擇安裝macOS。',
+                'install_step1_detail': '在啟動時按ESC鍵選擇啟動設備，選擇UEFI:您的U盤名稱。',
+                'install_step2_title': '磁碟工具',
+                'install_step2_desc': '進入安裝程式後，使用磁碟工具將目標硬碟格式化為APFS格式。',
+                'install_step2_detail': '選擇"顯示所有設備"，選擇主硬碟，點擊"抹掉"，格式選擇APFS，方案選擇GUID分割區圖。',
+                'install_step3_title': '開始安裝',
+                'install_step3_desc': '選擇剛格式化的磁碟作為安裝目標，開始安裝過程。',
+                'install_step3_detail': '安裝過程會重啟數次，每次重啟後請繼續選擇從U盤啟動，然後選擇macOS安裝器繼續安裝。',
+                'install_step4_title': '完成安裝',
+                'install_step4_desc': '系統會自動重啟數次，最終進入macOS設定精靈。',
+                'install_step4_detail': '按照精靈完成macOS初始設定，建立使用者帳戶等。',
+                'install_warning_title': '常見問題：',
+                'install_warning_desc': '如果安裝過程中出現卡住、重啟或錯誤，請嘗試使用不同的引導參數，如"-v"除錯模式、"agdpmod=pikera"解決顯示卡問題等。',
+                'license': '許可證',
+                'rights_reserved': '保留所有權利',
+                'footer_note': '溫馨提示：本項目僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+            },
+            'en': {
+                'site_title': 'ASUS FL8700JP Hackintosh',
+                'nav_home': 'Home',
+                'nav_hardware': 'Hardware Support',
+                'nav_installation': 'Installation Guide',
+                'nav_faq': 'FAQ',
+                'nav_compatibility': 'System Compatibility',
+                'page_title': 'Installation Guide',
+                'page_subtitle': 'Follow the steps to perfectly install macOS on your ASUS FL8700JP laptop',
+                'preparation': 'Preparation',
+                'preparation_desc': 'Before starting the installation, make sure you have the following items and conditions ready:',
+                'required_items': 'Required items:',
+                'item1': '16GB or larger USB drive',
+                'item2': 'A working Windows or macOS system',
+                'item3': 'Stable internet connection',
+                'item4': 'At least 50GB of free disk space',
+                'item5': 'ASUS FL8700JP laptop (X509JP)',
+                'important_note': 'Important note:',
+                'important_desc': 'The installation process will format the hard drive, please backup all important data. This guide is only for ASUS FL8700JP (X509JP) specific model.',
+                'supported_versions': 'Supported versions:',
+                'supported_desc': 'macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x)',
+                'bios_settings': 'BIOS Settings',
+                'bios_desc': 'Before starting the installation, make sure your BIOS is updated to the latest version and follow these steps to configure:',
+                'bios_step1_title': 'Enter BIOS Settings',
+                'bios_step1_desc': 'Press F2 repeatedly during boot to enter BIOS settings.',
+                'bios_step2_title': 'Secure Boot Settings',
+                'bios_step2_desc': 'In the Security tab, set Secure Boot to Disabled.',
+                'bios_step3_title': 'Boot Options',
+                'bios_step3_desc': 'In the Boot tab, set Fast Boot to Disabled and CSM to Enabled.',
+                'bios_step4_title': 'DVMT Pre-Allocation',
+                'bios_step4_desc': 'In Advanced options, set DVMT Pre-Allocated to 64M.',
+                'bios_step5_title': 'Other Settings',
+                'bios_step5_desc': 'Disable CFG Lock, VT-d and Thunderbolt security options (if present).',
+                'bios_step6_title': 'Save Settings',
+                'bios_step6_desc': 'Press F10 to save settings and exit BIOS.',
+                'bios_warning_title': 'Note:',
+                'bios_warning_desc': 'BIOS interfaces may vary slightly between versions, but the key setting names are basically the same. If you cannot find an option, consult your BIOS manual or update the BIOS version.',
+                'create_installer': 'Create Installation Media',
+                'media_step1_title': 'Download macOS Image',
+                'media_step1_desc': 'Download macOS installation image from Apple official website or trusted sources. Recommended to use gibMacOS tool.',
+                'media_step1_detail': 'On Windows, you can use gibMacOS tool:',
+                'media_step2_title': 'Prepare USB Drive',
+                'media_step2_desc': 'Format the USB drive to Mac OS Extended (Journaled) format with GUID partition map.',
+                'media_step3_title': 'Create Installation Disk',
+                'media_step3_desc': 'Use terminal command or BalenaEtcher to write the image to the USB drive.',
+                'media_step3_terminal': 'In macOS terminal, use the following command:',
+                'media_step3_windows': 'On Windows, you can use BalenaEtcher or TransMac tools.',
+                'media_note_title': 'Tip:',
+                'media_note_desc': 'The process of creating installation media may take 30 minutes or longer, please ensure stable power supply and do not interrupt the process.',
+                'installation_process': 'Installation Process',
+                'install_step1_title': 'Start Installation',
+                'install_step1_desc': 'Boot from USB drive, enter OpenCore boot interface, select Install macOS.',
+                'install_step1_detail': 'Press ESC during boot to select boot device, choose UEFI: Your USB drive name.',
+                'install_step2_title': 'Disk Utility',
+                'install_step2_desc': 'After entering the installer, use Disk Utility to format the target hard drive to APFS format.',
+                'install_step2_detail': 'Select "Show All Devices", select the main hard drive, click "Erase", choose APFS format and GUID partition map scheme.',
+                'install_step3_title': 'Start Installation',
+                'install_step3_desc': 'Select the newly formatted disk as the installation target and start the installation process.',
+                'install_step3_detail': 'The installation process will restart several times, after each restart continue to select boot from USB drive, then select macOS Installer to continue.',
+                'install_step4_title': 'Complete Installation',
+                'install_step4_desc': 'The system will automatically restart several times and finally enter the macOS setup wizard.',
+                'install_step4_detail': 'Follow the wizard to complete macOS initial setup, create user account, etc.',
+                'install_warning_title': 'Common Issues:',
+                'install_warning_desc': 'If the installation process gets stuck, restarts or errors, try using different boot arguments such as "-v" debug mode, "agdpmod=pikera" to solve graphics issues, etc.',
+                'license': 'License',
+                'rights_reserved': 'All Rights Reserved',
+                'footer_note': 'Friendly reminder: This project is for learning and research purposes only, please comply with Apple related agreements when using macOS.'
             }
-        });
-        
-        // 添加滚动动画
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
         };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
+
+        // 当前语言设置
+        let currentLang = 'zh-CN';
+
+        // 初始化语言
+        function initLanguage() {
+            // 从本地存储获取语言设置
+            const savedLang = localStorage.getItem('preferred_language');
+            if (savedLang && translations[savedLang]) {
+                currentLang = savedLang;
+            } else {
+                // 根据浏览器语言自动选择
+                const browserLang = navigator.language || navigator.userLanguage;
+                if (browserLang.startsWith('zh')) {
+                    currentLang = browserLang.includes('TW') || browserLang.includes('HK') ? 'zh-TW' : 'zh-CN';
+                } else {
+                    currentLang = 'en';
+                }
+            }
+            
+            applyLanguage();
+        }
+
+        // 应用语言
+        function applyLanguage() {
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
                 }
             });
-        }, observerOptions);
+            
+            // 更新语言下拉菜单
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-lang') === currentLang) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // 保存语言设置
+            localStorage.setItem('preferred_language', currentLang);
+        }
+
+        // 主题切换功能
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+            
+            // 设置初始主题
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            }
+            
+            // 更新图标
+            updateThemeIcon();
+            
+            // 主题切换按钮事件
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon();
+            });
+            
+            // 监听系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                    updateThemeIcon();
+                }
+            });
+        }
         
-        // 观察所有卡片元素
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
+        // 更新主题图标
+        function updateThemeIcon() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (currentTheme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // 移动端菜单功能
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // 点击其他地方关闭菜单
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
+
+        // 语言切换功能
+        function initLanguageSwitcher() {
+            const langDropdown = document.getElementById('langDropdown');
+            
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    if (translations[lang]) {
+                        currentLang = lang;
+                        applyLanguage();
+                    }
+                });
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguage();
+            initTheme();
+            initMobileMenu();
+            initLanguageSwitcher();
+            
+            // 添加页面加载动画
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
         });
     </script>
 </body>
