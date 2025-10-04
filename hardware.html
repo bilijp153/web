@@ -184,12 +184,23 @@
             cursor: pointer;
         }
         
-        /* 页面标题样式 */
+            /* 页面标题样式 */
         .page-header {
             text-align: center;
             padding: 80px 0 40px;
             position: relative;
             overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(41, 151, 255, 0.1), transparent 50%);
+            z-index: -1;
         }
         
         .page-header h1 {
@@ -198,6 +209,7 @@
             background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .page-header p {
@@ -205,7 +217,9 @@
             color: var(--secondary);
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
+        
         /* 内容卡片样式 */
         .section {
             padding: 40px 0;
