@@ -8,34 +8,40 @@
     <style>
         :root {
             --primary: #2997ff;
+            --primary-light: #5ab1ff;
             --secondary: #888;
-            --background: #1d1d1f;
-            --card-bg: #2a2a2e;
-            --text: #f5f5f7;
-            --text-secondary: #a1a1a6;
-            --success: #34c759;
-            --warning: #ffcc00;
-            --danger: #ff3b30;
+            --background: #0d1117;
+            --card-bg: #161b22;
+            --text: #f0f6fc;
+            --text-secondary: #8b949e;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
             --border-radius: 12px;
             --transition: all 0.3s ease;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --header-bg: rgba(0, 0, 0, 0.8);
-            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(13, 17, 23, 0.95);
+            --border-color: rgba(240, 246, 252, 0.1);
+            --gradient-primary: linear-gradient(135deg, #2997ff 0%, #5ab1ff 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #ffa62e 100%);
         }
 
         [data-theme="light"] {
-            --primary: #0071e3;
-            --secondary: #86868b;
-            --background: #f5f5f7;
-            --card-bg: #ffffff;
-            --text: #1d1d1f;
-            --text-secondary: #86868b;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
+            --primary: #0969da;
+            --primary-light: #218bff;
+            --secondary: #656d76;
+            --background: #ffffff;
+            --card-bg: #f6f8fa;
+            --text: #24292f;
+            --text-secondary: #656d76;
+            --success: #1a7f37;
+            --warning: #9a6700;
+            --danger: #cf222e;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --header-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(0, 0, 0, 0.1);
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --border-color: rgba(36, 41, 47, 0.1);
+            --gradient-primary: linear-gradient(135deg, #0969da 0%, #218bff 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b 0%, #ffa62e 100%);
         }
         
         * {
@@ -54,9 +60,8 @@
             transition: var(--transition);
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 20%);
-            background-attachment: fixed;
+                radial-gradient(circle at 85% 30%, rgba(255, 107, 107, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 166, 46, 0.05) 0%, transparent 20%);
         }
         
         .container {
@@ -64,7 +69,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        
         /* 导航栏样式 */
         header {
             background-color: var(--header-bg);
@@ -179,28 +183,6 @@
             cursor: pointer;
         }
         
-        /* 页面标题样式 */
-        .page-header {
-            text-align: center;
-            padding: 80px 0 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .page-header h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 800px;
-            margin: 0 auto;
-        }
         /* 英雄区域样式 */
         .hero {
             text-align: center;
@@ -546,9 +528,9 @@
         <section class="hero">
             <div class="container hero-content">
                 <h1 class="fade-in-up" data-lang-key="hero_title">让 Windows 笔记本完美运行 macOS</h1>
-                <p class="fade-in-up delay-1" data-lang-key="hero_subtitle">为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Sequoia 全面兼容</p>
+                <p class="fade-in-up delay-1" data-lang-key="hero_subtitle">为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
                 <div class="badges fade-in-up delay-1">
-                    <div class="badge"><i class="fas fa-code-branch"></i> <span data-lang-key="badge_opencore">OpenCore 1.0.4</span></div>
+                    <div class="badge"><i class="fas fa-code-branch"></i> <span data-lang-key="badge_opencore">OpenCore 1.0.5</span></div>
                     <div class="badge"><i class="fab fa-apple"></i> <span data-lang-key="badge_compatibility">全版本兼容</span></div>
                     <div class="badge"><i class="fas fa-shield-alt"></i> <span data-lang-key="badge_stable">稳定可靠</span></div>
                 </div>
@@ -578,7 +560,7 @@
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <h3 data-lang-key="feature2_title">全版本兼容</h3>
-                        <p data-lang-key="feature2_desc">支持从 Catalina 到 Sequoia 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
+                        <p data-lang-key="feature2_desc">支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
                         <a href="compatibility.html" class="btn btn-outline" style="margin-top: auto; width: fit-content;" data-lang-key="btn_details">查看详情</a>
                     </div>
                     
@@ -603,7 +585,7 @@
                         <div style="flex: 1; min-width: 250px; background: rgba(41, 151, 255, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary);">
                             <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fas fa-cogs"></i> <span data-lang-key="tech_title">技术特点</span></h4>
                             <ul style="color: var(--text-secondary); padding-left: 20px;">
-                                <li data-lang-key="tech_item1">基于 OpenCore 1.0.4 最新引导</li>
+                                <li data-lang-key="tech_item1">基于 OpenCore 1.0.5 最新引导</li>
                                 <li data-lang-key="tech_item2">ACPI 热补丁与 SSDT 优化</li>
                                 <li data-lang-key="tech_item3">完善的电源管理配置</li>
                             </ul>
@@ -612,7 +594,7 @@
                         <div style="flex: 1; min-width: 250px; background: rgba(58, 191, 80, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid var(--success);">
                             <h4 style="color: var(--success); margin-bottom: 10px;"><i class="fas fa-check-circle"></i> <span data-lang-key="compat_title">兼容性</span></h4>
                             <ul style="color: var(--text-secondary); padding-left: 20px;">
-                                <li data-lang-key="compat_item1">macOS Catalina 至 Sequoia</li>
+                                <li data-lang-key="compat_item1">macOS Catalina 至 Tahoe</li>
                                 <li data-lang-key="compat_item2">Intel Wi-Fi 与蓝牙</li>
                                 <li data-lang-key="compat_item3">高清音频与麦克风</li>
                             </ul>
@@ -689,8 +671,8 @@
                 'nav_faq': '常见问题',
                 'nav_compatibility': '系统兼容',
                 'hero_title': '让 Windows 笔记本完美运行 macOS',
-                'hero_subtitle': '为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Sequoia 全面兼容',
-                'badge_opencore': 'OpenCore 1.0.4',
+                'hero_subtitle': '为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容',
+                'badge_opencore': 'OpenCore 1.0.5',
                 'badge_compatibility': '全版本兼容',
                 'badge_stable': '稳定可靠',
                 'btn_install': '开始安装之旅',
@@ -699,18 +681,18 @@
                 'feature1_title': '全面硬件支持',
                 'feature1_desc': '完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。',
                 'feature2_title': '全版本兼容',
-                'feature2_desc': '支持从 Catalina 到 Sequoia 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。',
+                'feature2_desc': '支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。',
                 'feature3_title': '详细安装指南',
                 'feature3_desc': '从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。',
                 'btn_details': '查看详情',
                 'about_title': '项目简介',
                 'about_desc': '本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。',
                 'tech_title': '技术特点',
-                'tech_item1': '基于 OpenCore 1.0.4 最新引导',
+                'tech_item1': '基于 OpenCore 1.0.5 最新引导',
                 'tech_item2': 'ACPI 热补丁与 SSDT 优化',
                 'tech_item3': '完善的电源管理配置',
                 'compat_title': '兼容性',
-                'compat_item1': 'macOS Catalina 至 Sequoia',
+                'compat_item1': 'macOS Catalina 至 Tahoe',
                 'compat_item2': 'Intel Wi-Fi 与蓝牙',
                 'compat_item3': '高清音频与麦克风',
                 'warning_text': '重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。',
@@ -735,8 +717,8 @@
                 'nav_faq': '常見問題',
                 'nav_compatibility': '系統相容',
                 'hero_title': '讓 Windows 筆記本完美運行 macOS',
-                'hero_subtitle': '為華碩 VivoBook FL8700JP 訂製的專業黑蘋果解決方案，從 Catalina 到 Sequoia 全面相容',
-                'badge_opencore': 'OpenCore 1.0.4',
+                'hero_subtitle': '為華碩 VivoBook FL8700JP 訂製的專業黑蘋果解決方案，從 Catalina 到 Tahoe 全面相容',
+                'badge_opencore': 'OpenCore 1.0.5',
                 'badge_compatibility': '全版本相容',
                 'badge_stable': '穩定可靠',
                 'btn_install': '開始安裝之旅',
@@ -745,18 +727,18 @@
                 'feature1_title': '全面硬體支援',
                 'feature1_desc': '完美支援 Intel i7 處理器、Iris Plus 顯示卡、Realtek 音訊等核心硬體元件，提供接近原生的使用體驗。',
                 'feature2_title': '全版本相容',
-                'feature2_desc': '支援從 Catalina 到 Sequoia 的所有現代 macOS 版本，持續更新確保與新版本系統完美相容。',
+                'feature2_desc': '支援從 Catalina 到 Tahoe 的所有現代 macOS 版本，持續更新確保與新版本系統完美相容。',
                 'feature3_title': '詳細安裝指南',
                 'feature3_desc': '從 BIOS 設定到系統配置，提供完整的安裝教程和排錯指南，即使是新手也能輕鬆完成安裝。',
                 'btn_details': '檢視詳情',
                 'about_title': '專案簡介',
                 'about_desc': '本專案專為華碩 VivoBook FL8700JP (X509JP) 筆記型電腦設計，提供完整的黑蘋果解決方案。採用最新的 OpenCore 引導載入程式，確保系統穩定性和相容性。',
                 'tech_title': '技術特點',
-                'tech_item1': '基於 OpenCore 1.0.4 最新引導',
+                'tech_item1': '基於 OpenCore 1.0.5 最新引導',
                 'tech_item2': 'ACPI 熱修補與 SSDT 優化',
                 'tech_item3': '完善的電源管理配置',
                 'compat_title': '相容性',
-                'compat_item1': 'macOS Catalina 至 Sequoia',
+                'compat_item1': 'macOS Catalina 至 Tahoe',
                 'compat_item2': 'Intel Wi-Fi 與藍牙',
                 'compat_item3': '高解析度音訊與麥克風',
                 'warning_text': '重要提示：本 EFI 配置僅適用於華碩 FL8700JP (X509JP) 特定機型。操作前請務必備份重要資料，並仔細閱讀安裝指南。',
@@ -781,8 +763,8 @@
                 'nav_faq': 'FAQ',
                 'nav_compatibility': 'System Compatibility',
                 'hero_title': 'Run macOS Perfectly on Windows Laptop',
-                'hero_subtitle': 'Professional Hackintosh solution customized for ASUS VivoBook FL8700JP, fully compatible from Catalina to Sequoia',
-                'badge_opencore': 'OpenCore 1.0.4',
+                'hero_subtitle': 'Professional Hackintosh solution customized for ASUS VivoBook FL8700JP, fully compatible from Catalina to Tahoe',
+                'badge_opencore': 'OpenCore 1.0.5',
                 'badge_compatibility': 'Full Version Support',
                 'badge_stable': 'Stable & Reliable',
                 'btn_install': 'Start Installation',
@@ -791,18 +773,18 @@
                 'feature1_title': 'Comprehensive Hardware Support',
                 'feature1_desc': 'Perfectly supports Intel i7 processor, Iris Plus graphics, Realtek audio and other core hardware components, providing a near-native experience.',
                 'feature2_title': 'Full Version Compatibility',
-                'feature2_desc': 'Supports all modern macOS versions from Catalina to Sequoia, with continuous updates to ensure perfect compatibility with new system versions.',
+                'feature2_desc': 'Supports all modern macOS versions from Catalina to Tahoe, with continuous updates to ensure perfect compatibility with new system versions.',
                 'feature3_title': 'Detailed Installation Guide',
                 'feature3_desc': 'Complete installation tutorials and troubleshooting guides from BIOS setup to system configuration, making it easy even for beginners to complete the installation.',
                 'btn_details': 'View Details',
                 'about_title': 'Project Introduction',
                 'about_desc': 'This project is designed for ASUS VivoBook FL8700JP (X509JP) laptops, providing a complete Hackintosh solution. Using the latest OpenCore bootloader to ensure system stability and compatibility.',
                 'tech_title': 'Technical Features',
-                'tech_item1': 'Based on the latest OpenCore 1.0.4 bootloader',
+                'tech_item1': 'Based on the latest OpenCore 1.0.5 bootloader',
                 'tech_item2': 'ACPI hot patches and SSDT optimization',
                 'tech_item3': 'Comprehensive power management configuration',
                 'compat_title': 'Compatibility',
-                'compat_item1': 'macOS Catalina to Sequoia',
+                'compat_item1': 'macOS Catalina to Tahoe',
                 'compat_item2': 'Intel Wi-Fi and Bluetooth',
                 'compat_item3': 'High-definition audio and microphone',
                 'warning_text': 'Important: This EFI configuration is only suitable for specific ASUS FL8700JP (X509JP) models. Please be sure to back up important data before operation and read the installation guide carefully.',
