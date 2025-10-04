@@ -671,7 +671,7 @@
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 25px 0;">
                         <div style="text-align: center; padding: 20px; background: rgba(52, 199, 89, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(52, 199, 89, 0.2);">
-                            <div style="font-size: 2rem; color: var(--success); margin-bottom: 10px;">6</div>
+                            <div style="font-size: 2rem; color: var(--success); margin-bottom: 10px;">7</div>
                             <div data-lang-key="compat_count">完美兼容版本</div>
                         </div>
                         <div style="text-align: center; padding: 20px; background: rgba(41, 151, 255, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(41, 151, 255, 0.2);">
@@ -728,7 +728,7 @@
                                 <div class="timeline-date" data-lang-key="date_2023_9">2023年9月</div>
                                 <div class="timeline-version">macOS Sonoma 14.0</div>
                                 <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
-                                <p data-lang-key="sonoma_desc">小组件和游戏模式运行良好，需要所有驱动更新到最新版本。</p>
+                                <p data-lang-key="sonoma_desc">需要所有驱动更新到最新版本。</p>
                             </div>
                         </div>
                         <div class="timeline-item">
@@ -736,7 +736,15 @@
                                 <div class="timeline-date" data-lang-key="date_2024_9">2024年9月</div>
                                 <div class="timeline-version">macOS Sequoia 15.0</div>
                                 <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
-                                <p data-lang-key="sequoia_desc">最新版本完全兼容，所有功能正常运行，需要OpenCore 1.0.4+。</p>
+                                <p data-lang-key="sequoia_desc">需要OpenCore 1.0.4+。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date" data-lang-key="date_2025_9">2025年9月</div>
+                                <div class="timeline-version">macOS Tahoe 26.0</div>
+                                <span class="timeline-status status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span>
+                                <p data-lang-key="tahoe_desc">最新版本几乎兼容，需要OpenCore 1.0.5+和所有驱动更新到最新版本。</p>
                             </div>
                         </div>
                     </div>
@@ -793,6 +801,12 @@
                                 <td>15.0+</td>
                                 <td data-lang-key="sequoia_notes">需要OpenCore 1.0.4或更高版本</td>
                             </tr>
+                            <tr>
+                                <td><span class="version-badge">Tahoe 26.0</span></td>
+                                <td><span class="status-supported"><i class="fas fa-check"></i> <span data-lang-key="status_perfect">完美支持</span></span></td>
+                                <td>15.0+</td>
+                                <td data-lang-key="tahoe_notes">需要OpenCore 1.0.5或更高版本和所有驱动更新到最新版本</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -821,7 +835,7 @@
                             <i class="fas fa-bolt"></i>
                         </div>
                         <h3 data-lang-key="features_title">体验最新功能</h3>
-                        <p><strong data-lang-key="recommend_sequoia">推荐：macOS Sequoia 15.0</strong></p>
+                        <p><strong data-lang-key="recommend_tahoe">推荐：macOS Tahoe 26.0</strong></p>
                         <p data-lang-key="features_desc">包含所有最新功能和安全更新，适合喜欢尝试新特性和技术前沿的用户。</p>
                         <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
                             <li data-lang-key="features_item1">最新界面设计和功能</li>
@@ -919,13 +933,15 @@
                 'date_2022_10': '2022年10月',
                 'date_2023_9': '2023年9月',
                 'date_2024_9': '2024年9月',
+                'date_2025_9': '2025年9月',
                 'status_perfect': '完美支持',
                 'catalina_desc': '首个完全兼容的macOS版本，所有核心功能正常工作，为后续版本奠定坚实基础。',
                 'bigsur_desc': '全新设计界面完全兼容，需要更新部分驱动以适应新的系统架构。',
                 'monterey_desc': '通用控制、隔空播放等新功能需要额外配置，整体稳定性优秀。',
                 'ventura_desc': '台前调度功能完美运行，需要更新OpenCore到0.8.6+版本。',
-                'sonoma_desc': '小组件和游戏模式运行良好，需要所有驱动更新到最新版本。',
-                'sequoia_desc': '最新版本完全兼容，所有功能正常运行，需要OpenCore 1.0.4+。',
+                'sonoma_desc': '需要所有驱动更新到最新版本。',
+                'sequoia_desc': '需要OpenCore 1.0.4+。,
+                'tahoe_desc': 最新版本几乎兼容，需要OpenCore 1.0.5+和所有驱动更新到最新版本。',
                 'detailed_compatibility': '详细兼容性信息',
                 'table_version': 'macOS 版本',
                 'table_status': '兼容状态',
@@ -937,6 +953,7 @@
                 'ventura_notes': '台前调度功能完美运行',
                 'sonoma_notes': '需要所有驱动更新到最新版本',
                 'sequoia_notes': '需要OpenCore 1.0.4或更高版本',
+                'tahoe_notes': '需要OpenCore 1.0.5或更高版本',
                 'version_recommendations': '版本选择建议',
                 'performance_title': '追求最佳性能',
                 'recommend_monterey': '推荐：macOS Monterey 12.0',
@@ -945,7 +962,7 @@
                 'performance_item2': '应用程序兼容性广泛',
                 'performance_item3': '长期支持版本',
                 'features_title': '体验最新功能',
-                'recommend_sequoia': '推荐：macOS Sequoia 15.0',
+                'recommend_tahoe': '推荐：macOS Tahoe 26.0',
                 'features_desc': '包含所有最新功能和安全更新，适合喜欢尝试新特性和技术前沿的用户。',
                 'features_item1': '最新界面设计和功能',
                 'features_item2': '持续安全更新',
@@ -995,13 +1012,15 @@
                 'date_2022_10': '2022年10月',
                 'date_2023_9': '2023年9月',
                 'date_2024_9': '2024年9月',
+                'date_2025_9': '2025年9月',
                 'status_perfect': '完美支援',
                 'catalina_desc': '首個完全相容的macOS版本，所有核心功能正常工作，為後續版本奠定堅實基礎。',
                 'bigsur_desc': '全新設計界面完全相容，需要更新部分驅動以適應新的系統架構。',
                 'monterey_desc': '通用控制、隔空播放等新功能需要額外配置，整體穩定性優秀。',
                 'ventura_desc': '台前調度功能完美運行，需要更新OpenCore到0.8.6+版本。',
-                'sonoma_desc': '小組件和遊戲模式運行良好，需要所有驅動更新到最新版本。',
-                'sequoia_desc': '最新版本完全相容，所有功能正常運行，需要OpenCore 1.0.4+。',
+                'sonoma_desc': '需要所有驅動更新到最新版本。',
+                'sequoia_desc': '需要OpenCore 1.0.4+。',
+                'tahoe_desc': '最新版本幾乎相容，需要OpenCore 1.0.4+和所有驅動更新到最新版本。',
                 'detailed_compatibility': '詳細相容性資訊',
                 'table_version': 'macOS 版本',
                 'table_status': '相容狀態',
@@ -1013,6 +1032,7 @@
                 'ventura_notes': '台前調度功能完美運行',
                 'sonoma_notes': '需要所有驅動更新到最新版本',
                 'sequoia_notes': '需要OpenCore 1.0.4或更高版本',
+                'tahoe_notes': '需要OpenCore 1.0.5或更高版本',
                 'version_recommendations': '版本選擇建議',
                 'performance_title': '追求最佳性能',
                 'recommend_monterey': '推薦：macOS Monterey 12.0',
@@ -1021,7 +1041,7 @@
                 'performance_item2': '應用程式相容性廣泛',
                 'performance_item3': '長期支援版本',
                 'features_title': '體驗最新功能',
-                'recommend_sequoia': '推薦：macOS Sequoia 15.0',
+                'recommend_tahoe': '推薦：macOS Tahoe 26.0',
                 'features_desc': '包含所有最新功能和安全更新，適合喜歡嘗試新特性和技術前沿的用戶。',
                 'features_item1': '最新界面設計和功能',
                 'features_item2': '持續安全更新',
@@ -1071,13 +1091,15 @@
                 'date_2022_10': 'October 2022',
                 'date_2023_9': 'September 2023',
                 'date_2024_9': 'September 2024',
+                'date_2025_9': 'September 2025',
                 'status_perfect': 'Perfect Support',
                 'catalina_desc': 'First fully compatible macOS version with all core features working properly, laying solid foundation for subsequent versions.',
                 'bigsur_desc': 'New design interface fully compatible, requires updating some drivers to adapt to new system architecture.',
                 'monterey_desc': 'Universal Control, AirPlay and other new features require additional configuration, excellent overall stability.',
                 'ventura_desc': 'Stage Manager feature works perfectly, requires OpenCore 0.8.6+ update.',
-                'sonoma_desc': 'Widgets and Game Mode work well, requires all drivers to be updated to latest versions.',
-                'sequoia_desc': 'Latest version fully compatible, all features work normally, requires OpenCore 1.0.4+.',
+                'sonoma_desc': 'Requires all drivers to be updated to latest versions.',
+                'sequoia_desc':'Requires OpenCore 1.0.4+.',
+                'tahoe_desc': 'The latest version is almost compatible, requiring OpenCore 1.0.5+ and all drivers updated to the latest version.',
                 'detailed_compatibility': 'Detailed Compatibility Information',
                 'table_version': 'macOS Version',
                 'table_status': 'Compatibility Status',
@@ -1089,6 +1111,7 @@
                 'ventura_notes': 'Stage Manager feature works perfectly',
                 'sonoma_notes': 'Requires all drivers to be updated to latest versions',
                 'sequoia_notes': 'Requires OpenCore 1.0.4 or higher',
+                'tahoe_notes': 'Requires OpenCore 1.0.5 or higher',
                 'version_recommendations': 'Version Recommendations',
                 'performance_title': 'Best Performance',
                 'recommend_monterey': 'Recommended: macOS Monterey 12.0',
@@ -1097,7 +1120,7 @@
                 'performance_item2': 'Wide application compatibility',
                 'performance_item3': 'Long-term support version',
                 'features_title': 'Latest Features',
-                'recommend_sequoia': 'Recommended: macOS Sequoia 15.0',
+                'recommend_tahoe': 'Recommended: macOS Tahoe 26.0',
                 'features_desc': 'Includes all latest features and security updates, suitable for users who like to try new features and cutting-edge technology.',
                 'features_item1': 'Latest interface design and features',
                 'features_item2': 'Continuous security updates',
