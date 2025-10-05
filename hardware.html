@@ -974,68 +974,48 @@
             }
         };
 
-        // 语言切换功能
-        const langToggle = document.getElementById('langToggle');
-        const langMenu = document.getElementById('langMenu');
-        const langOptions = document.querySelectorAll('.lang-option');
-        
-        // 检查本地存储或浏览器语言
-        const savedLang = localStorage.getItem('language') || navigator.language;
-        let currentLang = savedLang.startsWith('zh') ? (savedLang.includes('TW') || savedLang.includes('HK') ? 'zh-TW' : 'zh-CN') : 'en';
-        
+        // 当前语言设置
+        let currentLang = 'zh-CN';
+
+        // 初始化语言
+        function initLanguage() {
+            // 从本地存储获取语言设置
+            const savedLang = localStorage.getItem('preferred_language');
+            if (savedLang && translations[savedLang]) {
+                currentLang = savedLang;
+            } else {
+                // 根据浏览器语言自动选择
+                const browserLang = navigator.language || navigator.userLanguage;
+                if (browserLang.startsWith('zh')) {
+                    currentLang = browserLang.includes('TW') || browserLang.includes('HK') ? 'zh-TW' : 'zh-CN';
+                } else {
+                    currentLang = 'en';
+                }
+            }
+            
+            applyLanguage();
+        }
+
         // 应用语言
-        function applyLanguage(lang) {
-            document.documentElement.lang = lang;
+        function applyLanguage() {
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
-                if (translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.value = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
                 }
             });
             
-            // 更新语言选项激活状态
-            langOptions.forEach(option => {
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                } else {
-                    option.classList.remove('active');
+            // 更新语言下拉菜单
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-lang') === currentLang) {
+                    link.classList.add('active');
                 }
             });
             
-            // 保存语言选择
-            localStorage.setItem('language', lang);
-            currentLang = lang;
+            // 保存语言设置
+            localStorage.setItem('preferred_language', currentLang);
         }
-        
-        // 初始化语言
-        applyLanguage(currentLang);
-        
-        // 语言切换菜单
-        langToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langMenu.classList.toggle('active');
-        });
-        
-        // 选择语言
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                applyLanguage(lang);
-                langMenu.classList.remove('active');
-            });
-        });
-        
-        // 点击其他地方关闭语言菜单
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.lang-container')) {
-                langMenu.classList.remove('active');
-            }
-        });
-        
         // 主题切换功能
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
