@@ -886,7 +886,6 @@
             // 保存语言设置
             localStorage.setItem('preferred_language', currentLang);
         }
-
         // 主题切换功能
         function initTheme() {
             const themeToggle = document.getElementById('themeToggle');
@@ -949,22 +948,6 @@
                 if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
                     navLinks.classList.remove('active');
                 }
-            });
-        }
-
-        // 语言切换功能
-        function initLanguageSwitcher() {
-            const langDropdown = document.getElementById('langDropdown');
-            
-            document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lang = link.getAttribute('data-lang');
-                    if (translations[lang]) {
-                        currentLang = lang;
-                        applyLanguage();
-                    }
-                });
             });
         }
 
