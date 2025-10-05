@@ -183,6 +183,29 @@
         }
         
 
+        /* 页面标题样式 */
+        .page-header {
+            text-align: center;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         /* 英雄区域样式 */
         .hero {
             text-align: center;
@@ -540,23 +563,19 @@
         }
         
         /* 响应式设计 */
-              @media (max-width: 768px) {
+                    /* 响应式设计 */
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 100%;
+                top: 70px;
                 left: 0;
                 right: 0;
                 background: var(--header-bg);
-                backdrop-filter: blur(20px);
                 flex-direction: column;
                 padding: 20px;
                 gap: 15px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-color);
-                z-index: 100;
-                max-height: 80vh;
-                overflow-y: auto;
             }
             
             .nav-links.active {
@@ -571,42 +590,17 @@
                 font-size: 2.5rem;
             }
             
-            .page-header p {
-                font-size: 1.1rem;
+            .step {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .timeline::before {
-                left: 20px;
+            .step-number {
+                align-self: flex-start;
             }
             
-            .timeline-item {
-                justify-content: flex-start !important;
-                margin-left: 40px;
-                width: calc(100% - 40px);
-            }
-            
-            .timeline-item-content {
-                width: 100%;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-item-content::before,
-            .timeline-item:nth-child(even) .timeline-item-content::before {
-                left: -10px;
-                right: auto;
-                border-right: 10px solid var(--card-bg);
-                border-left: none;
-            }
-            
-            .timeline-dot {
-                left: 20px;
-            }
-            
-            .feature-grid {
+            .download-section {
                 grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2rem;
             }
         }
         
@@ -617,14 +611,6 @@
             
             .section-title {
                 font-size: 1.8rem;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .timeline-item-content {
-                padding: 20px;
             }
         }
         
