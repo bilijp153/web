@@ -1295,21 +1295,29 @@ header {
         }
 
         // 移动端菜单功能
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-            
-            // 点击其他地方关闭菜单
-            document.addEventListener('click', (e) => {
-                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        }
+    function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 点击其他地方关闭菜单
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        initMobileMenu();
+        initMobileMenu();
+            initTheme();
+            initLanguageSwitcher();
+    });
 
         // 语言切换功能
         function initLanguageSwitcher() {
