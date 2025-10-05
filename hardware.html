@@ -1097,6 +1097,13 @@
                 }
             });
         }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguage();
+            initTheme();
+            initMobileMenu();
+            initLanguageSwitcher();
         
         // 设置当前页面激活状态
         document.querySelectorAll('.nav-links a').forEach(link => {
