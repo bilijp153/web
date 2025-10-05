@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
         :root {
             --primary: #2997ff;
             --secondary: #888;
-            --background: #1d1d1f;https://bilijp153.github.io/web/compatibility.html
+            --background: #1d1d1f;
             --card-bg: #2a2a2e;
             --text: #f5f5f7;
             --text-secondary: #a1a1a6;
@@ -23,7 +23,7 @@
             --border-color: rgba(255, 255, 255, 0.1);
         }
 
-[data-theme="light"] {
+        [data-theme="light"] {
             --primary: #0071e3;
             --secondary: #86868b;
             --background: #f5f5f7;
@@ -52,11 +52,6 @@
             padding: 0;
             margin: 0;
             transition: var(--transition);
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 20%);
-            background-attachment: fixed;
         }
         
         .container {
@@ -65,7 +60,8 @@
             padding: 0 20px;
         }
         
-         header {
+        /* 导航栏样式 */
+        header {
             background-color: var(--header-bg);
             backdrop-filter: blur(20px);
             position: sticky;
@@ -178,6 +174,7 @@
             cursor: pointer;
         }
         
+        /* 页面标题样式 */
         .page-header {
             text-align: center;
             padding: 80px 0 40px;
@@ -200,6 +197,7 @@
             margin: 0 auto;
         }
         
+        /* 内容卡片样式 */
         .section {
             padding: 40px 0;
         }
@@ -261,6 +259,7 @@
             gap: 10px;
         }
         
+        /* 修复的时间线样式 - 确保三端完美显示 */
         .timeline-container {
             position: relative;
             max-width: 1000px;
@@ -388,12 +387,13 @@
             margin-bottom: 15px;
         }
         
-        .status-partial {
-            background-color: rgba(210, 153, 34, 0.2);
-            color: var(--partial);
-            border: 1px solid rgba(210, 153, 34, 0.3);
+        .status-supported {
+            background-color: rgba(52, 199, 89, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(52, 199, 89, 0.3);
         }
         
+        /* 兼容性表格样式 */
         .compatibility-table {
             width: 100%;
             border-collapse: collapse;
@@ -434,6 +434,7 @@
             border: 1px solid rgba(41, 151, 255, 0.3);
         }
         
+        /* 功能卡片网格 */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -482,6 +483,7 @@
             color: var(--primary);
         }
         
+        /* 页脚样式 */
         footer {
             background-color: var(--card-bg);
             padding: 40px 0;
@@ -519,7 +521,8 @@
             margin-top: 20px;
         }
         
-            @media (max-width: 768px) {
+        /* 响应式设计 - 重点修复时间线在移动端的显示 */
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
@@ -533,8 +536,8 @@
                 gap: 15px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
                 border-top: 1px solid var(--border-color);
-                z-index: 1000;
-                max-height: calc(100vh - 70px);
+                z-index: 100;
+                max-height: 80vh;
                 overflow-y: auto;
             }
             
@@ -550,17 +553,43 @@
                 font-size: 2.5rem;
             }
             
-            .hardware-table {
-                display: block;
-                overflow-x: auto;
+            .page-header p {
+                font-size: 1.1rem;
             }
             
-            .compatibility-summary {
-                grid-template-columns: 1fr;
+            /* 修复移动端时间线显示 */
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                justify-content: flex-start !important;
+                margin-left: 40px;
+                width: calc(100% - 40px);
+            }
+            
+            .timeline-item-content {
+                width: 100%;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-item-content::before,
+            .timeline-item:nth-child(even) .timeline-item-content::before {
+                left: -10px;
+                right: auto;
+                border-right: 10px solid var(--card-bg);
+                border-left: none;
+            }
+            
+            .timeline-dot {
+                left: 20px;
             }
             
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
             
             .lang-menu {
@@ -577,18 +606,21 @@
                 font-size: 1.8rem;
             }
             
-            .nav-links {
-                padding: 15px;
+            .card {
+                padding: 20px;
             }
             
-            .nav-links a {
-                padding: 10px;
-                font-size: 16px;
+            .timeline-item-content {
+                padding: 20px;
             }
-        }page-content {
+        }
+        
+        /* 页面内容容器 */
+        .page-content {
             min-height: calc(100vh - 200px);
         }
         
+        /* 动画效果 */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -606,13 +638,14 @@
     </style>
 </head>
 <body>
+    <!-- 导航栏 -->
     <header>
         <div class="container nav-container">
             <div class="logo">
                 <i class="fab fa-apple"></i>
                 <h1 data-lang-key="site_title">ASUS FL8700JP 黑苹果</h1>
             </div>
-            <div class="nav-links" id="navLinks">
+            <div class="nav-links">
                 <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
                 <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
                 <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
@@ -624,7 +657,7 @@
                     <button class="lang-toggle" id="langToggle">
                         <i class="fas fa-globe"></i>
                     </button>
-                    <div class="lang-dropdown" id="langDropdown">
+                    <div class="lang-dropdown">
                         <a href="#" data-lang="zh-CN">简体中文</a>
                         <a href="#" data-lang="zh-TW">繁體中文</a>
                         <a href="#" data-lang="en">English</a>
@@ -641,14 +674,16 @@
         </div>
     </header>
 
+    <!-- 页面内容 -->
     <div class="page-content">
+        <!-- 页面标题 -->
         <section class="page-header">
             <div class="container">
                 <h1 data-lang-key="page_title">系统兼容性</h1>
-                <p data-lang-key="page_subtitle">全面了解您的ASUS FL8700JP笔记本电脑与各版本macOS的兼容性</p>
+                <p data-lang-key="page_subtitle">全面了解您的ASUS FL8700JP笔记本电脑与各版本macOS的完美兼容性</p>
                 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
-                    <span style="background: rgba(210, 153, 34, 0.2); color: var(--partial); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
-                        <i class="fas fa-exclamation-triangle"></i> <span data-lang-key="badge_full_compat">全版本基本支持</span>
+                    <span style="background: rgba(52, 199, 89, 0.2); color: var(--success); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
+                        <i class="fas fa-check"></i> <span data-lang-key="badge_full_compat">全版本完美兼容</span>
                     </span>
                     <span style="background: rgba(41, 151, 255, 0.2); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
                         <i class="fas fa-sync-alt"></i> <span data-lang-key="badge_continuous">持续更新支持</span>
@@ -660,7 +695,7 @@
             </div>
         </section>
 
-        <main class="container">
+      <main class="container">
             <section class="section fade-in">
                 <h2 class="section-title"><i class="fas fa-check-circle"></i> <span data-lang-key="compatibility_overview">兼容性概述</span></h2>
                 <div class="card">
@@ -683,7 +718,8 @@
                 </div>
             </section>
 
-            <section class="section fade-in">
+            <!-- 兼容性时间线 -->
+               <section class="section fade-in">
                 <h2 class="section-title"><i class="fas fa-history"></i> <span data-lang-key="macos_timeline">macOS 版本演进时间线</span></h2>
                 <div class="card">
                     <div class="timeline-container">
@@ -761,8 +797,8 @@
                     </div>
                 </div>
             </section>
-
-            <section class="section fade-in">
+            <!-- 详细兼容性表格 -->
+           <section class="section fade-in">
                 <h2 class="section-title"><i class="fas fa-table"></i> <span data-lang-key="detailed_compatibility">详细兼容性信息</span></h2>
                 <div class="card">
                     <table class="compatibility-table">
@@ -822,6 +858,7 @@
                 </div>
             </section>
 
+            <!-- 版本推荐 -->
             <section class="section fade-in">
                 <h2 class="section-title"><i class="fas fa-star"></i> <span data-lang-key="version_recommendations">版本选择建议</span></h2>
                 <div class="feature-grid">
@@ -869,6 +906,7 @@
                 </div>
             </section>
 
+            <!-- 升级指南 -->
             <section class="section fade-in">
                 <h2 class="section-title"><i class="fas fa-sync-alt"></i> <span data-lang-key="upgrade_guide">系统升级指南</span></h2>
                 <div class="card">
@@ -915,7 +953,8 @@
     </footer>
 
     <script>
-        const translations = {
+        // 多语言支持
+          const translations = {
             'zh-CN': {
                 'site_title': 'ASUS FL8700JP 黑苹果',
                 'nav_home': '主页',
@@ -1155,103 +1194,109 @@
             }
         };
 
-        let currentLang = 'zh-CN';
 
-        function setLanguage(lang) {
-            currentLang = lang;
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const langMenu = document.querySelector('.lang-dropdown');
+        const langOptions = document.querySelectorAll('.lang-dropdown a');
+        
+        // 检查本地存储或浏览器语言
+        const savedLang = localStorage.getItem('language') || navigator.language;
+        let currentLang = savedLang.startsWith('zh') ? (savedLang.includes('TW') || savedLang.includes('HK') ? 'zh-TW' : 'zh-CN') : 'en';
+        
+        // 应用语言
+        function applyLanguage(lang) {
             document.documentElement.lang = lang;
-            
-
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
-                if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'INPUT' && element.type === 'text') {
-                        element.placeholder = translations[lang][key];
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
                     } else {
-                        element.innerHTML = translations[lang][key];
+                        element.textContent = translations[lang][key];
                     }
                 }
             });
             
-            document.querySelectorAll('.lang-option').forEach(option => {
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                } else {
-                    option.classList.remove('active');
-                }
-            });
-            
-
-            document.getElementById('langMenu').classList.remove('active');
+            // 保存语言选择
+            localStorage.setItem('language', lang);
+            currentLang = lang;
         }
-
-        function toggleTheme() {
+        
+        // 初始化语言
+        applyLanguage(currentLang);
+        
+        // 语言切换菜单
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // 选择语言
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.getAttribute('data-lang');
+                applyLanguage(lang);
+                langMenu.style.display = 'none';
+            });
+        });
+        
+        // 点击其他地方关闭语言菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-menu')) {
+                langMenu.style.display = 'none';
+            }
+        });
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查本地存储或系统偏好
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
             document.documentElement.setAttribute('data-theme', newTheme);
-            
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-            
             localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
-
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
+        
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
-
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function animateTimeline() {
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            const windowHeight = window.innerHeight;
-            
-            timelineItems.forEach(item => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < windowHeight - 100) {
-                    item.classList.add('visible');
-                }
-            });
-        }
-
+        });
+        
+        // 时间线动画效果
         document.addEventListener('DOMContentLoaded', function() {
-
-            setLanguage(currentLang);
+            const timelineItems = document.querySelectorAll('.timeline-item');
             
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-            
-
-            document.getElementById('langToggle').addEventListener('click', function() {
-                document.getElementById('langMenu').classList.toggle('active');
-            });
-            
-            document.querySelectorAll('.lang-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    setLanguage(lang);
+            function checkVisibility() {
+                timelineItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        item.classList.add('visible');
+                    }
                 });
-            });
+            }
             
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+            // 初始检查
+            checkVisibility();
             
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.lang-container')) {
-                    document.getElementById('langMenu').classList.remove('active');
-                }
-            });
-            
-            window.addEventListener('scroll', animateTimeline);
-            animateTimeline();
-            
-            document.querySelectorAll('.fade-in').forEach((element, index) => {
-                element.style.animationDelay = `${index * 0.2}s`;
-            });
+            // 滚动时检查
+            window.addEventListener('scroll', checkVisibility);
         });
     </script>
 </body>
