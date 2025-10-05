@@ -1017,7 +1017,7 @@
             }
         };
 
-        // 当前语言设置
+// 当前语言设置
         let currentLang = 'zh-CN';
 
         // 初始化语言
@@ -1059,28 +1059,55 @@
             // 保存语言设置
             localStorage.setItem('preferred_language', currentLang);
         }
+
         // 主题切换功能
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // 检查本地存储或系统偏好
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
             
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-        
-        function updateThemeIcon(theme) {
-            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            // 设置初始主题
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            }
+            
+            // 更新图标
+            updateThemeIcon();
+            
+            // 主题切换按钮事件
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon();
+            });
+            
+            // 监听系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                    updateThemeIcon();
+                }
+            });
         }
         
+        // 更新主题图标
+        function updateThemeIcon() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (currentTheme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
         // 移动端菜单功能
         function initMobileMenu() {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1098,13 +1125,29 @@
             });
         }
 
+        // 语言切换功能
+        function initLanguageSwitcher() {
+            const langDropdown = document.getElementById('langDropdown');
+            
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    if (translations[lang]) {
+                        currentLang = lang;
+                        applyLanguage();
+                    }
+                });
+            });
+        }
+
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
             initLanguage();
             initTheme();
             initMobileMenu();
             initLanguageSwitcher();
-        
+            
         // 设置当前页面激活状态
         document.querySelectorAll('.nav-links a').forEach(link => {
             if (link.href === window.location.href) {
