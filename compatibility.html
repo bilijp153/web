@@ -402,6 +402,7 @@
             border: 1px solid rgba(210, 153, 34, 0.3);
         }
         
+        
         /* 兼容性表格样式 */
         .compatibility-table {
             width: 100%;
@@ -531,7 +532,7 @@
         }
         
         /* 响应式设计*/
-@media (max-width: 768px) {
+ @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
@@ -619,64 +620,6 @@
             }
         }
          
-            /* 修复移动端时间线显示 */
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                justify-content: flex-start !important;
-                margin-left: 40px;
-                width: calc(100% - 40px);
-            }
-            
-            .timeline-item-content {
-                width: 100%;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-item-content::before,
-            .timeline-item:nth-child(even) .timeline-item-content::before {
-                left: -10px;
-                right: auto;
-                border-right: 10px solid var(--card-bg);
-                border-left: none;
-            }
-            
-            .timeline-dot {
-                left: 20px;
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .lang-menu {
-                right: -50px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .timeline-item-content {
-                padding: 20px;
-            }
-        }
-        
         /* 页面内容容器 */
         .page-content {
             min-height: calc(100vh - 200px);
