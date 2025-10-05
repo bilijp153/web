@@ -1335,7 +1335,7 @@ header {
             initLanguageSwitcher();
             
         // 时间线动画效果
-   const timelineItems = document.querySelectorAll('.timeline-item');
+const timelineItems = document.querySelectorAll('.timeline-item');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1347,6 +1347,7 @@ header {
             timelineItems.forEach(item => {
                 observer.observe(item);
             });
+
 
                         
             // 滚动时检查
