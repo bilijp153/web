@@ -1185,98 +1185,142 @@ header {
             }
         };
 
-        // 语言切换功能
-        const langToggle = document.getElementById('langToggle');
-        const langMenu = document.getElementById('langMenu');
-        const langOptions = document.querySelectorAll('.lang-option');
-        
-        // 检查本地存储或浏览器语言
-        const savedLang = localStorage.getItem('language') || navigator.language;
-        let currentLang = savedLang.startsWith('zh') ? (savedLang.includes('TW') || savedLang.includes('HK') ? 'zh-TW' : 'zh-CN') : 'en';
-        
+               // 当前语言设置
+        let currentLang = 'zh-CN';
+
+        // 初始化语言
+        function initLanguage() {
+            // 从本地存储获取语言设置
+            const savedLang = localStorage.getItem('preferred_language');
+            if (savedLang && translations[savedLang]) {
+                currentLang = savedLang;
+            } else {
+                // 根据浏览器语言自动选择
+                const browserLang = navigator.language || navigator.userLanguage;
+                if (browserLang.startsWith('zh')) {
+                    currentLang = browserLang.includes('TW') || browserLang.includes('HK') ? 'zh-TW' : 'zh-CN';
+                } else {
+                    currentLang = 'en';
+                }
+            }
+            
+            applyLanguage();
+        }
+
         // 应用语言
-        function applyLanguage(lang) {
-            document.documentElement.lang = lang;
+        function applyLanguage() {
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
-                if (translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.value = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
                 }
             });
             
-            // 更新语言选项激活状态
-            langOptions.forEach(option => {
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                } else {
-                    option.classList.remove('active');
+            // 更新语言下拉菜单
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-lang') === currentLang) {
+                    link.classList.add('active');
                 }
             });
             
-            // 保存语言选择
-            localStorage.setItem('language', lang);
-            currentLang = lang;
+            // 保存语言设置
+            localStorage.setItem('preferred_language', currentLang);
         }
-        
-        // 初始化语言
-        applyLanguage(currentLang);
-        
-        // 语言切换菜单
-        langToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langMenu.classList.toggle('active');
-        });
-        
-        // 选择语言
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                applyLanguage(lang);
-                langMenu.classList.remove('active');
-            });
-        });
-        
-        // 点击其他地方关闭语言菜单
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.lang-container')) {
-                langMenu.classList.remove('active');
-            }
-        });
-        
+
         // 主题切换功能
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // 检查本地存储或系统偏好
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
             
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-        
-        function updateThemeIcon(theme) {
-            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            // 设置初始主题
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            }
+            
+            // 更新图标
+            updateThemeIcon();
+            
+            // 主题切换按钮事件
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon();
+            });
+            
+            // 监听系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                    updateThemeIcon();
+                }
+            });
         }
         
-        // 移动端菜单切换
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        // 更新主题图标
+        function updateThemeIcon() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (currentTheme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // 移动端菜单功能
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // 点击其他地方关闭菜单
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
+
+        // 语言切换功能
+        function initLanguageSwitcher() {
+            const langDropdown = document.getElementById('langDropdown');
+            
+            document.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    if (translations[lang]) {
+                        currentLang = lang;
+                        applyLanguage();
+                    }
+                });
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguage();
+            initTheme();
+            initMobileMenu();
+            initLanguageSwitcher();
+            
+            // 添加页面加载动画
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
         });
-        
         // FAQ展开功能
         const faqQuestions = document.querySelectorAll('.faq-question');
         
