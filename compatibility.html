@@ -1220,7 +1220,7 @@
         };
 
 
-// 当前语言设置
+        // 当前语言设置
         let currentLang = 'zh-CN';
 
         // 初始化语言
@@ -1312,29 +1312,21 @@
         }
 
         // 移动端菜单功能
-    function initMobileMenu() {
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // 点击其他地方关闭菜单
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-    }
-
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', () => {
-        initMobileMenu();
-        initMobileMenu();
-            initTheme();
-            initLanguageSwitcher();
-    });
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // 点击其他地方关闭菜单
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
 
         // 语言切换功能
         function initLanguageSwitcher() {
@@ -1359,6 +1351,12 @@
             initMobileMenu();
             initLanguageSwitcher();
             
+            // 添加页面加载动画
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+        
         // 时间线动画效果
 const timelineItems = document.querySelectorAll('.timeline-item');
             const observer = new IntersectionObserver((entries) => {
