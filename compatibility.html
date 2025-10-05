@@ -524,8 +524,8 @@
             margin-top: 20px;
         }
         
-        /* 响应式设计 - 重点修复时间线在移动端的显示 */
-        @media (max-width: 768px) {
+        /* 响应式设计*/
+             @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
@@ -559,6 +559,59 @@
             .page-header p {
                 font-size: 1.1rem;
             }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                justify-content: flex-start !important;
+                margin-left: 40px;
+                width: calc(100% - 40px);
+            }
+            
+            .timeline-item-content {
+                width: 100%;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-item-content::before,
+            .timeline-item:nth-child(even) .timeline-item-content::before {
+                left: -10px;
+                right: auto;
+                border-right: 10px solid var(--card-bg);
+                border-left: none;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .timeline-item-content {
+                padding: 20px;
+            }
+        }
             
             /* 修复移动端时间线显示 */
             .timeline::before {
