@@ -1393,20 +1393,25 @@
             initLanguageSwitcher();
             
         // 时间线动画效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            
-            function checkVisibility() {
-                timelineItems.forEach(item => {
-                    const rect = item.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 100) {
-                        item.classList.add('visible');
+   const timelineItems = document.querySelectorAll('.timeline-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
                     }
                 });
-            }
+            }, { threshold: 0.1 });
+            
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+
                         
             // 滚动时检查
-            window.addEventListener('scroll', checkVisibility);
+             document.addEventListener('click', function(e) {
+                if (!e.target.closest('.lang-menu')) {
+                    langDropdown.style.display = 'none';
+
         });
     </script>
 </body>
