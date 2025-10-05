@@ -71,7 +71,7 @@
         }
         
         /* 导航栏样式 */
-        header {
+header {
             background-color: var(--header-bg);
             backdrop-filter: blur(20px);
             position: sticky;
@@ -114,30 +114,13 @@
             font-size: 16px;
             font-weight: 500;
             transition: var(--transition);
-            padding: 8px 16px;
+            padding: 5px 10px;
             border-radius: 8px;
-            position: relative;
         }
         
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
             background: rgba(41, 151, 255, 0.1);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background: var(--gradient-primary);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
-        
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 80%;
         }
         
         .theme-toggle, .lang-toggle {
