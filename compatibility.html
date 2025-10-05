@@ -1351,10 +1351,11 @@ const timelineItems = document.querySelectorAll('.timeline-item');
 
                         
             // 滚动时检查
-             document.addEventListener('click', function(e) {
+document.addEventListener('click', function(e) {
                 if (!e.target.closest('.lang-menu')) {
                     langDropdown.style.display = 'none';
-
+                }
+            });
         });
     </script>
 </body>
