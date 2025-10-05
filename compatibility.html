@@ -521,7 +521,7 @@
             margin-top: 20px;
         }
         
-        @media (max-width: 768px) {
+            @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
@@ -535,8 +535,8 @@
                 gap: 15px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
                 border-top: 1px solid var(--border-color);
-                z-index: 100;
-                max-height: 80vh;
+                z-index: 1000;
+                max-height: calc(100vh - 70px);
                 overflow-y: auto;
             }
             
@@ -552,42 +552,21 @@
                 font-size: 2.5rem;
             }
             
-            .page-header p {
-                font-size: 1.1rem;
+            .hardware-table {
+                display: block;
+                overflow-x: auto;
             }
             
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                justify-content: flex-start !important;
-                margin-left: 40px;
-                width: calc(100% - 40px);
-            }
-            
-            .timeline-item-content {
-                width: 100%;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-item-content::before,
-            .timeline-item:nth-child(even) .timeline-item-content::before {
-                left: -10px;
-                right: auto;
-                border-right: 10px solid var(--card-bg);
-                border-left: none;
-            }
-            
-            .timeline-dot {
-                left: 20px;
+            .compatibility-summary {
+                grid-template-columns: 1fr;
             }
             
             .feature-grid {
                 grid-template-columns: 1fr;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .lang-menu {
+                right: -50px;
             }
         }
         
@@ -600,16 +579,15 @@
                 font-size: 1.8rem;
             }
             
-            .card {
-                padding: 20px;
+            .nav-links {
+                padding: 15px;
             }
             
-            .timeline-item-content {
-                padding: 20px;
+            .nav-links a {
+                padding: 10px;
+                font-size: 16px;
             }
-        }
-        
-        .page-content {
+        }page-content {
             min-height: calc(100vh - 200px);
         }
         
