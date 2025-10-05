@@ -1155,107 +1155,102 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const langToggle = document.getElementById('langToggle');
-            const langDropdown = document.getElementById('langDropdown');
-            const themeToggle = document.getElementById('themeToggle');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
+        let currentLang = 'zh-CN';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
             
-            let currentLang = 'zh-CN';
-            
-            langToggle.addEventListener('click', function() {
-                langDropdown.style.display = langDropdown.style.display === 'block' ? 'none' : 'block';
+
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.type === 'text') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
             });
             
-            document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    currentLang = this.getAttribute('data-lang');
-                    updateLanguage(currentLang);
-                    langDropdown.style.display = 'none';
-                });
+            document.querySelectorAll('.lang-option').forEach(option => {
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
             });
             
-        function initTheme() {
-            const themeToggle = document.getElementById('themeToggle');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
+
+            document.getElementById('langMenu').classList.remove('active');
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
             
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else {
-                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-            }
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
             
-            updateThemeIcon();
+            localStorage.setItem('theme', newTheme);
+        }
+
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
             
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon();
-            });
+
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const windowHeight = window.innerHeight;
             
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!localStorage.getItem('theme')) {
-                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                    updateThemeIcon();
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
                 }
             });
         }
-        
-        function updateThemeIcon() {
-            const themeToggle = document.getElementById('themeToggle');
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const icon = themeToggle.querySelector('i');
-            
-            if (currentTheme === 'dark') {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
-        }
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-            });
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            setLanguage(currentLang);
             
             const savedTheme = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
             
-            function updateLanguage(lang) {
-                document.querySelectorAll('[data-lang-key]').forEach(element => {
-                    const key = element.getAttribute('data-lang-key');
-                    if (translations[lang] && translations[lang][key]) {
-                        element.textContent = translations[lang][key];
-                    }
-                });
-                document.documentElement.setAttribute('lang', lang);
-            }
-            
-            updateLanguage(currentLang);
-            
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            timelineItems.forEach(item => {
-                observer.observe(item);
+
+            document.getElementById('langToggle').addEventListener('click', function() {
+                document.getElementById('langMenu').classList.toggle('active');
             });
             
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.lang-menu')) {
-                    langDropdown.style.display = 'none';
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+            
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+            
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.lang-container')) {
+                    document.getElementById('langMenu').classList.remove('active');
                 }
+            });
+            
+            window.addEventListener('scroll', animateTimeline);
+            animateTimeline();
+            
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
             });
         });
     </script>
