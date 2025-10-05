@@ -1261,6 +1261,13 @@
                 }
             });
         }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initLanguage();
+            initTheme();
+            initMobileMenu();
+            initLanguageSwitcher();
         
         // FAQ展开功能
         const faqQuestions = document.querySelectorAll('.faq-question');
