@@ -1155,42 +1155,28 @@
             }
         };
 
-        let currentLang = 'zh-CN';
-
-        function initLanguage() {
-            const savedLang = localStorage.getItem('preferred_language');
-            if (savedLang && translations[savedLang]) {
-                currentLang = savedLang;
-            } else {
-                const browserLang = navigator.language || navigator.userLanguage;
-                if (browserLang.startsWith('zh')) {
-                    currentLang = browserLang.includes('TW') || browserLang.includes('HK') ? 'zh-TW' : 'zh-CN';
-                } else {
-                    currentLang = 'en';
-                }
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const langToggle = document.getElementById('langToggle');
+            const langDropdown = document.getElementById('langDropdown');
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
             
-            applyLanguage();
-        }
-
-        function applyLanguage() {
-            document.querySelectorAll('[data-lang-key]').forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                if (translations[currentLang] && translations[currentLang][key]) {
-                    element.textContent = translations[currentLang][key];
-                }
+            let currentLang = 'zh-CN';
+            
+            langToggle.addEventListener('click', function() {
+                langDropdown.style.display = langDropdown.style.display === 'block' ? 'none' : 'block';
             });
             
             document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-lang') === currentLang) {
-                    link.classList.add('active');
-                }
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentLang = this.getAttribute('data-lang');
+                    updateLanguage(currentLang);
+                    langDropdown.style.display = 'none';
+                });
             });
             
-            localStorage.setItem('preferred_language', currentLang);
-        }
-
         function initTheme() {
             const themeToggle = document.getElementById('themeToggle');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1232,38 +1218,28 @@
                 icon.className = 'fas fa-moon';
             }
         }
-
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
             
-            mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
             });
             
-            document.addEventListener('click', (e) => {
-                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        }
-
-        function initLanguageSwitcher() {
-            const langDropdown = document.getElementById('langDropdown');
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             
-            document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lang = link.getAttribute('data-lang');
-                    if (translations[lang]) {
-                        currentLang = lang;
-                        applyLanguage();
+            function updateLanguage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
                     }
                 });
-            });
-        }
- 
-        const timelineItems = document.querySelectorAll('.timeline-item');
+                document.documentElement.setAttribute('lang', lang);
+            }
+            
+            updateLanguage(currentLang);
+            
+            const timelineItems = document.querySelectorAll('.timeline-item');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1275,15 +1251,11 @@
             timelineItems.forEach(item => {
                 observer.observe(item);
             });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            initLanguage();
-            initTheme();
-            initMobileMenu();
-            initLanguageSwitcher();
             
-            document.querySelectorAll('.fade-in').forEach((element, index) => {
-                element.style.animationDelay = `${index * 0.1}s`;
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.lang-menu')) {
+                    langDropdown.style.display = 'none';
+                }
             });
         });
     </script>
