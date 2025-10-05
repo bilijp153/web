@@ -70,8 +70,8 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        /* 导航栏样式 */
-             header {
+       /* 导航栏样式 */
+        header {
             background-color: var(--header-bg);
             backdrop-filter: blur(20px);
             position: sticky;
@@ -94,10 +94,15 @@
             gap: 15px;
         }
         
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
         .logo h1 {
             font-size: 22px;
             font-weight: 600;
-            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -114,13 +119,30 @@
             font-size: 16px;
             font-weight: 500;
             transition: var(--transition);
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 8px;
+            position: relative;
         }
         
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
             background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 80%;
         }
         
         .theme-toggle, .lang-toggle {
@@ -132,6 +154,7 @@
             padding: 8px;
             border-radius: 50%;
             transition: var(--transition);
+            position: relative;
         }
         
         .theme-toggle:hover, .lang-toggle:hover {
@@ -140,39 +163,42 @@
         }
         
         .lang-menu {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .lang-dropdown {
-            display: none;
             position: absolute;
-            right: 0;
             top: 100%;
-            background-color: var(--card-bg);
-            min-width: 120px;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 10px;
             box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            z-index: 1;
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 120px;
+            z-index: 101;
             border: 1px solid var(--border-color);
         }
         
-        .lang-dropdown a {
-            color: var(--text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
+        .lang-menu.active {
+            display: flex;
         }
         
-        .lang-dropdown a:hover {
-            background-color: rgba(41, 151, 255, 0.1);
+        .lang-option {
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-option:hover {
+            background: rgba(41, 151, 255, 0.1);
+        }
+        
+        .lang-option.active {
+            background: rgba(41, 151, 255, 0.2);
             color: var(--primary);
-        }
-        
-        .lang-menu:hover .lang-dropdown {
-            display: block;
         }
         
         .mobile-menu-btn {
@@ -184,6 +210,46 @@
             cursor: pointer;
         }
         
+        /* 移动端菜单样式修复 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--header-bg);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                z-index: 99;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .lang-menu {
+                right: 0;
+                left: auto;
+            }
+            
+            /* 防止页面滚动 */
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
+        
+
             /* 页面标题样式 */
         .page-header {
             text-align: center;
