@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="advanced">Advanced - Hackintosh FL8700JP</title>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <div class="container navbar">
+      <div class="logo" data-i18n="title">Hackintosh FL8700JP</div>
+      <div>
+        <span id="lang-switcher"></span>
+        <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 data-i18n="advanced">高级配置</h1>
+    <div class="card">
+      <h3>🔋 电池状态显示</h3>
+      <p>已通过 SMCBatteryManager 正确注入，电池百分比和充电状态正常显示。</p>
+
+      <h3>🌡️ CPU 温度与风扇</h3>
+      <p>使用 VirtualSMC + ACPI 补丁实现温度读取。风扇由 BIOS 控制，macOS 无法调节转速（正常现象）。</p>
+
+      <h3>💤 睡眠与唤醒</h3>
+      <p>支持睡眠（S3），但部分用户报告唤醒后屏幕闪烁。建议使用“显示器睡眠”代替整机睡眠。</p>
+
+      <h3>🔒 安全启动</h3>
+      <p>需在 BIOS 中：<br>
+        - 关闭 Secure Boot<br>
+        - 启用 AHCI（非 RAID）<br>
+        - 禁用 Fast Boot<br>
+        - 设置 OS Type 为 "Other OS"</p>
+
+      <h3>🔄 更新建议</h3>
+      <p>每次 macOS 大版本更新前，请：<br>
+        - 备份 EFI 分区<br>
+        - 暂勿升级 OpenCore，除非有新补丁<br>
+        - 更新后若无法启动，可临时从 U 盘引导修复</p>
+    </div>
+  </main>
+
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>
