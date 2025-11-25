@@ -1,473 +1,295 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
-    <meta name="description" content="详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况">
-    <style>
-        /* ========== 全局重置与变量 ========== */
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --card-bg: #ffffff;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-            --header-bg: #ffffff;
-            --footer-bg: #f1f5f9;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --text-primary: #f1f5f9;
-                --text-secondary: #94a9c9;
-                --border-color: #334155;
-                --card-bg: #1e293b;
-                --accent-color: #60a5fa;
-                --accent-hover: #3b82f6;
-                --success-color: #34d399;
-                --warning-color: #fbbf24;
-                --error-color: #f87171;
-                --header-bg: #0f172a;
-                --footer-bg: #1a2234;
-                --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-                --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* ========== 头部导航 ========== */
-        header {
-            background-color: var(--header-bg);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--border-color);
-        }
-
-        /* ========== 主要内容区 ========== */
-        main {
-            padding: 2rem 0;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            color: var(--text-secondary);
-        }
-
-        .summary-cards {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .summary-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            min-width: 150px;
-        }
-
-        .summary-card.success { border-top: 4px solid var(--success-color); }
-        .summary-card.warning { border-top: 4px solid var(--warning-color); }
-        .summary-card.error { border-top: 4px solid var(--error-color); }
-
-        .summary-card h3 {
-            font-size: 1.25rem;
-            margin: 0.5rem 0;
-        }
-
-        .summary-card .count {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--text-primary);
-        }
-
-        .hardware-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .hardware-table th,
-        .hardware-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hardware-table th {
-            background-color: var(--bg-secondary);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .hardware-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .status {
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .status.success {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
-        }
-
-        .status.warning {
-            background-color: rgba(245, 158, 11, 0.1);
-            color: var(--warning-color);
-        }
-
-        .status.error {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--error-color);
-        }
-
-        .note {
-            background-color: var(--bg-secondary);
-            border-left: 4px solid var(--warning-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-            color: var(--text-secondary);
-        }
-
-        /* ========== 页脚 ========== */
-        footer {
-            background-color: var(--footer-bg);
-            padding: 2rem 0;
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .license {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* ========== 响应式设计 ========== */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .summary-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .summary-card {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .hardware-table {
-                font-size: 0.9rem;
-            }
-
-            .hardware-table th,
-            .hardware-table td {
-                padding: 0.75rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
+  <meta name="description" content="详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况">
+  <style>
+    :root {
+      --bg: #fff;
+      --text: #111;
+      --card-bg: #fff;
+      --link: #0066cc;
+      --border: #ddd;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --accent: #0066cc;
+      --header-bg: #f8f9fa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --text: #eee;
+        --card-bg: #1e1e1e;
+        --link: #66b3ff;
+        --border: #444;
+        --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        --header-bg: #1a1a1a;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    header {
+      background: var(--header-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover, nav a.active {
+      text-decoration: underline;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    main { padding: 2rem 0; }
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .page-header h1 { font-size: 2.25rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: rgba(0,0,0,0.05);
+      font-weight: 600;
+    }
+    @media (prefers-color-scheme: dark) {
+      th { background: rgba(255,255,255,0.05); }
+    }
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .status.success {
+      background: #e6f4ea;
+      color: #137333;
+    }
+    .status.warning {
+      background: #fff4e6;
+      color: #b75e0e;
+    }
+    .status.error {
+      background: #fce8e6;
+      color: #c5221f;
+    }
+    @media (prefers-color-scheme: dark) {
+      .status.success { background: #1b4332; color: #66b3a0; }
+      .status.warning { background: #43320f; color: #f4b350; }
+      .status.error { background: #4d1f1c; color: #e57373; }
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      color: var(--text-secondary, inherit);
+      font-size: 0.9rem;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 2rem; }
+      th, td { padding: 0.75rem; }
+      nav ul { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
-                <ul class="nav-links">
-                    <li><a href="hardware.html" class="active">硬件支持</a></li>
-                    <li><a href="installation.html">安装指南</a></li>
-                    <li><a href="faq.html">常见问题</a></li>
-                    <li><a href="compatibility.html">系统兼容</a></li>
-                    <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
-                </ul>
-                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
+        <div class="header-right">
+          <ul>
+            <li><a href="hardware.html" class="active">硬件支持</a></li>
+            <li><a href="installation.html">安装指南</a></li>
+            <li><a href="faq.html">常见问题</a></li>
+            <li><a href="compatibility.html">系统兼容</a></li>
+            <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
+          </ul>
+          <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
         </div>
-    </header>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <div class="page-header">
-            <h1>硬件支持</h1>
-            <p>详细了解您的 ASUS FL8700JP 笔记本电脑与 macOS 的硬件兼容性情况</p>
-        </div>
+  <main class="container">
+    <div class="page-header">
+      <h1>硬件支持</h1>
+      <p>详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况</p>
+    </div>
 
-        <div class="summary-cards">
-            <div class="summary-card success">
-                <div class="count">95%</div>
-                <h3>兼容硬件</h3>
-            </div>
-            <div class="summary-card warning">
-                <div class="count">3</div>
-                <h3>部分支持</h3>
-            </div>
-            <div class="summary-card error">
-                <div class="count">2</div>
-                <h3>不支持</h3>
-            </div>
-        </div>
+    <table>
+      <thead>
+        <tr>
+          <th>硬件组件</th>
+          <th>型号/规格</th>
+          <th>状态</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>处理器</td>
+          <td>Intel Core i7-10510U</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>原生性能，睿频正常</td>
+        </tr>
+        <tr>
+          <td>显卡</td>
+          <td>Intel Iris Plus G7</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>支持硬件加速和视频编解码</td>
+        </tr>
+        <tr>
+          <td>无线网卡</td>
+          <td>Intel Wi-Fi 6 AX201</td>
+          <td><span class="status warning">需替换</span></td>
+          <td>需更换为 Broadcom 无线网卡</td>
+        </tr>
+        <tr>
+          <td>蓝牙</td>
+          <td>Intel Bluetooth</td>
+          <td><span class="status warning">需替换</span></td>
+          <td>随无线网卡一同替换</td>
+        </tr>
+        <tr>
+          <td>声卡</td>
+          <td>Realtek ALC294</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>扬声器、耳机、麦克风均正常</td>
+        </tr>
+        <tr>
+          <td>触控板</td>
+          <td>ELAN 或 Synaptics</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>支持所有多点触控手势</td>
+        </tr>
+        <tr>
+          <td>键盘</td>
+          <td>标准笔记本键盘</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>所有按键包括功能键均正常</td>
+        </tr>
+        <tr>
+          <td>摄像头</td>
+          <td>720p HD 摄像头</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>FaceTime 和第三方应用均可使用</td>
+        </tr>
+        <tr>
+          <td>亮度调节</td>
+          <td>显示器背光</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>支持键盘快捷键和系统设置调节</td>
+        </tr>
+        <tr>
+          <td>音量调节</td>
+          <td>扬声器控制</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>支持键盘快捷键调节</td>
+        </tr>
+        <tr>
+          <td>睡眠/唤醒</td>
+          <td>电源管理</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>盖上盖子自动睡眠，唤醒正常</td>
+        </tr>
+        <tr>
+          <td>USB 端口</td>
+          <td>USB 3.2 Gen1 Type-A</td>
+          <td><span class="status success">完全支持</span></td>
+          <td>所有端口均可正常识别设备</td>
+        </tr>
+        <tr>
+          <td>Thunderbolt</td>
+          <td>USB-C 端口</td>
+          <td><span class="status error">不支持</span></td>
+          <td>仅支持 USB 数据传输</td>
+        </tr>
+        <tr>
+          <td>指纹识别</td>
+          <td>Windows Hello 指纹</td>
+          <td><span class="status error">不支持</span></td>
+          <td>macOS 无原生驱动支持</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
 
-        <table class="hardware-table">
-            <thead>
-                <tr>
-                    <th>硬件组件</th>
-                    <th>型号/规格</th>
-                    <th>状态</th>
-                    <th>备注</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>处理器</td>
-                    <td>Intel Core i7-10510U</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>原生性能，睿频正常</td>
-                </tr>
-                <tr>
-                    <td>显卡</td>
-                    <td>Intel Iris Plus G7</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>支持硬件加速和视频编解码</td>
-                </tr>
-                <tr>
-                    <td>无线网卡</td>
-                    <td>Intel Wi-Fi 6 AX201</td>
-                    <td><span class="status warning">需替换</span></td>
-                    <td>需更换为 Broadcom 无线网卡</td>
-                </tr>
-                <tr>
-                    <td>蓝牙</td>
-                    <td>Intel Bluetooth</td>
-                    <td><span class="status warning">需替换</span></td>
-                    <td>随无线网卡一同替换</td>
-                </tr>
-                <tr>
-                    <td>声卡</td>
-                    <td>Realtek ALC294</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>扬声器、耳机、麦克风均正常</td>
-                </tr>
-                <tr>
-                    <td>触控板</td>
-                    <td>ELAN 或 Synaptics</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>支持所有多点触控手势</td>
-                </tr>
-                <tr>
-                    <td>键盘</td>
-                    <td>标准笔记本键盘</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>所有按键包括功能键均正常</td>
-                </tr>
-                <tr>
-                    <td>摄像头</td>
-                    <td>720p HD 摄像头</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>FaceTime 和第三方应用均可使用</td>
-                </tr>
-                <tr>
-                    <td>亮度调节</td>
-                    <td>显示器背光</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>支持键盘快捷键和系统设置调节</td>
-                </tr>
-                <tr>
-                    <td>音量调节</td>
-                    <td>扬声器控制</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>支持键盘快捷键调节</td>
-                </tr>
-                <tr>
-                    <td>睡眠/唤醒</td>
-                    <td>电源管理</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>盖上盖子自动睡眠，唤醒正常</td>
-                </tr>
-                <tr>
-                    <td>USB 端口</td>
-                    <td>USB 3.2 Gen1 Type-A</td>
-                    <td><span class="status success">完全支持</span></td>
-                    <td>所有端口均可正常识别设备</td>
-                </tr>
-                <tr>
-                    <td>Thunderbolt</td>
-                    <td>USB-C 端口</td>
-                    <td><span class="status error">不支持</span></td>
-                    <td>仅支持 USB 数据传输</td>
-                </tr>
-                <tr>
-                    <td>指纹识别</td>
-                    <td>Windows Hello 指纹</td>
-                    <td><span class="status error">不支持</span></td>
-                    <td>macOS 无原生驱动支持</td>
-                </tr>
-            </tbody>
-        </table>
+  <footer>
+    <div class="container">
+      <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+      <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+    </div>
+  </footer>
 
-        <div class="note">
-            <p><strong>注意：</strong>无线网卡和蓝牙模块需要物理更换为兼容的 Broadcom 型号（如 BCM94360CS2）才能在 macOS 中正常使用。其他硬件均已通过 OpenCore 配置实现完美支持。</p>
-        </div>
-    </main>
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-    <footer>
-        <div class="container">
-            <div class="license">
-                <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-                <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-            </div>
-        </div>
-    </footer>
+    function setTheme(theme) {
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
 
-    <script>
-        // 主题切换逻辑
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(currentTheme);
 
-        function updateThemeIcon() {
-            themeToggle.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
-        }
+    themeToggle.addEventListener('click', () => {
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
 
-        function setTheme(theme) {
-            document.documentElement.classList.toggle('dark', theme === 'dark');
-            localStorage.setItem('theme', theme);
-            updateThemeIcon();
-        }
-
-        // 初始化主题
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-        updateThemeIcon();
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-
-        // 监听系统主题变化
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                setTheme(e.matches ? 'dark' : 'light');
-            }
-        });
-    </script>
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  </script>
 </body>
 </html>
