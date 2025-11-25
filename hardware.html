@@ -360,7 +360,7 @@
   </footer>
 
   <script>
-    // ========== 功能脚本（仅修复逻辑，不影响样式） ==========
+    // ========== 功能脚本（修复移动端菜单 & 暗色模式兼容） ==========
     const translations = {
       'zh-CN': {
         home: '主页',
@@ -560,38 +560,40 @@
       });
     }
 
-    function toggleTheme() {
-      const isDark = document.body.hasAttribute('data-theme') && document.body.getAttribute('data-theme') === 'dark';
+    function applyTheme(isDark) {
       if (isDark) {
-        document.body.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.removeItem('preferredTheme');
-      } else {
         document.body.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('preferredTheme', 'dark');
-      }
 
-      // Apply dark mode styles without CSS variables (to preserve original style)
-      if (document.body.hasAttribute('data-theme')) {
         document.body.style.backgroundColor = '#111827';
         document.body.style.color = '#f9fafb';
-        document.querySelectorAll('header, footer, .compatibility-item, table, th, .page-header h1, .nav-link, .logo, .social-links a, select, button')
-          .forEach(el => {
-            if (el.classList.contains('status-working')) return;
-            if (el.classList.contains('status-partial')) return;
-            if (el.classList.contains('status-not-working')) return;
+
+        const safeSelectors = [
+          'header', 'footer', '.compatibility-item', 'table', 'th',
+          '.page-header h1', '.logo', '.social-links a',
+          'select.language-selector', 'button.theme-toggle',
+          'main', 'main h3', 'main p'
+        ].join(', ');
+
+        document.querySelectorAll(safeSelectors).forEach(el => {
+          if (!el.classList.contains('status-working') &&
+              !el.classList.contains('status-partial') &&
+              !el.classList.contains('status-not-working')) {
             el.style.color = '#f9fafb';
-          });
+          }
+        });
+
         document.querySelectorAll('.compatibility-item, table, main div[style*="margin-top"]')
           .forEach(el => el.style.backgroundColor = '#1f2937');
-        document.querySelectorAll('header, footer')
+        document.querySelectorAll('header, footer, th')
           .forEach(el => el.style.backgroundColor = '#1f2937');
-        document.querySelectorAll('th')
-          .forEach(el => el.style.backgroundColor = '#1f2937');
-        document.querySelectorAll('.nav-link:not(.active):hover')
-          .forEach(el => el.style.color = '#93c5fd');
+
       } else {
+        document.body.removeAttribute('data-theme');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.removeItem('preferredTheme');
+
         document.body.style.backgroundColor = '';
         document.body.style.color = '';
         document.querySelectorAll('*').forEach(el => {
@@ -601,25 +603,44 @@
       }
     }
 
+    function toggleTheme() {
+      const isDark = document.body.hasAttribute('data-theme');
+      applyTheme(!isDark);
+    }
+
+    function closeMobileMenu() {
+      navMenu.classList.remove('active');
+    }
+
     function toggleMobileMenu() {
       navMenu.classList.toggle('active');
     }
 
+    // 自动收起菜单：点击外部 或 滚动页面
+    document.addEventListener('click', (e) => {
+      if (!navMenu.classList.contains('active')) return;
+      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
+      if (!isClickInside) closeMobileMenu();
+    });
+
+    window.addEventListener('scroll', () => {
+      if (navMenu.classList.contains('active')) closeMobileMenu();
+    });
+
+    // 导航链接点击后关闭菜单
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // 事件绑定
     languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
     themeToggle.addEventListener('click', toggleTheme);
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => navMenu.classList.remove('active'));
-    });
-
-    // Restore theme on load
+    // 初始化
     if (localStorage.getItem('preferredTheme') === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      toggleTheme(); // trigger style apply
+      applyTheme(true);
     }
-
     document.addEventListener('DOMContentLoaded', initLanguage);
   </script>
 </body>
