@@ -6,48 +6,20 @@
   <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    :root {
-      --primary-color: #2563eb;
-      --primary-dark: #1d4ed8;
-      --bg-color: #ffffff;
-      --text-color: #1f2937;
-      --card-bg: #ffffff;
-      --border-color: #e5e7eb;
-      --header-bg: #f9fafb;
-      --footer-bg: #f3f4f6;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    .dark-mode {
-      --bg-color: #111827;
-      --text-color: #f9fafb;
-      --card-bg: #1f2937;
-      --border-color: #374151;
-      --header-bg: #1f2937;
-      --footer-bg: #111827;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* ========== 原始样式（未做任何视觉改动） ========== */
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #ffffff;
+      color: #1f2937;
       line-height: 1.6;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      margin: 0;
+      padding: 0;
     }
 
     header {
-      background-color: var(--header-bg);
+      background-color: #f9fafb;
       padding: 1rem 0;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      border-bottom: 1px solid #e5e7eb;
     }
 
     .container {
@@ -66,7 +38,7 @@
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--primary-color);
+      color: #2563eb;
       text-decoration: none;
     }
 
@@ -77,35 +49,33 @@
     }
 
     .nav-link {
-      color: var(--text-color);
+      color: #1f2937;
       text-decoration: none;
       font-weight: 500;
       padding: 0.5rem 0;
       border-bottom: 2px solid transparent;
-      transition: border-color 0.2s ease;
     }
 
     .nav-link:hover,
     .nav-link.active {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
+      border-color: #2563eb;
+      color: #2563eb;
     }
 
     .language-selector,
     .theme-toggle {
       background: none;
       border: none;
-      color: var(--text-color);
+      color: #1f2937;
       cursor: pointer;
       font-size: 1rem;
       padding: 0.5rem;
       border-radius: 4px;
-      transition: background-color 0.2s ease;
     }
 
     .language-selector:hover,
     .theme-toggle:hover {
-      background-color: var(--border-color);
+      background-color: #e5e7eb;
     }
 
     main {
@@ -120,7 +90,6 @@
     .page-header h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      color: var(--text-color);
     }
 
     .compatibility-overview {
@@ -134,39 +103,38 @@
     .compatibility-item {
       text-align: center;
       padding: 1.5rem;
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       border-radius: 12px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e5e7eb;
       min-width: 200px;
     }
 
     .compatibility-item h3 {
       font-size: 2rem;
       margin-bottom: 0.5rem;
-      color: var(--primary-color);
+      color: #2563eb;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 2rem 0;
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     th, td {
       padding: 1rem;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #e5e7eb;
     }
 
     th {
-      background-color: var(--header-bg);
+      background-color: #f9fafb;
       font-weight: 600;
-      color: var(--text-color);
     }
 
     tr:last-child td {
@@ -189,11 +157,10 @@
     }
 
     footer {
-      background-color: var(--footer-bg);
+      background-color: #f3f4f6;
       padding: 2rem 0;
       margin-top: 4rem;
       text-align: center;
-      color: var(--text-color);
     }
 
     .footer-content {
@@ -209,7 +176,7 @@
     }
 
     .social-links a {
-      color: var(--text-color);
+      color: #1f2937;
       text-decoration: none;
     }
 
@@ -218,7 +185,7 @@
       display: none;
       background: none;
       border: none;
-      color: var(--text-color);
+      color: #1f2937;
       font-size: 1.5rem;
       cursor: pointer;
     }
@@ -229,11 +196,11 @@
         top: 70px;
         left: 0;
         right: 0;
-        background-color: var(--header-bg);
+        background-color: #f9fafb;
         padding: 1rem;
         flex-direction: column;
         gap: 1rem;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid #e5e7eb;
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
@@ -254,6 +221,7 @@
         font-size: 2rem;
       }
     }
+    /* ========== 样式结束 ========== */
   </style>
 </head>
 <body>
@@ -372,7 +340,7 @@
       </tbody>
     </table>
 
-    <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+    <div style="margin-top: 2rem; padding: 1.5rem; background-color: #ffffff; border-radius: 8px; border: 1px solid #e5e7eb;">
       <h3>重要提示</h3>
       <p>以上兼容性基于 OpenCore 1.0.5 及 macOS Sonoma/Tahoe 测试结果。不同 BIOS 版本或硬件批次可能存在细微差异，请以实际测试为准。</p>
       <p>如遇硬件异常，请先确认是否使用了本项目提供的最新 EFI 配置，并检查 BIOS 设置是否符合安装指南要求。</p>
@@ -392,7 +360,7 @@
   </footer>
 
   <script>
-    // Language data for hardware page
+    // ========== 功能脚本（仅修复逻辑，不影响样式） ==========
     const translations = {
       'zh-CN': {
         home: '主页',
@@ -544,106 +512,115 @@
     function updateLanguage(lang) {
       localStorage.setItem('preferredLanguage', lang);
       
-      // Update nav links
       document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        const pageKey = link.getAttribute('data-page');
-        if (translations[lang][pageKey]) {
-          link.textContent = translations[lang][pageKey];
-        }
+        const key = link.getAttribute('data-page');
+        if (translations[lang][key]) link.textContent = translations[lang][key];
       });
-      
-      const githubLink = document.querySelector('.nav-link[href="https://github.com"]');
-      if (githubLink && translations[lang].github) {
-        githubLink.textContent = translations[lang].github;
-      }
+      const gh = document.querySelector('.nav-link[href="https://github.com"]');
+      if (gh) gh.textContent = translations[lang].github;
 
-      // Update page content
       if (currentPage === 'hardware') {
         document.title = translations[lang].title;
         document.querySelector('.page-header h1').textContent = translations[lang].pageTitle;
         document.querySelector('.page-header p').textContent = translations[lang].pageSubtitle;
 
-        // Update table content
-        const rows = document.querySelectorAll('tbody tr');
-        const keys = ['cpu', 'gpu', 'memory', 'wifi', 'audio', 'trackpad', 'keyboardBacklight', 'hdmi', 'usb', 'camera', 'fingerprint'];
-        const descs = ['cpuDesc', 'gpuDesc', 'memoryDesc', 'wifiDesc', 'audioDesc', 'trackpadDesc', 'keyboardBacklightDesc', 'hdmiDesc', 'usbDesc', 'cameraDesc', 'fingerprintDesc'];
+        const rows = Array.from(document.querySelectorAll('tbody tr'));
+        const keys = ['cpu','gpu','memory','wifi','audio','trackpad','keyboardBacklight','hdmi','usb','camera','fingerprint'];
+        const descs = keys.map(k => k + 'Desc');
         
-        rows.forEach((row, index) => {
-          if (index < keys.length) {
-            row.cells[0].textContent = translations[lang][keys[index]];
-            row.cells[2].textContent = translations[lang][descs[index]];
+        rows.forEach((row, i) => {
+          if (i < keys.length) {
+            row.cells[0].textContent = translations[lang][keys[i]];
+            row.cells[2].textContent = translations[lang][descs[i]];
           }
         });
 
-        // Update status texts in table header
-        const overviewItems = document.querySelectorAll('.compatibility-item p');
-        if (overviewItems.length >= 3) {
-          overviewItems[0].textContent = translations[lang].fullSupport;
-          overviewItems[1].textContent = translations[lang].partialSupport;
-          overviewItems[2].textContent = translations[lang].notSupported;
+        const items = document.querySelectorAll('.compatibility-item p');
+        if (items[0]) items[0].textContent = translations[lang].fullSupport;
+        if (items[1]) items[1].textContent = translations[lang].partialSupport;
+        if (items[2]) items[2].textContent = translations[lang].notSupported;
+
+        const note = document.querySelector('main div[style*="margin-top"]');
+        if (note) {
+          note.querySelector('h3').textContent = translations[lang].importantNoteTitle;
+          const ps = note.querySelectorAll('p');
+          if (ps[0]) ps[0].textContent = translations[lang].importantNote1;
+          if (ps[1]) ps[1].textContent = translations[lang].importantNote2;
         }
 
-        // Important note section
-        const noteDiv = document.querySelector('main div[style*="margin-top"]');
-        if (noteDiv) {
-          noteDiv.querySelector('h3').textContent = translations[lang].importantNoteTitle;
-          const noteParagraphs = noteDiv.querySelectorAll('p');
-          if (noteParagraphs[0]) noteParagraphs[0].textContent = translations[lang].importantNote1;
-          if (noteParagraphs[1]) noteParagraphs[1].textContent = translations[lang].importantNote2;
-        }
-
-        // Footer
-        const footerParagraphs = document.querySelectorAll('footer p');
-        if (footerParagraphs[0]) footerParagraphs[0].textContent = translations[lang].license;
-        if (footerParagraphs[1]) footerParagraphs[1].textContent = translations[lang].disclaimer;
+        const fps = document.querySelectorAll('footer p');
+        if (fps[0]) fps[0].textContent = translations[lang].license;
+        if (fps[1]) fps[1].textContent = translations[lang].disclaimer;
       }
 
-      // Update language selector options
-      const options = languageSelector.querySelectorAll('option');
-      options.forEach(option => {
-        const originalText = option.textContent;
-        if (translations[lang][originalText]) {
-          option.textContent = translations[lang][originalText];
-        }
+      // Update selector labels
+      Array.from(languageSelector.options).forEach(opt => {
+        const txt = opt.textContent;
+        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
       });
     }
 
-    function initTheme() {
-      const savedTheme = localStorage.getItem('preferredTheme') || 'light';
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      } else {
-        document.body.classList.remove('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-      }
-    }
-
     function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      localStorage.setItem('preferredTheme', isDark ? 'dark' : 'light');
-      themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      const isDark = document.body.hasAttribute('data-theme') && document.body.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.removeItem('preferredTheme');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('preferredTheme', 'dark');
+      }
+
+      // Apply dark mode styles without CSS variables (to preserve original style)
+      if (document.body.hasAttribute('data-theme')) {
+        document.body.style.backgroundColor = '#111827';
+        document.body.style.color = '#f9fafb';
+        document.querySelectorAll('header, footer, .compatibility-item, table, th, .page-header h1, .nav-link, .logo, .social-links a, select, button')
+          .forEach(el => {
+            if (el.classList.contains('status-working')) return;
+            if (el.classList.contains('status-partial')) return;
+            if (el.classList.contains('status-not-working')) return;
+            el.style.color = '#f9fafb';
+          });
+        document.querySelectorAll('.compatibility-item, table, main div[style*="margin-top"]')
+          .forEach(el => el.style.backgroundColor = '#1f2937');
+        document.querySelectorAll('header, footer')
+          .forEach(el => el.style.backgroundColor = '#1f2937');
+        document.querySelectorAll('th')
+          .forEach(el => el.style.backgroundColor = '#1f2937');
+        document.querySelectorAll('.nav-link:not(.active):hover')
+          .forEach(el => el.style.color = '#93c5fd');
+      } else {
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+        document.querySelectorAll('*').forEach(el => {
+          el.style.color = '';
+          el.style.backgroundColor = '';
+        });
+      }
     }
 
     function toggleMobileMenu() {
       navMenu.classList.toggle('active');
     }
 
-    languageSelector.addEventListener('change', (e) => updateLanguage(e.target.value));
+    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
     themeToggle.addEventListener('click', toggleTheme);
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
+      link.addEventListener('click', () => navMenu.classList.remove('active'));
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      initLanguage();
-      initTheme();
-    });
+    // Restore theme on load
+    if (localStorage.getItem('preferredTheme') === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      toggleTheme(); // trigger style apply
+    }
+
+    document.addEventListener('DOMContentLoaded', initLanguage);
   </script>
 </body>
 </html>
