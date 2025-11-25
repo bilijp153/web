@@ -1,279 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>系统兼容 | 华硕 FL8700JP 黑苹果</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style id="theme-style">
-    :root {
-      --bg: #ffffff;
-      --text: #1f2937;
-      --text-secondary: #4b5563;
-      --card-bg: #f9fafb;
-      --border: #e5e7eb;
-      --primary: #3b82f6;
-      --secondary: #8b5cf6;
-      --success: #10b981;
-      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-      --radius: 12px;
-      --transition: all 0.3s ease;
-    }
-    .dark-mode {
-      --bg: #111827;
-      --text: #f9fafb;
-      --text-secondary: #d1d5db;
-      --card-bg: #1f2937;
-      --border: #374151;
-      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.25);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: var(--transition);
-    }
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-    .logo { font-size: 1.4rem; font-weight: 700; }
-    .controls {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-    .lang-switcher, .theme-toggle {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 1.2rem;
-      margin-top: 1rem;
-      max-width: 1200px;
-      margin: 1rem auto 0;
-      padding: 0 1.5rem;
-    }
-    nav a {
-      color: var(--text);
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 0;
-      border-bottom: 2px solid transparent;
-      transition: var(--transition);
-    }
-    nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
-    nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-    }
-    th, td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    th {
-      background: var(--card-bg);
-      font-weight: 600;
-    }
-    .status-full { color: var(--success); font-weight: 600; }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    @media (max-width: 768px) {
-      .top-bar { flex-wrap: wrap; }
-      nav ul { gap: 0.8rem; }
-      table { font-size: 0.9rem; }
-      th, td { padding: 0.7rem; }
-    }
-  </style>
+  <title data-i18n="compatibility">Compatibility - Hackintosh FL8700JP</title>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-
-<header>
-  <div class="top-bar">
-    <div class="logo" data-key="projectTitle">让 Windows 笔记本完美运行 macOS</div>
-    <div class="controls">
-      <select id="languageSwitcher" class="lang-switcher">
-        <option value="zh-CN">简体中文</option>
-        <option value="zh-TW">繁體中文</option>
-        <option value="en">English</option>
-      </select>
-      <button id="themeToggle" class="theme-toggle">
-        <i class="fas fa-moon"></i>
-      </button>
+  <header>
+    <div class="container navbar">
+      <div class="logo" data-i18n="title">Hackintosh FL8700JP</div>
+      <div>
+        <span id="lang-switcher"></span>
+        <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+      </div>
     </div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html" data-key="navHome">首页</a></li>
-      <li><a href="hardware.html" data-key="navHardware">硬件支持</a></li>
-      <li><a href="compatibility.html" class="active" data-key="navCompatibility">系统兼容</a></li>
-      <li><a href="installation.html" data-key="navInstallation">安装指南</a></li>
-      <li><a href="faq.html" data-key="navFAQ">常见问题</a></li>
-    </ul>
-  </nav>
-</header>
+  </header>
 
-<main>
-  <h1><i class="fas fa-check-circle"></i> <span data-key="pageTitle">macOS 系统兼容性</span></h1>
-  <p data-key="pageDesc">本 EFI 配置已全面测试并支持以下 macOS 版本：</p>
+  <main class="container">
+    <h1 data-i18n="compatibility">系统兼容性</h1>
+    <div class="card">
+      <p>本 EFI 基于 OpenCore 0.9.7 构建，适配以下 macOS 版本：</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li>✅ macOS Sonoma (14.x) — 完美运行</li>
+        <li>✅ macOS Ventura (13.x) — 完美运行</li>
+        <li>✅ macOS Monterey (12.x) — 完美运行</li>
+        <li>⚠️ macOS Big Sur (11.x) — 基本可用（不推荐）</li>
+        <li>❌ macOS Catalina (10.15) 及更早版本 — 不支持（Ice Lake 需要 11+）</li>
+      </ul>
+      <p style="margin-top: 1rem;"><strong>建议：</strong>使用 macOS Sonoma 以获得最佳体验。</p>
+    </div>
+  </main>
 
-  <table>
-    <thead>
-      <tr>
-        <th data-key="macosVersion">macOS 版本</th>
-        <th data-key="compatStatus">兼容状态</th>
-        <th data-key="minVersion">最低要求版本</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Catalina</td><td class="status-full" data-key="perfect">✅ 完美</td><td>10.15.4</td></tr>
-      <tr><td>Big Sur</td><td class="status-full" data-key="perfect">✅ 完美</td><td>11.0</td></tr>
-      <tr><td>Monterey</td><td class="status-full" data-key="perfect">✅ 完美</td><td>12.0</td></tr>
-      <tr><td>Ventura</td><td class="status-full" data-key="perfect">✅ 完美</td><td>13.0</td></tr>
-      <tr><td>Sonoma</td><td class="status-full" data-key="perfect">✅ 完美</td><td>14.0</td></tr>
-      <tr><td>Sequoia</td><td class="status-full" data-key="perfect">✅ 完美</td><td>15.0</td></tr>
-    </tbody>
-  </table>
-
-  <div style="background:var(--card-bg);padding:1.2rem;border-radius:var(--radius);margin-top:1.5rem;">
-    <p><i class="fas fa-info-circle" style="color:var(--primary);"></i> <strong data-key="noteTitle">重要提示：</strong></p>
-    <p data-key="noteDesc">每次 macOS 系统更新前，请务必备份当前 EFI 分区，并检查项目更新日志，等待社区确认兼容性后再升级。</p>
-  </div>
-</main>
-
-<footer>
-  <p data-key="footerText">© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的</p>
-</footer>
-
-<script>
-  const translations = {
-    "zh-CN": {
-      projectTitle: "让 Windows 笔记本完美运行 macOS",
-      navHome: "首页",
-      navHardware: "硬件支持",
-      navCompatibility: "系统兼容",
-      navInstallation: "安装指南",
-      navFAQ: "常见问题",
-      pageTitle: "macOS 系统兼容性",
-      pageDesc: "本 EFI 配置已全面测试并支持以下 macOS 版本：",
-      macosVersion: "macOS 版本",
-      compatStatus: "兼容状态",
-      minVersion: "最低要求版本",
-      perfect: "✅ 完美",
-      noteTitle: "重要提示：",
-      noteDesc: "每次 macOS 系统更新前，请务必备份当前 EFI 分区，并检查项目更新日志，等待社区确认兼容性后再升级。",
-      footerText: "© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的"
-    },
-    "zh-TW": {
-      projectTitle: "讓 Windows 筆記型電腦完美運行 macOS",
-      navHome: "首頁",
-      navHardware: "硬體支援",
-      navCompatibility: "系統相容",
-      navInstallation: "安裝指南",
-      navFAQ: "常見問題",
-      pageTitle: "macOS 系統相容性",
-      pageDesc: "本 EFI 設定已全面測試並支援以下 macOS 版本：",
-      macosVersion: "macOS 版本",
-      compatStatus: "相容狀態",
-      minVersion: "最低需求版本",
-      perfect: "✅ 完美",
-      noteTitle: "重要提示：",
-      noteDesc: "每次 macOS 系統更新前，請務必備份目前 EFI 分區，並檢查專案更新日誌，等待社群確認相容性後再升級。",
-      footerText: "© 2021–2025 極光呆呆腦 | MIT 授權 | 本專案僅供學習與研究用途"
-    },
-    "en": {
-      projectTitle: "Run macOS Perfectly on Windows Laptops",
-      navHome: "Home",
-      navHardware: "Hardware",
-      navCompatibility: "Compatibility",
-      navInstallation: "Installation",
-      navFAQ: "FAQ",
-      pageTitle: "macOS Compatibility",
-      pageDesc: "This EFI configuration has been fully tested and supports the following macOS versions:",
-      macosVersion: "macOS Version",
-      compatStatus: "Status",
-      minVersion: "Min Required",
-      perfect: "✅ Perfect",
-      noteTitle: "Important Note:",
-      noteDesc: "Before any macOS system update, please back up your EFI partition, check the project changelog, and wait for community confirmation before upgrading.",
-      footerText: "© 2021–2025 AuroraDumbBrain | MIT License | For educational purposes only"
-    }
-  };
-
-  const themeToggle = document.getElementById('themeToggle');
-  const body = document.body;
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark)) {
-    body.classList.add('dark-mode');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-  }
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-    themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  });
-
-  const langSwitcher = document.getElementById('languageSwitcher');
-  const userLang = navigator.language;
-  let currentLang = localStorage.getItem('language') || (userLang.startsWith('zh-TW') ? 'zh-TW' : (userLang.startsWith('zh') ? 'zh-CN' : 'en'));
-  langSwitcher.value = currentLang;
-
-  function updateLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('language', lang);
-    document.querySelectorAll('[data-key]').forEach(el => {
-      const key = el.getAttribute('data-key');
-      if (translations[lang][key]) {
-        el.textContent = translations[lang][key];
-      }
-    });
-  }
-
-  langSwitcher.addEventListener('change', (e) => updateLanguage(e.target.value));
-  updateLanguage(currentLang);
-</script>
-
+  <script src="/assets/js/theme.js"></script>
+  <script src="/assets/js/i18n.js"></script>
 </body>
 </html>
