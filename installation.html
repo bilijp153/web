@@ -1,286 +1,365 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>安装指南 | ASUS FL8700JP 黑苹果项目</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <title>安装指南 | 华硕 FL8700JP 黑苹果</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style id="theme-style">
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --text-secondary: #4b5563;
+      --card-bg: #f9fafb;
+      --border: #e5e7eb;
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    .dark-mode {
+      --bg: #111827;
+      --text: #f9fafb;
+      --text-secondary: #d1d5db;
+      --card-bg: #1f2937;
+      --border: #374151;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.25);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .lang-switcher, .theme-toggle {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+      margin-top: 1rem;
+      max-width: 1200px;
+      margin: 1rem auto 0;
+      padding: 0 1.5rem;
+    }
+    nav a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin: 1.8rem 0 1rem;
+      color: var(--secondary);
+    }
+    .step {
+      display: flex;
+      gap: 1.2rem;
+      margin-bottom: 1.8rem;
+      align-items: flex-start;
+    }
+    .step-number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+    pre {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+    .dark-mode pre { background: #111827; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) {
+      .top-bar { flex-wrap: wrap; }
+      nav ul { gap: 0.8rem; }
+      .step { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <i class="fas fa-bars"></i>
-        </button>
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html" class="nav-link" data-page="home">主页</a>
-          <a href="hardware.html" class="nav-link" data-page="hardware">硬件支持</a>
-          <a href="installation.html" class="nav-link active" data-page="installation">安装指南</a>
-          <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
-          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
-          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
-          <select class="language-selector" id="languageSelector">
-            <option value="zh-CN">简体中文</option>
-            <option value="zh-TW">繁體中文</option>
-            <option value="en">English</option>
-          </select>
-          <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-          </button>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="page-header">
-      <h1>macOS 安装指南</h1>
-      <p>从 BIOS 设置到系统迁移的完整流程</p>
+<header>
+  <div class="top-bar">
+    <div class="logo" data-key="projectTitle">让 Windows 笔记本完美运行 macOS</div>
+    <div class="controls">
+      <select id="languageSwitcher" class="lang-switcher">
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+      </select>
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html" data-key="navHome">首页</a></li>
+      <li><a href="hardware.html" data-key="navHardware">硬件支持</a></li>
+      <li><a href="compatibility.html" data-key="navCompatibility">系统兼容</a></li>
+      <li><a href="installation.html" class="active" data-key="navInstallation">安装指南</a></li>
+      <li><a href="faq.html" data-key="navFAQ">常见问题</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="steps">
-      <div class="step fade-in">
-        <strong>1. 准备工作</strong><br>
-        下载最新版 OpenCore 引导文件与 macOS 安装镜像（需自行准备）。
-      </div>
-      <div class="step fade-in">
-        <strong>2. BIOS 设置</strong><br>
-        关闭 Secure Boot、Fast Boot；启用 AHCI 模式；禁用 VT-d（如存在）。
-      </div>
-      <div class="step fade-in">
-        <strong>3. 制作启动盘</strong><br>
-        使用 BalenaEtcher 或 Rufus 将 macOS 镜像写入 U 盘，并复制 EFI 文件夹至 EFI 分区。
-      </div>
-      <div class="step fade-in">
-        <strong>4. 安装系统</strong><br>
-        从 U 盘启动，选择 “Install macOS” 进行安装（约 20-40 分钟）。
-      </div>
-      <div class="step fade-in">
-        <strong>5. 迁移 EFI</strong><br>
-        安装完成后，将 U 盘中的 EFI 文件夹复制到硬盘的 EFI 分区，实现免 U 盘启动。
-      </div>
+<main>
+  <h1><i class="fas fa-tools"></i> <span data-key="pageTitle">安装指南</span></h1>
+
+  <h2 data-key="preparation">准备工作</h2>
+  <p data-key="biosSettings"><strong>BIOS 设置：</strong> 禁用 Secure Boot，关闭 Fast Boot，设置 DVMT 预分配为 64M。</p>
+  <p data-key="installMedia"><strong>安装介质：</strong> 下载 macOS 镜像（推荐黑果小兵的部落阁），使用 BalenaEtcher 创建安装U盘。</p>
+
+  <h2 data-key="steps">安装流程</h2>
+
+  <div class="step">
+    <div class="step-number">1</div>
+    <div>
+      <h3 data-key="step1Title">下载 EFI 文件</h3>
+      <p data-key="step1Desc">访问项目发布页面，下载最新版 EFI 配置包。</p>
     </div>
+  </div>
 
-    <div class="card fade-in" style="margin-top: 2rem;">
-      <h3>⚠️ 注意事项</h3>
-      <ul style="padding-left: 1.5rem; margin-top: 0.5rem; color: var(--text-light);">
-        <li>请勿升级 BIOS 至 311 版本以上，可能导致无法开机</li>
-        <li>首次安装建议断开网络，避免系统自动更新破坏兼容性</li>
-        <li>若遇卡顿，请尝试在 config.plist 中关闭 CpuPm/CpuTscSync</li>
-      </ul>
+  <div class="step">
+    <div class="step-number">2</div>
+    <div>
+      <h3 data-key="step2Title">提取本机 ACPI 表</h3>
+      <p data-key="step2Desc">使用 SSDTTime 工具提取必要文件，将 FACP.aml 重命名为 SSDT-FACP.aml。</p>
+      <pre># 使用 SSDTTime 提取
+SSDTTime 提取 → FACP.aml → 重命名为 SSDT-FACP.aml</pre>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="social-links">
-          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <p class="copyright">📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-        <p class="copyright">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-      </div>
+  <div class="step">
+    <div class="step-number">3</div>
+    <div>
+      <h3 data-key="step3Title">替换配置文件</h3>
+      <p data-key="step3Desc">将生成的 SSDT 文件放入 EFI/OC/ACPI 目录，替换原有文件。</p>
     </div>
-  </footer>
+  </div>
 
-  <script>
-    const translations = {
-      'zh-CN': {
-        home: '主页',
-        hardware: '硬件支持',
-        installation: '安装指南',
-        faq: '常见问题',
-        compatibility: '系统兼容',
-        github: 'GitHub',
-        '简体中文': '简体中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'macOS 安装指南',
-        subtitle: '从 BIOS 设置到系统迁移的完整流程',
-        step1: '1. 准备工作',
-        desc1: '下载最新版 OpenCore 引导文件与 macOS 安装镜像（需自行准备）。',
-        step2: '2. BIOS 设置',
-        desc2: '关闭 Secure Boot、Fast Boot；启用 AHCI 模式；禁用 VT-d（如存在）。',
-        step3: '3. 制作启动盘',
-        desc3: '使用 BalenaEtcher 或 Rufus 将 macOS 镜像写入 U 盘，并复制 EFI 文件夹至 EFI 分区。',
-        step4: '4. 安装系统',
-        desc4: '从 U 盘启动，选择 “Install macOS” 进行安装（约 20-40 分钟）。',
-        step5: '5. 迁移 EFI',
-        desc5: '安装完成后，将 U 盘中的 EFI 文件夹复制到硬盘的 EFI 分区，实现免 U 盘启动。',
-        noteTitle: '⚠️ 注意事项',
-        note1: '请勿升级 BIOS 至 311 版本以上，可能导致无法开机',
-        note2: '首次安装建议断开网络，避免系统自动更新破坏兼容性',
-        note3: '若遇卡顿，请尝试在 config.plist 中关闭 CpuPm/CpuTscSync',
-        license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
-        disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
-      },
-      'zh-TW': {
-        home: '主頁',
-        hardware: '硬體支援',
-        installation: '安裝指南',
-        faq: '常見問題',
-        compatibility: '系統相容',
-        github: 'GitHub',
-        '简体中文': '簡體中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'macOS 安裝指南',
-        subtitle: '從 BIOS 設定到系統遷移的完整流程',
-        step1: '1. 準備工作',
-        desc1: '下載最新版 OpenCore 引導檔案與 macOS 安裝映像（需自行準備）。',
-        step2: '2. BIOS 設定',
-        desc2: '關閉 Secure Boot、Fast Boot；啟用 AHCI 模式；禁用 VT-d（如存在）。',
-        step3: '3. 製作啟動碟',
-        desc3: '使用 BalenaEtcher 或 Rufus 將 macOS 映像寫入 USB，並複製 EFI 資料夾至 EFI 分割區。',
-        step4: '4. 安裝系統',
-        desc4: '從 USB 啟動，選擇 “Install macOS” 進行安裝（約 20-40 分鐘）。',
-        step5: '5. 遷移 EFI',
-        desc5: '安裝完成後，將 USB 中的 EFI 資料夾複製到硬碟的 EFI 分割區，實現免 USB 啟動。',
-        noteTitle: '⚠️ 注意事項',
-        note1: '請勿升級 BIOS 至 311 版本以上，可能導致無法開機',
-        note2: '首次安裝建議斷開網路，避免系統自動更新破壞相容性',
-        note3: '若遇卡頓，請嘗試在 config.plist 中關閉 CpuPm/CpuTscSync',
-        license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
-        disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
-      },
-      'en': {
-        home: 'Home',
-        hardware: 'Hardware Support',
-        installation: 'Installation Guide',
-        faq: 'FAQ',
-        compatibility: 'Compatibility',
-        github: 'GitHub',
-        '简体中文': 'Simplified Chinese',
-        '繁體中文': 'Traditional Chinese',
-        English: 'English',
-        title: 'macOS Installation Guide',
-        subtitle: 'Complete workflow from BIOS settings to system migration',
-        step1: '1. Preparation',
-        desc1: 'Download the latest OpenCore bootloader and macOS installer (you must provide the installer).',
-        step2: '2. BIOS Settings',
-        desc2: 'Disable Secure Boot and Fast Boot; enable AHCI mode; disable VT-d if present.',
-        step3: '3. Create Bootable USB',
-        desc3: 'Use BalenaEtcher or Rufus to write the macOS image to a USB drive, then copy the EFI folder to the EFI partition.',
-        step4: '4. Install macOS',
-        desc4: 'Boot from USB and select “Install macOS” (takes ~20-40 minutes).',
-        step5: '5. Migrate EFI',
-        desc5: 'After installation, copy the EFI folder from USB to your internal drive’s EFI partition for USB-free booting.',
-        noteTitle: '⚠️ Notes',
-        note1: 'Do NOT upgrade BIOS beyond version 311, may cause boot failure',
-        note2: 'Disconnect network during first install to prevent auto-updates',
-        note3: 'If laggy, try disabling CpuPm/CpuTscSync in config.plist',
-        license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
-        disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+  <div class="step">
+    <div class="step-number">4</div>
+    <div>
+      <h3 data-key="step4Title">启动安装</h3>
+      <p data-key="step4Desc">从 U 盘启动进入 OpenCore，选择 "Install macOS XXX"，按照屏幕提示完成安装。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">5</div>
+    <div>
+      <h3 data-key="step5Title">迁移 EFI 到系统分区</h3>
+      <p data-key="step5Desc">安装完成后，使用 MountEFI 工具将 EFI 分区挂载，并将配置文件复制到系统 EFI 分区。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">6</div>
+    <div>
+      <h3 data-key="step6Title">配置 SMBIOS</h3>
+      <p data-key="step6Desc">使用 OCAuxiliaryTools 编辑 config.plist，设置机型为 MacBookPro16,2，并生成三码。</p>
+      <pre>&lt;dict&gt;
+  &lt;key&gt;PlatformInfo&lt;/key&gt;
+  &lt;dict&gt;
+    &lt;key&gt;Generic&lt;/key&gt;
+    &lt;dict&gt;
+      &lt;key&gt;SystemProductName&lt;/key&gt;
+      &lt;string&gt;MacBookPro16,2&lt;/string&gt;
+    &lt;/dict&gt;
+  &lt;/dict&gt;
+&lt;/dict&gt;</pre>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p data-key="footerText">© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的</p>
+</footer>
+
+<script>
+  const translations = {
+    "zh-CN": {
+      projectTitle: "让 Windows 笔记本完美运行 macOS",
+      navHome: "首页",
+      navHardware: "硬件支持",
+      navCompatibility: "系统兼容",
+      navInstallation: "安装指南",
+      navFAQ: "常见问题",
+      pageTitle: "安装指南",
+      preparation: "准备工作",
+      biosSettings: "BIOS 设置： 禁用 Secure Boot，关闭 Fast Boot，设置 DVMT 预分配为 64M。",
+      installMedia: "安装介质： 下载 macOS 镜像（推荐黑果小兵的部落阁），使用 BalenaEtcher 创建安装U盘。",
+      steps: "安装流程",
+      step1Title: "下载 EFI 文件",
+      step1Desc: "访问项目发布页面，下载最新版 EFI 配置包。",
+      step2Title: "提取本机 ACPI 表",
+      step2Desc: "使用 SSDTTime 工具提取必要文件，将 FACP.aml 重命名为 SSDT-FACP.aml。",
+      step3Title: "替换配置文件",
+      step3Desc: "将生成的 SSDT 文件放入 EFI/OC/ACPI 目录，替换原有文件。",
+      step4Title: "启动安装",
+      step4Desc: "从 U 盘启动进入 OpenCore，选择 \"Install macOS XXX\"，按照屏幕提示完成安装。",
+      step5Title: "迁移 EFI 到系统分区",
+      step5Desc: "安装完成后，使用 MountEFI 工具将 EFI 分区挂载，并将配置文件复制到系统 EFI 分区。",
+      step6Title: "配置 SMBIOS",
+      step6Desc: "使用 OCAuxiliaryTools 编辑 config.plist，设置机型为 MacBookPro16,2，并生成三码。",
+      footerText: "© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的"
+    },
+    "zh-TW": {
+      projectTitle: "讓 Windows 筆記型電腦完美運行 macOS",
+      navHome: "首頁",
+      navHardware: "硬體支援",
+      navCompatibility: "系統相容",
+      navInstallation: "安裝指南",
+      navFAQ: "常見問題",
+      pageTitle: "安裝指南",
+      preparation: "準備工作",
+      biosSettings: "BIOS 設定：停用 Secure Boot，關閉 Fast Boot，設定 DVMT 預分配為 64M。",
+      installMedia: "安裝媒體：下載 macOS 映像檔（推薦黑果小兵的部落閣），使用 BalenaEtcher 建立安裝隨身碟。",
+      steps: "安裝流程",
+      step1Title: "下載 EFI 檔案",
+      step1Desc: "造訪專案發布頁面，下載最新版 EFI 設定包。",
+      step2Title: "提取本機 ACPI 表",
+      step2Desc: "使用 SSDTTime 工具提取必要檔案，將 FACP.aml 重新命名為 SSDT-FACP.aml。",
+      step3Title: "替換設定檔案",
+      step3Desc: "將產生的 SSDT 檔案放入 EFI/OC/ACPI 目錄，取代原有檔案。",
+      step4Title: "啟動安裝",
+      step4Desc: "從隨身碟啟動進入 OpenCore，選擇 \"Install macOS XXX\"，依照畫面提示完成安裝。",
+      step5Title: "遷移 EFI 至系統分割區",
+      step5Desc: "安裝完成後，使用 MountEFI 工具掛載 EFI 分割區，並將設定檔複製到系統 EFI 分割區。",
+      step6Title: "設定 SMBIOS",
+      step6Desc: "使用 OCAuxiliaryTools 編輯 config.plist，設定機型為 MacBookPro16,2，並產生三碼。",
+      footerText: "© 2021–2025 極光呆呆腦 | MIT 授權 | 本專案僅供學習與研究用途"
+    },
+    "en": {
+      projectTitle: "Run macOS Perfectly on Windows Laptops",
+      navHome: "Home",
+      navHardware: "Hardware",
+      navCompatibility: "Compatibility",
+      navInstallation: "Installation",
+      navFAQ: "FAQ",
+      pageTitle: "Installation Guide",
+      preparation: "Preparation",
+      biosSettings: "BIOS Settings: Disable Secure Boot, turn off Fast Boot, set DVMT pre-allocated memory to 64MB.",
+      installMedia: "Installation Media: Download macOS image (recommended from HeiGuoXiaoBing), create bootable USB with BalenaEtcher.",
+      steps: "Installation Steps",
+      step1Title: "Download EFI Files",
+      step1Desc: "Visit the project release page and download the latest EFI package.",
+      step2Title: "Extract Native ACPI Tables",
+      step2Desc: "Use SSDTTime to extract required files, rename FACP.aml to SSDT-FACP.aml.",
+      step3Title: "Replace Configuration Files",
+      step3Desc: "Place generated SSDT files into EFI/OC/ACPI directory, replacing existing ones.",
+      step4Title: "Boot Installation",
+      step4Desc: "Boot from USB into OpenCore, select \"Install macOS XXX\", and follow on-screen instructions.",
+      step5Title: "Migrate EFI to System Partition",
+      step5Desc: "After installation, use MountEFI to mount the EFI partition and copy config files to system EFI.",
+      step6Title: "Configure SMBIOS",
+      step6Desc: "Use OCAuxiliaryTools to edit config.plist, set model to MacBookPro16,2, and generate serial numbers.",
+      footerText: "© 2021–2025 AuroraDumbBrain | MIT License | For educational purposes only"
+    }
+  };
+
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark)) {
+    body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+
+  const langSwitcher = document.getElementById('languageSwitcher');
+  const userLang = navigator.language;
+  let currentLang = localStorage.getItem('language') || (userLang.startsWith('zh-TW') ? 'zh-TW' : (userLang.startsWith('zh') ? 'zh-CN' : 'en'));
+  langSwitcher.value = currentLang;
+
+  function updateLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
       }
-    };
-
-    const currentPage = 'installation';
-    // ... [其余脚本同 hardware.html，仅替换 updateLanguage 内容]
-    const languageSelector = document.getElementById('languageSelector');
-    const themeToggle = document.getElementById('themeToggle');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    function initLanguage() {
-      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
-      languageSelector.value = savedLang;
-      updateLanguage(savedLang);
-    }
-
-    function updateLanguage(lang) {
-      localStorage.setItem('preferredLanguage', lang);
-      document.title = translations[lang].title + ' | ASUS FL8700JP 黑苹果项目';
-
-      document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        const key = link.getAttribute('data-page');
-        if (translations[lang][key]) link.textContent = translations[lang][key];
-      });
-      const gh = document.querySelector('.nav-link[href="https://github.com"]');
-      if (gh) gh.textContent = translations[lang].github;
-
-      document.querySelector('.page-header h1').textContent = translations[lang].title;
-      document.querySelector('.page-header p').textContent = translations[lang].subtitle;
-
-      const steps = document.querySelectorAll('.step');
-      const stepKeys = ['step1', 'step2', 'step3', 'step4', 'step5'];
-      const descKeys = ['desc1', 'desc2', 'desc3', 'desc4', 'desc5'];
-      steps.forEach((step, i) => {
-        step.innerHTML = `<strong>${translations[lang][stepKeys[i]]}</strong><br>${translations[lang][descKeys[i]]}`;
-      });
-
-      const card = document.querySelector('.card');
-      if (card) {
-        card.querySelector('h3').textContent = translations[lang].noteTitle;
-        const lis = card.querySelectorAll('li');
-        if (lis[0]) lis[0].textContent = translations[lang].note1;
-        if (lis[1]) lis[1].textContent = translations[lang].note2;
-        if (lis[2]) lis[2].textContent = translations[lang].note3;
-      }
-
-      const fps = document.querySelectorAll('.copyright');
-      if (fps[0]) fps[0].textContent = translations[lang].license;
-      if (fps[1]) fps[1].textContent = translations[lang].disclaimer;
-
-      Array.from(languageSelector.options).forEach(opt => {
-        const txt = opt.textContent;
-        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
-      });
-    }
-
-    function applyTheme(isDark) {
-      if (isDark) {
-        document.body.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('preferredTheme', 'dark');
-      } else {
-        document.body.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.removeItem('preferredTheme');
-      }
-    }
-
-    function toggleTheme() {
-      const isDark = document.body.hasAttribute('data-theme');
-      applyTheme(!isDark);
-    }
-
-    function closeMobileMenu() {
-      navMenu.classList.remove('active');
-    }
-
-    document.addEventListener('click', (e) => {
-      if (!navMenu.classList.contains('active')) return;
-      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
-      if (!isClickInside) closeMobileMenu();
     });
+  }
 
-    window.addEventListener('scroll', () => {
-      if (navMenu.classList.contains('active')) closeMobileMenu();
-    });
+  langSwitcher.addEventListener('change', (e) => updateLanguage(e.target.value));
+  updateLanguage(currentLang);
+</script>
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    if (localStorage.getItem('preferredTheme') === 'dark' || 
-        (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      applyTheme(true);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initLanguage();
-      document.querySelectorAll('.fade-in').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('appear');
-      });
-    });
-  </script>
 </body>
 </html>
