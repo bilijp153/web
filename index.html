@@ -1,173 +1,228 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>欢迎使用 NovaSync | 首页</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>NovaSync | Hardware Requirements</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style id="theme-style"></style>
   <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #7e22ce;
-      --light-bg: #f8fafc;
-      --dark-text: #1e293b;
-      --gray: #64748b;
-      --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-      --transition: all 0.3s ease;
-    }
+    /* 同 index.html 的 :root 和基础样式 */
+    :root { /* ... same as above ... */ }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--dark-text);
-      background-color: #ffffff;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+    body { font-family: 'Inter', sans-serif; line-height: 1.6; transition: all 0.3s ease; }
+    .light body { background-color: var(--light-bg); color: var(--text-light); }
+    .dark body { background-color: var(--dark-bg); color: var(--text-dark); }
+
+    header { padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+    .light header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+    .dark header { background: linear-gradient(135deg, #1d4ed8, #6b21a8); color: white; }
+
+    .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     .logo { font-size: 1.5rem; font-weight: 700; }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-toggle, .theme-toggle {
+      background: rgba(255,255,255,0.2);
+      border: none;
       color: white;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-    .nav-links a:hover { opacity: 0.9; }
-
-    .hero {
-      text-align: center;
-      padding: 6rem 1rem;
-      background: var(--light-bg);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--gray);
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 4rem 2rem;
-    }
-    .feature-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: var(--card-shadow);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: var(--transition);
-    }
-    .feature-card.appear {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .feature-card i {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    .feature-card h3 { margin-bottom: 0.8rem; }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--light-bg);
-      color: var(--gray);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
       font-size: 0.9rem;
     }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: white; font-weight: 500; }
+    .nav-links a:hover { opacity: 0.9; }
+
+    main { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary); }
+    .req-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .req-table th, .req-table td { padding: 1rem; text-align: left; }
+    .light .req-table th { background-color: var(--light-bg); }
+    .dark .req-table th { background-color: #1e293b; }
+    .light .req-table tr { border-bottom: 1px solid var(--border-light); }
+    .dark .req-table tr { border-bottom: 1px solid var(--border-dark); }
+    .highlight { font-weight: 600; }
+    .light .highlight { background-color: #eff6ff; }
+    .dark .highlight { background-color: #1e3a8a; color: #bfdbfe; }
+
+    .note-box {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-left: 4px solid #eab308;
+    }
+    .light .note-box { background: #fffbeb; }
+    .dark .note-box { background: #1a1a1a; border-left-color: #facc15; }
+
+    footer { text-align: center; padding: 2.5rem; }
+    .light footer { background: #f1f5f9; color: var(--gray-light); }
+    .dark footer { background: #1a202c; color: var(--gray-dark); }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .hero h1 { font-size: 2.2rem; }
+      main { padding: 2rem 1rem; }
+      .req-table { font-size: 0.9rem; }
     }
   </style>
 </head>
-<body>
+<body class="light">
+  <header>
+    <div class="nav-container">
+      <div class="logo">NovaSync</div>
+      <div class="nav-right">
+        <select id="lang-select" class="lang-toggle">
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="en">English</option>
+        </select>
+        <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+          <li><a href="hardware.html" data-i18n="nav.hardware">硬件要求</a></li>
+          <li><a href="installation.html" data-i18n="nav.installation">安装指南</a></li>
+          <li><a href="compatibility.html" data-i18n="nav.compatibility">兼容性</a></li>
+          <li><a href="faq.html" data-i18n="nav.faq">常见问题</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <div class="nav-container">
-    <div class="logo">NovaSync</div>
-    <ul class="nav-links">
-      <li><a href="index.html">首页</a></li>
-      <li><a href="hardware.html">硬件要求</a></li>
-      <li><a href="installation.html">安装指南</a></li>
-      <li><a href="compatibility.html">兼容性</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-    </ul>
-  </div>
-</header>
+  <main>
+    <h1><i class="fas fa-microchip"></i> <span data-i18n="page.title">硬件要求</span></h1>
+    <p data-i18n="page.desc">为确保 NovaSync 能够流畅运行并发挥最佳性能，请确保您的设备满足以下最低和推荐配置：</p>
 
-<section class="hero">
-  <h1>无缝同步，极致体验</h1>
-  <p>NovaSync 是一款专为高性能设备设计的跨平台数据同步工具，支持实时备份、低延迟传输与端到端加密，让您的数字生活更安全、更高效。</p>
-  <a href="installation.html" class="btn" style="display:inline-block;padding:12px 30px;background:#2563eb;color:white;border-radius:30px;text-decoration:none;font-weight:600;">立即开始</a>
-</section>
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th data-i18n="table.component">组件</th>
+          <th data-i18n="table.minimum">最低要求</th>
+          <th data-i18n="table.recommended">推荐配置</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong data-i18n="os">操作系统</strong></td>
+          <td data-i18n="os.min">Windows 10 / macOS 11 / Ubuntu 20.04</td>
+          <td data-i18n="os.rec">Windows 11 / macOS 14 / Ubuntu 22.04+</td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="cpu">处理器 (CPU)</strong></td>
+          <td data-i18n="cpu.min">双核 1.8 GHz</td>
+          <td data-i18n="cpu.rec">四核 2.5 GHz 或更高</td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="ram">内存 (RAM)</strong></td>
+          <td data-i18n="ram.min">4 GB</td>
+          <td class="highlight" data-i18n="ram.rec">8 GB 或以上</td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="storage">存储空间</strong></td>
+          <td data-i18n="storage.min">500 MB 可用空间</td>
+          <td data-i18n="storage.rec">1 GB SSD（用于缓存加速）</td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="network">网络</strong></td>
+          <td data-i18n="network.min">10 Mbps 宽带</td>
+          <td class="highlight" data-i18n="network.rec">100 Mbps 或更高（建议有线连接）</td>
+        </tr>
+      </tbody>
+    </table>
 
-<section class="features">
-  <div class="feature-card" data-animate>
-    <i class="fas fa-microchip"></i>
-    <h3>高性能引擎</h3>
-    <p>基于 Rust 编写的底层同步引擎，资源占用极低，速度提升 300%。</p>
-  </div>
-  <div class="feature-card" data-animate>
-    <i class="fas fa-lock"></i>
-    <h3>端到端加密</h3>
-    <p>所有数据在本地加密后再上传，确保隐私不被第三方窥探。</p>
-  </div>
-  <div class="feature-card" data-animate>
-    <i class="fas fa-sync-alt"></i>
-    <h3>实时双向同步</h3>
-    <p>文件修改后 1 秒内自动同步，支持冲突智能合并。</p>
-  </div>
-</section>
+    <div class="note-box">
+      <p><i class="fas fa-info-circle"></i> <strong data-i18n="note.title">提示：</strong> <span data-i18n="note.content">虽然 NovaSync 可在最低配置下运行，但若需同步大量文件（>10GB）或启用实时协作功能，强烈建议使用推荐配置以获得最佳体验。</span></p>
+    </div>
+  </main>
 
-<footer>
-  &copy; 2025 NovaSync. 保留所有权利。
-</footer>
+  <footer>
+    <div data-i18n="footer.copyright">&copy; 2025 NovaSync. 保留所有权利。</div>
+  </footer>
 
-<script>
-  // 简易滚动动画
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('appear');
+  <script>
+    // ========== 复用 index.html 的 JS 逻辑 ==========
+    const translations = {
+      "zh-CN": {
+        "nav.home": "首页", "nav.hardware": "硬件要求", "nav.installation": "安装指南", "nav.compatibility": "兼容性", "nav.faq": "常见问题",
+        "page.title": "硬件要求",
+        "page.desc": "为确保 NovaSync 能够流畅运行并发挥最佳性能，请确保您的设备满足以下最低和推荐配置：",
+        "table.component": "组件", "table.minimum": "最低要求", "table.recommended": "推荐配置",
+        "os": "操作系统", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
+        "cpu": "处理器 (CPU)", "cpu.min": "双核 1.8 GHz", "cpu.rec": "四核 2.5 GHz 或更高",
+        "ram": "内存 (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB 或以上",
+        "storage": "存储空间", "storage.min": "500 MB 可用空间", "storage.rec": "1 GB SSD（用于缓存加速）",
+        "network": "网络", "network.min": "10 Mbps 宽带", "network.rec": "100 Mbps 或更高（建议有线连接）",
+        "note.title": "提示：", "note.content": "虽然 NovaSync 可在最低配置下运行，但若需同步大量文件（>10GB）或启用实时协作功能，强烈建议使用推荐配置以获得最佳体验。",
+        "footer.copyright": "&copy; 2025 NovaSync. 保留所有权利。"
+      },
+      "zh-TW": {
+        "nav.home": "首頁", "nav.hardware": "硬體需求", "nav.installation": "安裝指南", "nav.compatibility": "相容性", "nav.faq": "常見問題",
+        "page.title": "硬體需求",
+        "page.desc": "為確保 NovaSync 能夠流暢運行並發揮最佳效能，請確保您的裝置滿足以下最低和推薦配置：",
+        "table.component": "元件", "table.minimum": "最低需求", "table.recommended": "推薦配置",
+        "os": "作業系統", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
+        "cpu": "處理器 (CPU)", "cpu.min": "雙核心 1.8 GHz", "cpu.rec": "四核心 2.5 GHz 或更高",
+        "ram": "記憶體 (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB 或以上",
+        "storage": "儲存空間", "storage.min": "500 MB 可用空間", "storage.rec": "1 GB SSD（用於快取加速）",
+        "network": "網路", "network.min": "10 Mbps 寬頻", "network.rec": "100 Mbps 或更高（建議使用有線連接）",
+        "note.title": "提示：", "note.content": "雖然 NovaSync 可在最低配置下運行，但若需同步大量檔案（>10GB）或啟用即時協作功能，強烈建議使用推薦配置以獲得最佳體驗。",
+        "footer.copyright": "&copy; 2025 NovaSync. 保留所有權利。"
+      },
+      "en": {
+        "nav.home": "Home", "nav.hardware": "Hardware", "nav.installation": "Installation", "nav.compatibility": "Compatibility", "nav.faq": "FAQ",
+        "page.title": "Hardware Requirements",
+        "page.desc": "To ensure NovaSync runs smoothly and delivers optimal performance, please verify your device meets the following minimum and recommended specifications:",
+        "table.component": "Component", "table.minimum": "Minimum", "table.recommended": "Recommended",
+        "os": "Operating System", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
+        "cpu": "Processor (CPU)", "cpu.min": "Dual-core 1.8 GHz", "cpu.rec": "Quad-core 2.5 GHz or higher",
+        "ram": "Memory (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB or more",
+        "storage": "Storage", "storage.min": "500 MB free space", "storage.rec": "1 GB SSD (for cache acceleration)",
+        "network": "Network", "network.min": "10 Mbps broadband", "network.rec": "100 Mbps or higher (wired connection recommended)",
+        "note.title": "Note:", "note.content": "While NovaSync can run on minimum specs, we strongly recommend the recommended configuration for syncing large datasets (>10GB) or enabling real-time collaboration.",
+        "footer.copyright": "&copy; 2025 NovaSync. All rights reserved."
       }
+    };
+
+    // ========== 主题与语言逻辑（同 index.html）==========
+    function setTheme(theme) {
+      document.body.className = theme;
+      document.getElementById('theme-toggle').innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('novasync-theme', theme);
+    }
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('novasync-theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function getBrowserLang() {
+      const lang = navigator.language;
+      if (lang.startsWith('zh-TW') || lang.startsWith('zh-HK')) return 'zh-TW';
+      if (lang.startsWith('zh')) return 'zh-CN';
+      return 'en';
+    }
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem('novasync-lang', lang);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.innerHTML = translations[lang][key] || translations['en'][key] || key;
+      });
+      document.getElementById('lang-select').value = lang;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const theme = getPreferredTheme();
+      setTheme(theme);
+      const savedLang = localStorage.getItem('novasync-lang');
+      const lang = savedLang || getBrowserLang();
+      setLanguage(lang);
+
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        setTheme(document.body.className === 'dark' ? 'light' : 'dark');
+      });
+      document.getElementById('lang-select').addEventListener('change', (e) => {
+        setLanguage(e.target.value);
+      });
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('[data-animate]').forEach(el => {
-    observer.observe(el);
-  });
-</script>
-
+  </script>
 </body>
 </html>
