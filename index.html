@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASUS FL8700JP 黑苹果项目 | 专业macOS解决方案</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>ASUS FL8700JP 黑苹果项目</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #2563eb;
-      --primary-dark: #1d4ed8;
-      --bg-color: #ffffff;
-      --text-color: #1f2937;
-      --card-bg: #ffffff;
-      --border-color: #e5e7eb;
+      --bg: #ffffff;
+      --text: #1f2937;
       --header-bg: #f9fafb;
-      --footer-bg: #f3f4f6;
+      --border: #e5e7eb;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
-    .dark-mode {
-      --bg-color: #111827;
-      --text-color: #f9fafb;
-      --card-bg: #1f2937;
-      --border-color: #374151;
+    [data-theme="dark"] {
+      --bg: #111827;
+      --text: #f9fafb;
       --header-bg: #1f2937;
-      --footer-bg: #111827;
+      --border: #374151;
+      --card-bg: #1f2937;
+      --accent: #60a5fa;
     }
 
     * {
@@ -35,16 +36,15 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     header {
       background-color: var(--header-bg);
       padding: 1rem 0;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -61,118 +61,107 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--primary-color);
+      color: var(--accent);
       text-decoration: none;
     }
 
     .nav-menu {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-link {
-      color: var(--text-color);
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
       padding: 0.5rem 0;
       border-bottom: 2px solid transparent;
-      transition: border-color 0.2s ease;
+      white-space: nowrap;
     }
 
     .nav-link:hover,
     .nav-link.active {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    .language-selector,
-    .theme-toggle {
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    select, button {
       background: none;
-      border: none;
-      color: var(--text-color);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1rem;
-      padding: 0.5rem;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
+      font-size: 0.95rem;
     }
 
-    .language-selector:hover,
-    .theme-toggle:hover {
-      background-color: var(--border-color);
+    select:hover, button:hover {
+      background-color: var(--header-bg);
+    }
+
+    main {
+      padding: 2.5rem 0;
     }
 
     .hero {
       text-align: center;
-      padding: 4rem 0;
+      margin-bottom: 3rem;
     }
 
     .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      color: var(--text-color);
+      color: var(--accent);
     }
 
     .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
       max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--text-color);
+      margin: 0 auto 1.5rem;
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
 
     .feature-card {
-      background-color: var(--card-bg);
-      padding: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 12px;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
     }
 
     .feature-card h3 {
-      margin-bottom: 1rem;
-      color: var(--text-color);
-    }
-
-    .feature-card p {
-      color: var(--text-color);
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: var(--primary-color);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-dark);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     footer {
-      background-color: var(--footer-bg);
+      background-color: var(--header-bg);
       padding: 2rem 0;
       margin-top: 4rem;
       text-align: center;
-      color: var(--text-color);
     }
 
     .footer-content {
@@ -188,8 +177,9 @@
     }
 
     .social-links a {
-      color: var(--text-color);
+      color: var(--text);
       text-decoration: none;
+      font-size: 1.25rem;
     }
 
     /* Mobile menu */
@@ -197,7 +187,7 @@
       display: none;
       background: none;
       border: none;
-      color: var(--text-color);
+      color: var(--text);
       font-size: 1.5rem;
       cursor: pointer;
     }
@@ -212,11 +202,12 @@
         padding: 1rem;
         flex-direction: column;
         gap: 1rem;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border);
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+        z-index: 99;
       }
 
       .nav-menu.active {
@@ -229,12 +220,13 @@
         display: block;
       }
 
-      .hero h1 {
-        font-size: 2rem;
+      .controls {
+        width: 100%;
+        justify-content: flex-end;
       }
 
-      .hero p {
-        font-size: 1.1rem;
+      .hero h1 {
+        font-size: 2rem;
       }
     }
   </style>
@@ -250,246 +242,127 @@
         <nav class="nav-menu" id="navMenu">
           <a href="index.html" class="nav-link active" data-page="home">主页</a>
           <a href="hardware.html" class="nav-link" data-page="hardware">硬件支持</a>
+          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
           <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
           <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
-          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
-          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
-          <select class="language-selector" id="languageSelector">
-            <option value="zh-CN">简体中文</option>
-            <option value="zh-TW">繁體中文</option>
-            <option value="en">English</option>
-          </select>
-          <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-          </button>
+          <a href="advanced.html" class="nav-link" data-page="advanced">高级配置</a>
+          <a href="contribute.html" class="nav-link" data-page="contribute">参与贡献</a>
+          <div class="controls">
+            <select class="language-selector" id="languageSelector">
+              <option value="zh-CN">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
+              <option value="en">English</option>
+            </select>
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
         </nav>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="hero">
+    <div class="hero">
       <h1>让 Windows 笔记本完美运行 macOS</h1>
-      <p>为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
-      <div class="hero-buttons">
-        <a href="installation.html" class="btn">开始安装之旅</a>
-      </div>
-    </section>
+      <p>为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案</p>
+    </div>
 
     <div class="features">
       <div class="feature-card">
-        <h3>全面硬件支持</h3>
-        <p>完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。</p>
-        <a href="hardware.html" class="btn" style="margin-top: 1rem;">查看详情</a>
+        <h3><i class="fas fa-laptop"></i> <span class="text-hardware">硬件支持</span></h3>
+        <p>全面兼容 CPU、核显、声卡、蓝牙等核心组件，屏蔽不支持的独显。</p>
       </div>
       <div class="feature-card">
-        <h3>全版本兼容</h3>
-        <p>支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
-        <a href="compatibility.html" class="btn" style="margin-top: 1rem;">查看详情</a>
+        <h3><i class="fas fa-sync-alt"></i> <span class="text-compatibility">系统兼容</span></h3>
+        <p>支持从 macOS Catalina 到最新 Sequoia 的所有主流版本。</p>
       </div>
       <div class="feature-card">
-        <h3>详细安装指南</h3>
-        <p>从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。</p>
-        <a href="installation.html" class="btn" style="margin-top: 1rem;">查看详情</a>
+        <h3><i class="fas fa-tools"></i> <span class="text-installation">安装指南</span></h3>
+        <p>提供详细 BIOS 设置、U 盘制作、EFI 替换及 SMBIOS 配置步骤。</p>
       </div>
     </div>
-
-    <section class="project-info">
-      <h2>项目简介</h2>
-      <p>本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。</p>
-      
-      <h3>技术特点</h3>
-      <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-        <li>基于 OpenCore 1.0.5 最新引导</li>
-        <li>ACPI 热补丁与 SSDT 优化</li>
-        <li>完善的电源管理配置</li>
-      </ul>
-
-      <h3>兼容性</h3>
-      <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-        <li>macOS Catalina 至 Tahoe</li>
-        <li>Intel Wi-Fi 与蓝牙</li>
-        <li>高清音频与麦克风</li>
-      </ul>
-
-      <div class="important-note" style="background-color: #fef3c7; padding: 1rem; border-radius: 8px; margin: 2rem 0;">
-        <strong>重要提示：</strong>本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。
-      </div>
-
-      <div class="quick-start">
-        <h3>快速开始</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-          <div style="background-color: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-            <h4>安装指南</h4>
-            <p>详细的步骤指导，从准备工作到系统优化，帮助您顺利完成黑苹果安装。</p>
-            <a href="installation.html" class="btn" style="margin-top: 1rem;">开始安装</a>
-          </div>
-          <div style="background-color: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-            <h4>常见问题</h4>
-            <p>收集了用户常见问题及解决方案，帮助您快速排除安装和使用过程中的问题。</p>
-            <a href="faq.html" class="btn" style="margin-top: 1rem;">查看问题</a>
-          </div>
-          <div style="background-color: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
-            <h4>社区支持</h4>
-            <p>加入我们的社区，获取最新更新、分享经验或寻求帮助。</p>
-            <a href="https://github.com" class="btn" style="margin-top: 1rem;" target="_blank">访问 GitHub</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="social-links">
-          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
-        <p>© 2021-2025 极光呆呆脑 - 保留所有权利</p>
-        <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+        <p class="text-license">许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+        <p class="text-disclaimer">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Language data for all pages
+    // ========== 多语言 & 主题管理 ==========
     const translations = {
       'zh-CN': {
         home: '主页',
         hardware: '硬件支持',
+        compatibility: '系统兼容',
         installation: '安装指南',
         faq: '常见问题',
-        compatibility: '系统兼容',
-        github: 'GitHub',
+        advanced: '高级配置',
+        contribute: '参与贡献',
         '简体中文': '简体中文',
         '繁體中文': '繁體中文',
         English: 'English',
-        title: 'ASUS FL8700JP 黑苹果项目 | 专业macOS解决方案',
+        title: 'ASUS FL8700JP 黑苹果项目',
         heroTitle: '让 Windows 笔记本完美运行 macOS',
-        heroSubtitle: '为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容',
-        startInstallation: '开始安装之旅',
-        fullHardwareSupport: '全面硬件支持',
-        fullHardwareSupportDesc: '完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。',
-        fullVersionCompatibility: '全版本兼容',
-        fullVersionCompatibilityDesc: '支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。',
-        detailedInstallationGuide: '详细安装指南',
-        detailedInstallationGuideDesc: '从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。',
-        projectIntroduction: '项目简介',
-        projectIntroText: '本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。',
-        technicalFeatures: '技术特点',
-        openCoreLatest: '基于 OpenCore 1.0.5 最新引导',
-        acpiOptimization: 'ACPI 热补丁与 SSDT 优化',
-        powerManagement: '完善的电源管理配置',
-        compatibility: '兼容性',
-        catalinaToTahoe: 'macOS Catalina 至 Tahoe',
-        intelWifiBluetooth: 'Intel Wi-Fi 与蓝牙',
-        hdAudioMic: '高清音频与麦克风',
-        importantNote: '重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。',
-        quickStart: '快速开始',
-        installationGuide: '安装指南',
-        installationGuideDesc: '详细的步骤指导，从准备工作到系统优化，帮助您顺利完成黑苹果安装。',
-        startInstallationBtn: '开始安装',
-        commonProblems: '常见问题',
-        commonProblemsDesc: '收集了用户常见问题及解决方案，帮助您快速排除安装和使用过程中的问题。',
-        viewProblems: '查看问题',
-        communitySupport: '社区支持',
-        communitySupportDesc: '加入我们的社区，获取最新更新、分享经验或寻求帮助。',
-        visitGithub: '访问 GitHub',
-        license: '© 2021-2025 极光呆呆脑 - 保留所有权利',
+        heroSubtitle: '为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案',
+        hardwareCard: '硬件支持',
+        compatibilityCard: '系统兼容',
+        installationCard: '安装指南',
+        license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
         disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
       },
       'zh-TW': {
         home: '主頁',
         hardware: '硬體支援',
+        compatibility: '系統相容',
         installation: '安裝指南',
         faq: '常見問題',
-        compatibility: '系統相容',
-        github: 'GitHub',
+        advanced: '進階設定',
+        contribute: '參與貢獻',
         '简体中文': '簡體中文',
         '繁體中文': '繁體中文',
         English: 'English',
-        title: 'ASUS FL8700JP 黑蘋果專案 | 專業macOS解決方案',
-        heroTitle: '讓 Windows 筆記型電腦完美執行 macOS',
-        heroSubtitle: '為華碩 VivoBook FL8700JP 定製的專業黑蘋果解決方案，從 Catalina 到 Tahoe 全面相容',
-        startInstallation: '開始安裝之旅',
-        fullHardwareSupport: '全面硬體支援',
-        fullHardwareSupportDesc: '完美支援 Intel i7 處理器、Iris Plus 顯示卡、Realtek 音訊等核心硬體元件，提供接近原生的使用體驗。',
-        fullVersionCompatibility: '全版本相容',
-        fullVersionCompatibilityDesc: '支援從 Catalina 到 Tahoe 的所有現代 macOS 版本，持續更新確保與新版本系統完美相容。',
-        detailedInstallationGuide: '詳細安裝指南',
-        detailedInstallationGuideDesc: '從 BIOS 設定到系統配置，提供完整的安裝教學和排錯指南，即使是新手也能輕鬆完成安裝。',
-        projectIntroduction: '專案簡介',
-        projectIntroText: '本專案專為華碩 VivoBook FL8700JP (X509JP) 筆記型電腦設計，提供完整的黑蘋果解決方案。採用最新的 OpenCore 引導載入程式，確保系統穩定性和相容性。',
-        technicalFeatures: '技術特點',
-        openCoreLatest: '基於 OpenCore 1.0.5 最新引導',
-        acpiOptimization: 'ACPI 熱補丁與 SSDT 優化',
-        powerManagement: '完善的電源管理配置',
-        compatibility: '相容性',
-        catalinaToTahoe: 'macOS Catalina 至 Tahoe',
-        intelWifiBluetooth: 'Intel Wi-Fi 與藍牙',
-        hdAudioMic: '高畫質音訊與麥克風',
-        importantNote: '重要提示：本 EFI 配置僅適用於華碩 FL8700JP (X509JP) 特定機型。操作前請務必備份重要資料，並仔細閱讀安裝指南。',
-        quickStart: '快速開始',
-        installationGuide: '安裝指南',
-        installationGuideDesc: '詳細的步驟指導，從準備工作到系統優化，幫助您順利完成黑蘋果安裝。',
-        startInstallationBtn: '開始安裝',
-        commonProblems: '常見問題',
-        commonProblemsDesc: '收集了使用者常見問題及解決方案，幫助您快速排除安裝和使用過程中的問題。',
-        viewProblems: '查看問題',
-        communitySupport: '社群支援',
-        communitySupportDesc: '加入我們的社群，獲取最新更新、分享經驗或尋求幫助。',
-        visitGithub: '訪問 GitHub',
+        title: 'ASUS FL8700JP 黑蘋果專案',
+        heroTitle: '讓 Windows 筆電完美運行 macOS',
+        heroSubtitle: '為華碩 VivoBook FL8700JP (X509JP) 定製的黑蘋果解決方案',
+        hardwareCard: '硬體支援',
+        compatibilityCard: '系統相容',
+        installationCard: '安裝指南',
         license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
         disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
       },
       'en': {
         home: 'Home',
         hardware: 'Hardware Support',
+        compatibility: 'Compatibility',
         installation: 'Installation Guide',
         faq: 'FAQ',
-        compatibility: 'Compatibility',
-        github: 'GitHub',
+        advanced: 'Advanced Config',
+        contribute: 'Contribute',
         '简体中文': 'Simplified Chinese',
         '繁體中文': 'Traditional Chinese',
         English: 'English',
-        title: 'ASUS FL8700JP Hackintosh Project | Professional macOS Solution',
-        heroTitle: 'Run macOS Perfectly on Your Windows Laptop',
-        heroSubtitle: 'Professional Hackintosh solution customized for ASUS VivoBook FL8700JP, fully compatible from Catalina to Tahoe',
-        startInstallation: 'Start Installation Journey',
-        fullHardwareSupport: 'Full Hardware Support',
-        fullHardwareSupportDesc: 'Perfect support for Intel i7 processor, Iris Plus graphics, Realtek audio and other core hardware components, providing a near-native experience.',
-        fullVersionCompatibility: 'Full Version Compatibility',
-        fullVersionCompatibilityDesc: 'Supports all modern macOS versions from Catalina to Tahoe, continuously updated to ensure perfect compatibility with new system versions.',
-        detailedInstallationGuide: 'Detailed Installation Guide',
-        detailedInstallationGuideDesc: 'Complete installation tutorials and troubleshooting guides from BIOS setup to system configuration, making it easy even for beginners to complete the installation.',
-        projectIntroduction: 'Project Introduction',
-        projectIntroText: 'This project is specifically designed for ASUS VivoBook FL8700JP (X509JP) laptops, providing a complete Hackintosh solution. Using the latest OpenCore bootloader to ensure system stability and compatibility.',
-        technicalFeatures: 'Technical Features',
-        openCoreLatest: 'Based on latest OpenCore 1.0.5 bootloader',
-        acpiOptimization: 'ACPI hot patches and SSDT optimization',
-        powerManagement: 'Comprehensive power management configuration',
-        compatibility: 'Compatibility',
-        catalinaToTahoe: 'macOS Catalina to Tahoe',
-        intelWifiBluetooth: 'Intel Wi-Fi and Bluetooth',
-        hdAudioMic: 'High-definition audio and microphone',
-        importantNote: 'Important Note: This EFI configuration is only for ASUS FL8700JP (X509JP) specific models. Please backup important data before operation and carefully read the installation guide.',
-        quickStart: 'Quick Start',
-        installationGuide: 'Installation Guide',
-        installationGuideDesc: 'Detailed step-by-step guidance, from preparation to system optimization, helping you successfully complete the Hackintosh installation.',
-        startInstallationBtn: 'Start Installation',
-        commonProblems: 'Common Problems',
-        commonProblemsDesc: 'Collected common user questions and solutions to help you quickly troubleshoot installation and usage issues.',
-        viewProblems: 'View Problems',
-        communitySupport: 'Community Support',
-        communitySupportDesc: 'Join our community to get the latest updates, share experiences, or seek help.',
-        visitGithub: 'Visit GitHub',
-        license: '© 2021-2025 Aurora - All rights reserved',
+        title: 'ASUS FL8700JP Hackintosh Project',
+        heroTitle: 'Run macOS Perfectly on Windows Laptop',
+        heroSubtitle: 'Custom Hackintosh Solution for ASUS VivoBook FL8700JP (X509JP)',
+        hardwareCard: 'Hardware Support',
+        compatibilityCard: 'Compatibility',
+        installationCard: 'Installation Guide',
+        license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
         disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
       }
     };
 
-    // Current page identifier
     const currentPage = 'home';
+    let currentLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
 
     // DOM elements
     const languageSelector = document.getElementById('languageSelector');
@@ -499,161 +372,99 @@
 
     // Initialize language
     function initLanguage() {
-      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
-      languageSelector.value = savedLang;
-      updateLanguage(savedLang);
+      languageSelector.value = currentLang;
+      updateLanguage(currentLang);
     }
 
-    // Update language
     function updateLanguage(lang) {
+      currentLang = lang;
       localStorage.setItem('preferredLanguage', lang);
       
-      // Update navigation
       document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        const pageKey = link.getAttribute('data-page');
-        if (translations[lang][pageKey]) {
-          link.textContent = translations[lang][pageKey];
-        }
+        const key = link.getAttribute('data-page');
+        if (translations[lang][key]) link.textContent = translations[lang][key];
       });
-      
-      // Update GitHub link text
-      const githubLink = document.querySelector('.nav-link[href="https://github.com"]');
-      if (githubLink && translations[lang].github) {
-        githubLink.textContent = translations[lang].github;
-      }
-      
-      // Update page content based on current page
-      if (currentPage === 'home') {
-        document.title = translations[lang].title;
-        document.querySelector('.hero h1').textContent = translations[lang].heroTitle;
-        document.querySelector('.hero p').textContent = translations[lang].heroSubtitle;
-        document.querySelector('.hero .btn').textContent = translations[lang].startInstallation;
-        
-        // Feature cards
-        const featureCards = document.querySelectorAll('.feature-card');
-        if (featureCards.length >= 3) {
-          featureCards[0].querySelector('h3').textContent = translations[lang].fullHardwareSupport;
-          featureCards[0].querySelector('p').textContent = translations[lang].fullHardwareSupportDesc;
-          featureCards[0].querySelector('.btn').textContent = translations[lang].viewDetails || '查看详情';
-          
-          featureCards[1].querySelector('h3').textContent = translations[lang].fullVersionCompatibility;
-          featureCards[1].querySelector('p').textContent = translations[lang].fullVersionCompatibilityDesc;
-          featureCards[1].querySelector('.btn').textContent = translations[lang].viewDetails || '查看详情';
-          
-          featureCards[2].querySelector('h3').textContent = translations[lang].detailedInstallationGuide;
-          featureCards[2].querySelector('p').textContent = translations[lang].detailedInstallationGuideDesc;
-          featureCards[2].querySelector('.btn').textContent = translations[lang].viewDetails || '查看详情';
-        }
-        
-        // Project info section
-        const projectInfo = document.querySelector('.project-info');
-        if (projectInfo) {
-          const headings = projectInfo.querySelectorAll('h2, h3, h4');
-          if (headings[0]) headings[0].textContent = translations[lang].projectIntroduction;
-          if (headings[1]) headings[1].textContent = translations[lang].technicalFeatures;
-          if (headings[2]) headings[2].textContent = translations[lang].compatibility;
-          if (headings[3]) headings[3].textContent = translations[lang].quickStart;
-          
-          const paragraphs = projectInfo.querySelectorAll('p');
-          if (paragraphs[0]) paragraphs[0].textContent = translations[lang].projectIntroText;
-          
-          const listItems = projectInfo.querySelectorAll('li');
-          if (listItems.length >= 6) {
-            listItems[0].textContent = translations[lang].openCoreLatest;
-            listItems[1].textContent = translations[lang].acpiOptimization;
-            listItems[2].textContent = translations[lang].powerManagement;
-            listItems[3].textContent = translations[lang].catalinaToTahoe;
-            listItems[4].textContent = translations[lang].intelWifiBluetooth;
-            listItems[5].textContent = translations[lang].hdAudioMic;
-          }
-          
-          const importantNote = projectInfo.querySelector('.important-note');
-          if (importantNote) {
-            importantNote.innerHTML = `<strong>${translations[lang].importantNote.split('：')[0]}：</strong>${translations[lang].importantNote.split('：')[1]}`;
-          }
-          
-          // Quick start buttons
-          const quickStartDivs = projectInfo.querySelectorAll('.quick-start div[style*="background"]');
-          if (quickStartDivs.length >= 3) {
-            const qsHeadings = quickStartDivs[0].querySelectorAll('h4, p, .btn');
-            if (qsHeadings[0]) qsHeadings[0].textContent = translations[lang].installationGuide;
-            if (qsHeadings[1]) qsHeadings[1].textContent = translations[lang].installationGuideDesc;
-            if (qsHeadings[2]) qsHeadings[2].textContent = translations[lang].startInstallationBtn;
-            
-            const qsHeadings2 = quickStartDivs[1].querySelectorAll('h4, p, .btn');
-            if (qsHeadings2[0]) qsHeadings2[0].textContent = translations[lang].commonProblems;
-            if (qsHeadings2[1]) qsHeadings2[1].textContent = translations[lang].commonProblemsDesc;
-            if (qsHeadings2[2]) qsHeadings2[2].textContent = translations[lang].viewProblems;
-            
-            const qsHeadings3 = quickStartDivs[2].querySelectorAll('h4, p, .btn');
-            if (qsHeadings3[0]) qsHeadings3[0].textContent = translations[lang].communitySupport;
-            if (qsHeadings3[1]) qsHeadings3[1].textContent = translations[lang].communitySupportDesc;
-            if (qsHeadings3[2]) qsHeadings3[2].textContent = translations[lang].visitGithub;
-          }
-        }
-        
-        // Footer
-        const footer = document.querySelector('footer');
-        if (footer) {
-          const footerParagraphs = footer.querySelectorAll('p');
-          if (footerParagraphs[0]) footerParagraphs[0].textContent = translations[lang].license;
-          if (footerParagraphs[1]) footerParagraphs[1].textContent = translations[lang].disclaimer;
-        }
-      }
-      
-      // Update language selector options
-      const options = languageSelector.querySelectorAll('option');
-      options.forEach(option => {
-        const originalText = option.textContent;
-        if (translations[lang][originalText]) {
-          option.textContent = translations[lang][originalText];
-        }
+
+      document.title = translations[lang].title;
+      document.querySelector('.hero h1').textContent = translations[lang].heroTitle;
+      document.querySelector('.hero p').textContent = translations[lang].heroSubtitle;
+
+      document.querySelector('.text-hardware').textContent = translations[lang].hardwareCard;
+      document.querySelector('.text-compatibility').textContent = translations[lang].compatibilityCard;
+      document.querySelector('.text-installation').textContent = translations[lang].installationCard;
+
+      document.querySelector('.text-license').textContent = translations[lang].license;
+      document.querySelector('.text-disclaimer').textContent = translations[lang].disclaimer;
+
+      // Update selector options text
+      Array.from(languageSelector.options).forEach(opt => {
+        const txt = opt.textContent;
+        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
       });
     }
 
-    // Theme toggle
-    function initTheme() {
-      const savedTheme = localStorage.getItem('preferredTheme') || 'light';
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
+    // Theme handling
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('preferredTheme');
+      if (saved === 'light' || saved === 'dark') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
       } else {
-        document.body.classList.remove('dark-mode');
+        document.body.removeAttribute('data-theme');
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
       }
+      localStorage.setItem('preferredTheme', theme);
     }
 
     function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      localStorage.setItem('preferredTheme', isDark ? 'dark' : 'light');
-      themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      const current = document.body.hasAttribute('data-theme') ? 'dark' : 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
     }
 
-    // Mobile menu toggle
+    // Mobile menu
+    function closeMobileMenu() {
+      navMenu.classList.remove('active');
+    }
+
     function toggleMobileMenu() {
       navMenu.classList.toggle('active');
     }
 
-    // Event listeners
-    languageSelector.addEventListener('change', (e) => {
-      updateLanguage(e.target.value);
+    // Auto-close mobile menu
+    document.addEventListener('click', (e) => {
+      if (!navMenu.classList.contains('active')) return;
+      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
+      if (!isClickInside) closeMobileMenu();
     });
 
+    window.addEventListener('scroll', () => {
+      if (navMenu.classList.contains('active')) closeMobileMenu();
+    });
+
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Event listeners
+    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
     themeToggle.addEventListener('click', toggleTheme);
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-    // Close mobile menu when clicking a nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
+    // Initialize
+    applyTheme(getPreferredTheme());
+    initLanguage();
 
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', () => {
-      initLanguage();
-      initTheme();
+    // Watch system theme change
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('preferredTheme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
     });
   </script>
 </body>
