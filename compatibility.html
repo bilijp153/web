@@ -1,281 +1,279 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>系统兼容 | ASUS FL8700JP 黑苹果项目</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <title>系统兼容 | 华硕 FL8700JP 黑苹果</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style id="theme-style">
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --text-secondary: #4b5563;
+      --card-bg: #f9fafb;
+      --border: #e5e7eb;
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --success: #10b981;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    .dark-mode {
+      --bg: #111827;
+      --text: #f9fafb;
+      --text-secondary: #d1d5db;
+      --card-bg: #1f2937;
+      --border: #374151;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.25);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .lang-switcher, .theme-toggle {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+      margin-top: 1rem;
+      max-width: 1200px;
+      margin: 1rem auto 0;
+      padding: 0 1.5rem;
+    }
+    nav a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--card-bg);
+      font-weight: 600;
+    }
+    .status-full { color: var(--success); font-weight: 600; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) {
+      .top-bar { flex-wrap: wrap; }
+      nav ul { gap: 0.8rem; }
+      table { font-size: 0.9rem; }
+      th, td { padding: 0.7rem; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <i class="fas fa-bars"></i>
-        </button>
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html" class="nav-link" data-page="home">主页</a>
-          <a href="hardware.html" class="nav-link" data-page="hardware">硬件支持</a>
-          <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
-          <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
-          <a href="compatibility.html" class="nav-link active" data-page="compatibility">系统兼容</a>
-          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
-          <select class="language-selector" id="languageSelector">
-            <option value="zh-CN">简体中文</option>
-            <option value="zh-TW">繁體中文</option>
-            <option value="en">English</option>
-          </select>
-          <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-          </button>
-        </nav>
-      </div>
+
+<header>
+  <div class="top-bar">
+    <div class="logo" data-key="projectTitle">让 Windows 笔记本完美运行 macOS</div>
+    <div class="controls">
+      <select id="languageSwitcher" class="lang-switcher">
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+      </select>
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
-  </header>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html" data-key="navHome">首页</a></li>
+      <li><a href="hardware.html" data-key="navHardware">硬件支持</a></li>
+      <li><a href="compatibility.html" class="active" data-key="navCompatibility">系统兼容</a></li>
+      <li><a href="installation.html" data-key="navInstallation">安装指南</a></li>
+      <li><a href="faq.html" data-key="navFAQ">常见问题</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <main class="container">
-    <div class="page-header">
-      <h1>macOS 版本兼容性</h1>
-      <p>从 Catalina 到 Sequoia 的全版本支持情况</p>
-    </div>
+<main>
+  <h1><i class="fas fa-check-circle"></i> <span data-key="pageTitle">macOS 系统兼容性</span></h1>
+  <p data-key="pageDesc">本 EFI 配置已全面测试并支持以下 macOS 版本：</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>macOS 版本</th>
-          <th>状态</th>
-          <th>备注</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>macOS Sequoia (15.x)</td><td class="status working">✅ 完美支持</td><td>推荐使用</td></tr>
-        <tr><td>macOS Sonoma (14.x)</td><td class="status working">✅ 完美支持</td><td>稳定运行</td></tr>
-        <tr><td>macOS Ventura (13.x)</td><td class="status working">✅ 完美支持</td><td>长期支持</td></tr>
-        <tr><td>macOS Monterey (12.x)</td><td class="status working">✅ 完美支持</td><td>兼容性最佳</td></tr>
-        <tr><td>macOS Big Sur (11.x)</td><td class="status working">✅ 完美支持</td><td>基础支持</td></tr>
-        <tr><td>macOS Catalina (10.15)</td><td class="status working">✅ 完美支持</td><td>最低支持版本</td></tr>
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th data-key="macosVersion">macOS 版本</th>
+        <th data-key="compatStatus">兼容状态</th>
+        <th data-key="minVersion">最低要求版本</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Catalina</td><td class="status-full" data-key="perfect">✅ 完美</td><td>10.15.4</td></tr>
+      <tr><td>Big Sur</td><td class="status-full" data-key="perfect">✅ 完美</td><td>11.0</td></tr>
+      <tr><td>Monterey</td><td class="status-full" data-key="perfect">✅ 完美</td><td>12.0</td></tr>
+      <tr><td>Ventura</td><td class="status-full" data-key="perfect">✅ 完美</td><td>13.0</td></tr>
+      <tr><td>Sonoma</td><td class="status-full" data-key="perfect">✅ 完美</td><td>14.0</td></tr>
+      <tr><td>Sequoia</td><td class="status-full" data-key="perfect">✅ 完美</td><td>15.0</td></tr>
+    </tbody>
+  </table>
 
-    <div class="card fade-in" style="margin-top: 2rem;">
-      <h3>💡 建议</h3>
-      <p>推荐使用 <strong>macOS Sonoma 或 Ventura</strong>，兼顾新特性与稳定性。Sequoia 为最新版，可能存在未知小问题。</p>
-    </div>
-  </main>
+  <div style="background:var(--card-bg);padding:1.2rem;border-radius:var(--radius);margin-top:1.5rem;">
+    <p><i class="fas fa-info-circle" style="color:var(--primary);"></i> <strong data-key="noteTitle">重要提示：</strong></p>
+    <p data-key="noteDesc">每次 macOS 系统更新前，请务必备份当前 EFI 分区，并检查项目更新日志，等待社区确认兼容性后再升级。</p>
+  </div>
+</main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="social-links">
-          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <p class="copyright">📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-        <p class="copyright">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-      </div>
-    </div>
-  </footer>
+<footer>
+  <p data-key="footerText">© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的</p>
+</footer>
 
-  <script>
-    const translations = {
-      'zh-CN': {
-        home: '主页',
-        hardware: '硬件支持',
-        installation: '安装指南',
-        faq: '常见问题',
-        compatibility: '系统兼容',
-        github: 'GitHub',
-        '简体中文': '简体中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'macOS 版本兼容性',
-        subtitle: '从 Catalina 到 Sequoia 的全版本支持情况',
-        sequoia: 'macOS Sequoia (15.x)',
-        sonoma: 'macOS Sonoma (14.x)',
-        ventura: 'macOS Ventura (13.x)',
-        monterey: 'macOS Monterey (12.x)',
-        bigsur: 'macOS Big Sur (11.x)',
-        catalina: 'macOS Catalina (10.15)',
-        working: '✅ 完美支持',
-        rec: '推荐使用',
-        stable: '稳定运行',
-        lts: '长期支持',
-        best: '兼容性最佳',
-        base: '基础支持',
-        min: '最低支持版本',
-        tipTitle: '💡 建议',
-        tip: '推荐使用 <strong>macOS Sonoma 或 Ventura</strong>，兼顾新特性与稳定性。Sequoia 为最新版，可能存在未知小问题。',
-        license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
-        disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
-      },
-      'zh-TW': {
-        home: '主頁',
-        hardware: '硬體支援',
-        installation: '安裝指南',
-        faq: '常見問題',
-        compatibility: '系統相容',
-        github: 'GitHub',
-        '简体中文': '簡體中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'macOS 版本相容性',
-        subtitle: '從 Catalina 到 Sequoia 的全版本支援情況',
-        sequoia: 'macOS Sequoia (15.x)',
-        sonoma: 'macOS Sonoma (14.x)',
-        ventura: 'macOS Ventura (13.x)',
-        monterey: 'macOS Monterey (12.x)',
-        bigsur: 'macOS Big Sur (11.x)',
-        catalina: 'macOS Catalina (10.15)',
-        working: '✅ 完美支援',
-        rec: '推薦使用',
-        stable: '穩定運行',
-        lts: '長期支援',
-        best: '相容性最佳',
-        base: '基礎支援',
-        min: '最低支援版本',
-        tipTitle: '💡 建議',
-        tip: '推薦使用 <strong>macOS Sonoma 或 Ventura</strong>，兼顧新特性與穩定性。Sequoia 為最新版，可能存在未知小問題。',
-        license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
-        disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
-      },
-      'en': {
-        home: 'Home',
-        hardware: 'Hardware Support',
-        installation: 'Installation Guide',
-        faq: 'FAQ',
-        compatibility: 'Compatibility',
-        github: 'GitHub',
-        '简体中文': 'Simplified Chinese',
-        '繁體中文': 'Traditional Chinese',
-        English: 'English',
-        title: 'macOS Version Compatibility',
-        subtitle: 'Full support from Catalina to Sequoia',
-        sequoia: 'macOS Sequoia (15.x)',
-        sonoma: 'macOS Sonoma (14.x)',
-        ventura: 'macOS Ventura (13.x)',
-        monterey: 'macOS Monterey (12.x)',
-        bigsur: 'macOS Big Sur (11.x)',
-        catalina: 'macOS Catalina (10.15)',
-        working: '✅ Fully Working',
-        rec: 'Recommended',
-        stable: 'Stable',
-        lts: 'Long-term support',
-        best: 'Best compatibility',
-        base: 'Basic support',
-        min: 'Minimum supported version',
-        tipTitle: '💡 Recommendation',
-        tip: 'We recommend <strong>macOS Sonoma or Ventura</strong> for the best balance of features and stability. Sequoia is the latest but may have minor unknown issues.',
-        license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
-        disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+<script>
+  const translations = {
+    "zh-CN": {
+      projectTitle: "让 Windows 笔记本完美运行 macOS",
+      navHome: "首页",
+      navHardware: "硬件支持",
+      navCompatibility: "系统兼容",
+      navInstallation: "安装指南",
+      navFAQ: "常见问题",
+      pageTitle: "macOS 系统兼容性",
+      pageDesc: "本 EFI 配置已全面测试并支持以下 macOS 版本：",
+      macosVersion: "macOS 版本",
+      compatStatus: "兼容状态",
+      minVersion: "最低要求版本",
+      perfect: "✅ 完美",
+      noteTitle: "重要提示：",
+      noteDesc: "每次 macOS 系统更新前，请务必备份当前 EFI 分区，并检查项目更新日志，等待社区确认兼容性后再升级。",
+      footerText: "© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的"
+    },
+    "zh-TW": {
+      projectTitle: "讓 Windows 筆記型電腦完美運行 macOS",
+      navHome: "首頁",
+      navHardware: "硬體支援",
+      navCompatibility: "系統相容",
+      navInstallation: "安裝指南",
+      navFAQ: "常見問題",
+      pageTitle: "macOS 系統相容性",
+      pageDesc: "本 EFI 設定已全面測試並支援以下 macOS 版本：",
+      macosVersion: "macOS 版本",
+      compatStatus: "相容狀態",
+      minVersion: "最低需求版本",
+      perfect: "✅ 完美",
+      noteTitle: "重要提示：",
+      noteDesc: "每次 macOS 系統更新前，請務必備份目前 EFI 分區，並檢查專案更新日誌，等待社群確認相容性後再升級。",
+      footerText: "© 2021–2025 極光呆呆腦 | MIT 授權 | 本專案僅供學習與研究用途"
+    },
+    "en": {
+      projectTitle: "Run macOS Perfectly on Windows Laptops",
+      navHome: "Home",
+      navHardware: "Hardware",
+      navCompatibility: "Compatibility",
+      navInstallation: "Installation",
+      navFAQ: "FAQ",
+      pageTitle: "macOS Compatibility",
+      pageDesc: "This EFI configuration has been fully tested and supports the following macOS versions:",
+      macosVersion: "macOS Version",
+      compatStatus: "Status",
+      minVersion: "Min Required",
+      perfect: "✅ Perfect",
+      noteTitle: "Important Note:",
+      noteDesc: "Before any macOS system update, please back up your EFI partition, check the project changelog, and wait for community confirmation before upgrading.",
+      footerText: "© 2021–2025 AuroraDumbBrain | MIT License | For educational purposes only"
+    }
+  };
+
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark)) {
+    body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    themeToggle.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+
+  const langSwitcher = document.getElementById('languageSwitcher');
+  const userLang = navigator.language;
+  let currentLang = localStorage.getItem('language') || (userLang.startsWith('zh-TW') ? 'zh-TW' : (userLang.startsWith('zh') ? 'zh-CN' : 'en'));
+  langSwitcher.value = currentLang;
+
+  function updateLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
       }
-    };
-
-    const currentPage = 'compatibility';
-    // ... [脚本同上]
-    const languageSelector = document.getElementById('languageSelector');
-    const themeToggle = document.getElementById('themeToggle');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    function initLanguage() {
-      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
-      languageSelector.value = savedLang;
-      updateLanguage(savedLang);
-    }
-
-    function updateLanguage(lang) {
-      localStorage.setItem('preferredLanguage', lang);
-      document.title = translations[lang].title + ' | ASUS FL8700JP 黑苹果项目';
-
-      document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        const key = link.getAttribute('data-page');
-        if (translations[lang][key]) link.textContent = translations[lang][key];
-      });
-      const gh = document.querySelector('.nav-link[href="https://github.com"]');
-      if (gh) gh.textContent = translations[lang].github;
-
-      document.querySelector('.page-header h1').textContent = translations[lang].title;
-      document.querySelector('.page-header p').textContent = translations[lang].subtitle;
-
-      const rows = document.querySelectorAll('tbody tr');
-      const oses = ['sequoia', 'sonoma', 'ventura', 'monterey', 'bigsur', 'catalina'];
-      const notes = ['rec', 'stable', 'lts', 'best', 'base', 'min'];
-      rows.forEach((row, i) => {
-        const tds = row.querySelectorAll('td');
-        tds[0].textContent = translations[lang][oses[i]];
-        tds[1].textContent = translations[lang].working;
-        tds[1].className = 'status working';
-        tds[2].textContent = translations[lang][notes[i]];
-      });
-
-      const card = document.querySelector('.card');
-      if (card) {
-        card.querySelector('h3').textContent = translations[lang].tipTitle;
-        card.querySelector('p').innerHTML = translations[lang].tip;
-      }
-
-      const fps = document.querySelectorAll('.copyright');
-      if (fps[0]) fps[0].textContent = translations[lang].license;
-      if (fps[1]) fps[1].textContent = translations[lang].disclaimer;
-
-      Array.from(languageSelector.options).forEach(opt => {
-        const txt = opt.textContent;
-        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
-      });
-    }
-
-    function applyTheme(isDark) {
-      if (isDark) {
-        document.body.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('preferredTheme', 'dark');
-      } else {
-        document.body.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.removeItem('preferredTheme');
-      }
-    }
-
-    function toggleTheme() {
-      const isDark = document.body.hasAttribute('data-theme');
-      applyTheme(!isDark);
-    }
-
-    function closeMobileMenu() {
-      navMenu.classList.remove('active');
-    }
-
-    document.addEventListener('click', (e) => {
-      if (!navMenu.classList.contains('active')) return;
-      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
-      if (!isClickInside) closeMobileMenu();
     });
+  }
 
-    window.addEventListener('scroll', () => {
-      if (navMenu.classList.contains('active')) closeMobileMenu();
-    });
+  langSwitcher.addEventListener('change', (e) => updateLanguage(e.target.value));
+  updateLanguage(currentLang);
+</script>
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    if (localStorage.getItem('preferredTheme') === 'dark' || 
-        (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      applyTheme(true);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initLanguage();
-      document.querySelectorAll('.fade-in').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('appear');
-      });
-    });
-  </script>
 </body>
 </html>
