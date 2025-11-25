@@ -10,27 +10,22 @@
       --text-color: #333333;
       --header-bg: #f8f9fa;
       --card-bg: #ffffff;
+      --link-color: #007bff;
       --border-color: #e9ecef;
-      --link-color: #0d6efd;
-      --hover-bg: #f8f9fa;
     }
-
     .dark-mode {
       --bg-color: #121212;
       --text-color: #e0e0e0;
       --header-bg: #1e1e1e;
       --card-bg: #1e1e1e;
-      --border-color: #333333;
       --link-color: #4da6ff;
-      --hover-bg: #2a2a2a;
+      --border-color: #333333;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: var(--bg-color);
@@ -38,233 +33,147 @@
       line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
     }
-
     header {
       background-color: var(--header-bg);
-      padding: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
       z-index: 100;
     }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-
     .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
       color: var(--link-color);
-      text-decoration: none;
     }
-
-    .nav-menu {
+    nav ul {
       display: flex;
       list-style: none;
-      margin: 0;
-      padding: 0;
+      gap: 1.5rem;
     }
-
-    .nav-menu li {
-      margin-left: 1.5rem;
-    }
-
-    .nav-menu a {
-      color: var(--text-color);
+    nav a {
       text-decoration: none;
+      color: var(--text-color);
       font-weight: 500;
-      transition: color 0.2s;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
     }
-
-    .nav-menu a:hover {
+    nav a:hover, nav a.active {
+      border-color: var(--link-color);
       color: var(--link-color);
     }
-
     .lang-toggle, .theme-toggle {
       background: none;
       border: none;
-      color: var(--text-color);
-      cursor: pointer;
       font-size: 1rem;
-      margin-left: 1rem;
+      cursor: pointer;
+      color: var(--text-color);
       padding: 0.5rem;
       border-radius: 4px;
       transition: background-color 0.2s;
     }
-
     .lang-toggle:hover, .theme-toggle:hover {
-      background-color: var(--hover-bg);
+      background-color: var(--border-color);
     }
-
     .hero {
       text-align: center;
-      padding: 4rem 0;
+      padding: 4rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
-
     .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: var(--text-color);
     }
-
     .hero p {
       font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
+      margin-bottom: 2rem;
       color: var(--text-color);
     }
-
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin: 3rem 0;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
     .feature-card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       border: 1px solid var(--border-color);
     }
-
     .feature-card h3 {
       margin-bottom: 1rem;
       color: var(--text-color);
     }
-
-    .feature-card p {
-      color: var(--text-color);
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: var(--link-color);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
     footer {
       text-align: center;
-      padding: 2rem 0;
+      padding: 2rem;
       margin-top: 3rem;
       border-top: 1px solid var(--border-color);
       color: var(--text-color);
     }
-
-    /* Mobile menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-color);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
     @media (max-width: 768px) {
       .header-content {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 1rem;
       }
-
-      .mobile-menu-btn {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
       }
-
-      .nav-menu {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        margin-top: 1rem;
-        padding-top: 1rem;
-        border-top: 1px solid var(--border-color);
-      }
-
-      .nav-menu.active {
-        display: flex;
-      }
-
-      .nav-menu li {
-        margin: 0.5rem 0;
-        margin-left: 0;
-      }
-
-      .lang-theme-container {
-        display: flex;
-        width: 100%;
-        justify-content: flex-end;
-        margin-top: 1rem;
-      }
-
       .hero h1 {
         font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-        <ul class="nav-menu" id="navMenu">
+    <div class="header-content">
+      <div class="logo">ASUS FL8700JP 黑苹果项目</div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">主页</a></li>
           <li><a href="hardware.html">硬件支持</a></li>
           <li><a href="installation.html">安装指南</a></li>
           <li><a href="faq.html">常见问题</a></li>
           <li><a href="compatibility.html">系统兼容</a></li>
           <li><a href="https://github.com">GitHub</a></li>
         </ul>
-        <div class="lang-theme-container">
-          <select class="lang-toggle" id="langToggle">
-            <option value="zh-CN">简体中文</option>
-            <option value="zh-TW">繁體中文</option>
-            <option value="en">English</option>
-          </select>
-          <button class="theme-toggle" id="themeToggle">🌓</button>
-        </div>
+      </nav>
+      <div class="header-actions">
+        <select id="languageSelect" class="lang-toggle">
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="en">English</option>
+        </select>
+        <button id="themeToggle" class="theme-toggle">🌓</button>
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <main>
     <section class="hero">
       <h1>让 Windows 笔记本完美运行 macOS</h1>
       <p>为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
-      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <div style="text-align: center;">
-          <div style="font-weight: bold; font-size: 1.2rem;">OpenCore 1.0.5</div>
-          <div>全版本兼容 稳定可靠</div>
-          <a href="installation.html" class="btn">开始安装之旅</a>
+      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+        <div style="background: var(--card-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+          <strong>OpenCore 1.0.5</strong><br>全版本兼容 稳定可靠
         </div>
+        <button onclick="window.location.href='installation.html'" style="padding: 0.75rem 1.5rem; background: var(--link-color); color: white; border: none; border-radius: 4px; cursor: pointer;">开始安装之旅</button>
       </div>
     </section>
 
@@ -272,22 +181,22 @@
       <div class="feature-card">
         <h3>全面硬件支持</h3>
         <p>完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。</p>
-        <a href="hardware.html" class="btn">查看详情</a>
+        <button onclick="window.location.href='hardware.html'" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--link-color); color: white; border: none; border-radius: 4px; cursor: pointer;">查看详情</button>
       </div>
       <div class="feature-card">
         <h3>全版本兼容</h3>
         <p>支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
-        <a href="compatibility.html" class="btn">查看详情</a>
+        <button onclick="window.location.href='compatibility.html'" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--link-color); color: white; border: none; border-radius: 4px; cursor: pointer;">查看详情</button>
       </div>
       <div class="feature-card">
         <h3>详细安装指南</h3>
         <p>从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。</p>
-        <a href="installation.html" class="btn">查看详情</a>
+        <button onclick="window.location.href='installation.html'" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--link-color); color: white; border: none; border-radius: 4px; cursor: pointer;">查看详情</button>
       </div>
     </section>
 
-    <section style="margin: 3rem 0; padding: 2rem; background-color: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color);">
-      <h2 style="margin-bottom: 1rem;">项目简介</h2>
+    <section style="max-width: 800px; margin: 3rem auto; padding: 0 1rem;">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">项目简介</h2>
       <p>本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。</p>
       
       <h3 style="margin: 1.5rem 0 1rem;">技术特点</h3>
@@ -296,86 +205,63 @@
         <li>ACPI 热补丁与 SSDT 优化</li>
         <li>完善的电源管理配置</li>
       </ul>
-      
+
       <h3 style="margin: 1.5rem 0 1rem;">兼容性</h3>
-      <ul style="padding-left: 1.5rem;">
+      <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
         <li>macOS Catalina 至 Tahoe</li>
         <li>Intel Wi-Fi 与蓝牙</li>
         <li>高清音频与麦克风</li>
       </ul>
-      
-      <div style="margin-top: 1.5rem; padding: 1rem; background-color: var(--hover-bg); border-radius: 4px;">
-        <strong>重要提示：</strong>本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。
-      </div>
-    </section>
 
-    <section style="text-align: center; margin: 3rem 0;">
-      <h2 style="margin-bottom: 2rem;">快速开始</h2>
-      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-        <div style="text-align: center; max-width: 300px;">
-          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">安装指南</div>
-          <p>详细的步骤指导，从准备工作到系统优化，帮助您顺利完成黑苹果安装。</p>
-          <a href="installation.html" class="btn">开始安装</a>
-        </div>
-        <div style="text-align: center; max-width: 300px;">
-          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">常见问题</div>
-          <p>收集了用户常见问题及解决方案，帮助您快速排除安装和使用过程中的问题。</p>
-          <a href="faq.html" class="btn">查看问题</a>
-        </div>
-        <div style="text-align: center; max-width: 300px;">
-          <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">社区支持</div>
-          <p>加入我们的社区，获取最新更新、分享经验或寻求帮助。</p>
-          <a href="https://github.com" class="btn">访问 GitHub</a>
-        </div>
+      <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); margin: 2rem 0;">
+        <p style="color: #d32f2f; font-weight: bold;">重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。</p>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button onclick="window.location.href='installation.html'" style="flex: 1; min-width: 200px; padding: 1rem; background: var(--link-color); color: white; border: none; border-radius: 4px; cursor: pointer;">安装指南</button>
+        <button onclick="window.location.href='faq.html'" style="flex: 1; min-width: 200px; padding: 1rem; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer;">常见问题</button>
+        <a href="https://github.com" style="flex: 1; min-width: 200px; padding: 1rem; text-align: center; background: var(--card-bg); color: var(--text-color); text-decoration: none; border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer;">社区支持</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      <p>📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-      <p style="margin-top: 0.5rem;">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-    </div>
+    <p>📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+    <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-      document.getElementById('navMenu').classList.toggle('active');
-    });
-
-    // Theme toggle
+    // 主题切换
     const themeToggle = document.getElementById('themeToggle');
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     
     if (isDarkMode) {
       document.body.classList.add('dark-mode');
-      themeToggle.textContent = '🌙';
+      themeToggle.textContent = '☀️';
     }
-    
-    themeToggle.addEventListener('click', function() {
+
+    themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       const isDark = document.body.classList.contains('dark-mode');
       localStorage.setItem('darkMode', isDark);
-      this.textContent = isDark ? '🌙' : '🌓';
+      themeToggle.textContent = isDark ? '☀️' : '🌓';
     });
 
-    // Language toggle - redirect to appropriate pages
-    document.getElementById('langToggle').addEventListener('change', function() {
-      const lang = this.value;
-      const currentPath = window.location.pathname;
-      const currentPage = currentPath.split('/').pop();
-      
-      // Map of language codes to URL paths
-      const langPaths = {
-        'zh-CN': '',
-        'zh-TW': '',
-        'en': ''
-      };
-      
-      // For now, we'll just reload the same page since all languages are in the same HTML
-      // In a real implementation, you might have separate HTML files for each language
-      console.log('Language changed to:', lang);
+    // 语言切换
+    const languageSelect = document.getElementById('languageSelect');
+    const currentLang = document.documentElement.lang || 'zh-CN';
+    languageSelect.value = currentLang;
+
+    languageSelect.addEventListener('change', (e) => {
+      alert('语言切换功能在 GitHub Pages 上需要后端支持，实际部署时请配置多语言路由。\n当前选择: ' + e.target.value);
+    });
+
+    // 导航高亮
+    document.querySelectorAll('nav a').forEach(link => {
+      if (link.getAttribute('href') === window.location.pathname.split('/').pop() || 
+          (window.location.pathname === '/' && link.getAttribute('href') === 'index.html')) {
+        link.classList.add('active');
+      }
     });
   </script>
 </body>
