@@ -4,309 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #1f2937;
-      --header-bg: #f9fafb;
-      --border: #e5e7eb;
-      --card-bg: #ffffff;
-      --accent: #2563eb;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --error: #ef4444;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    [data-theme="dark"] {
-      --bg: #111827;
-      --text: #f9fafb;
-      --header-bg: #1f2937;
-      --border: #374151;
-      --card-bg: #1f2937;
-      --accent: #60a5fa;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: var(--header-bg);
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 1.25rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav-link {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 0;
-      border-bottom: 2px solid transparent;
-      white-space: nowrap;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .controls {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    select, button {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-
-    select:hover, button:hover {
-      background-color: var(--header-bg);
-    }
-
-    main {
-      padding: 2.5rem 0;
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .page-header h1 {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-
-    .compatibility-overview {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-
-    .compatibility-item {
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      min-width: 180px;
-    }
-
-    .compatibility-item h3 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      background: var(--card-bg);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    th, td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      background-color: var(--header-bg);
-      font-weight: 600;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .status-working { color: var(--success); font-weight: bold; }
-    .status-partial { color: var(--warning); font-weight: bold; }
-    .status-not-working { color: var(--error); font-weight: bold; }
-
-    .note-box {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .note-box h3 {
-      margin-bottom: 1rem;
-    }
-
-    .note-list {
-      padding-left: 1.5rem;
-    }
-
-    .note-list li {
-      margin-bottom: 0.5rem;
-    }
-
-    footer {
-      background-color: var(--header-bg);
-      padding: 2rem 0;
-      margin-top: 4rem;
-      text-align: center;
-    }
-
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-links a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.25rem;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background-color: var(--header-bg);
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 99;
-      }
-
-      .nav-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .controls {
-        width: 100%;
-        justify-content: flex-end;
-      }
-
-      .page-header h1 {
-        font-size: 1.875rem;
-      }
-
-      table, th, td {
-        display: block;
-        width: 100%;
-      }
-
-      thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-
-      tr {
-        margin-bottom: 1.5rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 1rem;
-      }
-
-      td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-        border: none;
-      }
-
-      td::before {
-        content: attr(data-label) ": ";
-        position: absolute;
-        left: 1rem;
-        width: 45%;
-        font-weight: bold;
-        text-align: left;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header>
@@ -319,21 +18,18 @@
         <nav class="nav-menu" id="navMenu">
           <a href="index.html" class="nav-link" data-page="home">主页</a>
           <a href="hardware.html" class="nav-link active" data-page="hardware">硬件支持</a>
-          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
           <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
           <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
-          <a href="advanced.html" class="nav-link" data-page="advanced">高级配置</a>
-          <a href="contribute.html" class="nav-link" data-page="contribute">参与贡献</a>
-          <div class="controls">
-            <select class="language-selector" id="languageSelector">
-              <option value="zh-CN">简体中文</option>
-              <option value="zh-TW">繁體中文</option>
-              <option value="en">English</option>
-            </select>
-            <button class="theme-toggle" id="themeToggle">
-              <i class="fas fa-moon"></i>
-            </button>
-          </div>
+          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
+          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
+          <select class="language-selector" id="languageSelector">
+            <option value="zh-CN">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="en">English</option>
+          </select>
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
         </nav>
       </div>
     </div>
@@ -341,96 +37,39 @@
 
   <main class="container">
     <div class="page-header">
-      <h1 class="page-title">硬件支持详情</h1>
-      <p class="page-subtitle">全面兼容华硕 FL8700JP 的核心硬件组件</p>
-    </div>
-
-    <div class="compatibility-overview">
-      <div class="compatibility-item">
-        <h3>✅</h3>
-        <p class="text-full">完美支持</p>
-      </div>
-      <div class="compatibility-item">
-        <h3>⚠️</h3>
-        <p class="text-partial">部分支持</p>
-      </div>
-      <div class="compatibility-item">
-        <h3>❌</h3>
-        <p class="text-not">不支持</p>
-      </div>
+      <h1>硬件支持详情</h1>
+      <p>全面兼容华硕 FL8700JP 的核心硬件组件</p>
     </div>
 
     <table>
       <thead>
         <tr>
-          <th class="col-component">硬件组件</th>
-          <th class="col-status">状态</th>
-          <th class="col-desc">说明</th>
+          <th>组件</th>
+          <th>状态</th>
+          <th>说明</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td data-label="硬件组件">CPU (Intel i7-1065G7)</td>
-          <td class="status-working" data-label="状态">✅ 完美支持</td>
-          <td data-label="说明">Ice Lake 架构优化</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">核显 (Intel Iris Plus G7)</td>
-          <td class="status-partial" data-label="状态">⚠️ 基本支持</td>
-          <td data-label="说明">不支持 HDMI 输出</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">独立显卡 (NVIDIA MX330)</td>
-          <td class="status-not-working" data-label="状态">❌ 不支持</td>
-          <td data-label="说明">已在配置中屏蔽</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">音频 (Realtek ALC256)</td>
-          <td class="status-working" data-label="状态">✅ 完美支持</td>
-          <td data-label="说明">自动切换输入/输出设备</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">无线网络 (Intel Wireless-AC 9461)</td>
-          <td class="status-partial" data-label="状态">⚠️ 部分支持</td>
-          <td data-label="说明">不支持隔空投送</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">触控板 (ELAN1200)</td>
-          <td class="status-partial" data-label="状态">⚠️ 基本支持</td>
-          <td data-label="说明">偶发无响应</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">Type-C</td>
-          <td class="status-partial" data-label="状态">⚠️ 部分支持</td>
-          <td data-label="说明">不支持视频输出</td>
-        </tr>
-        <tr>
-          <td data-label="硬件组件">蓝牙 (Intel Bluetooth)</td>
-          <td class="status-working" data-label="状态">✅ 完美支持</td>
-          <td data-label="说明">完整功能</td>
-        </tr>
+        <tr><td>处理器 Intel i7-1065G7</td><td class="status working">✅ 完美支持</td><td>Ice Lake 架构优化</td></tr>
+        <tr><td>核显 Intel Iris Plus G7</td><td class="status partial">⚠️ 基本支持</td><td>不支持 HDMI 输出</td></tr>
+        <tr><td>独立显卡 NVIDIA MX330</td><td class="status not-working">❌ 不支持</td><td>已在配置中屏蔽</td></tr>
+        <tr><td>音频 Realtek ALC256</td><td class="status working">✅ 完美支持</td><td>自动切换输入/输出设备</td></tr>
+        <tr><td>无线网络 Intel Wireless-AC 9461</td><td class="status partial">⚠️ 部分支持</td><td>不支持隔空投送</td></tr>
+        <tr><td>触控板 ELAN1200</td><td class="status partial">⚠️ 基本支持</td><td>偶发无响应</td></tr>
+        <tr><td>Type-C</td><td class="status partial">⚠️ 部分支持</td><td>不支持视频输出</td></tr>
+        <tr><td>蓝牙 Intel Bluetooth</td><td class="status working">✅ 完美支持</td><td>完整功能</td></tr>
       </tbody>
     </table>
-
-    <div class="note-box">
-      <h3 class="note-title">重要说明</h3>
-      <ul class="note-list">
-        <li class="note-item-1">专属适配：仅适用于华硕 FL8700JP (X509JP) 特定机型</li>
-        <li class="note-item-2">系统准备：需自行获取 macOS 安装镜像</li>
-        <li class="note-item-3">风险提示：操作前请务必备份重要数据</li>
-        <li class="note-item-4">授权许可：遵循 MIT 许可证，禁止商业用途</li>
-      </ul>
-    </div>
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="social-links">
-          <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-        <p class="text-license">许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-        <p class="text-disclaimer">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+        <p class="copyright">📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+        <p class="copyright">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
       </div>
     </div>
   </footer>
@@ -440,217 +79,180 @@
       'zh-CN': {
         home: '主页',
         hardware: '硬件支持',
-        compatibility: '系统兼容',
         installation: '安装指南',
         faq: '常见问题',
-        advanced: '高级配置',
-        contribute: '参与贡献',
+        compatibility: '系统兼容',
+        github: 'GitHub',
         '简体中文': '简体中文',
         '繁體中文': '繁體中文',
         English: 'English',
-        title: '硬件支持 | ASUS FL8700JP 黑苹果项目',
-        pageTitle: '硬件支持详情',
-        pageSubtitle: '全面兼容华硕 FL8700JP 的核心硬件组件',
-        fullSupport: '完美支持',
-        partialSupport: '部分支持',
-        notSupported: '不支持',
-        cpu: 'CPU (Intel i7-1065G7)',
-        cpuDesc: 'Ice Lake 架构优化',
-        igpu: '核显 (Intel Iris Plus G7)',
-        igpuDesc: '不支持 HDMI 输出',
-        dgpu: '独立显卡 (NVIDIA MX330)',
-        dgpuDesc: '已在配置中屏蔽',
-        audio: '音频 (Realtek ALC256)',
-        audioDesc: '自动切换输入/输出设备',
-        wifi: '无线网络 (Intel Wireless-AC 9461)',
-        wifiDesc: '不支持隔空投送',
-        trackpad: '触控板 (ELAN1200)',
-        trackpadDesc: '偶发无响应',
+        title: '硬件支持详情',
+        subtitle: '全面兼容华硕 FL8700JP 的核心硬件组件',
+        cpu: '处理器 Intel i7-1065G7',
+        igpu: '核显 Intel Iris Plus G7',
+        dgpu: '独立显卡 NVIDIA MX330',
+        audio: '音频 Realtek ALC256',
+        wifi: '无线网络 Intel Wireless-AC 9461',
+        trackpad: '触控板 ELAN1200',
         typec: 'Type-C',
-        typecDesc: '不支持视频输出',
-        bluetooth: '蓝牙 (Intel Bluetooth)',
-        bluetoothDesc: '完整功能',
-        importantNote: '重要说明',
-        note1: '专属适配：仅适用于华硕 FL8700JP (X509JP) 特定机型',
-        note2: '系统准备：需自行获取 macOS 安装镜像',
-        note3: '风险提示：操作前请务必备份重要数据',
-        note4: '授权许可：遵循 MIT 许可证，禁止商业用途',
+        bluetooth: '蓝牙 Intel Bluetooth',
+        working: '✅ 完美支持',
+        partial: '⚠️ 基本支持',
+        notWorking: '❌ 不支持',
+        cpuNote: 'Ice Lake 架构优化',
+        igpuNote: '不支持 HDMI 输出',
+        dgpuNote: '已在配置中屏蔽',
+        audioNote: '自动切换输入/输出设备',
+        wifiNote: '不支持隔空投送',
+        trackpadNote: '偶发无响应',
+        typecNote: '不支持视频输出',
+        bluetoothNote: '完整功能',
         license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
         disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
       },
       'zh-TW': {
         home: '主頁',
         hardware: '硬體支援',
-        compatibility: '系統相容',
         installation: '安裝指南',
         faq: '常見問題',
-        advanced: '進階設定',
-        contribute: '參與貢獻',
+        compatibility: '系統相容',
+        github: 'GitHub',
         '简体中文': '簡體中文',
         '繁體中文': '繁體中文',
         English: 'English',
-        title: '硬體支援 | ASUS FL8700JP 黑蘋果專案',
-        pageTitle: '硬體支援詳情',
-        pageSubtitle: '全面相容華碩 FL8700JP 的核心硬體元件',
-        fullSupport: '完美支援',
-        partialSupport: '部分支援',
-        notSupported: '不支援',
-        cpu: 'CPU (Intel i7-1065G7)',
-        cpuDesc: 'Ice Lake 架構優化',
-        igpu: '核顯 (Intel Iris Plus G7)',
-        igpuDesc: '不支援 HDMI 輸出',
-        dgpu: '獨立顯示卡 (NVIDIA MX330)',
-        dgpuDesc: '已在設定中屏蔽',
-        audio: '音訊 (Realtek ALC256)',
-        audioDesc: '自動切換輸入/輸出裝置',
-        wifi: '無線網路 (Intel Wireless-AC 9461)',
-        wifiDesc: '不支援隔空投送',
-        trackpad: '觸控板 (ELAN1200)',
-        trackpadDesc: '偶發無回應',
+        title: '硬體支援詳情',
+        subtitle: '全面相容華碩 FL8700JP 的核心硬體元件',
+        cpu: '處理器 Intel i7-1065G7',
+        igpu: '核顯 Intel Iris Plus G7',
+        dgpu: '獨立顯示卡 NVIDIA MX330',
+        audio: '音訊 Realtek ALC256',
+        wifi: '無線網路 Intel Wireless-AC 9461',
+        trackpad: '觸控板 ELAN1200',
         typec: 'Type-C',
-        typecDesc: '不支援視訊輸出',
-        bluetooth: '藍牙 (Intel Bluetooth)',
-        bluetoothDesc: '完整功能',
-        importantNote: '重要說明',
-        note1: '專屬適配：僅適用於華碩 FL8700JP (X509JP) 特定機型',
-        note2: '系統準備：需自行取得 macOS 安裝映像檔',
-        note3: '風險提示：操作前請務必備份重要資料',
-        note4: '授權許可：遵循 MIT 許可證，禁止商業用途',
+        bluetooth: '藍牙 Intel Bluetooth',
+        working: '✅ 完美支援',
+        partial: '⚠️ 基本支援',
+        notWorking: '❌ 不支援',
+        cpuNote: 'Ice Lake 架構優化',
+        igpuNote: '不支援 HDMI 輸出',
+        dgpuNote: '已在設定中屏蔽',
+        audioNote: '自動切換輸入/輸出裝置',
+        wifiNote: '不支援隔空投送',
+        trackpadNote: '偶發無回應',
+        typecNote: '不支援影片輸出',
+        bluetoothNote: '完整功能',
         license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
         disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
       },
       'en': {
         home: 'Home',
         hardware: 'Hardware Support',
-        compatibility: 'Compatibility',
         installation: 'Installation Guide',
         faq: 'FAQ',
-        advanced: 'Advanced Config',
-        contribute: 'Contribute',
+        compatibility: 'Compatibility',
+        github: 'GitHub',
         '简体中文': 'Simplified Chinese',
         '繁體中文': 'Traditional Chinese',
         English: 'English',
-        title: 'Hardware Support | ASUS FL8700JP Hackintosh Project',
-        pageTitle: 'Hardware Compatibility Details',
-        pageSubtitle: 'Full compatibility with core hardware components of ASUS FL8700JP',
-        fullSupport: 'Fully Working',
-        partialSupport: 'Partially Working',
-        notSupported: 'Not Supported',
-        cpu: 'CPU (Intel i7-1065G7)',
-        cpuDesc: 'Optimized for Ice Lake architecture',
-        igpu: 'Integrated GPU (Intel Iris Plus G7)',
-        igpuDesc: 'HDMI output not supported',
-        dgpu: 'Dedicated GPU (NVIDIA MX330)',
-        dgpuDesc: 'Disabled in config',
-        audio: 'Audio (Realtek ALC256)',
-        audioDesc: 'Auto-switch input/output devices',
-        wifi: 'Wi-Fi (Intel Wireless-AC 9461)',
-        wifiDesc: 'AirDrop not supported',
-        trackpad: 'Trackpad (ELAN1200)',
-        trackpadDesc: 'Occasional unresponsiveness',
+        title: 'Hardware Support Details',
+        subtitle: 'Full compatibility with core hardware components of ASUS FL8700JP',
+        cpu: 'CPU Intel i7-1065G7',
+        igpu: 'Integrated GPU Intel Iris Plus G7',
+        dgpu: 'Discrete GPU NVIDIA MX330',
+        audio: 'Audio Realtek ALC256',
+        wifi: 'Wi-Fi Intel Wireless-AC 9461',
+        trackpad: 'Trackpad ELAN1200',
         typec: 'Type-C',
-        typecDesc: 'Video output not supported',
-        bluetooth: 'Bluetooth (Intel Bluetooth)',
-        bluetoothDesc: 'Full functionality',
-        importantNote: 'Important Notes',
-        note1: 'Model-specific: Only for ASUS FL8700JP (X509JP)',
-        note2: 'macOS installer image must be obtained separately',
-        note3: 'Backup your data before proceeding',
-        note4: 'MIT License — commercial use prohibited',
+        bluetooth: 'Bluetooth Intel Bluetooth',
+        working: '✅ Fully Working',
+        partial: '⚠️ Partially Working',
+        notWorking: '❌ Not Working',
+        cpuNote: 'Optimized for Ice Lake architecture',
+        igpuNote: 'HDMI output not supported',
+        dgpuNote: 'Disabled in configuration',
+        audioNote: 'Auto-switch input/output devices',
+        wifiNote: 'AirDrop not supported',
+        trackpadNote: 'Occasional unresponsiveness',
+        typecNote: 'Video output not supported',
+        bluetoothNote: 'Full functionality',
         license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
         disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
       }
     };
 
     const currentPage = 'hardware';
-    let currentLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
-
     const languageSelector = document.getElementById('languageSelector');
     const themeToggle = document.getElementById('themeToggle');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
 
     function initLanguage() {
-      languageSelector.value = currentLang;
-      updateLanguage(currentLang);
+      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
+      languageSelector.value = savedLang;
+      updateLanguage(savedLang);
     }
 
     function updateLanguage(lang) {
-      currentLang = lang;
       localStorage.setItem('preferredLanguage', lang);
-      
+      document.title = translations[lang].title + ' | ASUS FL8700JP 黑苹果项目';
+
+      // Nav
       document.querySelectorAll('.nav-link[data-page]').forEach(link => {
         const key = link.getAttribute('data-page');
         if (translations[lang][key]) link.textContent = translations[lang][key];
       });
+      const gh = document.querySelector('.nav-link[href="https://github.com"]');
+      if (gh) gh.textContent = translations[lang].github;
 
-      document.title = translations[lang].title;
-      document.querySelector('.page-title').textContent = translations[lang].pageTitle;
-      document.querySelector('.page-subtitle').textContent = translations[lang].pageSubtitle;
+      // Page content
+      document.querySelector('.page-header h1').textContent = translations[lang].title;
+      document.querySelector('.page-header p').textContent = translations[lang].subtitle;
 
-      // Update table rows
-      const rows = [
-        { comp: 'cpu', status: 'status-working', desc: 'cpuDesc' },
-        { comp: 'igpu', status: 'status-partial', desc: 'igpuDesc' },
-        { comp: 'dgpu', status: 'status-not-working', desc: 'dgpuDesc' },
-        { comp: 'audio', status: 'status-working', desc: 'audioDesc' },
-        { comp: 'wifi', status: 'status-partial', desc: 'wifiDesc' },
-        { comp: 'trackpad', status: 'status-partial', desc: 'trackpadDesc' },
-        { comp: 'typec', status: 'status-partial', desc: 'typecDesc' },
-        { comp: 'bluetooth', status: 'status-working', desc: 'bluetoothDesc' }
-      ];
+      // Table rows
+      const rows = document.querySelectorAll('tbody tr');
+      const keys = ['cpu', 'igpu', 'dgpu', 'audio', 'wifi', 'trackpad', 'typec', 'bluetooth'];
+      const statuses = ['working', 'partial', 'notWorking'];
+      const notes = ['cpuNote', 'igpuNote', 'dgpuNote', 'audioNote', 'wifiNote', 'trackpadNote', 'typecNote', 'bluetoothNote'];
 
-      const tds = document.querySelectorAll('tbody td');
-      let idx = 0;
-      rows.forEach(row => {
-        tds[idx++].textContent = translations[lang][row.comp];
-        tds[idx++].textContent = translations[lang][row.status === 'status-working' ? 'fullSupport' : row.status === 'status-partial' ? 'partialSupport' : 'notSupported'];
-        tds[idx++].textContent = translations[lang][row.desc];
+      rows.forEach((row, i) => {
+        const tds = row.querySelectorAll('td');
+        tds[0].textContent = translations[lang][keys[i]];
+        tds[1].textContent = translations[lang][statuses[i === 0 || i === 3 || i === 7 ? 0 : (i === 1 || i === 4 || i === 5 || i === 6 ? 1 : 2)]];
+        tds[1].className = 'status ' + (i === 0 || i === 3 || i === 7 ? 'working' : (i === 1 || i === 4 || i === 5 || i === 6 ? 'partial' : 'not-working'));
+        tds[2].textContent = translations[lang][notes[i]];
       });
 
-      document.querySelector('.note-title').textContent = translations[lang].importantNote;
-      document.querySelector('.note-item-1').textContent = translations[lang].note1;
-      document.querySelector('.note-item-2').textContent = translations[lang].note2;
-      document.querySelector('.note-item-3').textContent = translations[lang].note3;
-      document.querySelector('.note-item-4').textContent = translations[lang].note4;
+      // Footer
+      const fps = document.querySelectorAll('.copyright');
+      if (fps[0]) fps[0].textContent = translations[lang].license;
+      if (fps[1]) fps[1].textContent = translations[lang].disclaimer;
 
-      document.querySelector('.text-license').textContent = translations[lang].license;
-      document.querySelector('.text-disclaimer').textContent = translations[lang].disclaimer;
-
+      // Update selector labels
       Array.from(languageSelector.options).forEach(opt => {
         const txt = opt.textContent;
         if (translations[lang][txt]) opt.textContent = translations[lang][txt];
       });
     }
 
-    function getPreferredTheme() {
-      const saved = localStorage.getItem('preferredTheme');
-      if (saved === 'light' || saved === 'dark') return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    function applyTheme(theme) {
-      if (theme === 'dark') {
+    function applyTheme(isDark) {
+      if (isDark) {
         document.body.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('preferredTheme', 'dark');
       } else {
         document.body.removeAttribute('data-theme');
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.removeItem('preferredTheme');
       }
-      localStorage.setItem('preferredTheme', theme);
     }
 
     function toggleTheme() {
-      const current = document.body.hasAttribute('data-theme') ? 'dark' : 'light';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
+      const isDark = document.body.hasAttribute('data-theme');
+      applyTheme(!isDark);
     }
 
     function closeMobileMenu() {
       navMenu.classList.remove('active');
-    }
-
-    function toggleMobileMenu() {
-      navMenu.classList.toggle('active');
     }
 
     document.addEventListener('click', (e) => {
@@ -669,16 +271,14 @@
 
     languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
     themeToggle.addEventListener('click', toggleTheme);
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-    applyTheme(getPreferredTheme());
-    initLanguage();
+    if (localStorage.getItem('preferredTheme') === 'dark' || 
+        (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      applyTheme(true);
+    }
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('preferredTheme')) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
-    });
+    document.addEventListener('DOMContentLoaded', initLanguage);
   </script>
 </body>
 </html>
