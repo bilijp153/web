@@ -1,294 +1,648 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>硬件支持 | ASUS FL8700JP 黑苹果项目</title>
-  <meta name="description" content="详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --bg: #fff;
-      --text: #111;
-      --card-bg: #fff;
-      --link: #0066cc;
-      --border: #ddd;
-      --shadow: 0 2px 8px rgba(0,0,0,0.1);
-      --accent: #0066cc;
-      --header-bg: #f8f9fa;
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-color: #ffffff;
+      --text-color: #1f2937;
+      --card-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --header-bg: #f9fafb;
+      --footer-bg: #f3f4f6;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121212;
-        --text: #eee;
-        --card-bg: #1e1e1e;
-        --link: #66b3ff;
-        --border: #444;
-        --shadow: 0 2px 8px rgba(0,0,0,0.3);
-        --header-bg: #1a1a1a;
-      }
+
+    .dark-mode {
+      --bg-color: #111827;
+      --text-color: #f9fafb;
+      --card-bg: #1f2937;
+      --border-color: #374151;
+      --header-bg: #1f2937;
+      --footer-bg: #111827;
     }
-    body {
+
+    * {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    header {
-      background: var(--header-bg);
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
       padding: 0;
-      margin: 0;
-      flex-wrap: wrap;
-      justify-content: center;
+      box-sizing: border-box;
     }
-    nav a {
-      color: var(--link);
-      text-decoration: none;
-      font-weight: 500;
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    nav a:hover, nav a.active {
-      text-decoration: underline;
+
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--accent);
+      color: var(--primary-color);
+      text-decoration: none;
     }
-    main { padding: 2rem 0; }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .language-selector,
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+
+    .language-selector:hover,
+    .theme-toggle:hover {
+      background-color: var(--border-color);
+    }
+
+    main {
+      padding: 2rem 0;
+    }
+
     .page-header {
       text-align: center;
       margin-bottom: 2rem;
     }
-    .page-header h1 { font-size: 2.25rem; }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+
+    .compatibility-overview {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .compatibility-item {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      min-width: 200px;
+    }
+
+    .compatibility-item h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 2rem 0;
-      background: var(--card-bg);
-      border-radius: 12px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
     }
+
     th, td {
       padding: 1rem;
       text-align: left;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-color);
     }
+
     th {
-      background: rgba(0,0,0,0.05);
+      background-color: var(--header-bg);
       font-weight: 600;
+      color: var(--text-color);
     }
-    @media (prefers-color-scheme: dark) {
-      th { background: rgba(255,255,255,0.05); }
+
+    tr:last-child td {
+      border-bottom: none;
     }
-    .status {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      font-size: 0.875rem;
-      font-weight: 500;
+
+    .status-working {
+      color: #10b981;
+      font-weight: bold;
     }
-    .status.success {
-      background: #e6f4ea;
-      color: #137333;
+
+    .status-partial {
+      color: #f59e0b;
+      font-weight: bold;
     }
-    .status.warning {
-      background: #fff4e6;
-      color: #b75e0e;
+
+    .status-not-working {
+      color: #ef4444;
+      font-weight: bold;
     }
-    .status.error {
-      background: #fce8e6;
-      color: #c5221f;
-    }
-    @media (prefers-color-scheme: dark) {
-      .status.success { background: #1b4332; color: #66b3a0; }
-      .status.warning { background: #43320f; color: #f4b350; }
-      .status.error { background: #4d1f1c; color: #e57373; }
-    }
+
     footer {
-      text-align: center;
+      background-color: var(--footer-bg);
       padding: 2rem 0;
-      margin-top: 3rem;
-      color: var(--text-secondary, inherit);
-      font-size: 0.9rem;
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-color);
     }
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--text);
-    }
-    .header-right {
+
+    .footer-content {
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 1rem;
     }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
-      .page-header h1 { font-size: 2rem; }
-      th, td { padding: 0.75rem; }
-      nav ul { flex-direction: column; align-items: center; }
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: var(--header-bg);
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <nav>
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
-        <div class="header-right">
-          <ul>
-            <li><a href="hardware.html" class="active">硬件支持</a></li>
-            <li><a href="installation.html">安装指南</a></li>
-            <li><a href="faq.html">常见问题</a></li>
-            <li><a href="compatibility.html">系统兼容</a></li>
-            <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
-          </ul>
-          <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
-        </div>
-      </nav>
+      <div class="header-content">
+        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link" data-page="home">主页</a>
+          <a href="hardware.html" class="nav-link active" data-page="hardware">硬件支持</a>
+          <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
+          <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
+          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
+          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
+          <select class="language-selector" id="languageSelector">
+            <option value="zh-CN">简体中文</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="en">English</option>
+          </select>
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="page-header">
-      <h1>硬件支持</h1>
-      <p>详细了解您的ASUS FL8700JP笔记本电脑与macOS的硬件兼容性情况</p>
+      <h1>硬件支持详情</h1>
+      <p>全面兼容华硕 FL8700JP 的核心硬件组件</p>
+    </div>
+
+    <div class="compatibility-overview">
+      <div class="compatibility-item">
+        <h3>✅</h3>
+        <p>完美支持</p>
+      </div>
+      <div class="compatibility-item">
+        <h3>⚠️</h3>
+        <p>部分支持</p>
+      </div>
+      <div class="compatibility-item">
+        <h3>❌</h3>
+        <p>不支持</p>
+      </div>
     </div>
 
     <table>
       <thead>
         <tr>
           <th>硬件组件</th>
-          <th>型号/规格</th>
           <th>状态</th>
-          <th>备注</th>
+          <th>说明</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>处理器</td>
-          <td>Intel Core i7-10510U</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>原生性能，睿频正常</td>
+          <td>CPU (Intel Core i7-10510U)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>所有核心与线程正常工作，支持电源管理</td>
         </tr>
         <tr>
-          <td>显卡</td>
-          <td>Intel Iris Plus G7</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>支持硬件加速和视频编解码</td>
+          <td>GPU (Intel UHD Graphics)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>支持 4K 输出，硬件加速正常</td>
         </tr>
         <tr>
-          <td>无线网卡</td>
-          <td>Intel Wi-Fi 6 AX201</td>
-          <td><span class="status warning">需替换</span></td>
-          <td>需更换为 Broadcom 无线网卡</td>
+          <td>内存 (DDR4)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>最大支持 16GB，双通道正常识别</td>
         </tr>
         <tr>
-          <td>蓝牙</td>
-          <td>Intel Bluetooth</td>
-          <td><span class="status warning">需替换</span></td>
-          <td>随无线网卡一同替换</td>
+          <td>Wi-Fi / 蓝牙 (Intel AX201)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>需使用 AirportItlwm 驱动，蓝牙需配合 BlueToolFixup</td>
         </tr>
         <tr>
-          <td>声卡</td>
-          <td>Realtek ALC294</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>扬声器、耳机、麦克风均正常</td>
+          <td>音频 (Realtek ALC256)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>耳机、扬声器、麦克风均正常工作</td>
         </tr>
         <tr>
-          <td>触控板</td>
-          <td>ELAN 或 Synaptics</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>支持所有多点触控手势</td>
+          <td>触控板 (ELAN I2C)</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>支持多点触控、手势操作</td>
         </tr>
         <tr>
-          <td>键盘</td>
-          <td>标准笔记本键盘</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>所有按键包括功能键均正常</td>
+          <td>键盘背光</td>
+          <td class="status-partial">⚠️ 部分支持</td>
+          <td>可通过快捷键调节亮度，但无法自动感应环境光</td>
+        </tr>
+        <tr>
+          <td>HDMI 输出</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>支持 4K@60Hz 外接显示器</td>
+        </tr>
+        <tr>
+          <td>USB 接口</td>
+          <td class="status-working">✅ 完美支持</td>
+          <td>所有 USB 2.0/3.0 接口均可正常识别</td>
         </tr>
         <tr>
           <td>摄像头</td>
-          <td>720p HD 摄像头</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>FaceTime 和第三方应用均可使用</td>
-        </tr>
-        <tr>
-          <td>亮度调节</td>
-          <td>显示器背光</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>支持键盘快捷键和系统设置调节</td>
-        </tr>
-        <tr>
-          <td>音量调节</td>
-          <td>扬声器控制</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>支持键盘快捷键调节</td>
-        </tr>
-        <tr>
-          <td>睡眠/唤醒</td>
-          <td>电源管理</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>盖上盖子自动睡眠，唤醒正常</td>
-        </tr>
-        <tr>
-          <td>USB 端口</td>
-          <td>USB 3.2 Gen1 Type-A</td>
-          <td><span class="status success">完全支持</span></td>
-          <td>所有端口均可正常识别设备</td>
-        </tr>
-        <tr>
-          <td>Thunderbolt</td>
-          <td>USB-C 端口</td>
-          <td><span class="status error">不支持</span></td>
-          <td>仅支持 USB 数据传输</td>
+          <td class="status-not-working">❌ 不支持</td>
+          <td>目前尚无可用驱动，建议使用外接摄像头</td>
         </tr>
         <tr>
           <td>指纹识别</td>
-          <td>Windows Hello 指纹</td>
-          <td><span class="status error">不支持</span></td>
-          <td>macOS 无原生驱动支持</td>
+          <td class="status-not-working">❌ 不支持</td>
+          <td>macOS 不支持 Windows 笔记本指纹模块</td>
         </tr>
       </tbody>
     </table>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+      <h3>重要提示</h3>
+      <p>以上兼容性基于 OpenCore 1.0.5 及 macOS Sonoma/Tahoe 测试结果。不同 BIOS 版本或硬件批次可能存在细微差异，请以实际测试为准。</p>
+      <p>如遇硬件异常，请先确认是否使用了本项目提供的最新 EFI 配置，并检查 BIOS 设置是否符合安装指南要求。</p>
+    </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-      <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+      <div class="footer-content">
+        <div class="social-links">
+          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        <p>© 2021-2025 极光呆呆脑 - 保留所有权利</p>
+        <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+      </div>
     </div>
   </footer>
 
   <script>
-    const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    // Language data for hardware page
+    const translations = {
+      'zh-CN': {
+        home: '主页',
+        hardware: '硬件支持',
+        installation: '安装指南',
+        faq: '常见问题',
+        compatibility: '系统兼容',
+        github: 'GitHub',
+        '简体中文': '简体中文',
+        '繁體中文': '繁體中文',
+        English: 'English',
+        title: '硬件支持 | ASUS FL8700JP 黑苹果项目',
+        pageTitle: '硬件支持详情',
+        pageSubtitle: '全面兼容华硕 FL8700JP 的核心硬件组件',
+        fullSupport: '完美支持',
+        partialSupport: '部分支持',
+        notSupported: '不支持',
+        cpu: 'CPU (Intel Core i7-10510U)',
+        cpuDesc: '所有核心与线程正常工作，支持电源管理',
+        gpu: 'GPU (Intel UHD Graphics)',
+        gpuDesc: '支持 4K 输出，硬件加速正常',
+        memory: '内存 (DDR4)',
+        memoryDesc: '最大支持 16GB，双通道正常识别',
+        wifi: 'Wi-Fi / 蓝牙 (Intel AX201)',
+        wifiDesc: '需使用 AirportItlwm 驱动，蓝牙需配合 BlueToolFixup',
+        audio: '音频 (Realtek ALC256)',
+        audioDesc: '耳机、扬声器、麦克风均正常工作',
+        trackpad: '触控板 (ELAN I2C)',
+        trackpadDesc: '支持多点触控、手势操作',
+        keyboardBacklight: '键盘背光',
+        keyboardBacklightDesc: '可通过快捷键调节亮度，但无法自动感应环境光',
+        hdmi: 'HDMI 输出',
+        hdmiDesc: '支持 4K@60Hz 外接显示器',
+        usb: 'USB 接口',
+        usbDesc: '所有 USB 2.0/3.0 接口均可正常识别',
+        camera: '摄像头',
+        cameraDesc: '目前尚无可用驱动，建议使用外接摄像头',
+        fingerprint: '指纹识别',
+        fingerprintDesc: 'macOS 不支持 Windows 笔记本指纹模块',
+        importantNoteTitle: '重要提示',
+        importantNote1: '以上兼容性基于 OpenCore 1.0.5 及 macOS Sonoma/Tahoe 测试结果。不同 BIOS 版本或硬件批次可能存在细微差异，请以实际测试为准。',
+        importantNote2: '如遇硬件异常，请先确认是否使用了本项目提供的最新 EFI 配置，并检查 BIOS 设置是否符合安装指南要求。',
+        license: '© 2021-2025 极光呆呆脑 - 保留所有权利',
+        disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
+      },
+      'zh-TW': {
+        home: '主頁',
+        hardware: '硬體支援',
+        installation: '安裝指南',
+        faq: '常見問題',
+        compatibility: '系統相容',
+        github: 'GitHub',
+        '简体中文': '簡體中文',
+        '繁體中文': '繁體中文',
+        English: 'English',
+        title: '硬體支援 | ASUS FL8700JP 黑蘋果專案',
+        pageTitle: '硬體支援詳情',
+        pageSubtitle: '全面相容華碩 FL8700JP 的核心硬體元件',
+        fullSupport: '完美支援',
+        partialSupport: '部分支援',
+        notSupported: '不支援',
+        cpu: 'CPU (Intel Core i7-10510U)',
+        cpuDesc: '所有核心與執行緒正常運作，支援電源管理',
+        gpu: 'GPU (Intel UHD Graphics)',
+        gpuDesc: '支援 4K 輸出，硬體加速正常',
+        memory: '記憶體 (DDR4)',
+        memoryDesc: '最大支援 16GB，雙通道正常識別',
+        wifi: 'Wi-Fi / 藍牙 (Intel AX201)',
+        wifiDesc: '需使用 AirportItlwm 驅動，藍牙需配合 BlueToolFixup',
+        audio: '音訊 (Realtek ALC256)',
+        audioDesc: '耳機、揚聲器、麥克風皆正常運作',
+        trackpad: '觸控板 (ELAN I2C)',
+        trackpadDesc: '支援多點觸控、手勢操作',
+        keyboardBacklight: '鍵盤背光',
+        keyboardBacklightDesc: '可透過快速鍵調節亮度，但無法自動感應環境光',
+        hdmi: 'HDMI 輸出',
+        hdmiDesc: '支援 4K@60Hz 外接顯示器',
+        usb: 'USB 介面',
+        usbDesc: '所有 USB 2.0/3.0 介面皆可正常識別',
+        camera: '攝影機',
+        cameraDesc: '目前尚無可用驅動，建議使用外接攝影機',
+        fingerprint: '指紋辨識',
+        fingerprintDesc: 'macOS 不支援 Windows 筆記型電腦指紋模組',
+        importantNoteTitle: '重要提示',
+        importantNote1: '以上相容性基於 OpenCore 1.0.5 及 macOS Sonoma/Tahoe 測試結果。不同 BIOS 版本或硬體批次可能存在細微差異，請以實際測試為準。',
+        importantNote2: '如遇硬體異常，請先確認是否使用了本專案提供的最新 EFI 配置，並檢查 BIOS 設定是否符合安裝指南要求。',
+        license: '© 2021-2025 極光呆呆腦 - 保留所有權利',
+        disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+      },
+      'en': {
+        home: 'Home',
+        hardware: 'Hardware Support',
+        installation: 'Installation Guide',
+        faq: 'FAQ',
+        compatibility: 'Compatibility',
+        github: 'GitHub',
+        '简体中文': 'Simplified Chinese',
+        '繁體中文': 'Traditional Chinese',
+        English: 'English',
+        title: 'Hardware Support | ASUS FL8700JP Hackintosh Project',
+        pageTitle: 'Hardware Support Details',
+        pageSubtitle: 'Full compatibility with core hardware components of ASUS FL8700JP',
+        fullSupport: 'Fully Working',
+        partialSupport: 'Partially Working',
+        notSupported: 'Not Working',
+        cpu: 'CPU (Intel Core i7-10510U)',
+        cpuDesc: 'All cores and threads work properly with power management support',
+        gpu: 'GPU (Intel UHD Graphics)',
+        gpuDesc: 'Supports 4K output with proper hardware acceleration',
+        memory: 'Memory (DDR4)',
+        memoryDesc: 'Up to 16GB supported, dual-channel recognized correctly',
+        wifi: 'Wi-Fi / Bluetooth (Intel AX201)',
+        wifiDesc: 'Requires AirportItlwm driver, Bluetooth needs BlueToolFixup',
+        audio: 'Audio (Realtek ALC256)',
+        audioDesc: 'Headphones, speakers, and microphone all work properly',
+        trackpad: 'Trackpad (ELAN I2C)',
+        trackpadDesc: 'Multi-touch gestures fully supported',
+        keyboardBacklight: 'Keyboard Backlight',
+        keyboardBacklightDesc: 'Brightness adjustable via hotkeys, no ambient light sensing',
+        hdmi: 'HDMI Output',
+        hdmiDesc: 'Supports 4K@60Hz external display',
+        usb: 'USB Ports',
+        usbDesc: 'All USB 2.0/3.0 ports are correctly recognized',
+        camera: 'Camera',
+        cameraDesc: 'No working driver available, external webcam recommended',
+        fingerprint: 'Fingerprint Reader',
+        fingerprintDesc: 'Not supported by macOS on Windows laptops',
+        importantNoteTitle: 'Important Note',
+        importantNote1: 'Compatibility based on OpenCore 1.0.5 and macOS Sonoma/Tahoe testing. Minor differences may exist due to BIOS versions or hardware batches.',
+        importantNote2: 'If experiencing hardware issues, please ensure you are using the latest EFI from this project and that your BIOS settings match the installation guide.',
+        license: '© 2021-2025 Aurora - All rights reserved',
+        disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+      }
+    };
 
-    function setTheme(theme) {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      localStorage.setItem('theme', theme);
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    const currentPage = 'hardware';
+
+    const languageSelector = document.getElementById('languageSelector');
+    const themeToggle = document.getElementById('themeToggle');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    function initLanguage() {
+      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
+      languageSelector.value = savedLang;
+      updateLanguage(savedLang);
     }
 
-    setTheme(currentTheme);
+    function updateLanguage(lang) {
+      localStorage.setItem('preferredLanguage', lang);
+      
+      // Update nav links
+      document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+        const pageKey = link.getAttribute('data-page');
+        if (translations[lang][pageKey]) {
+          link.textContent = translations[lang][pageKey];
+        }
+      });
+      
+      const githubLink = document.querySelector('.nav-link[href="https://github.com"]');
+      if (githubLink && translations[lang].github) {
+        githubLink.textContent = translations[lang].github;
+      }
 
-    themeToggle.addEventListener('click', () => {
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      // Update page content
+      if (currentPage === 'hardware') {
+        document.title = translations[lang].title;
+        document.querySelector('.page-header h1').textContent = translations[lang].pageTitle;
+        document.querySelector('.page-header p').textContent = translations[lang].pageSubtitle;
+
+        // Update table content
+        const rows = document.querySelectorAll('tbody tr');
+        const keys = ['cpu', 'gpu', 'memory', 'wifi', 'audio', 'trackpad', 'keyboardBacklight', 'hdmi', 'usb', 'camera', 'fingerprint'];
+        const descs = ['cpuDesc', 'gpuDesc', 'memoryDesc', 'wifiDesc', 'audioDesc', 'trackpadDesc', 'keyboardBacklightDesc', 'hdmiDesc', 'usbDesc', 'cameraDesc', 'fingerprintDesc'];
+        
+        rows.forEach((row, index) => {
+          if (index < keys.length) {
+            row.cells[0].textContent = translations[lang][keys[index]];
+            row.cells[2].textContent = translations[lang][descs[index]];
+          }
+        });
+
+        // Update status texts in table header
+        const overviewItems = document.querySelectorAll('.compatibility-item p');
+        if (overviewItems.length >= 3) {
+          overviewItems[0].textContent = translations[lang].fullSupport;
+          overviewItems[1].textContent = translations[lang].partialSupport;
+          overviewItems[2].textContent = translations[lang].notSupported;
+        }
+
+        // Important note section
+        const noteDiv = document.querySelector('main div[style*="margin-top"]');
+        if (noteDiv) {
+          noteDiv.querySelector('h3').textContent = translations[lang].importantNoteTitle;
+          const noteParagraphs = noteDiv.querySelectorAll('p');
+          if (noteParagraphs[0]) noteParagraphs[0].textContent = translations[lang].importantNote1;
+          if (noteParagraphs[1]) noteParagraphs[1].textContent = translations[lang].importantNote2;
+        }
+
+        // Footer
+        const footerParagraphs = document.querySelectorAll('footer p');
+        if (footerParagraphs[0]) footerParagraphs[0].textContent = translations[lang].license;
+        if (footerParagraphs[1]) footerParagraphs[1].textContent = translations[lang].disclaimer;
+      }
+
+      // Update language selector options
+      const options = languageSelector.querySelectorAll('option');
+      options.forEach(option => {
+        const originalText = option.textContent;
+        if (translations[lang][originalText]) {
+          option.textContent = translations[lang][originalText];
+        }
+      });
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('preferredTheme') || 'light';
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('preferredTheme', isDark ? 'dark' : 'light');
+      themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    function toggleMobileMenu() {
+      navMenu.classList.toggle('active');
+    }
+
+    languageSelector.addEventListener('change', (e) => updateLanguage(e.target.value));
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      initLanguage();
+      initTheme();
     });
   </script>
 </body>
