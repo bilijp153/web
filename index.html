@@ -1,228 +1,299 @@
 <!DOCTYPE html>
-<html lang="zh-CN" id="html-root">
+<html lang="zh-CN" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NovaSync | Hardware Requirements</title>
+  <title>让 Windows 笔记本完美运行 macOS | 华硕 VivoBook FL8700JP 黑苹果方案</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style id="theme-style"></style>
-  <style>
-    /* 同 index.html 的 :root 和基础样式 */
-    :root { /* ... same as above ... */ }
+  <style id="theme-style">
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --text-secondary: #4b5563;
+      --card-bg: #f9fafb;
+      --border: #e5e7eb;
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --accent: #10b981;
+      --danger: #ef4444;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    .dark-mode {
+      --bg: #111827;
+      --text: #f9fafb;
+      --text-secondary: #d1d5db;
+      --card-bg: #1f2937;
+      --border: #374151;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.25);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; line-height: 1.6; transition: all 0.3s ease; }
-    .light body { background-color: var(--light-bg); color: var(--text-light); }
-    .dark body { background-color: var(--dark-bg); color: var(--text-dark); }
-
-    header { padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
-    .light header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
-    .dark header { background: linear-gradient(135deg, #1d4ed8, #6b21a8); color: white; }
-
-    .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-    .logo { font-size: 1.5rem; font-weight: 700; }
-    .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .lang-toggle, .theme-toggle {
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .lang-switcher, .theme-toggle {
       background: rgba(255,255,255,0.2);
       border: none;
       color: white;
       padding: 0.4rem 0.8rem;
-      border-radius: 6px;
+      border-radius: 20px;
       cursor: pointer;
       font-size: 0.9rem;
+      transition: var(--transition);
     }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { color: white; font-weight: 500; }
-    .nav-links a:hover { opacity: 0.9; }
-
-    main { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
-    h1 { font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary); }
-    .req-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-    .req-table th, .req-table td { padding: 1rem; text-align: left; }
-    .light .req-table th { background-color: var(--light-bg); }
-    .dark .req-table th { background-color: #1e293b; }
-    .light .req-table tr { border-bottom: 1px solid var(--border-light); }
-    .dark .req-table tr { border-bottom: 1px solid var(--border-dark); }
-    .highlight { font-weight: 600; }
-    .light .highlight { background-color: #eff6ff; }
-    .dark .highlight { background-color: #1e3a8a; color: #bfdbfe; }
-
-    .note-box {
+    .lang-switcher:hover, .theme-toggle:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    nav a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+    nav a:hover, nav a.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      background: var(--card-bg);
+      margin: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1.5rem 3rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .feature-card i {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
       margin-top: 2rem;
-      padding: 1rem;
-      border-left: 4px solid #eab308;
     }
-    .light .note-box { background: #fffbeb; }
-    .dark .note-box { background: #1a1a1a; border-left-color: #facc15; }
-
-    footer { text-align: center; padding: 2.5rem; }
-    .light footer { background: #f1f5f9; color: var(--gray-light); }
-    .dark footer { background: #1a202c; color: var(--gray-dark); }
-
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      main { padding: 2rem 1rem; }
-      .req-table { font-size: 0.9rem; }
+      .top-bar { flex-wrap: wrap; }
+      nav ul { gap: 0.8rem; }
+      .hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
-<body class="light">
-  <header>
-    <div class="nav-container">
-      <div class="logo">NovaSync</div>
-      <div class="nav-right">
-        <select id="lang-select" class="lang-toggle">
-          <option value="zh-CN">简体中文</option>
-          <option value="zh-TW">繁體中文</option>
-          <option value="en">English</option>
-        </select>
-        <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
-        <ul class="nav-links">
-          <li><a href="index.html" data-i18n="nav.home">首页</a></li>
-          <li><a href="hardware.html" data-i18n="nav.hardware">硬件要求</a></li>
-          <li><a href="installation.html" data-i18n="nav.installation">安装指南</a></li>
-          <li><a href="compatibility.html" data-i18n="nav.compatibility">兼容性</a></li>
-          <li><a href="faq.html" data-i18n="nav.faq">常见问题</a></li>
-        </ul>
-      </div>
+<body>
+
+<header>
+  <div class="top-bar">
+    <div class="logo" data-key="projectTitle">让 Windows 笔记本完美运行 macOS</div>
+    <div class="controls">
+      <select id="languageSwitcher" class="lang-switcher">
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+      </select>
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
     </div>
-  </header>
+  </div>
+  <nav class="container" style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+    <ul>
+      <li><a href="index.html" class="active" data-key="navHome">首页</a></li>
+      <li><a href="hardware.html" data-key="navHardware">硬件支持</a></li>
+      <li><a href="compatibility.html" data-key="navCompatibility">系统兼容</a></li>
+      <li><a href="installation.html" data-key="navInstallation">安装指南</a></li>
+      <li><a href="faq.html" data-key="navFAQ">常见问题</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <h1><i class="fas fa-microchip"></i> <span data-i18n="page.title">硬件要求</span></h1>
-    <p data-i18n="page.desc">为确保 NovaSync 能够流畅运行并发挥最佳性能，请确保您的设备满足以下最低和推荐配置：</p>
+<main>
+  <section class="hero">
+    <h1 data-key="heroTitle">华硕 VivoBook FL8700JP (X509JP) 黑苹果解决方案</h1>
+    <p data-key="heroDesc">专为此机型定制的 OpenCore 引导配置，助您在 Intel Ice Lake 平台上流畅运行 macOS。</p>
+  </section>
 
-    <table class="req-table">
-      <thead>
-        <tr>
-          <th data-i18n="table.component">组件</th>
-          <th data-i18n="table.minimum">最低要求</th>
-          <th data-i18n="table.recommended">推荐配置</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong data-i18n="os">操作系统</strong></td>
-          <td data-i18n="os.min">Windows 10 / macOS 11 / Ubuntu 20.04</td>
-          <td data-i18n="os.rec">Windows 11 / macOS 14 / Ubuntu 22.04+</td>
-        </tr>
-        <tr>
-          <td><strong data-i18n="cpu">处理器 (CPU)</strong></td>
-          <td data-i18n="cpu.min">双核 1.8 GHz</td>
-          <td data-i18n="cpu.rec">四核 2.5 GHz 或更高</td>
-        </tr>
-        <tr>
-          <td><strong data-i18n="ram">内存 (RAM)</strong></td>
-          <td data-i18n="ram.min">4 GB</td>
-          <td class="highlight" data-i18n="ram.rec">8 GB 或以上</td>
-        </tr>
-        <tr>
-          <td><strong data-i18n="storage">存储空间</strong></td>
-          <td data-i18n="storage.min">500 MB 可用空间</td>
-          <td data-i18n="storage.rec">1 GB SSD（用于缓存加速）</td>
-        </tr>
-        <tr>
-          <td><strong data-i18n="network">网络</strong></td>
-          <td data-i18n="network.min">10 Mbps 宽带</td>
-          <td class="highlight" data-i18n="network.rec">100 Mbps 或更高（建议有线连接）</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-box">
-      <p><i class="fas fa-info-circle"></i> <strong data-i18n="note.title">提示：</strong> <span data-i18n="note.content">虽然 NovaSync 可在最低配置下运行，但若需同步大量文件（>10GB）或启用实时协作功能，强烈建议使用推荐配置以获得最佳体验。</span></p>
+  <section class="features-grid">
+    <div class="feature-card">
+      <i class="fas fa-laptop"></i>
+      <h3 data-key="feature1Title">专属适配</h3>
+      <p data-key="feature1Desc">仅适用于华硕 FL8700JP (X509JP)，确保最佳兼容性与稳定性。</p>
     </div>
-  </main>
+    <div class="feature-card">
+      <i class="fas fa-shield-alt"></i>
+      <h3 data-key="feature2Title">安全可靠</h3>
+      <p data-key="feature2Desc">遵循 OpenCore 最佳实践，屏蔽不兼容硬件，避免系统崩溃。</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-cogs"></i>
+      <h3 data-key="feature3Title">开箱即用</h3>
+      <p data-key="feature3Desc">预配置 ACPI 补丁与 Kext 驱动，大幅简化安装流程。</p>
+    </div>
+  </section>
+</main>
 
-  <footer>
-    <div data-i18n="footer.copyright">&copy; 2025 NovaSync. 保留所有权利。</div>
-  </footer>
+<footer>
+  <p data-key="footerText">© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的</p>
+</footer>
 
-  <script>
-    // ========== 复用 index.html 的 JS 逻辑 ==========
-    const translations = {
-      "zh-CN": {
-        "nav.home": "首页", "nav.hardware": "硬件要求", "nav.installation": "安装指南", "nav.compatibility": "兼容性", "nav.faq": "常见问题",
-        "page.title": "硬件要求",
-        "page.desc": "为确保 NovaSync 能够流畅运行并发挥最佳性能，请确保您的设备满足以下最低和推荐配置：",
-        "table.component": "组件", "table.minimum": "最低要求", "table.recommended": "推荐配置",
-        "os": "操作系统", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
-        "cpu": "处理器 (CPU)", "cpu.min": "双核 1.8 GHz", "cpu.rec": "四核 2.5 GHz 或更高",
-        "ram": "内存 (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB 或以上",
-        "storage": "存储空间", "storage.min": "500 MB 可用空间", "storage.rec": "1 GB SSD（用于缓存加速）",
-        "network": "网络", "network.min": "10 Mbps 宽带", "network.rec": "100 Mbps 或更高（建议有线连接）",
-        "note.title": "提示：", "note.content": "虽然 NovaSync 可在最低配置下运行，但若需同步大量文件（>10GB）或启用实时协作功能，强烈建议使用推荐配置以获得最佳体验。",
-        "footer.copyright": "&copy; 2025 NovaSync. 保留所有权利。"
-      },
-      "zh-TW": {
-        "nav.home": "首頁", "nav.hardware": "硬體需求", "nav.installation": "安裝指南", "nav.compatibility": "相容性", "nav.faq": "常見問題",
-        "page.title": "硬體需求",
-        "page.desc": "為確保 NovaSync 能夠流暢運行並發揮最佳效能，請確保您的裝置滿足以下最低和推薦配置：",
-        "table.component": "元件", "table.minimum": "最低需求", "table.recommended": "推薦配置",
-        "os": "作業系統", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
-        "cpu": "處理器 (CPU)", "cpu.min": "雙核心 1.8 GHz", "cpu.rec": "四核心 2.5 GHz 或更高",
-        "ram": "記憶體 (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB 或以上",
-        "storage": "儲存空間", "storage.min": "500 MB 可用空間", "storage.rec": "1 GB SSD（用於快取加速）",
-        "network": "網路", "network.min": "10 Mbps 寬頻", "network.rec": "100 Mbps 或更高（建議使用有線連接）",
-        "note.title": "提示：", "note.content": "雖然 NovaSync 可在最低配置下運行，但若需同步大量檔案（>10GB）或啟用即時協作功能，強烈建議使用推薦配置以獲得最佳體驗。",
-        "footer.copyright": "&copy; 2025 NovaSync. 保留所有權利。"
-      },
-      "en": {
-        "nav.home": "Home", "nav.hardware": "Hardware", "nav.installation": "Installation", "nav.compatibility": "Compatibility", "nav.faq": "FAQ",
-        "page.title": "Hardware Requirements",
-        "page.desc": "To ensure NovaSync runs smoothly and delivers optimal performance, please verify your device meets the following minimum and recommended specifications:",
-        "table.component": "Component", "table.minimum": "Minimum", "table.recommended": "Recommended",
-        "os": "Operating System", "os.min": "Windows 10 / macOS 11 / Ubuntu 20.04", "os.rec": "Windows 11 / macOS 14 / Ubuntu 22.04+",
-        "cpu": "Processor (CPU)", "cpu.min": "Dual-core 1.8 GHz", "cpu.rec": "Quad-core 2.5 GHz or higher",
-        "ram": "Memory (RAM)", "ram.min": "4 GB", "ram.rec": "8 GB or more",
-        "storage": "Storage", "storage.min": "500 MB free space", "storage.rec": "1 GB SSD (for cache acceleration)",
-        "network": "Network", "network.min": "10 Mbps broadband", "network.rec": "100 Mbps or higher (wired connection recommended)",
-        "note.title": "Note:", "note.content": "While NovaSync can run on minimum specs, we strongly recommend the recommended configuration for syncing large datasets (>10GB) or enabling real-time collaboration.",
-        "footer.copyright": "&copy; 2025 NovaSync. All rights reserved."
+<script>
+  // 多语言数据
+  const translations = {
+    "zh-CN": {
+      projectTitle: "让 Windows 笔记本完美运行 macOS",
+      navHome: "首页",
+      navHardware: "硬件支持",
+      navCompatibility: "系统兼容",
+      navInstallation: "安装指南",
+      navFAQ: "常见问题",
+      heroTitle: "华硕 VivoBook FL8700JP (X509JP) 黑苹果解决方案",
+      heroDesc: "专为此机型定制的 OpenCore 引导配置，助您在 Intel Ice Lake 平台上流畅运行 macOS。",
+      feature1Title: "专属适配",
+      feature1Desc: "仅适用于华硕 FL8700JP (X509JP)，确保最佳兼容性与稳定性。",
+      feature2Title: "安全可靠",
+      feature2Desc: "遵循 OpenCore 最佳实践，屏蔽不兼容硬件，避免系统崩溃。",
+      feature3Title: "开箱即用",
+      feature3Desc: "预配置 ACPI 补丁与 Kext 驱动，大幅简化安装流程。",
+      footerText: "© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的"
+    },
+    "zh-TW": {
+      projectTitle: "讓 Windows 筆記型電腦完美運行 macOS",
+      navHome: "首頁",
+      navHardware: "硬體支援",
+      navCompatibility: "系統相容",
+      navInstallation: "安裝指南",
+      navFAQ: "常見問題",
+      heroTitle: "華碩 VivoBook FL8700JP (X509JP) 黑蘋果解決方案",
+      heroDesc: "專為此機型客製化的 OpenCore 引導設定，助您在 Intel Ice Lake 平台上流暢運行 macOS。",
+      feature1Title: "專屬適配",
+      feature1Desc: "僅適用於華碩 FL8700JP (X509JP)，確保最佳相容性與穩定性。",
+      feature2Title: "安全可靠",
+      feature2Desc: "遵循 OpenCore 最佳實踐，遮蔽不相容硬體，避免系統崩潰。",
+      feature3Title: "開箱即用",
+      feature3Desc: "預先配置 ACPI 補丁與 Kext 驅動，大幅簡化安裝流程。",
+      footerText: "© 2021–2025 極光呆呆腦 | MIT 授權 | 本專案僅供學習與研究用途"
+    },
+    "en": {
+      projectTitle: "Run macOS Perfectly on Windows Laptops",
+      navHome: "Home",
+      navHardware: "Hardware",
+      navCompatibility: "Compatibility",
+      navInstallation: "Installation",
+      navFAQ: "FAQ",
+      heroTitle: "Hackintosh Solution for ASUS VivoBook FL8700JP (X509JP)",
+      heroDesc: "Custom OpenCore configuration for seamless macOS experience on Intel Ice Lake platform.",
+      feature1Title: "Model-Specific",
+      feature1Desc: "Exclusively for ASUS FL8700JP (X509JP) to ensure optimal compatibility.",
+      feature2Title: "Safe & Stable",
+      feature2Desc: "Follows OpenCore best practices, disables incompatible hardware to prevent crashes.",
+      feature3Title: "Ready-to-Use",
+      feature3Desc: "Pre-configured ACPI patches and Kexts simplify the installation process.",
+      footerText: "© 2021–2025 AuroraDumbBrain | MIT License | For educational purposes only"
+    }
+  };
+
+  // 主题切换
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark)) {
+    body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    themeToggle.innerHTML = body.classList.contains('dark-mode') 
+      ? '<i class="fas fa-sun"></i>' 
+      : '<i class="fas fa-moon"></i>';
+  });
+
+  // 语言切换
+  const langSwitcher = document.getElementById('languageSwitcher');
+  const userLang = navigator.language;
+  let currentLang = localStorage.getItem('language') || 
+                   (userLang.startsWith('zh-TW') ? 'zh-TW' : 
+                   (userLang.startsWith('zh') ? 'zh-CN' : 'en'));
+  langSwitcher.value = currentLang;
+
+  function updateLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
       }
-    };
-
-    // ========== 主题与语言逻辑（同 index.html）==========
-    function setTheme(theme) {
-      document.body.className = theme;
-      document.getElementById('theme-toggle').innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-      localStorage.setItem('novasync-theme', theme);
-    }
-    function getPreferredTheme() {
-      const saved = localStorage.getItem('novasync-theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    function getBrowserLang() {
-      const lang = navigator.language;
-      if (lang.startsWith('zh-TW') || lang.startsWith('zh-HK')) return 'zh-TW';
-      if (lang.startsWith('zh')) return 'zh-CN';
-      return 'en';
-    }
-    function setLanguage(lang) {
-      document.documentElement.lang = lang;
-      localStorage.setItem('novasync-lang', lang);
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.innerHTML = translations[lang][key] || translations['en'][key] || key;
-      });
-      document.getElementById('lang-select').value = lang;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const theme = getPreferredTheme();
-      setTheme(theme);
-      const savedLang = localStorage.getItem('novasync-lang');
-      const lang = savedLang || getBrowserLang();
-      setLanguage(lang);
-
-      document.getElementById('theme-toggle').addEventListener('click', () => {
-        setTheme(document.body.className === 'dark' ? 'light' : 'dark');
-      });
-      document.getElementById('lang-select').addEventListener('change', (e) => {
-        setLanguage(e.target.value);
-      });
     });
-  </script>
+  }
+
+  langSwitcher.addEventListener('change', (e) => {
+    updateLanguage(e.target.value);
+  });
+
+  updateLanguage(currentLang);
+</script>
+
 </body>
 </html>
