@@ -1,384 +1,482 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安装指南 | ASUS FL8700JP 黑苹果项目</title>
-    <meta name="description" content="按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑">
-    <style>
-        /* ========== 全局重置与变量 ========== */
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --card-bg: #ffffff;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --warning-color: #f59e0b;
-            --header-bg: #ffffff;
-            --footer-bg: #f1f5f9;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --text-primary: #f1f5f9;
-                --text-secondary: #94a9c8;
-                --border-color: #334155;
-                --card-bg: #1e293b;
-                --accent-color: #60a5fa;
-                --accent-hover: #3b82f6;
-                --warning-color: #fbbf24;
-                --header-bg: #0f172a;
-                --footer-bg: #1a2234;
-                --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-                --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* ========== 头部导航 ========== */
-        header {
-            background-color: var(--header-bg);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--border-color);
-        }
-
-        /* ========== 主要内容区 ========== */
-        main {
-            padding: 2rem 0;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            color: var(--text-secondary);
-        }
-
-        .warning {
-            background-color: var(--bg-secondary);
-            border-left: 4px solid var(--warning-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .step {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .step h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .step ol, .step ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .step li {
-            margin-bottom: 0.75rem;
-        }
-
-        .code-block {
-            background-color: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 0.95rem;
-            margin: 1rem 0;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        /* ========== 页脚 ========== */
-        footer {
-            background-color: var(--footer-bg);
-            padding: 2rem 0;
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .license {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* ========== 响应式设计 ========== */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>安装指南 | ASUS FL8700JP 黑苹果项目</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #1a2a6c, #2a4d8e);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-menu li {
+      margin-left: 1.5rem;
+    }
+    
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      border-bottom: 2px solid #4fc3f7;
+      color: #4fc3f7;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Main Content */
+    main {
+      padding: 2rem 0;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: #1a2a6c;
+      margin-bottom: 1rem;
+    }
+    
+    .page-header p {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    
+    .content-section {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .content-section h2 {
+      color: #1a2a6c;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    
+    .content-section h3 {
+      color: #2a4d8e;
+      margin: 1.5rem 0 1rem;
+    }
+    
+    .step-list {
+      counter-reset: step-counter;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    
+    .step-list li {
+      counter-increment: step-counter;
+      margin-bottom: 1.5rem;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+    
+    .step-list li:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #1a2a6c;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    .code-block {
+      background: #f5f5f5;
+      border-left: 4px solid #1a2a6c;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+    }
+    
+    .important-note {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .important-note h4 {
+      color: #856404;
+      margin-bottom: 0.5rem;
+    }
+    
+    .important-note p {
+      color: #856404;
+      margin: 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a2a6c, #2a4d8e);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .btn:hover {
+      background: linear-gradient(135deg, #2a4d8e, #1a2a6c);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(26, 42, 108, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      background: #1a2a6c;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .nav-menu li {
+        margin: 0.5rem 0;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .content-section {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem 0;
+      }
+      
+      .step-list li {
+        padding-left: 2rem;
+      }
+      
+      .step-list li:before {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
-                <ul class="nav-links">
-                    <li><a href="hardware.html">硬件支持</a></li>
-                    <li><a href="installation.html" class="active">安装指南</a></li>
-                    <li><a href="faq.html">常见问题</a></li>
-                    <li><a href="compatibility.html">系统兼容</a></li>
-                    <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
-                </ul>
-                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
-                    <!-- Icon will be set by JS -->
-                </button>
-            </nav>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="hardware.html">硬件支持</a></li>
+        <li><a href="installation.html">安装指南</a></li>
+        <li><a href="faq.html">常见问题</a></li>
+        <li><a href="compatibility.html">系统兼容</a></li>
+        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>安装指南</h1>
+        <p>按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑</p>
+      </div>
+
+      <!-- 准备工作 -->
+      <div class="content-section">
+        <h2>准备工作</h2>
+        <p>在开始安装之前，请确保您已准备好以下物品和条件：</p>
+        
+        <h3>所需物品：</h3>
+        <ul style="margin: 1rem 0 1.5rem 1.5rem;">
+          <li>16GB或更大容量的U盘</li>
+          <li>可正常运行的Windows或macOS系统</li>
+          <li>稳定的网络连接</li>
+          <li>至少50GB的可用磁盘空间</li>
+          <li>ASUS FL8700JP笔记本电脑 (X509JP)</li>
+        </ul>
+        
+        <div class="important-note">
+          <h4>重要提示：</h4>
+          <p>安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。</p>
         </div>
-    </header>
+        
+        <h3>支持版本：</h3>
+        <p>macOS Catalina (10.15.x), macOS Big Sur (11.x), macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x), macOS Sequoia (15.x), macOS Tahoe (26.x)</p>
+      </div>
 
-    <main class="container">
-        <div class="page-header">
-            <h1>安装指南</h1>
-            <p>按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑</p>
+      <!-- BIOS设置 -->
+      <div class="content-section">
+        <h2>BIOS设置</h2>
+        <p>在开始安装之前，请确保您的BIOS已更新到最新版本，并按照以下步骤进行设置：</p>
+        
+        <ol class="step-list">
+          <li>
+            <strong>进入BIOS设置</strong><br>
+            开机时反复按F2键进入BIOS设置界面。
+          </li>
+          <li>
+            <strong>安全启动设置</strong><br>
+            在Security选项卡中，将Secure Boot设置为Disabled。
+          </li>
+          <li>
+            <strong>启动选项</strong><br>
+            在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。
+          </li>
+          <li>
+            <strong>DVMT预分配</strong><br>
+            在Advanced选项中，将DVMT Pre-Allocated设置为64M。
+          </li>
+          <li>
+            <strong>其他设置</strong><br>
+            禁用CFG Lock、VT-d和 Thunderbolt安全选项（如果存在）。
+          </li>
+          <li>
+            <strong>保存设置</strong><br>
+            按F10保存设置并退出BIOS。
+          </li>
+        </ol>
+        
+        <div class="important-note">
+          <h4>注意：</h4>
+          <p>不同版本的BIOS界面可能略有不同，但关键设置选项名称基本相同。如果找不到某个选项，请查阅您的BIOS手册或更新BIOS版本。</p>
         </div>
+      </div>
 
-        <div class="warning">
-            <strong>重要提示：</strong>安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。
+      <!-- 创建安装介质 -->
+      <div class="content-section">
+        <h2>创建安装介质</h2>
+        
+        <ol class="step-list">
+          <li>
+            <strong>下载macOS镜像</strong><br>
+            从苹果官网或可信来源下载macOS安装镜像。推荐使用gibMacOS工具下载。<br>
+            在Windows上，可以使用gibMacOS工具：
+            <div class="code-block">
+# 下载gibMacOS
+git clone https://github.com/corpnewt/gibMacOS
+cd gibMacOS
+python gibMacOS.command
+            </div>
+          </li>
+          <li>
+            <strong>准备U盘</strong><br>
+            使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式，GUID分区图。
+          </li>
+          <li>
+            <strong>创建安装盘</strong><br>
+            使用终端命令或BalenaEtcher将镜像写入U盘。<br>
+            在macOS终端中使用以下命令：
+            <div class="code-block">
+sudo /Applications/Install\ macOS\ [版本名称].app/Contents/Resources/createinstallmedia --volume /Volumes/[U盘名称] --nointeraction
+            </div>
+            在Windows上，可以使用BalenaEtcher或TransMac工具。
+          </li>
+        </ol>
+        
+        <div class="important-note">
+          <h4>提示：</h4>
+          <p>创建安装介质的过程可能需要30分钟或更长时间，请确保电源稳定且不要中断过程。</p>
         </div>
+      </div>
 
-        <div class="steps">
-            <div class="step">
-                <h2>1. 准备工作</h2>
-                <p>在开始安装之前，请确保您已准备好以下物品和条件：</p>
-                <ul>
-                    <li><strong>所需物品：</strong> 16GB或更大容量的U盘</li>
-                    <li><strong>所需物品：</strong> 可正常运行的Windows或macOS系统</li>
-                    <li><strong>所需物品：</strong> 稳定的网络连接</li>
-                    <li><strong>所需物品：</strong> 至少50GB的可用磁盘空间</li>
-                    <li><strong>所需物品：</strong> ASUS FL8700JP笔记本电脑 (X509JP)</li>
-                </ul>
-                <p><strong>支持版本：</strong> macOS Catalina (10.15.x), macOS Big Sur (11.x), macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x), macOS Sequoia (15.x), macOS Tahoe (26.x)</p>
-            </div>
+      <!-- 安装过程 -->
+      <div class="content-section">
+        <h2>安装过程</h2>
+        
+        <ol class="step-list">
+          <li>
+            <strong>启动安装</strong><br>
+            从U盘启动，进入OpenCore引导界面，选择安装macOS。<br>
+            在启动时按ESC键选择启动设备，选择UEFI:您的U盘名称。
+          </li>
+          <li>
+            <strong>磁盘工具</strong><br>
+            进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。<br>
+            选择"显示所有设备"，选择主硬盘，点击"抹掉"，格式选择APFS，方案选择GUID分区图。
+          </li>
+          <li>
+            <strong>开始安装</strong><br>
+            选择刚格式化的磁盘作为安装目标，开始安装过程。<br>
+            安装过程会重启数次，每次重启后请继续选择从U盘启动，然后选择macOS安装器继续安装。
+          </li>
+          <li>
+            <strong>完成安装</strong><br>
+            系统会自动重启数次，最终进入macOS设置向导。<br>
+            按照向导完成macOS初始设置，创建用户账户等。
+          </li>
+        </ol>
+      </div>
 
-            <div class="step">
-                <h2>2. BIOS设置</h2>
-                <p>在开始安装之前，请确保您的BIOS已更新到最新版本，并按照以下步骤进行设置：</p>
-                <ol>
-                    <li><strong>进入BIOS设置</strong> 开机时反复按F2键进入BIOS设置界面。</li>
-                    <li><strong>安全启动设置</strong> 在Security选项卡中，将Secure Boot设置为Disabled。</li>
-                    <li><strong>启动选项</strong> 在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。</li>
-                    <li><strong>DVMT预分配</strong> 在Advanced选项中，将DVMT Pre-Allocated设置为64M。</li>
-                    <li><strong>其他设置</strong> 禁用CFG Lock、VT-d和 Thunderbolt安全选项（如果存在）。</li>
-                    <li><strong>保存设置</strong> 按F10保存设置并退出BIOS。</li>
-                </ol>
-                <p><strong>注意：</strong> 不同版本的BIOS界面可能略有不同，但关键设置选项名称基本相同。如果找不到某个选项，请查阅您的BIOS手册或更新BIOS版本。</p>
-            </div>
+      <!-- 常见问题 -->
+      <div class="content-section">
+        <h2>常见问题</h2>
+        <p>如果安装过程中出现卡住、重启或错误，请尝试使用不同的引导参数，如"-v"调试模式、"agdpmod=pikera"解决显卡问题等。</p>
+        <a href="faq.html" class="btn">查看完整常见问题</a>
+      </div>
+    </div>
+  </main>
 
-            <div class="step">
-                <h2>3. 创建安装介质</h2>
-                <ol>
-                    <li><strong>下载macOS镜像</strong> 从苹果官网或可信来源下载macOS安装镜像。推荐使用gibMacOS工具下载。<br>
-                        在Windows上，可以使用gibMacOS工具：
-                        <div class="code-block">git clone https://github.com/corpnewt/gibMacOS<br>cd gibMacOS<br>python gibMacOS.command</div>
-                    </li>
-                    <li><strong>准备U盘</strong> 使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式，GUID分区图。</li>
-                    <li><strong>创建安装盘</strong> 使用终端命令或BalenaEtcher将镜像写入U盘。<br>
-                        在macOS终端中使用以下命令：
-                        <div class="code-block">sudo /Applications/Install\ macOS\ [版本名称].app/Contents/Resources/createinstallmedia --volume /Volumes/[U盘名称] --nointeraction</div>
-                        在Windows上，可以使用BalenaEtcher或TransMac工具。
-                    </li>
-                </ol>
-                <p><strong>提示：</strong> 创建安装介质的过程可能需要30分钟或更长时间，请确保电源稳定且不要中断过程。</p>
-            </div>
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+    </div>
+  </footer>
 
-            <div class="step">
-                <h2>4. 安装过程</h2>
-                <ol>
-                    <li><strong>启动安装</strong> 从U盘启动，进入OpenCore引导界面，选择安装macOS。<br>
-                        在启动时按ESC键选择启动设备，选择UEFI:您的U盘名称。
-                    </li>
-                    <li><strong>磁盘工具</strong> 进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。<br>
-                        选择"显示所有设备"，选择主硬盘，点击"抹掉"，格式选择APFS，方案选择GUID分区图。
-                    </li>
-                    <li><strong>开始安装</strong> 选择刚格式化的磁盘作为安装目标，开始安装过程。<br>
-                        安装过程会重启数次，每次重启后请继续选择从U盘启动，然后选择macOS安装器继续安装。
-                    </li>
-                    <li><strong>完成安装</strong> 系统会自动重启数次，最终进入macOS设置向导。<br>
-                        按照向导完成macOS初始设置，创建用户账户等。
-                    </li>
-                </ol>
-            </div>
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
 
-            <div class="step">
-                <h2>5. 常见问题</h2>
-                <p>如果安装过程中出现卡住、重启或错误，请尝试使用不同的引导参数，如"-v"调试模式、"agdpmod=pikera"解决显卡问题等。</p>
-                <a href="faq.html" class="btn">查看常见问题</a>
-            </div>
-        </div>
-    </main>
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        const navMenu = document.getElementById('navMenu');
+        navMenu.classList.remove('active');
+        const icon = document.getElementById('mobileMenuBtn').querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
 
-    <footer>
-        <div class="container">
-            <div class="license">
-                <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-                <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-        function setIcon(theme) {
-            themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    // Set active navigation item
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentLocation = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-menu a');
+      
+      navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentLocation || (currentLocation === '' && linkHref === 'index.html')) {
+          link.classList.add('active');
         }
-
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-        setIcon(currentTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', newTheme);
-            setIcon(newTheme);
-        });
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                document.documentElement.classList.toggle('dark', e.matches);
-                setIcon(newTheme);
-            }
-        });
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>
