@@ -1,27 +1,42 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>硬件要求 | NovaSync</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>硬件支持 | 华硕 FL8700JP 黑苹果</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    /* 复用相同样式 */
+  <style id="theme-style">
     :root {
-      --primary: #2563eb;
-      --secondary: #7e22ce;
-      --light-bg: #f8fafc;
-      --dark-text: #1e293b;
-      --gray: #64748b;
-      --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      --bg: #ffffff;
+      --text: #1f2937;
+      --text-secondary: #4b5563;
+      --card-bg: #f9fafb;
+      --border: #e5e7eb;
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    .dark-mode {
+      --bg: #111827;
+      --text: #f9fafb;
+      --text-secondary: #d1d5db;
+      --card-bg: #1f2937;
+      --border: #374151;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.25);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      color: var(--dark-text);
-      background-color: #ffffff;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      transition: var(--transition);
     }
     header {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -29,115 +44,355 @@
       padding: 1rem 0;
       position: sticky;
       top: 0;
+      z-index: 1000;
     }
-    .nav-container {
+    .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
-    .logo { font-size: 1.5rem; font-weight: 700; }
-    .nav-links {
+    .logo { font-size: 1.4rem; font-weight: 700; }
+    .controls {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
+      align-items: center;
     }
-    .nav-links a { color: white; font-weight: 500; }
-    main { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
-    h1 { font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary); }
-    .req-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1.5rem;
+    .lang-switcher, .theme-toggle {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
     }
-    .req-table th, .req-table td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid #e2e8f0;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+      margin-top: 1rem;
+      max-width: 1200px;
+      margin: 1rem auto 0;
+      padding: 0 1.5rem;
     }
-    .req-table th {
-      background-color: var(--light-bg);
+    nav a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+    nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    nav a.active { color: var(--primary); border-bottom-color: var(--primary); }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    .status {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
       font-weight: 600;
     }
-    .highlight { background-color: #eff6ff; font-weight: 600; }
+    .status-full { background: #dcfce7; color: var(--success); }
+    .status-partial { background: #fef3c7; color: var(--warning); }
+    .status-none { background: #fee2e2; color: var(--danger); }
+    .dark-mode .status-full { background: #065f46; color: #d1fae5; }
+    .dark-mode .status-partial { background: #92400e; color: #ffedd5; }
+    .dark-mode .status-none { background: #7f1d1d; color: #fecaca; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--card-bg);
+      font-weight: 600;
+    }
+    tr:hover td { background: var(--card-bg); }
     footer {
       text-align: center;
       padding: 2rem;
-      background: var(--light-bg);
-      color: var(--gray);
+      color: var(--text-secondary);
       font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
     }
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      main { padding: 2rem 1rem; }
+      .top-bar { flex-wrap: wrap; }
+      nav ul { gap: 0.8rem; }
+      table { font-size: 0.9rem; }
+      th, td { padding: 0.7rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="nav-container">
-    <div class="logo">NovaSync</div>
-    <ul class="nav-links">
-      <li><a href="index.html">首页</a></li>
-      <li><a href="hardware.html">硬件要求</a></li>
-      <li><a href="installation.html">安装指南</a></li>
-      <li><a href="compatibility.html">兼容性</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-    </ul>
+  <div class="top-bar">
+    <div class="logo" data-key="projectTitle">让 Windows 笔记本完美运行 macOS</div>
+    <div class="controls">
+      <select id="languageSwitcher" class="lang-switcher">
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="en">English</option>
+      </select>
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
   </div>
+  <nav>
+    <ul>
+      <li><a href="index.html" data-key="navHome">首页</a></li>
+      <li><a href="hardware.html" class="active" data-key="navHardware">硬件支持</a></li>
+      <li><a href="compatibility.html" data-key="navCompatibility">系统兼容</a></li>
+      <li><a href="installation.html" data-key="navInstallation">安装指南</a></li>
+      <li><a href="faq.html" data-key="navFAQ">常见问题</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main>
-  <h1><i class="fas fa-microchip"></i> 硬件要求</h1>
-  <p>为确保 NovaSync 能够流畅运行并发挥最佳性能，请确保您的设备满足以下最低和推荐配置：</p>
+  <h1><i class="fas fa-microchip"></i> <span data-key="pageTitle">硬件支持详情</span></h1>
+  <p data-key="pageDesc">华硕 VivoBook FL8700JP (X509JP) 各硬件组件在 macOS 下的兼容状态如下：</p>
 
-  <table class="req-table">
+  <table>
     <thead>
       <tr>
-        <th>组件</th>
-        <th>最低要求</th>
-        <th>推荐配置</th>
+        <th data-key="component">组件</th>
+        <th data-key="model">型号</th>
+        <th data-key="status">状态</th>
+        <th data-key="notes">详细说明</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>操作系统</strong></td>
-        <td>Windows 10 / macOS 11 / Ubuntu 20.04</td>
-        <td>Windows 11 / macOS 14 / Ubuntu 22.04+</td>
+        <td data-key="cpu">处理器</td>
+        <td>Intel i7-1065G7</td>
+        <td><span class="status status-full" data-key="fullSupport">✅ 完美支持</span></td>
+        <td data-key="cpuNote">Ice Lake 架构优化，CPU 电源管理正常。</td>
       </tr>
       <tr>
-        <td><strong>处理器 (CPU)</strong></td>
-        <td>双核 1.8 GHz</td>
-        <td>四核 2.5 GHz 或更高</td>
+        <td data-key="igpu">核显</td>
+        <td>Intel Iris Plus G7</td>
+        <td><span class="status status-partial" data-key="basicSupport">⚠️ 基本支持</span></td>
+        <td data-key="igpuNote">可驱动显示，但 HDMI 视频输出不支持。</td>
       </tr>
       <tr>
-        <td><strong>内存 (RAM)</strong></td>
-        <td>4 GB</td>
-        <td class="highlight">8 GB 或以上</td>
+        <td data-key="dgpu">独立显卡</td>
+        <td>NVIDIA MX330</td>
+        <td><span class="status status-none" data-key="notSupported">❌ 不支持</span></td>
+        <td data-key="dgpuNote">已在配置中屏蔽，避免冲突。</td>
       </tr>
       <tr>
-        <td><strong>存储空间</strong></td>
-        <td>500 MB 可用空间</td>
-        <td>1 GB SSD（用于缓存加速）</td>
+        <td data-key="audio">音频</td>
+        <td>Realtek ALC256</td>
+        <td><span class="status status-full" data-key="fullSupport">✅ 完美支持</span></td>
+        <td data-key="audioNote">自动切换输入/输出设备，支持耳机麦克风。</td>
       </tr>
       <tr>
-        <td><strong>网络</strong></td>
-        <td>10 Mbps 宽带</td>
-        <td class="highlight">100 Mbps 或更高（建议有线连接）</td>
+        <td data-key="wifi">无线网络</td>
+        <td>Intel Wireless-AC 9461</td>
+        <td><span class="status status-partial" data-key="partialSupport">⚠️ 部分支持</span></td>
+        <td data-key="wifiNote">可连接 Wi-Fi，但不支持隔空投送 (AirDrop) 和 Handoff。</td>
+      </tr>
+      <tr>
+        <td data-key="trackpad">触控板</td>
+        <td>ELAN1200</td>
+        <td><span class="status status-partial" data-key="basicSupport">⚠️ 基本支持</span></td>
+        <td data-key="trackpadNote">支持多点触控，偶发无响应（已知驱动问题）。</td>
+      </tr>
+      <tr>
+        <td data-key="typec">Type-C 接口</td>
+        <td>-</td>
+        <td><span class="status status-partial" data-key="partialSupport">⚠️ 部分支持</span></td>
+        <td data-key="typecNote">支持数据传输与充电，但不支持视频输出。</td>
+      </tr>
+      <tr>
+        <td data-key="bluetooth">蓝牙</td>
+        <td>Intel Bluetooth</td>
+        <td><span class="status status-full" data-key="fullSupport">✅ 完美支持</span></td>
+        <td data-key="bluetoothNote">完整功能，支持所有蓝牙外设。</td>
       </tr>
     </tbody>
   </table>
-
-  <p style="margin-top: 2rem; padding: 1rem; background: #fffbeb; border-left: 4px solid #eab308;">
-    <i class="fas fa-info-circle"></i> <strong>提示：</strong>虽然 NovaSync 可在最低配置下运行，但若需同步大量文件（>10GB）或启用实时协作功能，强烈建议使用推荐配置以获得最佳体验。
-  </p>
 </main>
 
 <footer>
-  &copy; 2025 NovaSync. 保留所有权利。
+  <p data-key="footerText">© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的</p>
 </footer>
+
+<script>
+  const translations = {
+    "zh-CN": {
+      projectTitle: "让 Windows 笔记本完美运行 macOS",
+      navHome: "首页",
+      navHardware: "硬件支持",
+      navCompatibility: "系统兼容",
+      navInstallation: "安装指南",
+      navFAQ: "常见问题",
+      pageTitle: "硬件支持详情",
+      pageDesc: "华硕 VivoBook FL8700JP (X509JP) 各硬件组件在 macOS 下的兼容状态如下：",
+      component: "组件",
+      model: "型号",
+      status: "状态",
+      notes: "详细说明",
+      cpu: "处理器",
+      igpu: "核显",
+      dgpu: "独立显卡",
+      audio: "音频",
+      wifi: "无线网络",
+      trackpad: "触控板",
+      typec: "Type-C 接口",
+      bluetooth: "蓝牙",
+      fullSupport: "✅ 完美支持",
+      basicSupport: "⚠️ 基本支持",
+      partialSupport: "⚠️ 部分支持",
+      notSupported: "❌ 不支持",
+      cpuNote: "Ice Lake 架构优化，CPU 电源管理正常。",
+      igpuNote: "可驱动显示，但 HDMI 视频输出不支持。",
+      dgpuNote: "已在配置中屏蔽，避免冲突。",
+      audioNote: "自动切换输入/输出设备，支持耳机麦克风。",
+      wifiNote: "可连接 Wi-Fi，但不支持隔空投送 (AirDrop) 和 Handoff。",
+      trackpadNote: "支持多点触控，偶发无响应（已知驱动问题）。",
+      typecNote: "支持数据传输与充电，但不支持视频输出。",
+      bluetoothNote: "完整功能，支持所有蓝牙外设。",
+      footerText: "© 2021–2025 极光呆呆脑 | MIT 许可证 | 本项目仅用于学习和研究目的"
+    },
+    "zh-TW": {
+      projectTitle: "讓 Windows 筆記型電腦完美運行 macOS",
+      navHome: "首頁",
+      navHardware: "硬體支援",
+      navCompatibility: "系統相容",
+      navInstallation: "安裝指南",
+      navFAQ: "常見問題",
+      pageTitle: "硬體支援詳情",
+      pageDesc: "華碩 VivoBook FL8700JP (X509JP) 各硬體元件在 macOS 下的相容狀態如下：",
+      component: "元件",
+      model: "型號",
+      status: "狀態",
+      notes: "詳細說明",
+      cpu: "處理器",
+      igpu: "內顯",
+      dgpu: "獨立顯示卡",
+      audio: "音訊",
+      wifi: "無線網路",
+      trackpad: "觸控板",
+      typec: "Type-C 介面",
+      bluetooth: "藍牙",
+      fullSupport: "✅ 完美支援",
+      basicSupport: "⚠️ 基本支援",
+      partialSupport: "⚠️ 部分支援",
+      notSupported: "❌ 不支援",
+      cpuNote: "Ice Lake 架構優化，CPU 電源管理正常。",
+      igpuNote: "可驅動顯示，但 HDMI 影像輸出不支援。",
+      dgpuNote: "已在設定中遮蔽，避免衝突。",
+      audioNote: "自動切換輸入/輸出裝置，支援耳機麥克風。",
+      wifiNote: "可連接 Wi-Fi，但不支援隔空投送 (AirDrop) 與 Handoff。",
+      trackpadNote: "支援多點觸控，偶發無回應（已知驅動問題）。",
+      typecNote: "支援資料傳輸與充電，但不支援影像輸出。",
+      bluetoothNote: "完整功能，支援所有藍牙週邊。",
+      footerText: "© 2021–2025 極光呆呆腦 | MIT 授權 | 本專案僅供學習與研究用途"
+    },
+    "en": {
+      projectTitle: "Run macOS Perfectly on Windows Laptops",
+      navHome: "Home",
+      navHardware: "Hardware",
+      navCompatibility: "Compatibility",
+      navInstallation: "Installation",
+      navFAQ: "FAQ",
+      pageTitle: "Hardware Support Details",
+      pageDesc: "Compatibility status of ASUS VivoBook FL8700JP (X509JP) components with macOS:",
+      component: "Component",
+      model: "Model",
+      status: "Status",
+      notes: "Notes",
+      cpu: "CPU",
+      igpu: "Integrated GPU",
+      dgpu: "Dedicated GPU",
+      audio: "Audio",
+      wifi: "Wi-Fi",
+      trackpad: "Trackpad",
+      typec: "Type-C Port",
+      bluetooth: "Bluetooth",
+      fullSupport: "✅ Full Support",
+      basicSupport: "⚠️ Basic Support",
+      partialSupport: "⚠️ Partial Support",
+      notSupported: "❌ Not Supported",
+      cpuNote: "Optimized for Ice Lake architecture, CPU power management works.",
+      igpuNote: "Display works, but HDMI video output is unsupported.",
+      dgpuNote: "Disabled in config to avoid conflicts.",
+      audioNote: "Auto-switch I/O devices, supports headset mic.",
+      wifiNote: "Wi-Fi works, but AirDrop and Handoff are unsupported.",
+      trackpadNote: "Multi-touch supported, occasional unresponsiveness (known issue).",
+      typecNote: "Data & charging supported, video output not supported.",
+      bluetoothNote: "Full functionality, all Bluetooth peripherals work.",
+      footerText: "© 2021–2025 AuroraDumbBrain | MIT License | For educational purposes only"
+    }
+  };
+
+  // 主题切换
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (localStorage.getItem('theme') === 'dark' || (localStorage.getItem('theme') === null && prefersDark)) {
+    body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    themeToggle.innerHTML = body.classList.contains('dark-mode') 
+      ? '<i class="fas fa-sun"></i>' 
+      : '<i class="fas fa-moon"></i>';
+  });
+
+  // 语言切换
+  const langSwitcher = document.getElementById('languageSwitcher');
+  const userLang = navigator.language;
+  let currentLang = localStorage.getItem('language') || 
+                   (userLang.startsWith('zh-TW') ? 'zh-TW' : 
+                   (userLang.startsWith('zh') ? 'zh-CN' : 'en'));
+  langSwitcher.value = currentLang;
+
+  function updateLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+  }
+
+  langSwitcher.addEventListener('change', (e) => {
+    updateLanguage(e.target.value);
+  });
+
+  updateLanguage(currentLang);
+</script>
 
 </body>
 </html>
