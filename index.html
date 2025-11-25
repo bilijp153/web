@@ -1,210 +1,481 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASUS FL8700JP 黑苹果项目 | 专业macOS解决方案</title>
-  <meta name="description" content="为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容">
+  <title>安装指南 | ASUS FL8700JP 黑苹果项目</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --bg: #fff;
-      --text: #111;
-      --card-bg: #fff;
-      --link: #0066cc;
-      --border: #ddd;
-      --shadow: 0 2px 8px rgba(0,0,0,0.1);
-      --accent: #0066cc;
-      --header-bg: #f8f9fa;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121212;
-        --text: #eee;
-        --card-bg: #1e1e1e;
-        --link: #66b3ff;
-        --border: #444;
-        --shadow: 0 2px 8px rgba(0,0,0,0.3);
-        --header-bg: #1a1a1a;
-      }
-    }
-    body {
+    * {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    header {
-      background: var(--header-bg);
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
       padding: 0;
-      margin: 0;
-      flex-wrap: wrap;
-      justify-content: center;
+      box-sizing: border-box;
     }
-    nav a {
-      color: var(--link);
-      text-decoration: none;
-      font-weight: 500;
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
     }
-    nav a:hover, nav a.active {
-      text-decoration: underline;
+    
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #1a2a6c, #2a4d8e);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--accent);
+      text-decoration: none;
+      color: white;
     }
-    main { padding: 2rem 0; }
-    .hero {
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-menu li {
+      margin-left: 1.5rem;
+    }
+    
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      border-bottom: 2px solid #4fc3f7;
+      color: #4fc3f7;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Main Content */
+    main {
+      padding: 2rem 0;
+    }
+    
+    .page-header {
       text-align: center;
-      padding: 4rem 0;
+      margin-bottom: 2rem;
     }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .hero p {
-      font-size: 1.25rem;
-      color: rgba(0,0,0,0.7);
-      max-width: 700px;
-      margin: 0 auto 2rem;
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: #1a2a6c;
+      margin-bottom: 1rem;
     }
-    @media (prefers-color-scheme: dark) {
-      .hero p { color: rgba(255,255,255,0.7); }
+    
+    .page-header p {
+      font-size: 1.2rem;
+      color: #666;
     }
+    
+    .content-section {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .content-section h2 {
+      color: #1a2a6c;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    
+    .content-section h3 {
+      color: #2a4d8e;
+      margin: 1.5rem 0 1rem;
+    }
+    
+    .step-list {
+      counter-reset: step-counter;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    
+    .step-list li {
+      counter-increment: step-counter;
+      margin-bottom: 1.5rem;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+    
+    .step-list li:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #1a2a6c;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    .code-block {
+      background: #f5f5f5;
+      border-left: 4px solid #1a2a6c;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+    }
+    
+    .important-note {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .important-note h4 {
+      color: #856404;
+      margin-bottom: 0.5rem;
+    }
+    
+    .important-note p {
+      color: #856404;
+      margin: 0;
+    }
+    
     .btn {
       display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: var(--accent);
+      background: linear-gradient(135deg, #1a2a6c, #2a4d8e);
       color: white;
-      border-radius: 6px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
       text-decoration: none;
       font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
     }
-    .btn:hover { opacity: 0.9; }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 4rem 0;
+    
+    .btn:hover {
+      background: linear-gradient(135deg, #2a4d8e, #1a2a6c);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(26, 42, 108, 0.3);
     }
-    .feature-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: var(--shadow);
-    }
-    .feature-card h3 {
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
+    
+    /* Footer */
     footer {
+      background: #1a2a6c;
+      color: white;
       text-align: center;
       padding: 2rem 0;
       margin-top: 3rem;
-      color: var(--text-secondary, inherit);
-      font-size: 0.9rem;
     }
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--text);
+    
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+    
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.1rem; }
-      nav ul { flex-direction: column; align-items: center; }
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .nav-menu li {
+        margin: 0.5rem 0;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .content-section {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      main {
+        padding: 1rem 0;
+      }
+      
+      .step-list li {
+        padding-left: 2rem;
+      }
+      
+      .step-list li:before {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header with Navigation -->
   <header>
-    <div class="container">
-      <nav>
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
-        <div class="header-right">
-          <ul>
-            <li><a href="hardware.html">硬件支持</a></li>
-            <li><a href="installation.html">安装指南</a></li>
-            <li><a href="faq.html">常见问题</a></li>
-            <li><a href="compatibility.html">系统兼容</a></li>
-            <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
-          </ul>
-          <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
-        </div>
-      </nav>
+    <div class="container header-content">
+      <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="hardware.html">硬件支持</a></li>
+        <li><a href="installation.html">安装指南</a></li>
+        <li><a href="faq.html">常见问题</a></li>
+        <li><a href="compatibility.html">系统兼容</a></li>
+        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      </ul>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <h1>让 Windows 笔记本完美运行 macOS</h1>
-      <p>为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
-      <a href="installation.html" class="btn">开始安装之旅</a>
-    </section>
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>安装指南</h1>
+        <p>按照步骤操作，将macOS完美安装到您的ASUS FL8700JP笔记本电脑</p>
+      </div>
 
-    <div class="features">
-      <div class="feature-card">
-        <h3>全面硬件支持</h3>
-        <p>完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。</p>
-        <a href="hardware.html" class="btn">查看详情</a>
+      <!-- 准备工作 -->
+      <div class="content-section">
+        <h2>准备工作</h2>
+        <p>在开始安装之前，请确保您已准备好以下物品和条件：</p>
+        
+        <h3>所需物品：</h3>
+        <ul style="margin: 1rem 0 1.5rem 1.5rem;">
+          <li>16GB或更大容量的U盘</li>
+          <li>可正常运行的Windows或macOS系统</li>
+          <li>稳定的网络连接</li>
+          <li>至少50GB的可用磁盘空间</li>
+          <li>ASUS FL8700JP笔记本电脑 (X509JP)</li>
+        </ul>
+        
+        <div class="important-note">
+          <h4>重要提示：</h4>
+          <p>安装过程中会格式化硬盘，请务必备份所有重要数据。本指南仅适用于ASUS FL8700JP (X509JP)特定机型。</p>
+        </div>
+        
+        <h3>支持版本：</h3>
+        <p>macOS Catalina (10.15.x), macOS Big Sur (11.x), macOS Monterey (12.x), macOS Ventura (13.x), macOS Sonoma (14.x), macOS Sequoia (15.x), macOS Tahoe (26.x)</p>
       </div>
-      <div class="feature-card">
-        <h3>全版本兼容</h3>
-        <p>支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
-        <a href="compatibility.html" class="btn">查看详情</a>
+
+      <!-- BIOS设置 -->
+      <div class="content-section">
+        <h2>BIOS设置</h2>
+        <p>在开始安装之前，请确保您的BIOS已更新到最新版本，并按照以下步骤进行设置：</p>
+        
+        <ol class="step-list">
+          <li>
+            <strong>进入BIOS设置</strong><br>
+            开机时反复按F2键进入BIOS设置界面。
+          </li>
+          <li>
+            <strong>安全启动设置</strong><br>
+            在Security选项卡中，将Secure Boot设置为Disabled。
+          </li>
+          <li>
+            <strong>启动选项</strong><br>
+            在Boot选项卡中，将Fast Boot设置为Disabled，将CSM设置为Enabled。
+          </li>
+          <li>
+            <strong>DVMT预分配</strong><br>
+            在Advanced选项中，将DVMT Pre-Allocated设置为64M。
+          </li>
+          <li>
+            <strong>其他设置</strong><br>
+            禁用CFG Lock、VT-d和 Thunderbolt安全选项（如果存在）。
+          </li>
+          <li>
+            <strong>保存设置</strong><br>
+            按F10保存设置并退出BIOS。
+          </li>
+        </ol>
+        
+        <div class="important-note">
+          <h4>注意：</h4>
+          <p>不同版本的BIOS界面可能略有不同，但关键设置选项名称基本相同。如果找不到某个选项，请查阅您的BIOS手册或更新BIOS版本。</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <h3>详细安装指南</h3>
-        <p>从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。</p>
-        <a href="installation.html" class="btn">查看详情</a>
+
+      <!-- 创建安装介质 -->
+      <div class="content-section">
+        <h2>创建安装介质</h2>
+        
+        <ol class="step-list">
+          <li>
+            <strong>下载macOS镜像</strong><br>
+            从苹果官网或可信来源下载macOS安装镜像。推荐使用gibMacOS工具下载。<br>
+            在Windows上，可以使用gibMacOS工具：
+            <div class="code-block">
+# 下载gibMacOS
+git clone https://github.com/corpnewt/gibMacOS
+cd gibMacOS
+python gibMacOS.command
+            </div>
+          </li>
+          <li>
+            <strong>准备U盘</strong><br>
+            使用磁盘工具将U盘格式化为Mac OS扩展（日志式）格式，GUID分区图。
+          </li>
+          <li>
+            <strong>创建安装盘</strong><br>
+            使用终端命令或BalenaEtcher将镜像写入U盘。<br>
+            在macOS终端中使用以下命令：
+            <div class="code-block">
+sudo /Applications/Install\ macOS\ [版本名称].app/Contents/Resources/createinstallmedia --volume /Volumes/[U盘名称] --nointeraction
+            </div>
+            在Windows上，可以使用BalenaEtcher或TransMac工具。
+          </li>
+        </ol>
+        
+        <div class="important-note">
+          <h4>提示：</h4>
+          <p>创建安装介质的过程可能需要30分钟或更长时间，请确保电源稳定且不要中断过程。</p>
+        </div>
+      </div>
+
+      <!-- 安装过程 -->
+      <div class="content-section">
+        <h2>安装过程</h2>
+        
+        <ol class="step-list">
+          <li>
+            <strong>启动安装</strong><br>
+            从U盘启动，进入OpenCore引导界面，选择安装macOS。<br>
+            在启动时按ESC键选择启动设备，选择UEFI:您的U盘名称。
+          </li>
+          <li>
+            <strong>磁盘工具</strong><br>
+            进入安装程序后，使用磁盘工具将目标硬盘格式化为APFS格式。<br>
+            选择"显示所有设备"，选择主硬盘，点击"抹掉"，格式选择APFS，方案选择GUID分区图。
+          </li>
+          <li>
+            <strong>开始安装</strong><br>
+            选择刚格式化的磁盘作为安装目标，开始安装过程。<br>
+            安装过程会重启数次，每次重启后请继续选择从U盘启动，然后选择macOS安装器继续安装。
+          </li>
+          <li>
+            <strong>完成安装</strong><br>
+            系统会自动重启数次，最终进入macOS设置向导。<br>
+            按照向导完成macOS初始设置，创建用户账户等。
+          </li>
+        </ol>
+      </div>
+
+      <!-- 常见问题 -->
+      <div class="content-section">
+        <h2>常见问题</h2>
+        <p>如果安装过程中出现卡住、重启或错误，请尝试使用不同的引导参数，如"-v"调试模式、"agdpmod=pikera"解决显卡问题等。</p>
+        <a href="faq.html" class="btn">查看完整常见问题</a>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>项目简介：本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。</p>
-      <p>技术特点：基于 OpenCore 1.0.5 最新引导 | ACPI 热补丁与 SSDT 优化 | 完善的电源管理配置</p>
-      <p>重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。</p>
-      <p>📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-      <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+    <div class="container footer-content">
+      <p>MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
     </div>
   </footer>
 
   <script>
-    const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-    function setTheme(theme) {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      localStorage.setItem('theme', theme);
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
-
-    setTheme(currentTheme);
-
-    themeToggle.addEventListener('click', () => {
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        const navMenu = document.getElementById('navMenu');
+        navMenu.classList.remove('active');
+        const icon = document.getElementById('mobileMenuBtn').querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+
+    // Set active navigation item
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentLocation = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.nav-menu a');
+      
+      navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentLocation || (currentLocation === '' && linkHref === 'index.html')) {
+          link.classList.add('active');
+        }
+      });
     });
   </script>
 </body>
