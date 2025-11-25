@@ -3,304 +3,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASUS FL8700JP 黑苹果项目</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/style.css">
+  <title>欢迎使用 NovaSync | 首页</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #7e22ce;
+      --light-bg: #f8fafc;
+      --dark-text: #1e293b;
+      --gray: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark-text);
+      background-color: #ffffff;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: white;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { opacity: 0.9; }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 1rem;
+      background: var(--light-bg);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+    .feature-card.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .feature-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 { margin-bottom: 0.8rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--light-bg);
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <i class="fas fa-bars"></i>
-        </button>
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html" class="nav-link active" data-page="home">主页</a>
-          <a href="hardware.html" class="nav-link" data-page="hardware">硬件支持</a>
-          <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
-          <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
-          <a href="compatibility.html" class="nav-link" data-page="compatibility">系统兼容</a>
-          <a href="https://github.com" class="nav-link" target="_blank">GitHub</a>
-          <select class="language-selector" id="languageSelector">
-            <option value="zh-CN">简体中文</option>
-            <option value="zh-TW">繁體中文</option>
-            <option value="en">English</option>
-          </select>
-          <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-          </button>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="page-header">
-      <h1>让 Windows 笔记本完美运行 macOS</h1>
-      <p>为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案</p>
-    </div>
+<header>
+  <div class="nav-container">
+    <div class="logo">NovaSync</div>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="hardware.html">硬件要求</a></li>
+      <li><a href="installation.html">安装指南</a></li>
+      <li><a href="compatibility.html">兼容性</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</header>
 
-    <div class="card-grid">
-      <div class="card fade-in">
-        <h3>💻 硬件支持</h3>
-        <p>全面兼容 CPU、核显、声卡、蓝牙等核心组件，NVIDIA 独显已屏蔽。</p>
-        <a href="hardware.html" class="nav-link" style="display:inline-block; margin-top:1rem;">查看详情 →</a>
-      </div>
-      <div class="card fade-in">
-        <h3>⚙️ 安装指南</h3>
-        <p>从 BIOS 设置到 EFI 迁移，手把手教你完成 macOS 安装。</p>
-        <a href="installation.html" class="nav-link" style="display:inline-block; margin-top:1rem;">开始安装 →</a>
-      </div>
-      <div class="card fade-in">
-        <h3>❓ 常见问题</h3>
-        <p>触控板无响应？开机有声音？这里有一站式解决方案。</p>
-        <a href="faq.html" class="nav-link" style="display:inline-block; margin-top:1rem;">立即查看 →</a>
-      </div>
-      <div class="card fade-in">
-        <h3>🖥️ 系统兼容</h3>
-        <p>从 Catalina 到 Sequoia，全版本 macOS 完美支持。</p>
-        <a href="compatibility.html" class="nav-link" style="display:inline-block; margin-top:1rem;">查看列表 →</a>
-      </div>
-    </div>
+<section class="hero">
+  <h1>无缝同步，极致体验</h1>
+  <p>NovaSync 是一款专为高性能设备设计的跨平台数据同步工具，支持实时备份、低延迟传输与端到端加密，让您的数字生活更安全、更高效。</p>
+  <a href="installation.html" class="btn" style="display:inline-block;padding:12px 30px;background:#2563eb;color:white;border-radius:30px;text-decoration:none;font-weight:600;">立即开始</a>
+</section>
 
-    <div class="card fade-in" style="margin-top: 2rem;">
-      <h3>⚠️ 重要提示</h3>
-      <ul style="padding-left: 1.5rem; margin-top: 0.5rem; color: var(--text-light);">
-        <li>专属适配：仅适用于华硕 FL8700JP (X509JP) 特定机型</li>
-        <li>系统准备：需自行获取 macOS 安装镜像</li>
-        <li>风险提示：操作前请务必备份重要数据</li>
-        <li>授权许可：遵循 MIT 许可证，禁止商业用途</li>
-      </ul>
-    </div>
-  </main>
+<section class="features">
+  <div class="feature-card" data-animate>
+    <i class="fas fa-microchip"></i>
+    <h3>高性能引擎</h3>
+    <p>基于 Rust 编写的底层同步引擎，资源占用极低，速度提升 300%。</p>
+  </div>
+  <div class="feature-card" data-animate>
+    <i class="fas fa-lock"></i>
+    <h3>端到端加密</h3>
+    <p>所有数据在本地加密后再上传，确保隐私不被第三方窥探。</p>
+  </div>
+  <div class="feature-card" data-animate>
+    <i class="fas fa-sync-alt"></i>
+    <h3>实时双向同步</h3>
+    <p>文件修改后 1 秒内自动同步，支持冲突智能合并。</p>
+  </div>
+</section>
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="social-links">
-          <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <p class="copyright">📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-        <p class="copyright">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-      </div>
-    </div>
-  </footer>
+<footer>
+  &copy; 2025 NovaSync. 保留所有权利。
+</footer>
 
-  <script>
-    const translations = {
-      'zh-CN': {
-        home: '主页',
-        hardware: '硬件支持',
-        installation: '安装指南',
-        faq: '常见问题',
-        compatibility: '系统兼容',
-        github: 'GitHub',
-        '简体中文': '简体中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'ASUS FL8700JP 黑苹果项目',
-        subtitle: '为华硕 VivoBook FL8700JP (X509JP) 定制的黑苹果解决方案',
-        card1Title: '💻 硬件支持',
-        card1Desc: '全面兼容 CPU、核显、声卡、蓝牙等核心组件，NVIDIA 独显已屏蔽。',
-        card2Title: '⚙️ 安装指南',
-        card2Desc: '从 BIOS 设置到 EFI 迁移，手把手教你完成 macOS 安装。',
-        card3Title: '❓ 常见问题',
-        card3Desc: '触控板无响应？开机有声音？这里有一站式解决方案。',
-        card4Title: '🖥️ 系统兼容',
-        card4Desc: '从 Catalina 到 Sequoia，全版本 macOS 完美支持。',
-        importantNote: '⚠️ 重要提示',
-        note1: '专属适配：仅适用于华硕 FL8700JP (X509JP) 特定机型',
-        note2: '系统准备：需自行获取 macOS 安装镜像',
-        note3: '风险提示：操作前请务必备份重要数据',
-        note4: '授权许可：遵循 MIT 许可证，禁止商业用途',
-        license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
-        disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
-      },
-      'zh-TW': {
-        home: '主頁',
-        hardware: '硬體支援',
-        installation: '安裝指南',
-        faq: '常見問題',
-        compatibility: '系統相容',
-        github: 'GitHub',
-        '简体中文': '簡體中文',
-        '繁體中文': '繁體中文',
-        English: 'English',
-        title: 'ASUS FL8700JP 黑蘋果專案',
-        subtitle: '為華碩 VivoBook FL8700JP (X509JP) 定製的黑蘋果解決方案',
-        card1Title: '💻 硬體支援',
-        card1Desc: '全面相容 CPU、核顯、聲卡、藍牙等核心元件，NVIDIA 獨顯已屏蔽。',
-        card2Title: '⚙️ 安裝指南',
-        card2Desc: '從 BIOS 設定到 EFI 遷移，手把手教你完成 macOS 安裝。',
-        card3Title: '❓ 常見問題',
-        card3Desc: '觸控板無回應？開機有聲音？這裡有一站式解決方案。',
-        card4Title: '🖥️ 系統相容',
-        card4Desc: '從 Catalina 到 Sequoia，全版本 macOS 完美支援。',
-        importantNote: '⚠️ 重要提示',
-        note1: '專屬適配：僅適用於華碩 FL8700JP (X509JP) 特定機型',
-        note2: '系統準備：需自行取得 macOS 安裝映像',
-        note3: '風險提示：操作前請務必備份重要資料',
-        note4: '授權許可：遵循 MIT 許可證，禁止商業用途',
-        license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
-        disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
-      },
-      'en': {
-        home: 'Home',
-        hardware: 'Hardware Support',
-        installation: 'Installation Guide',
-        faq: 'FAQ',
-        compatibility: 'Compatibility',
-        github: 'GitHub',
-        '简体中文': 'Simplified Chinese',
-        '繁體中文': 'Traditional Chinese',
-        English: 'English',
-        title: 'ASUS FL8700JP Hackintosh Project',
-        subtitle: 'Custom Hackintosh solution for ASUS VivoBook FL8700JP (X509JP)',
-        card1Title: '💻 Hardware Support',
-        card1Desc: 'Full compatibility with CPU, iGPU, audio, Bluetooth, etc. NVIDIA dGPU is disabled.',
-        card2Title: '⚙️ Installation Guide',
-        card2Desc: 'Step-by-step guide from BIOS settings to EFI migration.',
-        card3Title: '❓ FAQ',
-        card3Desc: 'Trackpad unresponsive? Boot chime? Find solutions here.',
-        card4Title: '🖥️ Compatibility',
-        card4Desc: 'Full macOS support from Catalina to Sequoia.',
-        importantNote: '⚠️ Important Notice',
-        note1: 'Model-specific: Only for ASUS FL8700JP (X509JP)',
-        note2: 'macOS installer required (not provided)',
-        note3: 'Backup your data before proceeding',
-        note4: 'MIT License — non-commercial use only',
-        license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
-        disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+<script>
+  // 简易滚动动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
       }
-    };
-
-    const currentPage = 'home';
-    const languageSelector = document.getElementById('languageSelector');
-    const themeToggle = document.getElementById('themeToggle');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    function initLanguage() {
-      const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
-      languageSelector.value = savedLang;
-      updateLanguage(savedLang);
-    }
-
-    function updateLanguage(lang) {
-      localStorage.setItem('preferredLanguage', lang);
-      document.title = translations[lang].title;
-
-      // Nav
-      document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        const key = link.getAttribute('data-page');
-        if (translations[lang][key]) link.textContent = translations[lang][key];
-      });
-      const gh = document.querySelector('.nav-link[href="https://github.com"]');
-      if (gh) gh.textContent = translations[lang].github;
-
-      // Page content
-      document.querySelector('.page-header h1').textContent = translations[lang].title;
-      document.querySelector('.page-header p').textContent = translations[lang].subtitle;
-
-      const cards = document.querySelectorAll('.card');
-      if (cards[0]) {
-        cards[0].querySelector('h3').textContent = translations[lang].card1Title;
-        cards[0].querySelector('p').textContent = translations[lang].card1Desc;
-      }
-      if (cards[1]) {
-        cards[1].querySelector('h3').textContent = translations[lang].card2Title;
-        cards[1].querySelector('p').textContent = translations[lang].card2Desc;
-      }
-      if (cards[2]) {
-        cards[2].querySelector('h3').textContent = translations[lang].card3Title;
-        cards[2].querySelector('p').textContent = translations[lang].card3Desc;
-      }
-      if (cards[3]) {
-        cards[3].querySelector('h3').textContent = translations[lang].card4Title;
-        cards[3].querySelector('p').textContent = translations[lang].card4Desc;
-      }
-
-      if (cards[4]) {
-        cards[4].querySelector('h3').textContent = translations[lang].importantNote;
-        const lis = cards[4].querySelectorAll('li');
-        if (lis[0]) lis[0].textContent = translations[lang].note1;
-        if (lis[1]) lis[1].textContent = translations[lang].note2;
-        if (lis[2]) lis[2].textContent = translations[lang].note3;
-        if (lis[3]) lis[3].textContent = translations[lang].note4;
-      }
-
-      const fps = document.querySelectorAll('.copyright');
-      if (fps[0]) fps[0].textContent = translations[lang].license;
-      if (fps[1]) fps[1].textContent = translations[lang].disclaimer;
-
-      // Update selector labels
-      Array.from(languageSelector.options).forEach(opt => {
-        const txt = opt.textContent;
-        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
-      });
-    }
-
-    function applyTheme(isDark) {
-      if (isDark) {
-        document.body.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('preferredTheme', 'dark');
-      } else {
-        document.body.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.removeItem('preferredTheme');
-      }
-    }
-
-    function toggleTheme() {
-      const isDark = document.body.hasAttribute('data-theme');
-      applyTheme(!isDark);
-    }
-
-    function closeMobileMenu() {
-      navMenu.classList.remove('active');
-    }
-
-    // Scroll animation
-    function animateOnScroll() {
-      document.querySelectorAll('.fade-in').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add('appear');
-        }
-      });
-    }
-
-    // Events
-    document.addEventListener('click', (e) => {
-      if (!navMenu.classList.contains('active')) return;
-      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
-      if (!isClickInside) closeMobileMenu();
     });
+  }, { threshold: 0.1 });
 
-    window.addEventListener('scroll', () => {
-      if (navMenu.classList.contains('active')) closeMobileMenu();
-      animateOnScroll();
-    });
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    observer.observe(el);
+  });
+</script>
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-    // Init
-    if (localStorage.getItem('preferredTheme') === 'dark' || 
-        (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      applyTheme(true);
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      initLanguage();
-      animateOnScroll();
-    });
-  </script>
 </body>
 </html>
