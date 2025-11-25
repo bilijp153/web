@@ -1,357 +1,152 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASUS FL8700JP 黑苹果项目 | 专业macOS解决方案</title>
-    <meta name="description" content="为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容">
-    <style>
-        /* ========== 全局重置与变量 ========== */
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --card-bg: #ffffff;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --success-color: #10b981;
-            --header-bg: #ffffff;
-            --footer-bg: #f1f5f9;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --text-primary: #f1f5f9;
-                --text-secondary: #94a9c8;
-                --border-color: #334155;
-                --card-bg: #1e293b;
-                --accent-color: #60a5fa;
-                --accent-hover: #3b82f6;
-                --success-color: #34d399;
-                --header-bg: #0f172a;
-                --footer-bg: #1a2234;
-                --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-                --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* ========== 头部导航 ========== */
-        header {
-            background-color: var(--header-bg);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--border-color);
-        }
-
-        /* ========== 主要内容区 ========== */
-        main {
-            padding: 2rem 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 3rem 0;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        .tagline {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        /* ========== 页脚 ========== */
-        footer {
-            background-color: var(--footer-bg);
-            padding: 2rem 0;
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .license {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* ========== 响应式设计 ========== */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASUS FL8700JP 黑苹果项目 | 专业macOS解决方案</title>
+  <meta name="description" content="为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容">
+  <style>
+    :root {
+      --bg: #fff;
+      --text: #111;
+      --card-bg: #fff;
+      --link: #0066cc;
+      --border: #ddd;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --accent: #0066cc;
+      --header-bg: #f8f9fa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --text: #eee;
+        --card-bg: #1e1e1e;
+        --link: #66b3ff;
+        --border: #444;
+        --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        --header-bg: #1a1a1a;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    header {
+      background: var(--header-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover { text-decoration: underline; }
+    .logo { font-size: 1.5rem; font-weight: bold; }
+    main { padding: 2rem 0; }
+    .hero { text-align: center; padding: 4rem 0; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.25rem; color: var(--text-secondary, inherit); max-width: 700px; margin: 0 auto 2rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn:hover { opacity: 0.9; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .feature-card h3 { margin-bottom: 1rem; color: var(--accent); }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      color: var(--text-secondary, inherit);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      nav ul { justify-content: center; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
-                <ul class="nav-links">
-                    <li><a href="hardware.html">硬件支持</a></li>
-                    <li><a href="installation.html" class="active">安装指南</a></li>
-                    <li><a href="faq.html">常见问题</a></li>
-                    <li><a href="compatibility.html">系统兼容</a></li>
-                    <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
-                </ul>
-                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
-                    <!-- Icon will be set by JS -->
-                </button>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果</a>
+        <ul>
+          <li><a href="hardware.html">硬件支持</a></li>
+          <li><a href="installation.html">安装指南</a></li>
+          <li><a href="faq.html">常见问题</a></li>
+          <li><a href="compatibility.html">系统兼容</a></li>
+          <li><a href="https://github.com/your-repo" target="_blank">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <section class="hero">
-            <h1>让 Windows 笔记本完美运行 macOS</h1>
-            <p>为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
-            <a href="installation.html" class="btn">开始安装之旅</a>
-        </section>
+  <main class="container">
+    <section class="hero">
+      <h1>让 Windows 笔记本完美运行 macOS</h1>
+      <p>为华硕 VivoBook FL8700JP 定制的专业黑苹果解决方案，从 Catalina 到 Tahoe 全面兼容</p>
+      <a href="installation.html" class="btn">开始安装之旅</a>
+    </section>
 
-        <div class="tagline">
-            OpenCore 1.0.5 全版本兼容 稳定可靠
-        </div>
+    <div class="features">
+      <div class="feature-card">
+        <h3>全面硬件支持</h3>
+        <p>完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。</p>
+        <a href="hardware.html" class="btn">查看详情</a>
+      </div>
+      <div class="feature-card">
+        <h3>全版本兼容</h3>
+        <p>支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
+        <a href="compatibility.html" class="btn">查看详情</a>
+      </div>
+      <div class="feature-card">
+        <h3>详细安装指南</h3>
+        <p>从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。</p>
+        <a href="installation.html" class="btn">查看详情</a>
+      </div>
+    </div>
+  </main>
 
-        <section class="features">
-            <div class="feature-card">
-                <h3>全面硬件支持</h3>
-                <p>完美支持 Intel i7 处理器、Iris Plus 显卡、Realtek 音频等核心硬件组件，提供接近原生的使用体验。</p>
-                <a href="hardware.html" class="btn btn-outline">查看详情</a>
-            </div>
-            <div class="feature-card">
-                <h3>全版本兼容</h3>
-                <p>支持从 Catalina 到 Tahoe 的所有现代 macOS 版本，持续更新确保与新版本系统完美兼容。</p>
-                <a href="compatibility.html" class="btn btn-outline">查看详情</a>
-            </div>
-            <div class="feature-card">
-                <h3>详细安装指南</h3>
-                <p>从 BIOS 设置到系统配置，提供完整的安装教程和排错指南，即使是新手也能轻松完成安装。</p>
-                <a href="installation.html" class="btn btn-outline">查看详情</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <p>项目简介：本项目专为华硕 VivoBook FL870JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。</p>
-                <p>技术特点：基于 OpenCore 1.0.5 最新引导 | ACPI 热补丁与 SSDT 优化 | 完善的电源管理配置</p>
-                <p>重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。</p>
-                <div class="license">
-                    <p>📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-                    <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-        // Set the icon based on the current theme
-        function setIcon(theme) {
-            themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-        }
-
-        // Apply the theme
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-        setIcon(currentTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', newTheme);
-            setIcon(newTheme);
-        });
-
-        // Handle system theme change if no local preference is set
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                document.documentElement.classList.toggle('dark', e.matches);
-                setIcon(newTheme);
-            }
-        });
-    </script>
+  <footer>
+    <div class="container">
+      <p>项目简介：本项目专为华硕 VivoBook FL8700JP (X509JP) 笔记本电脑设计，提供完整的黑苹果解决方案。采用最新的 OpenCore 引导加载程序，确保系统稳定性和兼容性。</p>
+      <p>技术特点：基于 OpenCore 1.0.5 最新引导 | ACPI 热补丁与 SSDT 优化 | 完善的电源管理配置</p>
+      <p>重要提示：本 EFI 配置仅适用于华硕 FL8700JP (X509JP) 特定机型。操作前请务必备份重要数据，并仔细阅读安装指南。</p>
+      <p>📜 许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+      <p>温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+    </div>
+  </footer>
 </body>
 </html>
