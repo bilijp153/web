@@ -1,1364 +1,496 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>系统兼容性 | ASUS FL8700JP 黑苹果项目</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <style>
-        :root {
-            --primary: #2997ff;
-            --secondary: #888;
-            --background: #0d1117;
-            --card-bg: #161b22;
-            --text: #f0f6fc;
-            --text-secondary: #8b949e;
-            --success: #34c759;
-            --warning: #d29922;
-            --danger: #f85149;
-            --partial: #d29922;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            --header-bg: rgba(13, 17, 23, 0.9);
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>系统兼容 | ASUS FL8700JP 黑苹果项目</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ========== 复用 index.html 的全部 CSS ========== */
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --header-bg: #f9fafb;
+      --border: #e5e7eb;
+      --card-bg: #ffffff;
+      --accent: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
-        [data-theme="light"] {
-            --primary: #0969da;
-            --secondary: #656d76;
-            --background: #ffffff;
-            --card-bg: #f6f8fa;
-            --text: #24292f;
-            --text-secondary: #656d76;
-            --success: #1a7f37;
-            --warning: #9a6700;
-            --danger: #cf222e;
-            --partial: #9a6700;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --header-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-            padding: 0;
-            margin: 0;
-            transition: var(--transition);
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(41, 151, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(52, 199, 89, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 204, 0, 0.05) 0%, transparent 20%);
-            background-attachment: fixed;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    [data-theme="dark"] {
+      --bg: #111827;
+      --text: #f9fafb;
+      --header-bg: #1f2937;
+      --border: #374151;
+      --card-bg: #1f2937;
+      --accent: #60a5fa;
+    }
 
-         /* 导航栏样式 */
-        header {
-            background-color: var(--header-bg);
-            backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo h1 {
-            font-size: 22px;
-            font-weight: 600;
-            background: linear-gradient(90deg, #a2fe73, #35f2c6, #3f87ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 5px 10px;
-            border-radius: 8px;
-        }
-        
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-            background: rgba(41, 151, 255, 0.1);
-        }
-        
-        .theme-toggle, .lang-toggle {
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 20px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-        
-        .theme-toggle:hover, .lang-toggle:hover {
-            background: rgba(41, 151, 255, 0.1);
-            color: var(--primary);
-        }
-        
-        .lang-menu {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .lang-dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 100%;
-            background-color: var(--card-bg);
-            min-width: 120px;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            z-index: 1;
-            border: 1px solid var(--border-color);
-        }
-        
-        .lang-dropdown a {
-            color: var(--text);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-        }
-        
-        .lang-dropdown a:hover {
-            background-color: rgba(41, 151, 255, 0.1);
-            color: var(--primary);
-        }
-        
-        .lang-menu:hover .lang-dropdown {
-            display: block;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* 页面标题样式 */
-        .page-header {
-            text-align: center;
-            padding: 80px 0 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .page-header h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ffa62e, #ff4b5c, #a254ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* 内容卡片样式 */
-    .section {
-            padding: 40px 0;
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-            border-radius: 3px;
-        }
-        
-        .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--success), var(--warning));
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        
-        /* 修复的时间线样式 - 确保三端完美显示 */
-    .timeline-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-        
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary), var(--success));
-            margin-left: -2px;
-            border-radius: 2px;
-            z-index: 1;
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            width: 100%;
-            display: flex;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .timeline-item:nth-child(odd) {
-            justify-content: flex-start;
-        }
-        
-        .timeline-item:nth-child(even) {
-            justify-content: flex-end;
-        }
-        
-        .timeline-item-content {
-            position: relative;
-            width: 45%;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            z-index: 2;
-        }
-        
-        .timeline-item-content:hover {
-            transform: scale(1.02);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-item-content::before {
-            content: '';
-            position: absolute;
-            right: -10px;
-            top: 20px;
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 10px solid var(--card-bg);
-        }
-        
-        .timeline-item:nth-child(even) .timeline-item-content::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 20px;
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 10px solid var(--card-bg);
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            border: 4px solid var(--card-bg);
-            border-radius: 50%;
-            margin-left: -10px;
-            z-index: 3;
-            box-shadow: 0 0 0 4px var(--primary);
-        }
-        
-        .timeline-date {
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .timeline-version {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .timeline-status {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-        
-        .status-partial {
-            background-color: rgba(210, 153, 34, 0.2);
-            color: var(--partial);
-            border: 1px solid rgba(210, 153, 34, 0.3);
-        }
-        
-        
-        /* 兼容性表格样式 */
-        .compatibility-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .compatibility-table th, .compatibility-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .compatibility-table th {
-            background-color: rgba(41, 151, 255, 0.1);
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .compatibility-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .compatibility-table tr:hover {
-            background-color: rgba(41, 151, 255, 0.05);
-        }
-        
-        .version-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            background-color: rgba(41, 151, 255, 0.2);
-            color: var(--primary);
-            border: 1px solid rgba(41, 151, 255, 0.3);
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        /* 功能卡片网格 */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .feature-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #ff6b6b, #ffa62e);
-        }
-        
-        .feature-card:nth-child(2)::before {
-            background: linear-gradient(135deg, #48dbfb, #0abde3);
-        }
-        
-        .feature-card:nth-child(3)::before {
-            background: linear-gradient(135deg, #1dd1a1, #10ac84);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-        }
-        
-        /* 页脚样式 */
-        footer {
-            background-color: var(--card-bg);
-            padding: 40px 0;
-            text-align: center;
-            margin-top: 60px;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
-        /* 响应式设计 */
-         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--header-bg);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-color);
-                z-index: 100;
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .page-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                justify-content: flex-start !important;
-                margin-left: 40px;
-                width: calc(100% - 40px);
-            }
-            
-            .timeline-item-content {
-                width: 100%;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-item-content::before,
-            .timeline-item:nth-child(even) .timeline-item-content::before {
-                left: -10px;
-                right: auto;
-                border-right: 10px solid var(--card-bg);
-                border-left: none;
-            }
-            
-            .timeline-dot {
-                left: 20px;
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .timeline-item-content {
-                padding: 20px;
-            }
-        }
+    header {
+      background-color: var(--header-bg);
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-         
-        /* 页面内容容器 */
-        .page-content {
-            min-height: calc(100vh - 200px);
-        }
-        
-        /* 动画效果 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-    </style>
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    select, button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    select:hover, button:hover {
+      background-color: var(--header-bg);
+    }
+
+    main {
+      padding: 2.5rem 0;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .page-header h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .compatibility-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .version-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .version-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .status-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .status-working { color: var(--success); }
+    .status-partial { color: var(--warning); }
+    .status-not-working { color: var(--error); }
+
+    footer {
+      background-color: var(--header-bg);
+      padding: 2rem 0;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: var(--header-bg);
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 99;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .controls {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .page-header h1 {
+        font-size: 1.875rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fab fa-apple"></i>
-                <h1 data-lang-key="site_title">ASUS FL8700JP 黑苹果</h1>
-            </div>
-            <div class="nav-links">
-                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
-                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
-                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
-                <a href="compatibility.html" class="active"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
-                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
-                
-                <div class="lang-menu">
-                    <button class="lang-toggle" id="langToggle">
-                        <i class="fas fa-globe"></i>
-                    </button>
-                    <div class="lang-dropdown" id="langDropdown">
-                        <a href="#" data-lang="zh-CN">简体中文</a>
-                        <a href="#" data-lang="zh-TW">繁體中文</a>
-                        <a href="#" data-lang="en">English</a>
-                    </div>
-                </div>
-                
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">ASUS FL8700JP 黑苹果项目</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html" class="nav-link" data-page="home">主页</a>
+          <a href="hardware.html" class="nav-link" data-page="hardware">硬件支持</a>
+          <a href="compatibility.html" class="nav-link active" data-page="compatibility">系统兼容</a>
+          <a href="installation.html" class="nav-link" data-page="installation">安装指南</a>
+          <a href="faq.html" class="nav-link" data-page="faq">常见问题</a>
+          <a href="advanced.html" class="nav-link" data-page="advanced">高级配置</a>
+          <a href="contribute.html" class="nav-link" data-page="contribute">参与贡献</a>
+          <div class="controls">
+            <select class="language-selector" id="languageSelector">
+              <option value="zh-CN">简体中文</option>
+              <option value="zh-TW">繁體中文</option>
+              <option value="en">English</option>
+            </select>
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
             </button>
-        </div>
-    </header>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-    <!-- 页面内容 -->
-    <div class="page-content">
-        <!-- 页面标题 -->
-        <section class="page-header">
-            <div class="container">
-                <h1 data-lang-key="page_title">系统兼容性</h1>
-                <p data-lang-key="page_subtitle">全面了解您的ASUS FL8700JP笔记本电脑与各版本macOS的兼容性</p>
-                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
-                    <span style="background: rgba(210, 153, 34, 0.2); color: var(--partial); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
-                        <i class="fas fa-exclamation-triangle"></i> <span data-lang-key="badge_full_compat">全版本基本支持</span>
-                    </span>
-                    <span style="background: rgba(41, 151, 255, 0.2); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
-                        <i class="fas fa-sync-alt"></i> <span data-lang-key="badge_continuous">持续更新支持</span>
-                    </span>
-                    <span style="background: rgba(255, 204, 0, 0.2); color: var(--warning); padding: 6px 12px; border-radius: 20px; font-size: 14px;">
-                        <i class="fas fa-shield-alt"></i> <span data-lang-key="badge_stable">稳定可靠</span>
-                    </span>
-                </div>
-            </div>
-        </section>
-
-        <main class="container">
-            <section class="section fade-in">
-                <h2 class="section-title"><i class="fas fa-check-circle"></i> <span data-lang-key="compatibility_overview">兼容性概述</span></h2>
-                <div class="card">
-                    <p data-lang-key="compatibility_desc">ASUS VivoBook FL8700JP (X509JP) 笔记本电脑基本支持从 macOS Catalina (10.15) 到 macOS Sequoia (15.0) 的所有现代 macOS 版本。经过精心优化和持续测试，每个版本都能充分发挥硬件性能，提供接近原生Mac的体验。</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 25px 0;">
-                        <div style="text-align: center; padding: 20px; background: rgba(210, 153, 34, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(210, 153, 34, 0.2);">
-                            <div style="font-size: 2rem; color: var(--partial); margin-bottom: 10px;">7</div>
-                            <div data-lang-key="compat_count">基本支持版本</div>
-                        </div>
-                        <div style="text-align: center; padding: 20px; background: rgba(41, 151, 255, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(41, 151, 255, 0.2);">
-                            <div style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;">100%</div>
-                            <div data-lang-key="core_feature">核心功能支持</div>
-                        </div>
-                        <div style="text-align: center; padding: 20px; background: rgba(255, 204, 0, 0.1); border-radius: var(--border-radius); border: 1px solid rgba(255, 204, 0, 0.2);">
-                            <div style="font-size: 2rem; color: var(--warning); margin-bottom: 10px;">持续</div>
-                            <div data-lang-key="update_maintenance">更新维护</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 兼容性时间线 -->
-            <section class="section fade-in">
-                <h2 class="section-title"><i class="fas fa-history"></i> <span data-lang-key="macos_timeline">macOS 版本演进时间线</span></h2>
-                <div class="card">
-                    <div class="timeline-container">
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2019_10">2019年10月</div>
-                                    <div class="timeline-version">macOS Catalina 10.15</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="catalina_desc">首个基本兼容的macOS版本，所有核心功能正常工作，为后续版本奠定坚实基础。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2020_11">2020年11月</div>
-                                    <div class="timeline-version">macOS Big Sur 11.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="bigsur_desc">全新设计界面基本兼容，需要更新部分驱动以适应新的系统架构。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2021_10">2021年10月</div>
-                                    <div class="timeline-version">macOS Monterey 12.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="monterey_desc">通用控制、隔空播放等新功能需要额外配置，整体稳定性优秀。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2022_10">2022年10月</div>
-                                    <div class="timeline-version">macOS Ventura 13.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="ventura_desc">台前调度功能基本运行，需要更新OpenCore到0.8.6+版本。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2023_9">2023年9月</div>
-                                    <div class="timeline-version">macOS Sonoma 14.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="sonoma_desc">需要所有驱动更新到最新版本。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2024_9">2024年9月</div>
-                                    <div class="timeline-version">macOS Sequoia 15.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="sequoia_desc">需要OpenCore 1.0.4+。</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-item-content">
-                                    <div class="timeline-date" data-lang-key="date_2025_9">2025年9月</div>
-                                    <div class="timeline-version">macOS Tahoe 26.0</div>
-                                    <span class="timeline-status status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span>
-                                    <p data-lang-key="tahoe_desc">最新版本基本兼容，需要OpenCore 1.0.5+和所有驱动更新到最新版本。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 详细兼容性表格 -->
-          <section class="section fade-in">
-                <h2 class="section-title"><i class="fas fa-table"></i> <span data-lang-key="detailed_compatibility">详细兼容性信息</span></h2>
-                <div class="card">
-                    <table class="compatibility-table">
-                        <thead>
-                            <tr>
-                                <th data-lang-key="table_version">macOS 版本</th>
-                                <th data-lang-key="table_status">兼容状态</th>
-                                <th data-lang-key="table_requirements">最低要求</th>
-                                <th data-lang-key="table_notes">重要说明</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="version-badge">Catalina 10.15</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>10.15.4+</td>
-                                <td data-lang-key="catalina_notes">首次支持版本，需要特定驱动配置</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Big Sur 11.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>11.0+</td>
-                                <td data-lang-key="bigsur_notes">需要更新WhateverGreen和Lilu驱动</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Monterey 12.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>12.0+</td>
-                                <td data-lang-key="monterey_notes">通用控制需要额外配置</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Ventura 13.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>13.0+</td>
-                                <td data-lang-key="ventura_notes">台前调度功能基本运行</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Sonoma 14.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>14.0+</td>
-                                <td data-lang-key="sonoma_notes">需要所有驱动更新到最新版本</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Sequoia 15.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>15.0+</td>
-                                <td data-lang-key="sequoia_notes">需要OpenCore 1.0.4或更高版本</td>
-                            </tr>
-                            <tr>
-                                <td><span class="version-badge">Tahoe 26.0</span></td>
-                                <td><span class="status-partial"><i class="fas fa-exclamation-triangle"></i> <span data-lang-key="status_partial">基本支持</span></span></td>
-                                <td>26.0+</td>
-                                <td data-lang-key="tahoe_notes">需要OpenCore 1.0.5或更高版本和所有驱动更新到最新版本</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-
-            <!-- 版本推荐 -->
-            <section class="section fade-in">
-                <h2 class="section-title"><i class="fas fa-star"></i> <span data-lang-key="version_recommendations">版本选择建议</span></h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3 data-lang-key="performance_title">追求最佳性能</h3>
-                        <p><strong data-lang-key="recommend_monterey">推荐：macOS Monterey 12.0</strong></p>
-                        <p data-lang-key="performance_desc">提供了最佳的平衡点，系统稳定且资源占用相对较低，适合日常使用和专业工作流程。</p>
-                        <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
-                            <li data-lang-key="performance_item1">内存占用优化最佳</li>
-                            <li data-lang-key="performance_item2">应用程序兼容性广泛</li>
-                            <li data-lang-key="performance_item3">长期支持版本</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3 data-lang-key="features_title">体验最新功能</h3>
-                        <p><strong data-lang-key="recommend_tahoe">推荐：macOS Tahoe 26.0</strong></p>
-                        <p data-lang-key="features_desc">包含所有最新功能和安全更新，适合喜欢尝试新特性和技术前沿的用户。</p>
-                        <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
-                            <li data-lang-key="features_item1">最新界面设计和功能</li>
-                            <li data-lang-key="features_item2">持续安全更新</li>
-                            <li data-lang-key="features_item3">未来软件兼容性好</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 data-lang-key="stability_title">需要最稳定环境</h3>
-                        <p><strong data-lang-key="recommend_bigsur">推荐：macOS Big Sur 11.0</strong></p>
-                        <p data-lang-key="stability_desc">经过长期测试，最为稳定可靠，适合需要绝对稳定工作环境的用户。</p>
-                        <ul style="color: var(--text-secondary); margin-top: 10px; padding-left: 20px;">
-                            <li data-lang-key="stability_item1">经过充分测试验证</li>
-                            <li data-lang-key="stability_item2">驱动程序最完善</li>
-                            <li data-lang-key="stability_item3">问题解决方案丰富</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 升级指南 -->
-            <section class="section fade-in">
-                <h2 class="section-title"><i class="fas fa-sync-alt"></i> <span data-lang-key="upgrade_guide">系统升级指南</span></h2>
-                <div class="card">
-                    <p data-lang-key="upgrade_intro">在进行macOS版本升级前，请务必遵循以下步骤确保升级过程顺利：</p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
-                        <div style="padding: 20px; background: rgba(41, 151, 255, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--primary);">
-                            <h4 style="color: var(--primary); margin-bottom: 10px;">1. <span data-lang-key="backup_title">备份重要数据</span></h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="backup_desc">完整备份当前EFI分区和系统重要文件</p>
-                        </div>
-                        <div style="padding: 20px; background: rgba(52, 199, 89, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--success);">
-                            <h4 style="color: var(--success); margin-bottom: 10px;">2. <span data-lang-key="compatibility_check">检查兼容性</span></h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="compatibility_check_desc">查看项目更新日志，确认目标版本兼容性</p>
-                        </div>
-                        <div style="padding: 20px; background: rgba(255, 204, 0, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--warning);">
-                            <h4 style="color: var(--warning); margin-bottom: 10px;">3. <span data-lang-key="update_drivers">更新驱动</span></h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="update_drivers_desc">更新OpenCore和所有Kexts到最新版本</p>
-                        </div>
-                        <div style="padding: 20px; background: rgba(248, 81, 73, 0.05); border-radius: var(--border-radius); border-left: 4px solid var(--danger);">
-                            <h4 style="color: var(--danger); margin-bottom: 10px;">4. <span data-lang-key="community_confirmation">社区确认</span></h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;" data-lang-key="community_confirmation_desc">等待社区确认兼容性后再进行升级操作</p>
-                        </div>
-                    </div>
-                    <div style="background: rgba(255, 204, 0, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--warning);">
-                        <p style="color: var(--warning); margin: 0;"><i class="fas fa-exclamation-triangle"></i> <strong data-lang-key="important_note">重要提示：</strong> <span data-lang-key="upgrade_warning">直接从苹果系统更新进行重大版本升级可能会导致兼容性问题，建议使用完整安装镜像进行系统升级。</span></p>
-                    </div>
-                </div>
-            </section>
-        </main>
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">macOS 系统兼容性</h1>
+      <p class="page-subtitle">支持从 Catalina 到最新 Sequoia 的所有主流版本</p>
     </div>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-links">
-                <a href="index.html"><i class="fas fa-home"></i> <span data-lang-key="nav_home">主页</span></a>
-                <a href="hardware.html"><i class="fas fa-microchip"></i> <span data-lang-key="nav_hardware">硬件支持</span></a>
-                <a href="installation.html"><i class="fas fa-download"></i> <span data-lang-key="nav_installation">安装指南</span></a>
-                <a href="faq.html"><i class="fas fa-question-circle"></i> <span data-lang-key="nav_faq">常见问题</span></a>
-                <a href="compatibility.html"><i class="fas fa-laptop-code"></i> <span data-lang-key="nav_compatibility">系统兼容</span></a>
-                <a href="https://github.com/bilijp153/ASUS-VivoBook-FL8700JP-Hackintosh"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-            <p class="copyright" data-lang-key="license"> <strong>许可证</strong>: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
-            <p><small data-lang-key="footer_note">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</small></p>
+    <div class="compatibility-grid">
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Sequoia (15.x)</h3>
+        <p>完全兼容</p>
+      </div>
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Sonoma (14.x)</h3>
+        <p>完全兼容</p>
+      </div>
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Ventura (13.x)</h3>
+        <p>完全兼容</p>
+      </div>
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Monterey (12.x)</h3>
+        <p>完全兼容</p>
+      </div>
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Big Sur (11.x)</h3>
+        <p>完全兼容</p>
+      </div>
+      <div class="version-card">
+        <div class="status-icon status-working">✅</div>
+        <h3>macOS Catalina (10.15)</h3>
+        <p>完全兼容</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="social-links">
+          <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
-    </footer>
+        <p class="text-license">许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利</p>
+        <p class="text-disclaimer">温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议</p>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // 多语言支持
-          const translations = {
-            'zh-CN': {
-                'site_title': 'ASUS FL8700JP 黑苹果',
-                'nav_home': '主页',
-                'nav_hardware': '硬件支持',
-                'nav_installation': '安装指南',
-                'nav_faq': '常见问题',
-                'nav_compatibility': '系统兼容',
-                'page_title': '系统兼容性',
-                'page_subtitle': '全面了解您的ASUS FL8700JP笔记本电脑与各版本macOS的兼容性',
-                'badge_full_compat': '全版本基本支持',
-                'badge_continuous': '持续更新支持',
-                'badge_stable': '稳定可靠',
-                'compatibility_overview': '兼容性概述',
-                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) 笔记本电脑基本支持从 macOS Catalina (10.15) 到 macOS Sequoia (15.0) 的所有现代 macOS 版本。经过精心优化和持续测试，每个版本都能充分发挥硬件性能，提供接近原生Mac的体验。',
-                'compat_count': '基本支持版本',
-                'core_feature': '核心功能支持',
-                'update_maintenance': '更新维护',
-                'macos_timeline': 'macOS 版本演进时间线',
-                'date_2019_10': '2019年10月',
-                'date_2020_11': '2020年11月',
-                'date_2021_10': '2021年10月',
-                'date_2022_10': '2022年10月',
-                'date_2023_9': '2023年9月',
-                'date_2024_9': '2024年9月',
-                'date_2025_9': '2025年9月',
-                'status_partial': '基本支持',
-                'catalina_desc': '首个基本兼容的macOS版本，所有核心功能正常工作，为后续版本奠定坚实基础。',
-                'bigsur_desc': '全新设计界面基本兼容，需要更新部分驱动以适应新的系统架构。',
-                'monterey_desc': '通用控制、隔空播放等新功能需要额外配置，整体稳定性优秀。',
-                'ventura_desc': '台前调度功能基本运行，需要更新OpenCore到0.8.6+版本。',
-                'sonoma_desc': '需要所有驱动更新到最新版本。',
-                'sequoia_desc': '需要OpenCore 1.0.4+。',
-                'tahoe_desc': '最新版本基本兼容，需要OpenCore 1.0.5+和所有驱动更新到最新版本。',
-                'detailed_compatibility': '详细兼容性信息',
-                'table_version': 'macOS 版本',
-                'table_status': '兼容状态',
-                'table_requirements': '最低要求',
-                'table_notes': '重要说明',
-                'catalina_notes': '首次支持版本，需要特定驱动配置',
-                'bigsur_notes': '需要更新WhateverGreen和Lilu驱动',
-                'monterey_notes': '通用控制需要额外配置',
-                'ventura_notes': '台前调度功能基本运行',
-                'sonoma_notes': '需要所有驱动更新到最新版本',
-                'sequoia_notes': '需要OpenCore 1.0.4或更高版本',
-                'tahoe_notes': '需要OpenCore 1.0.5或更高版本和所有驱动更新到最新版本',
-                'version_recommendations': '版本选择建议',
-                'performance_title': '追求最佳性能',
-                'recommend_monterey': '推荐：macOS Monterey 12.0',
-                'performance_desc': '提供了最佳的平衡点，系统稳定且资源占用相对较低，适合日常使用和专业工作流程。',
-                'performance_item1': '内存占用优化最佳',
-                'performance_item2': '应用程序兼容性广泛',
-                'performance_item3': '长期支持版本',
-                'features_title': '体验最新功能',
-                'recommend_tahoe': '推荐：macOS Tahoe 26.0',
-                'features_desc': '包含所有最新功能和安全更新，适合喜欢尝试新特性和技术前沿的用户。',
-                'features_item1': '最新界面设计和功能',
-                'features_item2': '持续安全更新',
-                'features_item3': '未来软件兼容性好',
-                'stability_title': '需要最稳定环境',
-                'recommend_bigsur': '推荐：macOS Big Sur 11.0',
-                'stability_desc': '经过长期测试，最为稳定可靠，适合需要绝对稳定工作环境的用户。',
-                'stability_item1': '经过充分测试验证',
-                'stability_item2': '驱动程序最完善',
-                'stability_item3': '问题解决方案丰富',
-                'upgrade_guide': '系统升级指南',
-                'upgrade_intro': '在进行macOS版本升级前，请务必遵循以下步骤确保升级过程顺利：',
-                'backup_title': '备份重要数据',
-                'backup_desc': '完整备份当前EFI分区和系统重要文件',
-                'compatibility_check': '检查兼容性',
-                'compatibility_check_desc': '查看项目更新日志，确认目标版本兼容性',
-                'update_drivers': '更新驱动',
-                'update_drivers_desc': '更新OpenCore和所有Kexts到最新版本',
-                'community_confirmation': '社区确认',
-                'community_confirmation_desc': '等待社区确认兼容性后再进行升级操作',
-                'important_note': '重要提示：',
-                'upgrade_warning': '直接从苹果系统更新进行重大版本升级可能会导致兼容性问题，建议使用完整安装镜像进行系统升级。',
-                'license': 'MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
-                'footer_note': '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
-            },
-            'zh-TW': {
-                'site_title': 'ASUS FL8700JP 黑蘋果',
-                'nav_home': '主頁',
-                'nav_hardware': '硬體支援',
-                'nav_installation': '安裝指南',
-                'nav_faq': '常見問題',
-                'nav_compatibility': '系統相容',
-                'page_title': '系統相容性',
-                'page_subtitle': '全面了解您的ASUS FL8700JP筆記型電腦與各版本macOS的相容性',
-                'badge_full_compat': '全版本基本支援',
-                'badge_continuous': '持續更新支援',
-                'badge_stable': '穩定可靠',
-                'compatibility_overview': '相容性概述',
-                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) 筆記型電腦基本支援從 macOS Catalina (10.15) 到 macOS Sequoia (15.0) 的所有現代 macOS 版本。經過精心優化和持續測試，每個版本都能充分發揮硬體性能，提供接近原生Mac的體驗。',
-                'compat_count': '基本支援版本',
-                'core_feature': '核心功能支援',
-                'update_maintenance': '更新維護',
-                'macos_timeline': 'macOS 版本演進時間線',
-                'date_2019_10': '2019年10月',
-                'date_2020_11': '2020年11月',
-                'date_2021_10': '2021年10月',
-                'date_2022_10': '2022年10月',
-                'date_2023_9': '2023年9月',
-                'date_2024_9': '2024年9月',
-                'date_2025_9': '2025年9月',
-                'status_partial': '基本支援',
-                'catalina_desc': '首個基本相容的macOS版本，所有核心功能正常工作，為後續版本奠定堅實基礎。',
-                'bigsur_desc': '全新設計界面基本相容，需要更新部分驅動以適應新的系統架構。',
-                'monterey_desc': '通用控制、隔空播放等新功能需要額外配置，整體穩定性優秀。',
-                'ventura_desc': '台前調度功能基本運行，需要更新OpenCore到0.8.6+版本。',
-                'sonoma_desc': '需要所有驅動更新到最新版本。',
-                'sequoia_desc': '需要OpenCore 1.0.4+。',
-                'tahoe_desc': '最新版本基本相容，需要OpenCore 1.0.5+和所有驅動更新到最新版本。',
-                'detailed_compatibility': '詳細相容性資訊',
-                'table_version': 'macOS 版本',
-                'table_status': '相容狀態',
-                'table_requirements': '最低要求',
-                'table_notes': '重要說明',
-                'catalina_notes': '首次支援版本，需要特定驅動配置',
-                'bigsur_notes': '需要更新WhateverGreen和Lilu驅動',
-                'monterey_notes': '通用控制需要額外配置',
-                'ventura_notes': '台前調度功能基本運行',
-                'sonoma_notes': '需要所有驅動更新到最新版本',
-                'sequoia_notes': '需要OpenCore 1.0.4或更高版本',
-                'tahoe_notes': '需要OpenCore 1.0.5或更高版本和所有驅動更新到最新版本',
-                'version_recommendations': '版本選擇建議',
-                'performance_title': '追求最佳性能',
-                'recommend_monterey': '推薦：macOS Monterey 12.0',
-                'performance_desc': '提供了最佳的平衡點，系統穩定且資源佔用相對較低，適合日常使用和專業工作流程。',
-                'performance_item1': '記憶體佔用優化最佳',
-                'performance_item2': '應用程式相容性廣泛',
-                'performance_item3': '長期支援版本',
-                'features_title': '體驗最新功能',
-                'recommend_tahoe': '推薦：macOS Tahoe 26.0',
-                'features_desc': '包含所有最新功能和安全更新，適合喜歡嘗試新特性和技術前沿的用戶。',
-                'features_item1': '最新界面設計和功能',
-                'features_item2': '持續安全更新',
-                'features_item3': '未來軟體相容性好',
-                'stability_title': '需要最穩定環境',
-                'recommend_bigsur': '推薦：macOS Big Sur 11.0',
-                'stability_desc': '經過長期測試，最為穩定可靠，適合需要絕對穩定工作環境的用戶。',
-                'stability_item1': '經過充分測試驗證',
-                'stability_item2': '驅動程式最完善',
-                'stability_item3': '問題解決方案豐富',
-                'upgrade_guide': '系統升級指南',
-                'upgrade_intro': '在進行macOS版本升級前，請務必遵循以下步驟確保升級過程順利：',
-                'backup_title': '備份重要數據',
-                'backup_desc': '完整備份當前EFI分區和系統重要文件',
-                'compatibility_check': '檢查相容性',
-                'compatibility_check_desc': '查看項目更新日誌，確認目標版本相容性',
-                'update_drivers': '更新驅動',
-                'update_drivers_desc': '更新OpenCore和所有Kexts到最新版本',
-                'community_confirmation': '社區確認',
-                'community_confirmation_desc': '等待社區確認相容性後再進行升級操作',
-                'important_note': '重要提示：',
-                'upgrade_warning': '直接從蘋果系統更新進行重大版本升級可能會導致相容性問題，建議使用完整安裝鏡像進行系統升級。',
-                'license': 'MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
-                'footer_note': '溫馨提示：本項目僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
-            },
-            'en': {
-                'site_title': 'ASUS FL8700JP Hackintosh',
-                'nav_home': 'Home',
-                'nav_hardware': 'Hardware Support',
-                'nav_installation': 'Installation Guide',
-                'nav_faq': 'FAQ',
-                'nav_compatibility': 'System Compatibility',
-                'page_title': 'System Compatibility',
-                'page_subtitle': 'Comprehensive overview of ASUS FL8700JP laptop compatibility with various macOS versions',
-                'badge_full_compat': 'Basic Support for All Versions',
-                'badge_continuous': 'Continuous Update Support',
-                'badge_stable': 'Stable and Reliable',
-                'compatibility_overview': 'Compatibility Overview',
-                'compatibility_desc': 'ASUS VivoBook FL8700JP (X509JP) laptop basically supports all modern macOS versions from macOS Catalina (10.15) to macOS Sequoia (15.0). After careful optimization and continuous testing, each version can fully utilize hardware performance, providing an experience close to native Mac.',
-                'compat_count': 'Basically Supported Versions',
-                'core_feature': 'Core Feature Support',
-                'update_maintenance': 'Update Maintenance',
-                'macos_timeline': 'macOS Version Timeline',
-                'date_2019_10': 'October 2019',
-                'date_2020_11': 'November 2020',
-                'date_2021_10': 'October 2021',
-                'date_2022_10': 'October 2022',
-                'date_2023_9': 'September 2023',
-                'date_2024_9': 'September 2024',
-                'date_2025_9': 'September 2025',
-                'status_partial': 'Basic Support',
-                'catalina_desc': 'First basically compatible macOS version, all core functions work properly, laying a solid foundation for subsequent versions.',
-                'bigsur_desc': 'New design interface basically compatible, requires updating some drivers to adapt to the new system architecture.',
-                'monterey_desc': 'New features like Universal Control and AirPlay require additional configuration, overall stability is excellent.',
-                'ventura_desc': 'Stage Manager basically works, requires OpenCore 0.8.6+ version.',
-                'sonoma_desc': 'Requires all drivers to be updated to the latest version.',
-                'sequoia_desc': 'Requires OpenCore 1.0.4+.',
-                'tahoe_desc': 'Latest version basically compatible, requires OpenCore 1.0.5+ and all drivers updated to the latest version.',
-                'detailed_compatibility': 'Detailed Compatibility Information',
-                'table_version': 'macOS Version',
-                'table_status': 'Compatibility Status',
-                'table_requirements': 'Minimum Requirements',
-                'table_notes': 'Important Notes',
-                'catalina_notes': 'First supported version, requires specific driver configuration',
-                'bigsur_notes': 'Requires updating WhateverGreen and Lilu drivers',
-                'monterey_notes': 'Universal Control requires additional configuration',
-                'ventura_notes': 'Stage Manager basically works',
-                'sonoma_notes': 'Requires all drivers to be updated to the latest version',
-                'sequoia_notes': 'Requires OpenCore 1.0.4 or higher',
-                'tahoe_notes': 'Requires OpenCore 1.0.5 or higher and all drivers updated to the latest version',
-                'version_recommendations': 'Version Selection Suggestions',
-                'performance_title': 'Pursue Best Performance',
-                'recommend_monterey': 'Recommended: macOS Monterey 12.0',
-                'performance_desc': 'Provides the best balance point, system is stable and resource usage is relatively low, suitable for daily use and professional workflows.',
-                'performance_item1': 'Best memory usage optimization',
-                'performance_item2': 'Wide application compatibility',
-                'performance_item3': 'Long-term support version',
-                'features_title': 'Experience Latest Features',
-                'recommend_tahoe': 'Recommended: macOS Tahoe 26.0',
-                'features_desc': 'Includes all the latest features and security updates, suitable for users who like to try new features and cutting-edge technology.',
-                'features_item1': 'Latest interface design and features',
-                'features_item2': 'Continuous security updates',
-                'features_item3': 'Good future software compatibility',
-                'stability_title': 'Need Most Stable Environment',
-                'recommend_bigsur': 'Recommended: macOS Big Sur 11.0',
-                'stability_desc': 'After long-term testing, it is the most stable and reliable, suitable for users who need an absolutely stable working environment.',
-                'stability_item1': 'Fully tested and verified',
-                'stability_item2': 'Most complete drivers',
-                'stability_item3': 'Rich problem solutions',
-                'upgrade_guide': 'System Upgrade Guide',
-                'upgrade_intro': 'Before upgrading macOS versions, please be sure to follow these steps to ensure a smooth upgrade process:',
-                'backup_title': 'Backup Important Data',
-                'backup_desc': 'Complete backup of current EFI partition and important system files',
-                'compatibility_check': 'Check Compatibility',
-                'compatibility_check_desc': 'Check project update logs to confirm target version compatibility',
-                'update_drivers': 'Update Drivers',
-                'update_drivers_desc': 'Update OpenCore and all Kexts to the latest version',
-                'community_confirmation': 'Community Confirmation',
-                'community_confirmation_desc': 'Wait for community confirmation of compatibility before performing upgrade operations',
-                'important_note': 'Important Note:',
-                'upgrade_warning': 'Directly upgrading major versions from Apple system updates may cause compatibility issues. It is recommended to use a complete installation image for system upgrade.',
-                'license': 'MIT License | © 2021-2025 极光呆呆脑 - All Rights Reserved',
-                'footer_note': 'Friendly reminder: This project is only for learning and research purposes. Please comply with Apple company related agreements when using macOS.'
-            }
-        };
+  <script>
+    // ========== 复用 shared JS logic ==========
+    const translations = {
+      'zh-CN': {
+        home: '主页',
+        hardware: '硬件支持',
+        compatibility: '系统兼容',
+        installation: '安装指南',
+        faq: '常见问题',
+        advanced: '高级配置',
+        contribute: '参与贡献',
+        '简体中文': '简体中文',
+        '繁體中文': '繁體中文',
+        English: 'English',
+        title: '系统兼容 | ASUS FL8700JP 黑苹果项目',
+        pageTitle: 'macOS 系统兼容性',
+        pageSubtitle: '支持从 Catalina 到最新 Sequoia 的所有主流版本',
+        sequoia: 'macOS Sequoia (15.x)',
+        sonoma: 'macOS Sonoma (14.x)',
+        ventura: 'macOS Ventura (13.x)',
+        monterey: 'macOS Monterey (12.x)',
+        bigsur: 'macOS Big Sur (11.x)',
+        catalina: 'macOS Catalina (10.15)',
+        fullyCompatible: '完全兼容',
+        license: '许可证: MIT License | © 2021-2025 极光呆呆脑 - 保留所有权利',
+        disclaimer: '温馨提示：本项目仅用于学习和研究目的，使用 macOS 请遵守苹果公司相关协议'
+      },
+      'zh-TW': {
+        home: '主頁',
+        hardware: '硬體支援',
+        compatibility: '系統相容',
+        installation: '安裝指南',
+        faq: '常見問題',
+        advanced: '進階設定',
+        contribute: '參與貢獻',
+        '简体中文': '簡體中文',
+        '繁體中文': '繁體中文',
+        English: 'English',
+        title: '系統相容 | ASUS FL8700JP 黑蘋果專案',
+        pageTitle: 'macOS 系統相容性',
+        pageSubtitle: '支援從 Catalina 到最新 Sequoia 的所有主流版本',
+        sequoia: 'macOS Sequoia (15.x)',
+        sonoma: 'macOS Sonoma (14.x)',
+        ventura: 'macOS Ventura (13.x)',
+        monterey: 'macOS Monterey (12.x)',
+        bigsur: 'macOS Big Sur (11.x)',
+        catalina: 'macOS Catalina (10.15)',
+        fullyCompatible: '完全相容',
+        license: '許可證: MIT License | © 2021-2025 極光呆呆腦 - 保留所有權利',
+        disclaimer: '溫馨提示：本專案僅用於學習和研究目的，使用 macOS 請遵守蘋果公司相關協議'
+      },
+      'en': {
+        home: 'Home',
+        hardware: 'Hardware Support',
+        compatibility: 'Compatibility',
+        installation: 'Installation Guide',
+        faq: 'FAQ',
+        advanced: 'Advanced Config',
+        contribute: 'Contribute',
+        '简体中文': 'Simplified Chinese',
+        '繁體中文': 'Traditional Chinese',
+        English: 'English',
+        title: 'Compatibility | ASUS FL8700JP Hackintosh Project',
+        pageTitle: 'macOS Version Compatibility',
+        pageSubtitle: 'Supports all major versions from Catalina to the latest Sequoia',
+        sequoia: 'macOS Sequoia (15.x)',
+        sonoma: 'macOS Sonoma (14.x)',
+        ventura: 'macOS Ventura (13.x)',
+        monterey: 'macOS Monterey (12.x)',
+        bigsur: 'macOS Big Sur (11.x)',
+        catalina: 'macOS Catalina (10.15)',
+        fullyCompatible: 'Fully Compatible',
+        license: 'License: MIT License | © 2021-2025 AuroraDumbBrain - All rights reserved',
+        disclaimer: 'Reminder: This project is for learning and research purposes only. Please comply with Apple\'s relevant agreements when using macOS.'
+      }
+    };
 
+    const currentPage = 'compatibility';
+    let currentLang = localStorage.getItem('preferredLanguage') || 'zh-CN';
 
-        // 当前语言设置
-        let currentLang = 'zh-CN';
+    const languageSelector = document.getElementById('languageSelector');
+    const themeToggle = document.getElementById('themeToggle');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
 
-        // 初始化语言
-        function initLanguage() {
-            // 从本地存储获取语言设置
-            const savedLang = localStorage.getItem('preferred_language');
-            if (savedLang && translations[savedLang]) {
-                currentLang = savedLang;
-            } else {
-                // 根据浏览器语言自动选择
-                const browserLang = navigator.language || navigator.userLanguage;
-                if (browserLang.startsWith('zh')) {
-                    currentLang = browserLang.includes('TW') || browserLang.includes('HK') ? 'zh-TW' : 'zh-CN';
-                } else {
-                    currentLang = 'en';
-                }
-            }
-            
-            applyLanguage();
-        }
+    function initLanguage() {
+      languageSelector.value = currentLang;
+      updateLanguage(currentLang);
+    }
 
-        // 应用语言
-        function applyLanguage() {
-            document.querySelectorAll('[data-lang-key]').forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                if (translations[currentLang] && translations[currentLang][key]) {
-                    element.textContent = translations[currentLang][key];
-                }
-            });
-            
-            // 更新语言下拉菜单
-            document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-lang') === currentLang) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // 保存语言设置
-            localStorage.setItem('preferred_language', currentLang);
-        }
+    function updateLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('preferredLanguage', lang);
+      
+      document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+        const key = link.getAttribute('data-page');
+        if (translations[lang][key]) link.textContent = translations[lang][key];
+      });
 
-        // 主题切换功能
-        function initTheme() {
-            const themeToggle = document.getElementById('themeToggle');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('theme');
-            
-            // 设置初始主题
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            } else {
-                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-            }
-            
-            // 更新图标
-            updateThemeIcon();
-            
-            // 主题切换按钮事件
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon();
-            });
-            
-            // 监听系统主题变化
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!localStorage.getItem('theme')) {
-                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                    updateThemeIcon();
-                }
-            });
-        }
-        
-        // 更新主题图标
-        function updateThemeIcon() {
-            const themeToggle = document.getElementById('themeToggle');
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const icon = themeToggle.querySelector('i');
-            
-            if (currentTheme === 'dark') {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
-        }
+      document.title = translations[lang].title;
+      document.querySelector('.page-title').textContent = translations[lang].pageTitle;
+      document.querySelector('.page-subtitle').textContent = translations[lang].pageSubtitle;
 
-        // 移动端菜单功能
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-            
-            // 点击其他地方关闭菜单
-            document.addEventListener('click', (e) => {
-                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        }
+      const versions = ['sequoia', 'sonoma', 'ventura', 'monterey', 'bigsur', 'catalina'];
+      const cards = document.querySelectorAll('.version-card');
+      cards.forEach((card, i) => {
+        card.querySelector('h3').textContent = translations[lang][versions[i]];
+        card.querySelector('p').textContent = translations[lang].fullyCompatible;
+      });
 
-        // 语言切换功能
-        function initLanguageSwitcher() {
-            const langDropdown = document.getElementById('langDropdown');
-            
-            document.querySelectorAll('.lang-dropdown a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lang = link.getAttribute('data-lang');
-                    if (translations[lang]) {
-                        currentLang = lang;
-                        applyLanguage();
-                    }
-                });
-            });
-        }
+      document.querySelector('.text-license').textContent = translations[lang].license;
+      document.querySelector('.text-disclaimer').textContent = translations[lang].disclaimer;
 
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            initLanguage();
-            initTheme();
-            initMobileMenu();
-            initLanguageSwitcher();
-            
-            // 添加页面加载动画
-            document.querySelectorAll('.fade-in').forEach((element, index) => {
-                element.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-        
-        // 时间线动画效果
-const timelineItems = document.querySelectorAll('.timeline-item');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            timelineItems.forEach(item => {
-                observer.observe(item);
-            });
+      Array.from(languageSelector.options).forEach(opt => {
+        const txt = opt.textContent;
+        if (translations[lang][txt]) opt.textContent = translations[lang][txt];
+      });
+    }
 
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('preferredTheme');
+      if (saved === 'light' || saved === 'dark') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
 
-                        
-            // 滚动时检查
-document.addEventListener('click', function(e) {
-                if (!e.target.closest('.lang-menu')) {
-                    langDropdown.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        document.body.removeAttribute('data-theme');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+      localStorage.setItem('preferredTheme', theme);
+    }
+
+    function toggleTheme() {
+      const current = document.body.hasAttribute('data-theme') ? 'dark' : 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    function closeMobileMenu() {
+      navMenu.classList.remove('active');
+    }
+
+    function toggleMobileMenu() {
+      navMenu.classList.toggle('active');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!navMenu.classList.contains('active')) return;
+      const isClickInside = navMenu.contains(e.target) || mobileMenuBtn.contains(e.target);
+      if (!isClickInside) closeMobileMenu();
+    });
+
+    window.addEventListener('scroll', () => {
+      if (navMenu.classList.contains('active')) closeMobileMenu();
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    languageSelector.addEventListener('change', e => updateLanguage(e.target.value));
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    applyTheme(getPreferredTheme());
+    initLanguage();
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('preferredTheme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  </script>
 </body>
 </html>
